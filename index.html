@@ -120,7 +120,7 @@ function daysUntil(d){const today=manilaDateStr();const todayMs=new Date(today+'
 
 function getRAStatus(){
   const h=manilaHour();const m=manilaMinute();const day=manilaDayNum();
-  const isWorkDay=day>=1&&day<=5;
+  const isWorkDay=day>=1&&day<=5&&!isHoliday(manilaDateStr());
   if(!isWorkDay)return{text:'Home (rest day)',icon:'🏠',color:'#10b981'};
   if(h>=20||h<4)return{text:'At work',icon:'💼',color:'#22d3ee'};
   if(h>=4&&h<5)return{text:'Wrapping up shift',icon:'💼',color:'#f59e0b'};
@@ -133,7 +133,7 @@ function getRAStatus(){
 
 function getArabelleStatus(){
   const h=manilaHour();const day=manilaDayNum();
-  if(day===0||day===6)return{text:'Rest day',icon:'🏠',color:'#10b981'};
+  if(day===0||day===6||isHoliday(manilaDateStr()))return{text:'Rest day',icon:'🏠',color:'#10b981'};
   if(day===1||day===5){
     if(h>=6&&h<15)return{text:'Working from home',icon:'💻',color:'#22d3ee'};
     return{text:'Home',icon:'🏠',color:'#10b981'};
@@ -144,6 +144,28 @@ function getArabelleStatus(){
   if(h>=6&&h<15)return{text:'At office',icon:'💼',color:'#22d3ee'};
   if(h>=15&&h<16)return{text:'Heading home',icon:'🏍',color:'#a78bfa'};
   return{text:'Home',icon:'🏠',color:'#10b981'};
+}
+
+// === HOLIDAYS ===
+let HOLIDAYS=[];
+async function fetchHolidays(){
+  try{
+    const year=new Date().toLocaleDateString('en-CA',{timeZone:'Asia/Manila'}).split('-')[0];
+    const res=await fetch(`https://date.nager.at/api/v3/PublicHolidays/${year}/PH`);
+    HOLIDAYS=await res.json();
+  }catch(e){HOLIDAYS=[]}
+}
+function getTodayHoliday(){
+  const today=manilaDateStr();
+  const h=HOLIDAYS.find(h=>h.date===today);
+  return h?h.name:null;
+}
+function isHoliday(dateStr){
+  return HOLIDAYS.some(h=>h.date===dateStr);
+}
+function getUpcomingHoliday(){
+  const today=manilaDateStr();
+  return HOLIDAYS.find(h=>h.date>=today)||null;
 }
 
 // === WEATHER ===
@@ -184,13 +206,16 @@ function updateHeader(){
   const dateStr=new Date().toLocaleDateString('en-US',{timeZone:'Asia/Manila',weekday:'long',month:'long',day:'numeric'});
   document.getElementById('header-date').textContent=dateStr;
 
+  const holiday=getTodayHoliday();
   if(PROFILE==='ra'){
     const s=getRAStatus();
-    document.getElementById('header-sub').textContent=s.icon+' '+s.text;
+    const sub=holiday?'🎉 '+holiday+' // '+s.text:s.icon+' '+s.text;
+    document.getElementById('header-sub').textContent=sub;
     document.getElementById('dash-label').textContent='RA Dashboard';
   }else{
     const s=getArabelleStatus();
-    document.getElementById('header-sub').textContent=s.icon+' '+s.text;
+    const sub=holiday?'🎉 '+holiday+' // '+s.text:s.icon+' '+s.text;
+    document.getElementById('header-sub').textContent=sub;
     document.getElementById('dash-label').textContent="Arabelle's Dashboard";
   }
 }
@@ -567,7 +592,7 @@ function renderExpenses(){
 // === INIT ===
 async function init(){
   try{
-    const [dataRes]=await Promise.all([fetch('dashboard-data.json')]);
+    const [dataRes]=await Promise.all([fetch('dashboard-data.json'),fetchHolidays()]);
     D=await dataRes.json();
     W=await fetchWeather(D.location.lat,D.location.lon);
 
