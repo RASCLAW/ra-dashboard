@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0a0a0f">
+<title>RA Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0f;--card:#12121a;--border:#1e293b;--text:#e2e8f0;--muted:#64748b;--input-bg:#0a0a0f}
+:root.light{--bg:#f1f5f9;--card:#ffffff;--border:#e2e8f0;--text:#0f172a;--muted:#64748b;--input-bg:#f8fafc}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{background:var(--bg);color:var(--text);font-family:'Space Grotesk',-apple-system,sans-serif;min-height:100vh;overflow-x:hidden;transition:background .3s,color .3s}
+.m{font-family:'JetBrains Mono',monospace}
+.tabs{display:flex;gap:3px;margin:0 16px 16px;background:var(--card);border-radius:10px;padding:4px}
+.tab{flex:1;padding:10px 0;border:none;border-radius:8px;cursor:pointer;font-size:11px;font-weight:600;font-family:'Space Grotesk',sans-serif;background:transparent;color:#64748b;transition:all .2s}
+.tab.a{background:#22d3ee;color:#0a0a0f}
+.cnt{padding:0 16px 16px}
+.s{display:none}.s.a{display:block}
+.c{background:var(--card);border-radius:12px;padding:16px;margin-bottom:12px;transition:background .3s}
+.ct{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.r{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--border)}
+.r:last-of-type{border-bottom:none}
+.rl{display:flex;align-items:center;gap:10px}
+.d{width:7px;height:7px;border-radius:50%}
+.lbl{font-size:10px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.val{font-size:18px;font-weight:700}
+.icon-box{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.alert-danger{background:rgba(239,68,68,.15);color:#ef4444}
+.alert-warning{background:rgba(245,158,11,.15);color:#f59e0b}
+.alert-ok{background:rgba(16,185,129,.15);color:#10b981}
+.alert-money{background:rgba(245,158,11,.15);color:#f59e0b}
+.stale-warning{background:#ef444412;border:1px solid #ef444425;border-radius:8px;padding:10px;margin-top:10px;font-size:11px;color:#ef4444;line-height:1.5}
+.jah-accent{color:#f472b6}
+.jah-bg{background:rgba(244,114,182,.1)}
+.jah-border{border:1px solid rgba(244,114,182,.2)}
+.log-entry{display:flex;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--border)}
+.log-entry:last-of-type{border-bottom:none}
+.empty-state{text-align:center;padding:14px 0 2px;font-size:11px;color:#4a5568;font-style:italic}
+.profile-sw{display:flex;gap:6px;margin:0 16px 12px}
+.prof-btn{padding:8px 16px;border:1px solid var(--border);border-radius:20px;background:transparent;color:#64748b;font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s}
+.prof-btn.a{background:#22d3ee;color:#0a0a0f;border-color:#22d3ee}
+.prof-btn.a-belle{background:#f472b6;color:#0a0a0f;border-color:#f472b6}
+.weather-rec-moto{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.2);color:#10b981}
+.weather-rec-early{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);color:#f59e0b}
+.weather-rec-car{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#ef4444}
+</style>
+</head>
+<body>
+
+<div style="padding:20px 16px 12px">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+    <div style="display:flex;align-items:center;gap:8px">
+      <div style="width:7px;height:7px;border-radius:50%;background:#10b981;box-shadow:0 0 6px #10b981" id="status-dot"></div>
+      <span class="m" style="font-size:10px;color:#64748b;text-transform:uppercase;letter-spacing:2px" id="dash-label">RA Dashboard</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px">
+      <span class="m" style="font-size:14px;color:#22d3ee;font-weight:500" id="live-clock"></span>
+      <button onclick="toggleTheme()" style="background:none;border:1px solid var(--border);border-radius:6px;padding:4px 8px;cursor:pointer;font-size:14px" id="theme-btn">🌙</button>
+    </div>
+  </div>
+  <h1 style="font-size:24px;font-weight:700;letter-spacing:-.5px" id="header-date"></h1>
+  <p style="color:#64748b;font-size:12px;margin-top:2px" id="header-sub"></p>
+</div>
+
+<div class="profile-sw">
+  <button class="prof-btn a" id="prof-ra" onclick="setProfile('ra')">RA</button>
+  <button class="prof-btn" id="prof-belle" onclick="setProfile('arabelle')">Arabelle</button>
+</div>
+
+<div class="tabs" id="tab-bar"></div>
+
+<div class="cnt">
+  <div class="s a" id="ov"></div>
+  <div class="s" id="jh"></div>
+  <div class="s" id="tr"></div>
+  <div class="s" id="tl"></div>
+  <div class="s" id="ex"></div>
+</div>
+
+<div style="text-align:center;padding:20px 0 16px">
+  <span class="m" style="font-size:9px;color:#334155" id="footer"></span>
+</div>
+
+<script>
+// === THEME ===
+function toggleTheme(){
+  const root=document.documentElement;
+  const isLight=root.classList.toggle('light');
+  document.getElementById('theme-btn').textContent=isLight?'🌑':'🌙';
+  localStorage.setItem('theme',isLight?'light':'dark');
+}
+(function(){const t=localStorage.getItem('theme');if(t==='light'){document.documentElement.classList.add('light');document.addEventListener('DOMContentLoaded',()=>{document.getElementById('theme-btn').textContent='🌑'})}})();
+
+// === GLOBALS ===
+let D=null, W=null, PROFILE='ra';
+const catIcons={task:'#22d3ee',health:'#10b981',finance:'#f59e0b',travel:'#a78bfa',family:'#f472b6'};
+const catEmoji={task:'📋',health:'🏥',finance:'💰',travel:'✈️',family:'👨‍👩‍👦'};
+const foodEmoji=['🍚','🍲','🍖','🍗','🍳','🍪','🥘','🍜'];
+const alertLabels={danger:'!!',warning:'!!',ok:'OK',money:'$$'};
+const wcDesc={0:'Clear sky',1:'Mostly clear',2:'Partly cloudy',3:'Overcast',45:'Fog',48:'Rime fog',51:'Light drizzle',53:'Drizzle',55:'Dense drizzle',61:'Light rain',63:'Moderate rain',65:'Heavy rain',80:'Light showers',81:'Moderate showers',82:'Heavy showers',95:'Thunderstorm',96:'Thunderstorm + hail',99:'Heavy thunderstorm'};
+const wcIcon={0:'☀️',1:'🌤',2:'⛅',3:'☁️',45:'🌫',48:'🌫',51:'🌦',53:'🌧',55:'🌧',61:'🌧',63:'🌧',65:'🌧',80:'🌦',81:'🌧',82:'⛈',95:'⛈',96:'⛈',99:'⛈'};
+
+// === PHT UTILITIES ===
+// Use Date.now() for all calculations (UTC-based, no timezone bugs)
+// Use Intl for display only
+function manilaHour(){return parseInt(new Date().toLocaleString('en-US',{timeZone:'Asia/Manila',hour:'numeric',hour12:false}))}
+function manilaMinute(){return parseInt(new Date().toLocaleString('en-US',{timeZone:'Asia/Manila',minute:'numeric'}))}
+function manilaDayNum(){return new Date().toLocaleDateString('en-US',{timeZone:'Asia/Manila',weekday:'narrow'})==='S'?((new Date().toLocaleDateString('en-US',{timeZone:'Asia/Manila',weekday:'long'})==='Sunday')?0:6):['Monday','Tuesday','Wednesday','Thursday','Friday'].indexOf(new Date().toLocaleDateString('en-US',{timeZone:'Asia/Manila',weekday:'long'}))+1}
+function manilaDateStr(){return new Date().toLocaleDateString('en-CA',{timeZone:'Asia/Manila'})}
+function fmt(n){return n==null?'--':'P'+n.toLocaleString()}
+function fmt12(t){if(!t)return'';const[h,m]=t.split(':').map(Number);const ampm=h>=12?'PM':'AM';const h12=h%12||12;return h12+':'+String(m).padStart(2,'0')+' '+ampm}
+function fmtDate(d){const m=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];const parts=d.split('-');return m[parseInt(parts[1])-1]+' '+parseInt(parts[2])}
+function isStale(d,days){if(!d)return true;return(Date.now()-new Date(d+'T00:00:00+08:00').getTime())>days*86400000}
+function timeAgo(d,t){if(!d)return null;const then=new Date(d+'T'+(t||'12:00')+':00+08:00');const diff=Date.now()-then.getTime();if(diff<0)return 'just now';const mins=Math.floor(diff/60000);if(mins<60)return mins+'m ago';const hrs=Math.floor(mins/60);if(hrs<24)return hrs+'h ago';const days=Math.floor(hrs/24);return days+'d ago'}
+function daysUntil(d){const today=manilaDateStr();const todayMs=new Date(today+'T00:00:00+08:00').getTime();const thenMs=new Date(d+'T00:00:00+08:00').getTime();const diff=Math.round((thenMs-todayMs)/86400000);if(diff===0)return 'Today';if(diff===1)return 'Tomorrow';if(diff<0)return Math.abs(diff)+'d ago';return 'in '+diff+' days'}
+
+function getRAStatus(){
+  const h=manilaHour();const m=manilaMinute();const day=manilaDayNum();
+  const isWorkDay=day>=1&&day<=5;
+  if(!isWorkDay)return{text:'Home (rest day)',icon:'🏠',color:'#10b981'};
+  if(h>=20||h<4)return{text:'At work',icon:'💼',color:'#22d3ee'};
+  if(h>=4&&h<5)return{text:'Wrapping up shift',icon:'💼',color:'#f59e0b'};
+  if(h===5&&m<30)return{text:'Heading home',icon:'🛵',color:'#a78bfa'};
+  if(h>=5&&h<12)return{text:'Home (sleeping)',icon:'😴',color:'#64748b'};
+  if(h>=12&&h<19)return{text:'Home (awake)',icon:'🏠',color:'#10b981'};
+  if(h>=19&&h<20)return{text:'Getting ready for work',icon:'👔',color:'#f59e0b'};
+  return{text:'Home',icon:'🏠',color:'#10b981'};
+}
+
+function getArabelleStatus(){
+  const h=manilaHour();const day=manilaDayNum();
+  if(day===0||day===6)return{text:'Rest day',icon:'🏠',color:'#10b981'};
+  if(day===1||day===5){
+    if(h>=6&&h<15)return{text:'Working from home',icon:'💻',color:'#22d3ee'};
+    return{text:'Home',icon:'🏠',color:'#10b981'};
+  }
+  if(h<5)return{text:'Sleeping',icon:'😴',color:'#64748b'};
+  if(h>=5&&h<6)return{text:'Getting ready',icon:'👔',color:'#f59e0b'};
+  if(h===6&&!0)return{text:'Commuting to office',icon:'🏍',color:'#a78bfa'};
+  if(h>=6&&h<15)return{text:'At office',icon:'💼',color:'#22d3ee'};
+  if(h>=15&&h<16)return{text:'Heading home',icon:'🏍',color:'#a78bfa'};
+  return{text:'Home',icon:'🏠',color:'#10b981'};
+}
+
+// === WEATHER ===
+async function fetchWeather(lat,lon){
+  try{
+    const url=`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=precipitation_probability,weathercode&timezone=Asia%2FManila&forecast_days=2`;
+    const res=await fetch(url);
+    return await res.json();
+  }catch(e){return null}
+}
+
+function getCommuteWeather(weather,hour,dayOffset){
+  if(!weather||!weather.hourly)return null;
+  const idx=dayOffset*24+hour;
+  if(idx>=weather.hourly.time.length)return null;
+  return{
+    time:weather.hourly.time[idx],
+    rain:weather.hourly.precipitation_probability[idx],
+    code:weather.hourly.weathercode[idx]
+  };
+}
+
+function getCommuteRec(rain,code){
+  if(rain>=60||code>=63)return{text:'Book a car (Grab/InDrive)',cls:'weather-rec-car',icon:'🚗'};
+  if(rain>=30||code>=51)return{text:'Book mototaxi early, bring umbrella',cls:'weather-rec-early',icon:'☂️'};
+  return{text:'Mototaxi is fine',cls:'weather-rec-moto',icon:'🏍'};
+}
+
+// === CLOCK & HEADER ===
+function updateClock(){
+  const h=manilaHour();const m=manilaMinute();
+  const ampm=h>=12?'PM':'AM';const h12=h%12||12;
+  document.getElementById('live-clock').textContent=h12+':'+String(m).padStart(2,'0')+' '+ampm+' PHT';
+}
+setInterval(updateClock,1000);updateClock();
+
+function updateHeader(){
+  const dateStr=new Date().toLocaleDateString('en-US',{timeZone:'Asia/Manila',weekday:'long',month:'long',day:'numeric'});
+  document.getElementById('header-date').textContent=dateStr;
+
+  if(PROFILE==='ra'){
+    const s=getRAStatus();
+    document.getElementById('header-sub').textContent=s.icon+' '+s.text;
+    document.getElementById('dash-label').textContent='RA Dashboard';
+  }else{
+    const s=getArabelleStatus();
+    document.getElementById('header-sub').textContent=s.icon+' '+s.text;
+    document.getElementById('dash-label').textContent="Arabelle's Dashboard";
+  }
+}
+setInterval(updateHeader,60000);
+
+// === PROFILE SWITCHER ===
+function setProfile(p){
+  PROFILE=p;
+  document.getElementById('prof-ra').className='prof-btn'+(p==='ra'?' a':'');
+  document.getElementById('prof-belle').className='prof-btn'+(p==='arabelle'?' a-belle':'');
+  updateHeader();buildTabs();render();
+}
+
+function buildTabs(){
+  const bar=document.getElementById('tab-bar');
+  const tabs=PROFILE==='ra'?
+    [{id:'ov',l:'Home'},{id:'jh',l:'Jah'},{id:'tr',l:'Trip'},{id:'tl',l:'Timeline'},{id:'ex',l:'Expenses'}]:
+    [{id:'ov',l:'Home'},{id:'jh',l:'Jah'},{id:'tr',l:'Trip'},{id:'tl',l:'Timeline'},{id:'ex',l:'Expenses'}];
+  bar.innerHTML=tabs.map((t,i)=>`<button class="tab${i===0?' a':''}" onclick="sw('${t.id}',this)">${t.l}</button>`).join('');
+  document.querySelectorAll('.s').forEach(s=>s.classList.remove('a'));
+  document.getElementById('ov').classList.add('a');
+}
+
+function sw(id,b){document.querySelectorAll('.s').forEach(s=>s.classList.remove('a'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('a'));document.getElementById(id).classList.add('a');b.classList.add('a')}
+
+// === RENDER ===
+function render(){
+  if(!D)return;
+  if(PROFILE==='ra')renderRAHome();else renderArabelleHome();
+  renderJah();renderTrip();renderTimeline();renderExpenses();
+}
+
+function renderRAHome(){
+  const el=document.getElementById('ov');
+  const S=D.shared;const P=D.ra;
+  const total=(S.accounts.payroll.balance||0)+(S.accounts.savings.balance||0)+(S.accounts.pocket_cash.balance||0);
+  const nextEvents=S.calendar.filter(e=>new Date(e.date+'T23:59:59+08:00')>=new Date()).slice(0,3);
+  const pendingTodos=P.todos.filter(t=>!t.done).slice(0,4);
+  const contacts=P.contacts.slice(0,3);
+  const jah=S.baby_jah;
+
+  let h='';
+
+  // Money
+  h+=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
+    <div class="c" style="margin-bottom:0"><div class="lbl m">Payroll</div><div class="m val" style="color:#22d3ee">${fmt(S.accounts.payroll.balance)}</div><div class="m" style="font-size:10px;color:#64748b;margin-top:2px">${S.accounts.payroll.account_masked}</div></div>
+    <div class="c" style="margin-bottom:0"><div class="lbl m">Pocket Cash</div><div class="m val" style="color:#f59e0b">${fmt(S.accounts.pocket_cash.balance)}</div></div>
+  </div>`;
+
+  // Baby Jah card
+  if(jah){
+    const lastFed=jah.feeding.length?jah.feeding[jah.feeding.length-1]:null;
+    const lastSleep=jah.sleep.length?jah.sleep[jah.sleep.length-1]:null;
+    const lastAct=jah.activities.length?jah.activities[jah.activities.length-1]:null;
+    const sleepLabel=lastSleep?(lastSleep.woke&&!lastSleep.slept?'Woke up':lastSleep.type==='nap'?'Napping':'Sleeping'):'--';
+    h+=`<div class="c jah-bg jah-border">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><div class="lbl m" style="margin-bottom:0"><span class="jah-accent">Baby Jah</span></div>${jah.mood_today?`<span style="font-size:16px">${jah.mood_today}</span>`:''}</div>
+      <div class="log-entry" style="border-bottom:1px solid rgba(244,114,182,.1)"><div class="icon-box" style="background:rgba(244,114,182,.1);font-size:13px">🍼</div>
+        <div style="flex:1"><div style="font-size:13px;font-weight:600">${lastFed?lastFed.food:'--'}</div><div class="m" style="font-size:10px;color:#64748b">Last fed</div></div>
+        <div style="text-align:right"><div style="font-size:12px;font-weight:600">${lastFed?timeAgo(lastFed.date,lastFed.time):'--'}</div><div class="m" style="font-size:10px;color:#64748b">${lastFed?fmt12(lastFed.time):''}</div></div></div>
+      <div class="log-entry" style="border-bottom:1px solid rgba(244,114,182,.1)"><div class="icon-box" style="background:rgba(167,139,250,.1);font-size:13px">😴</div>
+        <div style="flex:1"><div style="font-size:13px;font-weight:600">${sleepLabel}</div><div class="m" style="font-size:10px;color:#64748b">${lastSleep&&lastSleep.notes?lastSleep.notes:''}</div></div>
+        <div style="text-align:right"><div style="font-size:12px;font-weight:600">${lastSleep?timeAgo(lastSleep.date,lastSleep.slept||lastSleep.woke):'--'}</div><div class="m" style="font-size:10px;color:#64748b">${lastSleep?fmt12(lastSleep.slept||lastSleep.woke):''}</div></div></div>
+      <div class="log-entry"><div class="icon-box" style="background:rgba(34,211,238,.1);font-size:13px">🏃</div>
+        <div style="flex:1"><div style="font-size:13px;font-weight:600">${lastAct?lastAct.activity:'--'}</div><div class="m" style="font-size:10px;color:#64748b">Last activity</div></div>
+        <div style="text-align:right"><div style="font-size:12px;font-weight:600">${lastAct?timeAgo(lastAct.date,lastAct.time):'--'}</div><div class="m" style="font-size:10px;color:#64748b">${lastAct?fmt12(lastAct.time):''}</div></div></div>
+      ${jah.next_checkup?`<div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(244,114,182,.15);font-size:12px;color:#64748b">Next checkup: <span class="jah-accent">${fmtDate(jah.next_checkup)}</span> (${daysUntil(jah.next_checkup)})</div>`:''}</div>`;
+  }
+
+  // Gas
+  const gas=S.vehicle.scooter;
+  const gasStatus=gas.last_gas?`Last: ${fmtDate(gas.last_gas)}`:'Not yet logged';
+  const gasLabel=isStale(gas.last_gas,8)?'Might need gas':'Probably good';
+  const gasColor=isStale(gas.last_gas,8)?'#f59e0b':'#10b981';
+  h+=`<div class="c" style="display:flex;justify-content:space-between;align-items:center">
+    <div><div class="lbl m">Scooter Gas</div><div style="font-size:15px;font-weight:600;color:${gasColor}">${gasLabel}</div><div class="m" style="font-size:11px;color:#64748b;margin-top:2px">${gasStatus}</div></div>
+    <div style="font-size:28px">⛽</div></div>`;
+
+  // Events
+  if(nextEvents.length){
+    h+='<div class="c"><div class="lbl m">Next Up</div>';
+    nextEvents.forEach((e,i)=>{
+      h+=`<div style="display:flex;gap:12px;align-items:center;${i>0?'margin-top:12px':'margin-top:6px'}">
+        <div class="icon-box" style="background:${catIcons[e.category]}20">${catEmoji[e.category]||'📌'}</div>
+        <div style="flex:1"><div style="font-size:15px;font-weight:600">${e.title}</div><div class="m" style="font-size:11px;color:#64748b">${fmtDate(e.date)}${e.time?' // '+fmt12(e.time):''}</div></div>
+        <span class="m" style="font-size:10px;color:${catIcons[e.category]}">${daysUntil(e.date)}</span></div>`;
+    });h+='</div>';
+  }
+
+  // Todos
+  if(pendingTodos.length){
+    h+='<div class="c"><div class="lbl m">To Do</div><div style="margin-top:6px">';
+    pendingTodos.forEach((t,i)=>{
+      const border=i<pendingTodos.length-1?'border-bottom:1px solid #1e293b':'';
+      const dueTag=t.due?`<span class="m" style="font-size:9px;color:#64748b;margin-left:8px">${daysUntil(t.due)}</span>`:'';
+      h+=`<div style="display:flex;gap:10px;align-items:center;padding:8px 0;${border}"><div style="width:18px;height:18px;border-radius:4px;border:2px solid #64748b;flex-shrink:0"></div><span style="font-size:14px">${t.text}${dueTag}</span></div>`;
+    });h+='</div></div>';
+  }
+
+  // Contacts
+  if(contacts.length){
+    h+='<div class="c"><div class="lbl m">Need to Contact</div><div style="margin-top:6px">';
+    contacts.forEach(c=>{
+      h+=`<div class="r"><div class="rl"><div class="icon-box" style="background:#a78bfa20;font-size:12px">📞</div>
+        <div><div style="font-size:14px;font-weight:500">${c.name}</div><div class="m" style="font-size:11px;color:#64748b">${c.purpose}${c.due?' // '+fmtDate(c.due):''}</div></div></div>
+        ${c.due?`<span class="m" style="font-size:10px;color:#a78bfa">${daysUntil(c.due)}</span>`:''}</div>`;
+    });h+='</div></div>';
+  }
+
+  if(isStale(S.accounts.payroll.updated,7))h+=`<div class="stale-warning">Account balances haven't been updated in 7+ days. Send a bank screenshot to refresh.</div>`;
+  el.innerHTML=h;
+}
+
+function renderArabelleHome(){
+  const el=document.getElementById('ov');
+  const S=D.shared;const jah=S.baby_jah;
+  const ra=getRAStatus();
+  const h_now=manilaHour();
+
+  let h='';
+
+  // RA Status + Balance
+  h+=`<div class="c">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+      <div><div class="lbl m">RA</div><div style="font-size:16px;font-weight:600;color:${ra.color}">${ra.icon} ${ra.text}</div></div>
+    </div>
+    <div style="display:flex;gap:8px">
+      <div style="flex:1;background:#0a0a0f;border-radius:8px;padding:10px 12px"><div class="m" style="font-size:9px;color:#64748b;margin-bottom:3px">PAYROLL</div><div class="m" style="font-size:16px;font-weight:700;color:#22d3ee">${fmt(S.accounts.payroll.balance)}</div></div>
+      <div style="flex:1;background:#0a0a0f;border-radius:8px;padding:10px 12px"><div class="m" style="font-size:9px;color:#64748b;margin-bottom:3px">POCKET CASH</div><div class="m" style="font-size:16px;font-weight:700;color:#f59e0b">${fmt(S.accounts.pocket_cash.balance)}</div></div>
+    </div>
+    <div style="margin-top:10px;padding-top:10px;border-top:1px solid #1e293b;font-size:12px;color:#64748b">
+      Schedule: ${(() => {const day=manilaDayNum();const isWork=day>=1&&day<=5;if(!isWork)return'Rest day (off tonight)';return'Shift tonight 8 PM - 5 AM'})()}
+    </div>
+  </div>`;
+
+  // Weather + Commute Recommendation
+  if(W&&W.hourly){
+    const isToday=h_now<5;
+    const targetHour=5;
+    const dayOff=isToday?0:1;
+    const cw=getCommuteWeather(W,targetHour,dayOff);
+    if(cw){
+      const rec=getCommuteRec(cw.rain,cw.code);
+      const wIcon=wcIcon[cw.code]||'🌤';
+      const wDesc=wcDesc[cw.code]||'Unknown';
+      const label=isToday?'This morning 5 AM':'Tomorrow 5 AM';
+      h+=`<div class="c">
+        <div class="lbl m">Commute Forecast</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin:8px 0">
+          <div><div style="font-size:16px;font-weight:600">${wIcon} ${wDesc}</div><div class="m" style="font-size:11px;color:#64748b;margin-top:2px">${label} // ${cw.rain}% rain</div></div>
+          <div style="font-size:32px">${rec.icon}</div>
+        </div>
+        <div class="${rec.cls}" style="border-radius:8px;padding:10px;margin-top:8px;font-size:13px;font-weight:600;text-align:center">${rec.text}</div>
+      </div>`;
+    }
+  }else{
+    h+=`<div class="c"><div class="lbl m">Commute Forecast</div><div class="empty-state">Weather loading...</div></div>`;
+  }
+
+  // Baby Jah card (same rich format as RA's Home)
+  if(jah){
+    const lastFed=jah.feeding.length?jah.feeding[jah.feeding.length-1]:null;
+    const lastSleep=jah.sleep.length?jah.sleep[jah.sleep.length-1]:null;
+    const lastAct=jah.activities.length?jah.activities[jah.activities.length-1]:null;
+    const sleepLabel=lastSleep?(lastSleep.woke&&!lastSleep.slept?'Woke up':lastSleep.type==='nap'?'Napping':'Sleeping'):'--';
+    h+=`<div class="c jah-bg jah-border">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><div class="lbl m" style="margin-bottom:0"><span class="jah-accent">Baby Jah</span></div>${jah.mood_today?`<span style="font-size:16px">${jah.mood_today}</span>`:''}</div>
+      <div class="log-entry" style="border-bottom:1px solid rgba(244,114,182,.1)"><div class="icon-box" style="background:rgba(244,114,182,.1);font-size:13px">🍼</div>
+        <div style="flex:1"><div style="font-size:13px;font-weight:600">${lastFed?lastFed.food:'--'}</div><div class="m" style="font-size:10px;color:#64748b">Last fed</div></div>
+        <div style="text-align:right"><div style="font-size:12px;font-weight:600">${lastFed?timeAgo(lastFed.date,lastFed.time):'--'}</div><div class="m" style="font-size:10px;color:#64748b">${lastFed?fmt12(lastFed.time):''}</div></div></div>
+      <div class="log-entry" style="border-bottom:1px solid rgba(244,114,182,.1)"><div class="icon-box" style="background:rgba(167,139,250,.1);font-size:13px">😴</div>
+        <div style="flex:1"><div style="font-size:13px;font-weight:600">${sleepLabel}</div><div class="m" style="font-size:10px;color:#64748b">${lastSleep&&lastSleep.notes?lastSleep.notes:''}</div></div>
+        <div style="text-align:right"><div style="font-size:12px;font-weight:600">${lastSleep?timeAgo(lastSleep.date,lastSleep.slept||lastSleep.woke):'--'}</div><div class="m" style="font-size:10px;color:#64748b">${lastSleep?fmt12(lastSleep.slept||lastSleep.woke):''}</div></div></div>
+      <div class="log-entry"><div class="icon-box" style="background:rgba(34,211,238,.1);font-size:13px">🏃</div>
+        <div style="flex:1"><div style="font-size:13px;font-weight:600">${lastAct?lastAct.activity:'--'}</div><div class="m" style="font-size:10px;color:#64748b">Last activity</div></div>
+        <div style="text-align:right"><div style="font-size:12px;font-weight:600">${lastAct?timeAgo(lastAct.date,lastAct.time):'--'}</div><div class="m" style="font-size:10px;color:#64748b">${lastAct?fmt12(lastAct.time):''}</div></div></div>
+      ${jah.next_checkup?`<div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(244,114,182,.15);font-size:12px;color:#64748b">Next checkup: <span class="jah-accent">${fmtDate(jah.next_checkup)}</span> (${daysUntil(jah.next_checkup)})</div>`:''}
+    </div>`;
+  }
+
+  // RA sleep
+  const raSleep=(D.ra.schedule.sleep||[]);
+  const lastRASleep=raSleep.length?raSleep[raSleep.length-1]:null;
+  if(lastRASleep){
+    h+=`<div class="c"><div class="lbl m">RA Sleep</div>
+      <div class="log-entry"><div class="icon-box" style="background:rgba(167,139,250,.1);font-size:13px">😴</div>
+        <div style="flex:1"><div style="font-size:13px;font-weight:600">${lastRASleep.slept&&lastRASleep.woke?fmt12(lastRASleep.slept)+' - '+fmt12(lastRASleep.woke):lastRASleep.slept?'Slept '+fmt12(lastRASleep.slept):'--'}</div>
+        <div class="m" style="font-size:10px;color:#64748b">${lastRASleep.notes||''}</div></div>
+        <div style="text-align:right"><div style="font-size:12px;font-weight:600">${timeAgo(lastRASleep.date,lastRASleep.slept)}</div><div class="m" style="font-size:10px;color:#64748b">${fmtDate(lastRASleep.date)}</div></div></div></div>`;
+  }
+
+  // RA ate
+  const raEats=D.ra.transactions.filter(t=>t.category==='food').slice(-3).reverse();
+  if(raEats.length){
+    h+='<div class="c"><div class="lbl m">RA Ate</div>';
+    raEats.forEach(t=>{
+      h+=`<div class="log-entry"><div class="icon-box" style="background:#10b98118;font-size:13px">🍽</div>
+        <div style="flex:1"><span style="font-size:13px">${t.description}</span></div>
+        <span class="m" style="font-size:10px;color:#64748b">${fmt12(t.time)||''} ${timeAgo(t.date,t.time)||''}</span></div>`;
+    });h+='</div>';
+  }
+
+  // Meal plan
+  const kitchen=S.kitchen;
+  if(kitchen.meal_plan&&kitchen.meal_plan.length){
+    h+='<div class="c"><div class="lbl m">Meal Plan</div>';
+    kitchen.meal_plan.forEach(m=>{
+      h+=`<div class="log-entry"><div class="icon-box" style="background:#f59e0b18;font-size:13px">🍳</div>
+        <div style="flex:1"><div style="font-size:13px;font-weight:600">${m.meal}</div><div class="m" style="font-size:10px;color:#64748b">${m.day||''}</div></div></div>`;
+    });h+='</div>';
+  }else{
+    h+=`<div class="c"><div class="lbl m">Meal Plan</div><div class="empty-state">No meal plan set for this week</div></div>`;
+  }
+
+  // Grocery list
+  if(kitchen.grocery_list&&kitchen.grocery_list.length){
+    h+='<div class="c"><div class="lbl m">Grocery List</div><div style="margin-top:6px">';
+    kitchen.grocery_list.forEach(item=>{
+      h+=`<div style="display:flex;gap:10px;align-items:center;padding:6px 0"><span style="color:#22d3ee">&#x2022;</span><span style="font-size:13px">${item}</span></div>`;
+    });h+='</div></div>';
+  }
+
+  // Bills due soon
+  const pendingBills=S.bills.items.filter(b=>b.status!=='paid');
+  if(pendingBills.length){
+    h+='<div class="c"><div class="lbl m">Bills Due</div>';
+    pendingBills.forEach(b=>{
+      h+=`<div class="r"><div class="rl"><div class="d" style="background:#f59e0b"></div><span style="font-size:13px">${b.name}</span></div>
+        <span class="m" style="font-weight:600;font-size:13px">${fmt(b.amount)}</span></div>`;
+    });h+='</div>';
+  }
+
+  // Next family event
+  const nextEvent=S.calendar.filter(e=>new Date(e.date+'T23:59:59+08:00')>=new Date())[0];
+  if(nextEvent){
+    h+=`<div class="c"><div class="lbl m">Coming Up</div>
+      <div style="display:flex;gap:12px;align-items:center;margin-top:6px">
+        <div class="icon-box" style="background:${catIcons[nextEvent.category]}20">${catEmoji[nextEvent.category]||'📌'}</div>
+        <div style="flex:1"><div style="font-size:15px;font-weight:600">${nextEvent.title}</div><div class="m" style="font-size:11px;color:#64748b">${fmtDate(nextEvent.date)} // ${daysUntil(nextEvent.date)}</div></div>
+      </div></div>`;
+  }
+
+  el.innerHTML=h;
+}
+
+function renderJah(){
+  const el=document.getElementById('jh');const jah=D.shared.baby_jah;
+  if(!jah){el.innerHTML='<div class="c"><div class="ct m">No Data</div><p style="color:#64748b;font-size:13px">No Baby Jah data yet.</p></div>';return}
+  let h='';
+  h+=`<div class="c jah-bg jah-border" style="text-align:center;padding:20px"><div style="font-size:40px;margin-bottom:8px">👶</div><div style="font-size:20px;font-weight:700" class="jah-accent">${jah.name}</div>${jah.mood_today?`<div style="font-size:24px;margin-top:8px">${jah.mood_today}</div>`:'<div style="font-size:12px;color:#64748b;margin-top:6px">Mood not logged today</div>'}${jah.next_checkup?`<div style="margin-top:10px;font-size:12px;color:#64748b">Next checkup: <span class="jah-accent">${fmtDate(jah.next_checkup)}</span> (${daysUntil(jah.next_checkup)})</div>`:''}</div>`;
+
+  [{key:'feeding',title:'Feeding',icon:'🍼',render:f=>`<div style="font-size:13px">${f.food}</div>${f.notes?`<div class="m" style="font-size:10px;color:#64748b">${f.notes}</div>`:''}`,time:f=>fmt12(f.time),empty:'No feeding logs yet'},
+   {key:'sleep',title:'Sleep',icon:'💤',render:s=>`<div style="font-size:13px">${s.type==='nap'?'Nap':'Night'}</div>${s.notes?`<div class="m" style="font-size:10px;color:#64748b">${s.notes}</div>`:''}`,time:s=>fmt12(s.slept||s.woke),extra:s=>{const t=s.slept&&s.woke?`${fmt12(s.slept)} - ${fmt12(s.woke)}`:s.slept?`Slept ${fmt12(s.slept)}`:s.woke?`Woke ${fmt12(s.woke)}`:'--';return`<div class="m" style="font-size:10px;color:#64748b">${t}</div>`},empty:'No sleep logs yet'},
+   {key:'activities',title:'Activities',icon:'🏃',render:a=>`<div style="font-size:13px">${a.activity}</div>`,time:a=>fmt12(a.time),empty:'No activities logged yet'},
+   {key:'milestones',title:'Milestones',icon:'⭐',render:ms=>`<div style="font-size:13px">${ms.milestone}</div>${ms.notes?`<div class="m" style="font-size:10px;color:#64748b">${ms.notes}</div>`:''}`,time:()=>null,empty:'Milestones will appear here as they happen'},
+   {key:'medicine',title:'Medicine / Vitamins',icon:'💊',render:med=>`<div style="font-size:13px">${med.name}</div><div class="m" style="font-size:10px;color:#64748b">${med.dosage||''} ${med.frequency||''}</div>`,time:()=>null,empty:'No medicines logged'}
+  ].forEach(sec=>{
+    const items=jah[sec.key];
+    h+=`<div class="c"><div class="ct m">${sec.title}</div>`;
+    if(items&&items.length){
+      items.slice(-5).reverse().forEach(item=>{
+        h+=`<div class="log-entry"><div class="icon-box" style="background:rgba(244,114,182,.1);font-size:13px">${sec.icon}</div>
+          <div style="flex:1">${sec.render(item)}</div>
+          <div style="text-align:right"><div class="m" style="font-size:10px;color:#64748b">${fmtDate(item.date)}</div>${sec.time(item)?`<div class="m" style="font-size:10px;color:#64748b">${sec.time(item)}</div>`:''}${sec.extra?sec.extra(item):''}</div></div>`;
+      });
+    }else{h+=`<div class="empty-state">${sec.empty}</div>`}
+    h+='</div>';
+  });
+
+  // Growth
+  h+='<div class="c"><div class="ct m">Growth</div>';
+  if(jah.growth&&jah.growth.length){
+    jah.growth.slice().reverse().forEach(g=>{
+      h+=`<div class="log-entry"><div class="icon-box" style="background:rgba(16,185,129,.1);font-size:13px">📏</div>
+        <div style="flex:1"><div style="font-size:13px">${g.weight?g.weight+'kg':''} ${g.height?'/ '+g.height+'cm':''}</div>${g.notes?`<div class="m" style="font-size:10px;color:#64748b">${g.notes}</div>`:''}</div>
+        <div class="m" style="font-size:10px;color:#64748b">${fmtDate(g.date)}</div></div>`;
+    });
+  }else{h+=`<div class="empty-state">Log weight/height at checkups</div>`}
+  h+='</div>';
+  el.innerHTML=h;
+}
+
+function renderTrip(){
+  const el=document.getElementById('tr');const trip=D.shared.trips.find(t=>t.status==='upcoming'||t.status==='active');
+  if(!trip){el.innerHTML='<div class="c"><div class="ct m">No Active Trip</div><p style="color:#64748b;font-size:13px">No trips planned right now.</p></div>';return}
+  let h='';
+  h+=`<div class="c"><div class="ct m">Destination</div><div style="font-size:22px;font-weight:700;margin-bottom:6px">${trip.destination}</div><div style="color:#64748b;font-size:13px;line-height:1.7">${trip.name}<br>${trip.dates}<br>~${trip.distance_km} km // ${trip.route}<br>Drive time: ${trip.drive_hours} hours</div></div>`;
+  const b=trip.budget;
+  h+=`<div class="c"><div class="ct m">Trip Budget</div>`;
+  if(b.tolls)h+=`<div class="r"><span style="font-size:14px">Tolls (round trip)</span><span class="m" style="font-weight:600">${fmt(b.tolls)}</span></div>`;
+  if(b.gas)h+=`<div class="r"><span style="font-size:14px">Gas (round trip)</span><span class="m" style="font-weight:600">${fmt(b.gas)}</span></div>`;
+  if(b.food)h+=`<div class="r"><span style="font-size:14px">Food</span><span class="m" style="font-weight:600">${fmt(b.food)}</span></div>`;
+  if(b.misc)h+=`<div class="r"><span style="font-size:14px">Misc / Pasalubong</span><span class="m" style="font-weight:600">${fmt(b.misc)}</span></div>`;
+  h+=`<div style="display:flex;justify-content:space-between;padding-top:10px;margin-top:6px;border-top:2px solid rgba(34,211,238,.3)"><span class="m" style="color:#64748b;font-size:11px">Estimated Total</span><span class="m" style="color:#22d3ee;font-weight:700;font-size:22px">${fmt(b.total)}</span></div></div>`;
+  if(trip.alerts&&trip.alerts.length){h+='<div class="c"><div class="ct m">Road Alerts</div>';trip.alerts.forEach(a=>{h+=`<div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:10px"><div class="m alert-${a.type}" style="min-width:28px;height:20px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700">${alertLabels[a.type]||'!'}</div><span style="font-size:13px;line-height:1.4">${a.text}</span></div>`});h+='</div>'}
+  if(trip.highlights&&trip.highlights.length){h+='<div class="c"><div class="ct m">Things to Do</div>';trip.highlights.forEach(hl=>{h+=`<div style="display:flex;gap:10px;align-items:center;padding:6px 0"><span style="color:#22d3ee">&#x2022;</span><span style="font-size:13px">${hl}</span></div>`});h+='</div>'}
+  if(trip.food_spots&&trip.food_spots.length){h+='<div class="c"><div class="ct m">Food Spots</div>';trip.food_spots.forEach(f=>{h+=`<div style="display:flex;gap:10px;align-items:center;padding:6px 0"><span style="color:#f59e0b">&#x2022;</span><span style="font-size:13px">${f}</span></div>`});h+='</div>'}
+  el.innerHTML=h;
+}
+
+function renderTimeline(){
+  const el=document.getElementById('tl');
+  const events=D.shared.calendar.filter(e=>new Date(e.date+'T23:59:59+08:00')>=new Date(Date.now()-7*86400000)).sort((a,b)=>a.date.localeCompare(b.date));
+  let h=`<div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px">`;
+  Object.keys(catIcons).forEach(k=>{h+=`<div style="display:flex;align-items:center;gap:5px"><div class="d" style="background:${catIcons[k]}"></div><span class="m" style="font-size:9px;color:#64748b">${k}</span></div>`});
+  h+='</div><div class="c" style="padding:14px 16px">';
+  events.forEach((e,i)=>{
+    const color=catIcons[e.category]||'#64748b';
+    const line=i<events.length-1?`<div style="width:2px;flex-grow:1;background:#1e293b;min-height:18px"></div>`:'';
+    h+=`<div style="display:flex;gap:12px;padding:8px 0"><span class="m" style="min-width:60px;text-align:right;font-size:10px;color:#64748b">${fmtDate(e.date)}</span>
+      <div style="display:flex;flex-direction:column;align-items:center"><div style="width:10px;height:10px;border-radius:50%;background:${color};box-shadow:0 0 6px ${color}66;flex-shrink:0"></div>${line}</div>
+      <div style="flex:1"><span style="font-size:13px">${e.title}</span></div><span class="m" style="font-size:9px;color:#64748b;white-space:nowrap">${daysUntil(e.date)}</span></div>`;
+  });
+  h+='</div>';el.innerHTML=h;
+}
+
+function renderExpenses(){
+  const el=document.getElementById('ex');const S=D.shared;const P=D[PROFILE];
+  const total=(S.accounts.payroll.balance||0)+(S.accounts.savings.balance||0)+(S.accounts.pocket_cash.balance||0);
+  const bills=S.bills;const paidBills=bills.items.filter(b=>b.status==='paid');const pendingBills=bills.items.filter(b=>b.status!=='paid');
+  const pendingTotal=pendingBills.reduce((s,b)=>s+b.amount,0);const billsTotal=bills.items.reduce((s,b)=>s+b.amount,0);
+  const tripEst=S.trips.find(t=>t.status==='upcoming');const tripTotal=tripEst?tripEst.budget.total:0;
+  const monthNames=['','January','February','March','April','May','June','July','August','September','October','November','December'];
+  const monthNum=parseInt(bills.month.split('-')[1]);
+  let h='';
+
+  h+=`<div class="c"><div class="ct m">Accounts</div>
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:14px"><div><div class="lbl m">Total Balance</div><div class="m" style="font-size:30px;font-weight:700;color:#22d3ee">${fmt(total)}</div></div><div class="m" style="font-size:10px;color:#64748b">as of ${fmtDate(S.accounts.payroll.updated||D.last_updated)}</div></div>
+    <div style="display:flex;gap:8px">
+      <div style="flex:1;background:#0a0a0f;border-radius:8px;padding:10px 12px"><div class="m" style="font-size:9px;color:#64748b;margin-bottom:3px">PAYROLL ${S.accounts.payroll.account_masked}</div><div class="m" style="font-size:16px;font-weight:700">${fmt(S.accounts.payroll.balance)}</div></div>
+      <div style="flex:1;background:#0a0a0f;border-radius:8px;padding:10px 12px"><div class="m" style="font-size:9px;color:#64748b;margin-bottom:3px">SAVINGS ${S.accounts.savings.account_masked}</div><div class="m" style="font-size:16px;font-weight:700">${fmt(S.accounts.savings.balance)}</div></div>
+    </div></div>`;
+
+  h+=`<div class="c"><div class="ct m">${monthNames[monthNum]} Bills</div>
+    <div style="display:flex;gap:8px;margin-bottom:12px">
+      <div style="flex:1;background:#10b98118;border:1px solid #10b98130;border-radius:8px;padding:8px;text-align:center"><div class="m" style="font-size:20px;font-weight:700;color:#10b981">${paidBills.length}</div><div class="m" style="font-size:9px;color:#10b981">PAID</div></div>
+      <div style="flex:1;background:#f59e0b18;border:1px solid #f59e0b30;border-radius:8px;padding:8px;text-align:center"><div class="m" style="font-size:20px;font-weight:700;color:#f59e0b">${pendingBills.length}</div><div class="m" style="font-size:9px;color:#f59e0b">PENDING</div></div>
+      <div style="flex:1;background:#22d3ee18;border:1px solid #22d3ee30;border-radius:8px;padding:8px;text-align:center"><div class="m" style="font-size:18px;font-weight:700;color:#22d3ee">${fmt(billsTotal)}</div><div class="m" style="font-size:9px;color:#22d3ee">TOTAL</div></div>
+    </div>`;
+  if(pendingBills.length){h+=`<div class="m" style="font-size:9px;color:#f59e0b;letter-spacing:1.5px;margin-bottom:8px">UPCOMING</div>`;pendingBills.forEach(b=>{h+=`<div class="r"><div class="rl"><div class="d" style="background:#f59e0b"></div><span style="font-size:13px">${b.name}</span></div><div class="rl" style="gap:12px"><span class="m" style="font-weight:600;font-size:13px">${fmt(b.amount)}</span></div></div>`})}
+  if(paidBills.length){h+=`<div class="m" style="font-size:9px;color:#10b981;letter-spacing:1.5px;margin:12px 0 8px">PAID</div>`;paidBills.forEach(b=>{h+=`<div class="r"><div class="rl"><div class="d" style="background:#10b981"></div><span style="font-size:13px;color:#64748b">${b.name}</span></div><div class="rl"><span class="m" style="font-size:13px;color:#64748b">${fmt(b.amount)}</span></div></div>`})}
+  h+='</div>';
+
+  const txns=(P.transactions||[]).slice(-10).reverse();
+  if(txns.length){
+    h+='<div class="c"><div class="ct m">Recent Transactions</div>';
+    let lastDate='';
+    txns.forEach((t,idx)=>{
+      if(t.date!==lastDate){lastDate=t.date;h+=`<div class="m" style="font-size:9px;color:#64748b;letter-spacing:1.5px;margin:${idx>0?'12px':'0'} 0 8px">${fmtDate(t.date).toUpperCase()}</div>`}
+      const emoji=foodEmoji[Math.abs(t.description.split('').reduce((a,c)=>a+c.charCodeAt(0),0))%foodEmoji.length];
+      h+=`<div class="r"><div class="rl"><div class="icon-box" style="background:#10b98118;font-size:13px">${emoji}</div><div><span style="font-size:13px">${t.description}</span>${t.time?`<div class="m" style="font-size:10px;color:#64748b">${fmt12(t.time)}</div>`:''}</div></div><span class="m" style="font-size:13px;color:#64748b">${fmt(t.amount)}</span></div>`;
+    });h+=`<div class="empty-state">Amounts fill in as you send receipts</div></div>`;
+  }else if(PROFILE==='arabelle'){h+=`<div class="c"><div class="ct m">Recent Transactions</div><div class="empty-state">No transactions logged yet. Send receipt screenshots to start tracking.</div></div>`}
+
+  const remaining=total-pendingTotal-tripTotal;
+  h+=`<div class="c"><div class="ct m">Quick Stats</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+      <div style="background:#0a0a0f;border-radius:8px;padding:12px;text-align:center"><div class="m" style="font-size:18px;font-weight:700;color:#22d3ee">${fmt(total)}</div><div class="m" style="font-size:9px;color:#64748b;margin-top:3px">CASH ON HAND</div></div>
+      <div style="background:#0a0a0f;border-radius:8px;padding:12px;text-align:center"><div class="m" style="font-size:18px;font-weight:700;color:#f59e0b">${fmt(pendingTotal)}</div><div class="m" style="font-size:9px;color:#64748b;margin-top:3px">BILLS DUE</div></div>
+      <div style="background:#0a0a0f;border-radius:8px;padding:12px;text-align:center"><div class="m" style="font-size:18px;font-weight:700;color:#10b981">${fmt(total-pendingTotal)}</div><div class="m" style="font-size:9px;color:#64748b;margin-top:3px">AFTER BILLS</div></div>
+      ${tripTotal?`<div style="background:#0a0a0f;border-radius:8px;padding:12px;text-align:center"><div class="m" style="font-size:18px;font-weight:700;color:#a78bfa">~${fmt(tripTotal)}</div><div class="m" style="font-size:9px;color:#64748b;margin-top:3px">TRIP EST</div></div>`:''}
+    </div>`;
+  if(remaining<5000)h+=`<div class="stale-warning">After bills + trip: <span class="m" style="font-weight:700">${fmt(remaining)}</span> remaining.</div>`;
+  h+='</div>';
+
+  if(D.shared.patterns&&D.shared.patterns.length){
+    h+='<div class="c"><div class="ct m">Spending Patterns</div>';
+    D.shared.patterns.forEach(p=>{h+=`<div class="r"><div class="rl"><div class="d" style="background:#f59e0b"></div><span style="font-size:13px">${p.category}</span></div><div class="rl" style="gap:12px"><span class="m" style="color:#64748b;font-size:10px">${p.frequency}</span><span class="m" style="font-weight:600;font-size:13px">${p.amount?'~'+fmt(p.amount):'--'}</span></div></div>`});
+    h+=`<div class="empty-state">More patterns as data builds up</div></div>`;
+  }
+  el.innerHTML=h;
+}
+
+// === INIT ===
+async function init(){
+  try{
+    const [dataRes]=await Promise.all([fetch('dashboard-data.json')]);
+    D=await dataRes.json();
+    W=await fetchWeather(D.location.lat,D.location.lon);
+
+    updateHeader();buildTabs();render();
+
+    const updated=new Date(D.last_updated);
+    document.getElementById('footer').textContent='Data: '+updated.toLocaleDateString('en-PH',{month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit'});
+
+    if(isStale(D.last_updated,3)){
+      document.getElementById('status-dot').style.background='#f59e0b';
+      document.getElementById('status-dot').style.boxShadow='0 0 6px #f59e0b';
+    }
+  }catch(e){
+    document.getElementById('ov').innerHTML=`<div class="c"><div class="ct m">Error</div><p style="color:#ef4444;font-size:13px">Could not load: ${e.message}</p></div>`;
+  }
+}
+init();
+</script>
+</body>
+</html>

@@ -1,0 +1,170 @@
+{
+  "last_updated": "2026-03-23T21:30:00+08:00",
+  "location": {
+    "name": "San Joaquin, Pasig",
+    "lat": 14.5764,
+    "lon": 121.0851
+  },
+  "shared": {
+    "accounts": {
+      "payroll": { "balance": 5117, "account_masked": "***9713", "updated": "2026-03-23" },
+      "savings": { "balance": 10222, "account_masked": "***7397", "updated": "2026-03-23" },
+      "pocket_cash": { "balance": 2800, "updated": "2026-03-23" }
+    },
+    "bills": {
+      "month": "2026-03",
+      "items": [
+        { "name": "Rent", "amount": 4000, "due_day": 15, "status": "paid", "paid_date": "2026-03-15" },
+        { "name": "Meralco", "amount": 3269, "due_day": null, "status": "paid", "paid_date": "2026-03-23" },
+        { "name": "PLDT Fibr", "amount": 1700, "due_day": 17, "status": "paid", "paid_date": "2026-03-17" },
+        { "name": "Maynilad", "amount": 887, "due_day": null, "status": "paid", "paid_date": "2026-03-23" },
+        { "name": "Parking", "amount": 3000, "due_day": 28, "status": "pending", "paid_date": null }
+      ],
+      "subscriptions": [
+        { "name": "YouTube Premium", "amount": 189, "next_due": "2026-04-15" },
+        { "name": "TP-Link Tapo", "amount": 140, "next_due": "2026-04-11" },
+        { "name": "Arabelle Google Cloud", "amount": 179, "next_due": null }
+      ]
+    },
+    "calendar": [
+      { "date": "2026-03-25", "title": "Call ACE Hospital Pateros", "category": "health", "time": null },
+      { "date": "2026-03-26", "title": "Hospital visit -- Med Cert", "category": "health", "time": null },
+      { "date": "2026-03-27", "title": "Withdraw cash, check weather", "category": "finance", "time": null },
+      { "date": "2026-03-28", "title": "Pay parking P3,000", "category": "finance", "time": null },
+      { "date": "2026-03-28", "title": "Depart for Daet 8-9 PM", "category": "travel", "time": "20:00" },
+      { "date": "2026-03-28", "title": "Zach's Elementary Graduation", "category": "family", "time": null },
+      { "date": "2026-04-02", "title": "Return from Daet (latest)", "category": "travel", "time": null },
+      { "date": "2026-04-11", "title": "Iver Sage 1st Birthday -- Jollibee Green Meadows", "category": "family", "time": "16:00" },
+      { "date": "2026-06-06", "title": "Arabelle's Birthday", "category": "family", "time": null },
+      { "date": "2026-06-24", "title": "Baby Jah's Birthday", "category": "family", "time": null },
+      { "date": "2027-01-03", "title": "RA's Birthday", "category": "family", "time": null }
+    ],
+    "trips": [
+      {
+        "name": "Zach's Graduation + Family Visit",
+        "destination": "Daet, Camarines Norte",
+        "dates": "Mar 28 - Apr 2",
+        "route": "SLEX > STAR Tollway > exit Sto. Tomas > Maharlika Highway",
+        "distance_km": 340,
+        "drive_hours": "8-9",
+        "accommodation": "Arabelle's family",
+        "budget": {
+          "tolls": 320,
+          "gas": 2750,
+          "food": 4000,
+          "misc": 1500,
+          "total": 8570
+        },
+        "alerts": [
+          { "type": "danger", "text": "Sta. Elena to Labo curves -- accident-prone, slow down at night" },
+          { "type": "warning", "text": "Eme shortcut -- winding, poorly lit at night" },
+          { "type": "ok", "text": "DPWH clearing obstructions by end of March" },
+          { "type": "money", "text": "Avoid gas in Lopez-Tagkawayan (P3-4/L pricier)" }
+        ],
+        "highlights": [
+          "Bagasbas Beach (surfing P400/hr, shallow for Baby Jah)",
+          "Pineapple Island Resort (pool with slides for Baby Jah)",
+          "Mampurog River (riverside picnic)",
+          "Mercedes Islands (island hopping)"
+        ],
+        "food_spots": [
+          "Hoogpaan Restaurant", "Green Earth Cafe", "Oh Bang Ramen",
+          "Leo's Cuisine (Bagasbas)", "Kusina ni Angel (Bagasbas)"
+        ],
+        "pasalubong": "laing, pinangat, Bicol Express, kinunot, pili nut treats",
+        "status": "upcoming"
+      }
+    ],
+    "vehicle": {
+      "scooter": { "model": "Yamaha Mio Sporty 2013", "last_gas": "2026-03-23", "gas_level": "90%", "usual_cost": 200, "frequency": "weekly" },
+      "car": { "model": "Toyota Vios 2015", "last_maintenance": "2026-03-23", "notes": "Brake shoes replaced" }
+    },
+    "baby_jah": {
+      "name": "Baby Jah",
+      "feeding": [
+        { "date": "2026-03-23", "time": "08:00", "food": "Lugaw + Egg", "notes": null },
+        { "date": "2026-03-23", "time": "11:00", "food": "Bread", "notes": "While RA ate bangus" },
+        { "date": "2026-03-23", "time": "12:30", "food": "Nilagang Baboy", "notes": "Same time as RA" }
+      ],
+      "sleep": [
+        { "date": "2026-03-22", "slept": null, "woke": "02:30", "type": "night", "notes": "Woke up ~2:30 AM" },
+        { "date": "2026-03-23", "slept": "11:40", "woke": null, "type": "nap" },
+        { "date": "2026-03-23", "slept": "18:00", "woke": null, "type": "night", "notes": "Asleep since 6 PM" }
+      ],
+      "diapers": [],
+      "milestones": [],
+      "growth": [],
+      "medicine": [],
+      "activities": [
+        { "date": "2026-03-23", "activity": "Morning walk with RA", "time": "08:00" },
+      { "date": "2026-03-23", "activity": "Afternoon walk with Arabelle", "time": "15:00" }
+      ],
+      "next_checkup": null,
+      "mood_today": null
+    },
+    "buki": {
+      "name": "Buki",
+      "fed_today": null,
+      "last_vet": null,
+      "notes": null
+    },
+    "kitchen": {
+      "inventory": [],
+      "meal_plan": [],
+      "grocery_list": []
+    },
+    "patterns": [
+      { "category": "Scooter Gas", "frequency": "~weekly", "amount": 200 },
+      { "category": "MagicData Mobile", "frequency": "as needed", "amount": null },
+      { "category": "Monthly Fixed Costs", "frequency": "monthly", "amount": 13300 }
+    ]
+  },
+  "ra": {
+    "schedule": {
+      "work_start": "20:00",
+      "work_end": "05:00",
+      "commute_to": "19:45",
+      "sleep": [
+        { "date": "2026-03-23", "slept": "15:00", "woke": "19:00", "notes": "Pre-shift nap" }
+      ],
+      "commute_from": "05:00",
+      "work_days": [1, 2, 3, 4, 5],
+      "workplace": "McKinley Hills, Taguig"
+    },
+    "transactions": [
+      { "date": "2026-03-22", "time": "00:56", "description": "Presto PB Cookies", "amount": null, "category": "food" },
+      { "date": "2026-03-22", "time": "02:40", "description": "Chicken Nuggets + Rice", "amount": null, "category": "food" },
+      { "date": "2026-03-23", "time": "08:00", "description": "Lugaw + Egg (Baby Jah)", "amount": null, "category": "food" },
+      { "date": "2026-03-23", "time": "11:00", "description": "Bangus Silog", "amount": null, "category": "food" },
+      { "date": "2026-03-23", "time": "12:30", "description": "Nilagang Baboy + Rice", "amount": null, "category": "food" },
+      { "date": "2026-03-23", "time": null, "description": "Brake shoes replaced (Vios)", "amount": null, "category": "transport" },
+      { "date": "2026-03-23", "time": null, "description": "duberymnl.com domain (Namecheap)", "amount": null, "category": "shopping" }
+    ],
+    "todos": [
+      { "text": "File leave at Informdata for Daet trip", "done": false, "due": "2026-03-27" },
+      { "text": "Pay parking P3,000", "done": false, "due": "2026-03-28" },
+      { "text": "Withdraw cash before Daet trip", "done": false, "due": "2026-03-27" },
+      { "text": "Call ACE Hospital Pateros -- confirm PhilCare HMO", "done": false, "due": "2026-03-25" },
+      { "text": "Empty recycle bin (3.1GB)", "done": false, "due": null },
+      { "text": "Delete Google Photos library (takeout done, 28GB)", "done": false, "due": null }
+    ],
+    "contacts": [
+      { "name": "ACE Hospital Pateros", "purpose": "Confirm PhilCare HMO acceptance", "due": "2026-03-25" },
+      { "name": "Informdata HR", "purpose": "File leave for Mar 28+", "due": "2026-03-27" }
+    ]
+  },
+  "arabelle": {
+    "schedule": {
+      "work_start": "06:00",
+      "work_end": "15:00",
+      "leave_home": "05:30",
+      "work_days_wfh": [1, 5],
+      "work_days_office": [2, 3, 4],
+      "rest_days": [0, 6],
+      "commute_method": "mototaxi (default) / car if heavy rain"
+    },
+    "transactions": [],
+    "todos": [],
+    "contacts": []
+  }
+}
