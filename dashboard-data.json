@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-03-24T04:30:00+08:00",
+  "last_updated": "2026-03-24T08:50:00+08:00",
   "location": {
     "name": "San Joaquin, Pasig",
     "lat": 14.5764,
@@ -7,7 +7,7 @@
   },
   "shared": {
     "accounts": {
-      "payroll": { "balance": 5117, "account_masked": "***9713", "updated": "2026-03-23" },
+      "payroll": { "balance": 5058, "account_masked": "***9713", "updated": "2026-03-24" },
       "savings": { "balance": 10222, "account_masked": "***7397", "updated": "2026-03-23" },
       "pocket_cash": { "balance": 2800, "updated": "2026-03-23" }
     },
@@ -84,23 +84,40 @@
       "feeding": [
         { "date": "2026-03-23", "time": "08:00", "food": "Lugaw + Egg", "notes": null },
         { "date": "2026-03-23", "time": "11:00", "food": "Bread", "notes": "While RA ate bangus" },
-        { "date": "2026-03-23", "time": "12:30", "food": "Nilagang Baboy", "notes": "Same time as RA" }
+        { "date": "2026-03-23", "time": "12:30", "food": "Nilagang Baboy", "notes": "Same time as RA" },
+        { "date": "2026-03-24", "time": "04:00", "food": "Milk", "notes": "From Arabelle" },
+        { "date": "2026-03-24", "time": "06:45", "food": "Lugaw + Egg", "notes": "Morning outing with RA" }
       ],
       "sleep": [
         { "date": "2026-03-22", "slept": null, "woke": "02:30", "type": "night", "notes": "Woke up ~2:30 AM" },
         { "date": "2026-03-23", "slept": "11:40", "woke": null, "type": "nap" },
         { "date": "2026-03-23", "slept": "18:00", "woke": null, "type": "night", "notes": "Asleep since 6 PM" }
       ],
-      "diapers": [],
+      "diapers": [
+        {
+          "date": "2026-03-24",
+          "time": "04:00",
+          "type": "wet",
+          "notes": "Milk at 4 AM, diaper change (from Arabelle)"
+        },
+        {
+          "date": "2026-03-24",
+          "time": "06:30",
+          "type": "poop",
+          "notes": "Small round poops, semi-hard. Changed by RA."
+        }
+      ],
       "milestones": [],
       "growth": [],
       "medicine": [],
       "activities": [
         { "date": "2026-03-23", "activity": "Morning walk with RA", "time": "08:00" },
-      { "date": "2026-03-23", "activity": "Afternoon walk with Arabelle", "time": "15:00" }
+      { "date": "2026-03-23", "activity": "Afternoon walk with Arabelle", "time": "15:00" },
+      { "date": "2026-03-24", "activity": "Morning outing with RA -- bought lugaw", "time": "06:30" },
+      { "date": "2026-03-24", "activity": "Watching Miss Rachel", "time": "07:45" }
       ],
       "next_checkup": null,
-      "mood_today": null
+      "mood_today": "Good mood (2026-03-24 6:30 AM)"
     },
     "buki": {
       "name": "Buki",
@@ -140,7 +157,11 @@
       { "date": "2026-03-23", "time": null, "description": "Brake shoes replaced (Vios)", "amount": null, "category": "transport" },
       { "date": "2026-03-23", "time": null, "description": "duberymnl.com domain (Namecheap)", "amount": null, "category": "shopping" },
       { "date": "2026-03-23", "time": "23:06", "description": "Spaghetti with hotdog (work)", "amount": null, "category": "food" },
-      { "date": "2026-03-24", "time": "02:08", "description": "Nilagang Baboy + Rice (packed by Arabelle)", "amount": null, "category": "food" }
+      { "date": "2026-03-24", "time": "02:08", "description": "Nilagang Baboy + Rice (packed by Arabelle)", "amount": null, "category": "food" },
+      { "date": "2026-03-24", "time": "05:05", "description": "Parking -- McKinley Town Center (9 hrs)", "amount": 85, "category": "transport" },
+      { "date": "2026-03-24", "time": "05:22", "description": "Mobile load to 09278374069 via BPI", "amount": 59, "category": "load" },
+      { "date": "2026-03-24", "time": "05:17", "description": "Cash to Arabelle", "amount": 600, "category": "transfer" },
+      { "date": "2026-03-24", "time": "06:45", "description": "Lugaw + Egg (with Bujah)", "amount": null, "category": "food" }
     ],
     "todos": [
       { "text": "File leave at Informdata for Daet trip", "done": false, "due": "2026-03-27" },
