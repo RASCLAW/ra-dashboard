@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-03-25T01:28:50+08:00",
+  "last_updated": "2026-03-25T03:54:21+08:00",
   "location": {
     "name": "San Joaquin, Pasig",
     "lat": 14.5764,
@@ -7,7 +7,7 @@
   },
   "shared": {
     "accounts": {
-      "payroll": { "balance": 5057.99, "account_masked": "***9713", "updated": "2026-03-24" },
+      "payroll": { "balance": 5007.99, "account_masked": "***9713", "updated": "2026-03-25" },
       "savings": { "balance": 10222, "account_masked": "***7397", "updated": "2026-03-23" },
       "pocket_cash": { "balance": 2115, "updated": "2026-03-24" }
     },
@@ -18,7 +18,8 @@
         { "name": "Meralco", "amount": 3269, "due_day": null, "status": "paid", "paid_date": "2026-03-23" },
         { "name": "PLDT Fibr", "amount": 1700, "due_day": 17, "status": "paid", "paid_date": "2026-03-17" },
         { "name": "Maynilad", "amount": 887, "due_day": null, "status": "paid", "paid_date": "2026-03-23" },
-        { "name": "Parking", "amount": 3000, "due_day": 28, "status": "pending", "paid_date": null }
+        { "name": "Parking", "amount": 3000, "due_day": 28, "status": "pending", "paid_date": null },
+        { "name": "Meralco (Apr)", "amount": 5503.15, "due_day": 3, "status": "pending", "paid_date": null }
       ],
       "subscriptions": [
         { "name": "YouTube Premium", "amount": 189, "next_due": "2026-04-15" },
@@ -193,7 +194,8 @@
       { "date": "2026-03-24", "time": "05:17", "description": "Cash to Arabelle", "amount": 600, "category": "transfer" },
       { "date": "2026-03-24", "time": "06:45", "description": "Lugaw + Egg (with Bujah)", "amount": null, "category": "food" },
       { "date": "2026-03-24", "time": "09:50", "description": "Hotsilog (breakfast)", "amount": null, "category": "food" },
-      { "date": "2026-03-24", "time": "09:50", "description": "Pork steak (for lunch)", "amount": 80, "category": "food" }
+      { "date": "2026-03-24", "time": "09:50", "description": "Pork steak (for lunch)", "amount": 80, "category": "food" },
+      { "date": "2026-03-24", "time": "23:16", "description": "Globe load (09776852325)", "amount": 50, "category": "bills" }
     ],
     "todos": [
       { "text": "File leave at Informdata for Daet trip", "done": false, "due": "2026-03-27" },
@@ -228,6 +230,9 @@
     {"date":"2026-03-24","time":"4:29 PM","title":"Baby Jah's dinner","body":"Fettuccine pasta with chicken and cherry tomatoes in a wok. Home-cooked. This is Jah's food -- timestamp is 1 min after the feeding photo at 4:28 PM.\n\nJah is eating solid meals now (pasta, pork steak earlier). Growing up fast.","action":"Logged to baby_jah.feeding","tags":["baby_jah","food"]},
     {"date":"2026-03-24","time":"5:11 PM","title":"BPI balance check","body":"BPI mobile app screenshot. Balance: P5,057.99. Down ~P116 since Meta ads went live on Mar 23 (P200/day budget).\n\nPattern: RA checks BPI regularly when money is going out (ads, bills).","action":"Updated shared.accounts.payroll balance","tags":["money"]},
     {"date":"2026-03-24","time":"5:32 PM","title":"Doctor contact saved","body":"Contact card: 'Bella' -- Dr Charmaine Simon, 0928 942 0135, hours 12nn-4pm.\n\nLikely preparing for the ACE Hospital Pateros call scheduled for Mar 25 (PhilCare HMO) and the Mar 26 hospital visit for med cert.","tags":["health","errands"]},
+    {"date":"2026-03-24","time":"11:04 PM","title":"Meralco bill -- P5,503.15","body":"March billing period (Feb 22 - Mar 22). 381 kWh consumed. Due April 3.\n\nBig jump: +P2,234 from last month's P3,269 (+68%). 381 kWh is high -- summer heat or AC usage increasing. April/May bills will be worse.","action":"Added to pending bills. Due Apr 3.","tags":["money","home"]},
+    {"date":"2026-03-24","time":"11:16 PM","title":"P50 Globe load from BPI","body":"RegularLoad P50 to Globe 09776852325 from payroll account (***9713). Payroll balance: P5,007.99.","action":"Deducted P50 from payroll, logged transaction.","tags":["money"]},
+    {"date":"2026-03-25","time":"12:06 AM","title":"Dashboard camera upload test","body":"Two screenshots of the camera upload error ('Failed to fetch'). RA testing at work. Known CORS issue with Apps Script -- feature removed. Photos taken 4 sec apart (retake).","tags":["tech"]},
     {"date":"2026-03-25","time":"12:44 AM","title":"CCTV -- family sleeping","body":"Tapo CCTV night vision. Arabelle and Baby Jah sleeping together in the playpen bed. Jah sprawled out, blanket kicked off. Arabelle under blanket on the left.\n\nRA checking on family from work during night shift. Both asleep and safe.\n\nPattern: RA monitors home via Tapo CCTV during night shifts. Jah has been asleep since ~7 PM (6+ hours).","tags":["baby_jah","arabelle","home"]}
   ],
   "timeline": [
@@ -237,6 +242,54 @@
     {"date":"2026-03-24","time":"17:11","type":"balance","summary":"BPI balance: P5,057.99 -- down P116 since ads went live","tags":["money"],"source":"mobile-screenshots"},
     {"date":"2026-03-24","time":"17:30","type":"activity","summary":"RA napped 5:30-7:15 PM -- pre-shift, ~1.75 hrs","tags":["health","home"],"source":"conversation"},
     {"date":"2026-03-24","time":"17:32","type":"screenshot","summary":"Saved contact: Dr Charmaine Simon (Bella) -- 0928 942 0135, 12nn-4pm. Prep for hospital visit","tags":["health","errands"],"source":"mobile-screenshots"},
+    {"date":"2026-03-24","time":"23:04","type":"screenshot","summary":"Meralco bill: 381 kWh, P5,503.15 due Apr 3. Up P2,234 from last month (+68%)","tags":["money","home"],"source":"mobile-screenshots"},
+    {"date":"2026-03-24","time":"23:16","type":"transaction","summary":"P50 Globe load from BPI payroll. Balance now P5,007.99","tags":["money"],"source":"mobile-screenshots"},
+    {"date":"2026-03-25","time":"00:06","type":"screenshot","summary":"Dashboard camera upload error test -- known CORS issue, feature removed","tags":["tech"],"source":"mobile-screenshots"},
     {"date":"2026-03-25","time":"00:44","type":"photo","summary":"CCTV check -- Arabelle and Baby Jah sleeping together in playpen bed. Both safe.","tags":["baby_jah","arabelle","home"],"source":"mobile-screenshots"}
-  ]
+  ],
+  "briefing": {
+    "updated": "2026-03-25",
+    "fuel": {
+      "prices": [
+        {"type": "Gasoline (Regular)", "price": "P56-63/L"},
+        {"type": "Gasoline (Premium)", "price": "P58-67/L"},
+        {"type": "Diesel", "price": "P57-91/L"}
+      ],
+      "trend": "4th consecutive week of increases. Gasoline up P36/L year-to-date, diesel up P58/L. Caused by US-Israel-Iran conflict disrupting oil supply from Strait of Hormuz.",
+      "tip": "Fill up early in the week -- price hikes usually take effect Tuesday. Your scooter uses gasoline, not diesel, so you're less affected. Budget ~P250-300/fill-up instead of P200."
+    },
+    "electricity": {
+      "rate": "P13.82/kWh",
+      "trend": "Up P0.64/kWh from February. A 200 kWh household pays ~P129 more this month. Driven by 70% jump in NGCP ancillary charges + higher generation costs.",
+      "tip": "Summer demand is pushing rates up. Unplug idle chargers, use fan instead of AC when possible. Wash clothes at night (off-peak). Check your bill for time-of-use tier details."
+    },
+    "food": {
+      "items": [
+        {"item": "Rice (well-milled)", "price": "P50-63/kg"},
+        {"item": "Eggs", "price": "P6-8.50/pc"},
+        {"item": "Chicken (dressed)", "price": "P180-220/kg"},
+        {"item": "Pork liempo", "price": "P310-370/kg"},
+        {"item": "Pork kasim", "price": "P270-330/kg"},
+        {"item": "Pandesal", "price": "P5.80-7.50/pc"}
+      ],
+      "tip": "Rice prices elevated due to Middle East freight costs (doubled). Chicken is 40% cheaper than pork right now -- best budget protein. Subsidized rice at P20/kg available for seniors/PWD/minimum wage."
+    },
+    "ai_news": [
+      {"title": "Claude Dispatch: run agents from your phone", "summary": "Anthropic shipped Dispatch -- assign Claude tasks from your iPhone, it runs on your Mac while you're away. Persistent conversation across devices. Pairs with new Computer Use feature (macOS only, Pro/Max).", "insight": "This is directly relevant to our setup. You already use Claude Code at work via tunnel. Dispatch could replace the tunnel workflow -- assign tasks from phone, come back to results. Worth testing on your Mac plan.", "article": "articles/claude-dispatch.html"},
+      {"title": "Claude Code hits $1B annualized revenue", "summary": "Anthropic shipped voice mode, Cowork, interactive visuals, $100M partner fund, doubled usage limits. Claude Code alone crossed $1B ARR.", "insight": "The tool you're building your entire career on is the fastest-growing AI product. That's validation. Your portfolio of Claude Code skills + agentic workflows is increasingly valuable."},
+      {"title": "AI execution > AI text -- GitHub's new direction", "summary": "GitHub declared 'AI as text is over, execution is the new interface.' AWS added policy layers for agents. Stack Overflow warned enterprise AI fails without context. Supply chain attacks hitting repos.", "insight": "The industry is shifting from 'AI writes text' to 'AI takes actions.' That's exactly what your DuberyMNL pipeline does -- autonomous execution with human-in-the-loop. You're ahead of the curve."},
+      {"title": "n8n automation classes going viral", "summary": "Multiple creators running live n8n automation courses on YouTube. Error handling, autonomous business workflows, monetization guides.", "insight": "n8n content is booming. Your n8n portfolio strategy (31 workflows, Tier 1-4) is well-timed. Consider creating n8n tutorial content yourself -- the audience is growing fast."}
+    ],
+    "youtube_highlights": [
+      {"title": "Claude Dispatch Just Dropped, And It Kills OpenClaw", "channel": "Nick Saraev", "url": "https://youtube.com/watch?v=yTkS8oClCIc", "summary": "Deep dive on Dispatch vs OpenClaw. How to set it up, security advantages, running agents from phone."},
+      {"title": "All The Claude Code Features You DONT Know About", "channel": "Build In Public", "url": "https://youtube.com/watch?v=UleBatIXVeE", "summary": "Full roundup of Anthropic's week: voice mode, Cowork, interactive visuals, $1B revenue milestone."},
+      {"title": "The Real AI Story This Week: Execution Without Control", "channel": "MostProductive", "url": "https://youtube.com/watch?v=GNB9PsCQoAI", "summary": "Why AI execution (not text) is the real story. GitHub, AWS, Stack Overflow all shifting to agentic."}
+    ],
+    "life_hacks": [
+      {"title": "Gas savings for the Daet trip", "body": "Diesel is up P58/L this year. Your Vios uses gasoline (less affected). For the 340km Daet trip: drive steady at 80-90 kph, avoid full AC blast in traffic. Could save P200-400 on the round trip vs aggressive driving."},
+      {"title": "Baby Jah meal prep hack", "body": "Jah is eating solids consistently now (pasta, pork, lugaw). Batch-cook 3-4 portions on rest days, freeze in small containers. Saves Arabelle 20-30 min per meal on weekdays."},
+      {"title": "Electricity: P129 more this month", "body": "Meralco rate jumped to P13.82/kWh (+P0.64). For your household: unplug idle chargers, use fan over AC when tolerable, wash clothes at night. Summer will push rates higher -- April/May bills will be painful."},
+      {"title": "Go chicken over pork this week", "body": "Pork liempo at P310-370/kg vs chicken at P180-220/kg. Chicken is 40% cheaper right now. Adobo, tinola, or fried chicken stretches the budget further than pork dishes."}
+    ]
+  }
 }

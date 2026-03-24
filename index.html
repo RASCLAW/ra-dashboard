@@ -116,6 +116,7 @@ body{background:var(--bg);color:var(--text);font-family:'Space Grotesk',-apple-s
   <div class="s" id="jh"></div>
   <div class="s" id="tr"></div>
   <div class="s" id="tl"></div>
+  <div class="s" id="sm"></div>
   <div class="s" id="lg"></div>
   <div class="s" id="ex"></div>
 </div>
@@ -326,8 +327,8 @@ function setProfile(p){
 function buildTabs(){
   const bar=document.getElementById('tab-bar');
   const tabs=PROFILE==='ra'?
-    [{id:'ov',l:'Home'},{id:'jh',l:'Jah'},{id:'tr',l:'Trip'},{id:'ex',l:'Expenses'},{id:'tl',l:'Timeline'},{id:'lg',l:'Log'}]:
-    [{id:'ov',l:'Home'},{id:'jh',l:'Jah'},{id:'tr',l:'Trip'},{id:'ex',l:'Expenses'},{id:'tl',l:'Timeline'},{id:'lg',l:'Log'}];
+    [{id:'ov',l:'Home'},{id:'jh',l:'Jah'},{id:'tr',l:'Trip'},{id:'ex',l:'Expenses'},{id:'tl',l:'Timeline'},{id:'sm',l:'News'},{id:'lg',l:'Log'}]:
+    [{id:'ov',l:'Home'},{id:'jh',l:'Jah'},{id:'tr',l:'Trip'},{id:'ex',l:'Expenses'},{id:'tl',l:'Timeline'},{id:'sm',l:'News'},{id:'lg',l:'Log'}];
   bar.innerHTML=tabs.map((t,i)=>`<button class="tab${i===0?' a':''}" onclick="sw('${t.id}',this)">${t.l}</button>`).join('');
   document.querySelectorAll('.s').forEach(s=>s.classList.remove('a'));
   document.getElementById('ov').classList.add('a');
@@ -351,7 +352,7 @@ if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5){
 function render(){
   if(!D)return;
   if(PROFILE==='ra')renderRAHome();else renderArabelleHome();
-  renderJah();renderTrip();renderTimeline();renderLog();renderExpenses();
+  renderJah();renderTrip();renderTimeline();renderBrief();renderLog();renderExpenses();
 }
 
 function renderRAHome(){
@@ -746,6 +747,120 @@ function renderTimeline(){
   el.innerHTML=h;
 }
 
+function renderBrief(){
+  const el=document.getElementById('sm');
+  const b=D.briefing;
+  if(!b){el.innerHTML='<div class="c"><div class="empty-state">No briefing yet. Claude will populate this with research.</div></div>';return}
+  let h='';
+  h+=`<div class="m" style="font-size:10px;color:var(--muted);margin-bottom:8px">Last researched: ${b.updated||'--'}</div>`;
+  // Fuel
+  if(b.fuel){
+    h+='<div class="c"><div class="ct m">Fuel Prices (Metro Manila)</div>';
+    (b.fuel.prices||[]).forEach(f=>{
+      h+=`<div class="r"><span style="font-size:13px">${f.type}</span><span class="m" style="font-weight:600;color:#f59e0b">${f.price}</span></div>`;
+    });
+    if(b.fuel.trend)h+=`<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border);font-size:12px;color:var(--muted)">${b.fuel.trend}</div>`;
+    if(b.fuel.tip)h+=`<div style="margin-top:6px;font-size:12px;color:#10b981">Tip: ${b.fuel.tip}</div>`;
+    h+='</div>';
+  }
+  // Electricity
+  if(b.electricity){
+    h+=`<div class="c"><div class="ct m">Meralco Rate</div>
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:13px">Residential per kWh</span><span class="m" style="font-size:18px;font-weight:700;color:#22d3ee">${b.electricity.rate||'--'}</span></div>
+      ${b.electricity.trend?`<div style="margin-top:6px;font-size:12px;color:var(--muted)">${b.electricity.trend}</div>`:''}
+      ${b.electricity.tip?`<div style="margin-top:6px;font-size:12px;color:#10b981">Tip: ${b.electricity.tip}</div>`:''}
+    </div>`;
+  }
+  // Food prices
+  if(b.food){
+    h+='<div class="c"><div class="ct m">Food Prices</div>';
+    (b.food.items||[]).forEach(f=>{
+      h+=`<div class="r"><span style="font-size:13px">${f.item}</span><span class="m" style="font-weight:600">${f.price}</span></div>`;
+    });
+    if(b.food.tip)h+=`<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border);font-size:12px;color:#10b981">Tip: ${b.food.tip}</div>`;
+    h+='</div>';
+  }
+  // AI News
+  if(b.ai_news&&b.ai_news.length){
+    h+='<div class="c"><div class="ct m">AI News This Week</div>';
+    b.ai_news.forEach(n=>{
+      const link=n.article?`<a href="${n.article}" style="color:inherit;text-decoration:none;display:block">`:'<div>';
+      const linkEnd=n.article?'</a>':'</div>';
+      h+=`${link}<div style="padding:8px 0;border-bottom:1px solid var(--border);cursor:${n.article?'pointer':'default'}">
+        <div style="display:flex;justify-content:space-between;align-items:center"><div style="font-size:13px;font-weight:600">${n.title}</div>${n.article?'<span style="font-size:11px;color:var(--accent)">Read ></span>':''}</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:4px;line-height:1.5">${n.summary}</div>
+        ${n.insight?`<div style="font-size:11px;color:#22d3ee;margin-top:4px">${n.insight}</div>`:''}
+      </div>${linkEnd}`;
+    });h+='</div>';
+  }
+  // Career / Jobs
+  if(b.career&&b.career.length){
+    h+='<div class="c"><div class="ct m">Remote Job Matches</div>';
+    b.career.forEach(j=>{
+      h+=`<div style="padding:8px 0;border-bottom:1px solid var(--border)">
+        <div style="display:flex;justify-content:space-between"><span style="font-size:13px;font-weight:600">${j.title}</span>${j.pay?`<span class="m" style="font-size:12px;color:#10b981">${j.pay}</span>`:''}</div>
+        ${j.skills?`<div class="m" style="font-size:10px;color:var(--muted);margin-top:4px">${j.skills}</div>`:''}
+        ${j.match?`<div style="font-size:11px;color:#22d3ee;margin-top:4px">${j.match}</div>`:''}
+      </div>`;
+    });h+='</div>';
+  }
+  // Local News
+  if(b.local_news&&b.local_news.length){
+    h+='<div class="c"><div class="ct m">Local News</div>';
+    b.local_news.forEach(n=>{
+      h+=`<div style="padding:8px 0;border-bottom:1px solid var(--border)">
+        <div style="font-size:13px;font-weight:600">${n.title}</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:4px;line-height:1.5">${n.summary}</div>
+        ${n.action?`<div style="font-size:11px;color:#f59e0b;margin-top:4px">${n.action}</div>`:''}
+      </div>`;
+    });h+='</div>';
+  }
+  // Parenting
+  if(b.parenting&&b.parenting.length){
+    h+='<div class="c"><div class="ct m">Parenting (Baby Jah)</div>';
+    b.parenting.forEach(p=>{
+      h+=`<div style="padding:8px 0;border-bottom:1px solid var(--border)">
+        <div style="font-size:13px;font-weight:600">${p.title}</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:4px;line-height:1.5">${p.summary}</div>
+        ${p.tip?`<div style="font-size:11px;color:#f472b6;margin-top:4px">Tip: ${p.tip}</div>`:''}
+      </div>`;
+    });h+='</div>';
+  }
+  // Hardware
+  if(b.hardware&&b.hardware.length){
+    h+='<div class="c"><div class="ct m">Hardware / Edge AI</div>';
+    b.hardware.forEach(hw=>{
+      h+=`<div style="padding:8px 0;border-bottom:1px solid var(--border)">
+        <div style="font-size:13px;font-weight:600">${hw.title}</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:4px;line-height:1.5">${hw.summary}</div>
+        ${hw.insight?`<div style="font-size:11px;color:#22d3ee;margin-top:4px">${hw.insight}</div>`:''}
+      </div>`;
+    });h+='</div>';
+  }
+  // YouTube Highlights
+  if(b.youtube_highlights&&b.youtube_highlights.length){
+    h+='<div class="c"><div class="ct m">YouTube Highlights</div>';
+    b.youtube_highlights.forEach(v=>{
+      h+=`<div style="padding:8px 0;border-bottom:1px solid var(--border)">
+        <a href="${v.url}" target="_blank" style="font-size:13px;font-weight:600;color:#22d3ee;text-decoration:none">${v.title}</a>
+        <div class="m" style="font-size:10px;color:var(--muted);margin-top:2px">${v.channel}</div>
+        ${v.summary?`<div style="font-size:12px;color:var(--muted);margin-top:4px;line-height:1.5">${v.summary}</div>`:''}
+      </div>`;
+    });h+='</div>';
+  }
+  // Life hacks
+  if(b.life_hacks&&b.life_hacks.length){
+    h+='<div class="c"><div class="ct m">Life Hacks This Week</div>';
+    b.life_hacks.forEach(h2=>{
+      h+=`<div style="padding:8px 0;border-bottom:1px solid var(--border)">
+        <div style="font-size:13px;font-weight:600">${h2.title}</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:4px;line-height:1.5">${h2.body}</div>
+      </div>`;
+    });h+='</div>';
+  }
+  el.innerHTML=h;
+}
+
 function renderLog(){
   const el=document.getElementById('lg');
   const logs=(D.logs||[]).slice().reverse();
@@ -781,11 +896,12 @@ function renderExpenses(){
   const monthNum=parseInt(bills.month.split('-')[1]);
   let h='';
 
-  h+=`<div class="c"><div class="ct m">Accounts</div>
-    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:14px"><div><div class="lbl m">Total Balance</div><div class="m" style="font-size:30px;font-weight:700;color:#22d3ee">${fmt(total)}</div></div><div class="m" style="font-size:10px;color:#64748b">as of ${fmtDate(S.accounts.payroll.updated||D.last_updated)}</div></div>
+  const hid=balHidden;
+  h+=`<div class="c"><div style="display:flex;justify-content:space-between;align-items:center"><div class="ct m" style="margin-bottom:0;border-bottom:none;padding-bottom:0">Accounts</div><button onclick="toggleBal()" style="background:none;border:none;cursor:pointer;font-size:16px;color:var(--muted);padding:2px 6px">${hid?'🙈':'👁'}</button></div>
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:14px;margin-top:10px"><div><div class="lbl m">Total Balance</div><div class="m" style="font-size:30px;font-weight:700;color:#22d3ee">${hid?'****':fmt(total)}</div></div><div class="m" style="font-size:10px;color:#64748b">as of ${fmtDate(S.accounts.payroll.updated||D.last_updated)}</div></div>
     <div style="display:flex;gap:8px">
-      <div style="flex:1;background:#0a0a0f;border-radius:8px;padding:10px 12px"><div class="m" style="font-size:9px;color:#64748b;margin-bottom:3px">PAYROLL ${S.accounts.payroll.account_masked}</div><div class="m" style="font-size:16px;font-weight:700">${fmt(S.accounts.payroll.balance)}</div></div>
-      <div style="flex:1;background:#0a0a0f;border-radius:8px;padding:10px 12px"><div class="m" style="font-size:9px;color:#64748b;margin-bottom:3px">SAVINGS ${S.accounts.savings.account_masked}</div><div class="m" style="font-size:16px;font-weight:700">${fmt(S.accounts.savings.balance)}</div></div>
+      <div style="flex:1;background:#0a0a0f;border-radius:8px;padding:10px 12px"><div class="m" style="font-size:9px;color:#64748b;margin-bottom:3px">PAYROLL ${S.accounts.payroll.account_masked}</div><div class="m" style="font-size:16px;font-weight:700">${hid?'****':fmt(S.accounts.payroll.balance)}</div></div>
+      <div style="flex:1;background:#0a0a0f;border-radius:8px;padding:10px 12px"><div class="m" style="font-size:9px;color:#64748b;margin-bottom:3px">SAVINGS ${S.accounts.savings.account_masked}</div><div class="m" style="font-size:16px;font-weight:700">${hid?'****':fmt(S.accounts.savings.balance)}</div></div>
     </div></div>`;
 
   h+=`<div class="c"><div class="ct m">${monthNames[monthNum]} Bills</div>

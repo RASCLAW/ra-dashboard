@@ -36,6 +36,21 @@ Append-only. Never prune.
 
 ## 2026-03-25
 
+### 11:04 PM (Mar 24)
+- **Screenshot:** Gmail -- Meralco bill notification. March 2026 billing period (Feb 22 - Mar 22). 381 kWh, P5,503.15, due April 3. CAN: 0285742XXX.
+- **Context:** Big jump from last month's P3,269. That's +P2,234 (+68%). 381 kWh is high -- could be the AC or summer heat starting.
+- **Pattern:** Electricity bill trending up as summer approaches. April/May will be worse.
+- **Action:** Added to bills as pending. Due April 3.
+
+### 11:16 PM (Mar 24)
+- **Screenshot:** BPI mobile load -- P50 RegularLoad to Globe 09776852325 from payroll account.
+- **Context:** RA loading phone credits during shift. Payroll balance now P5,007.99.
+- **Action:** Deducted P50 from payroll balance, logged transaction.
+
+### 12:06 AM
+- **Screenshot:** Chrome -- dashboard camera upload error ("Failed to fetch"). x2 screenshots (retake 4 sec apart).
+- **Context:** RA testing the camera upload feature we built. Known issue -- CORS blocks Apps Script POST from browser. Feature removed.
+
 ### 12:44 AM
 - **Screenshot:** Tapo CCTV -- Arabelle and Baby Jah sleeping together in the playpen bed. Night vision. Jah sprawled out, blanket kicked off. Arabelle under blanket on the left.
 - **Context:** RA checking on family from work during night shift. Both asleep and safe.
