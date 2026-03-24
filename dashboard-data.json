@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-03-24T08:50:00+08:00",
+  "last_updated": "2026-03-25T01:28:50+08:00",
   "location": {
     "name": "San Joaquin, Pasig",
     "lat": 14.5764,
@@ -7,9 +7,9 @@
   },
   "shared": {
     "accounts": {
-      "payroll": { "balance": 5058, "account_masked": "***9713", "updated": "2026-03-24" },
+      "payroll": { "balance": 5057.99, "account_masked": "***9713", "updated": "2026-03-24" },
       "savings": { "balance": 10222, "account_masked": "***7397", "updated": "2026-03-23" },
-      "pocket_cash": { "balance": 2800, "updated": "2026-03-23" }
+      "pocket_cash": { "balance": 2115, "updated": "2026-03-24" }
     },
     "bills": {
       "month": "2026-03",
@@ -76,7 +76,7 @@
       }
     ],
     "vehicle": {
-      "scooter": { "model": "Yamaha Mio Sporty 2013", "last_gas": "2026-03-23", "gas_level": "90%", "usual_cost": 200, "frequency": "weekly" },
+      "scooter": { "model": "Yamaha Mio Sporty 2013", "last_gas": "2026-03-23", "gas_level": "90%", "usual_cost": 200, "frequency": "weekly", "avg_price": 98.00 },
       "car": { "model": "Toyota Vios 2015", "last_maintenance": "2026-03-23", "notes": "Brake shoes replaced" }
     },
     "baby_jah": {
@@ -86,12 +86,19 @@
         { "date": "2026-03-23", "time": "11:00", "food": "Bread", "notes": "While RA ate bangus" },
         { "date": "2026-03-23", "time": "12:30", "food": "Nilagang Baboy", "notes": "Same time as RA" },
         { "date": "2026-03-24", "time": "04:00", "food": "Milk", "notes": "From Arabelle" },
-        { "date": "2026-03-24", "time": "06:45", "food": "Lugaw + Egg", "notes": "Morning outing with RA" }
+        { "date": "2026-03-24", "time": "06:45", "food": "Lugaw + Egg", "notes": "Morning outing with RA" },
+        { "date": "2026-03-24", "time": "09:20", "food": "Milk", "notes": "Before bed" },
+        { "date": "2026-03-24", "time": "12:00", "food": "Pork steak", "notes": "Lunch with RA" },
+        { "date": "2026-03-24", "time": "16:29", "food": "Fettuccine pasta with chicken", "notes": "Dinner, home-cooked" },
+        { "date": "2026-03-24", "time": "17:35", "food": "Bread", "notes": "Snack (logged by RA)" },
+        { "date": "2026-03-24", "time": "18:41", "food": "Milk", "notes": "Evening milk before bed (logged by Arabelle)" }
       ],
       "sleep": [
         { "date": "2026-03-22", "slept": null, "woke": "02:30", "type": "night", "notes": "Woke up ~2:30 AM" },
         { "date": "2026-03-23", "slept": "11:40", "woke": null, "type": "nap" },
-        { "date": "2026-03-23", "slept": "18:00", "woke": null, "type": "night", "notes": "Asleep since 6 PM" }
+        { "date": "2026-03-23", "slept": "18:00", "woke": null, "type": "night", "notes": "Asleep since 6 PM" },
+        { "date": "2026-03-24", "slept": "09:30", "woke": "14:30", "type": "nap", "notes": "Milk + diaper change, ~5 hrs" },
+        { "date": "2026-03-24", "slept": "19:00", "woke": null, "type": "night", "notes": "Bath 6:40 PM, milk 6:41 PM, likely asleep by ~7 PM" }
       ],
       "diapers": [
         {
@@ -105,6 +112,24 @@
           "time": "06:30",
           "type": "poop",
           "notes": "Small round poops, semi-hard. Changed by RA."
+        },
+        {
+          "date": "2026-03-24",
+          "time": "09:20",
+          "type": "wet",
+          "notes": "Diaper change before bed"
+        },
+        {
+          "date": "2026-03-24",
+          "time": "14:36",
+          "type": "wet",
+          "notes": "After nap, changed by RA"
+        },
+        {
+          "date": "2026-03-24",
+          "time": "18:40",
+          "type": "wet",
+          "notes": "Bath time (inferred)"
         }
       ],
       "milestones": [],
@@ -114,7 +139,9 @@
         { "date": "2026-03-23", "activity": "Morning walk with RA", "time": "08:00" },
       { "date": "2026-03-23", "activity": "Afternoon walk with Arabelle", "time": "15:00" },
       { "date": "2026-03-24", "activity": "Morning outing with RA -- bought lugaw", "time": "06:30" },
-      { "date": "2026-03-24", "activity": "Watching Miss Rachel", "time": "07:45" }
+      { "date": "2026-03-24", "activity": "Watching Miss Rachel", "time": "07:45" },
+      { "date": "2026-03-24", "activity": "Fed by Arabelle in yellow chair", "time": "16:28" },
+      { "date": "2026-03-24", "activity": "Bath time (logged by Arabelle)", "time": "18:40" }
       ],
       "next_checkup": null,
       "mood_today": "Good mood (2026-03-24 6:30 AM)"
@@ -142,7 +169,10 @@
       "work_end": "05:00",
       "commute_to": "19:45",
       "sleep": [
-        { "date": "2026-03-23", "slept": "15:00", "woke": "19:00", "notes": "Pre-shift nap" }
+        { "date": "2026-03-23", "slept": "15:00", "woke": "19:00", "notes": "Pre-shift nap" },
+        { "date": "2026-03-24", "slept": "09:30", "woke": null, "notes": "Post-shift sleep with Bujah" },
+        { "date": "2026-03-24", "slept": "10:00", "woke": "14:30", "notes": "Post-shift sleep, ~4.5 hrs" },
+        { "date": "2026-03-24", "slept": "17:30", "woke": "19:15", "notes": "Pre-shift nap, ~1.75 hrs" }
       ],
       "commute_from": "05:00",
       "work_days": [1, 2, 3, 4, 5],
@@ -161,7 +191,9 @@
       { "date": "2026-03-24", "time": "05:05", "description": "Parking -- McKinley Town Center (9 hrs)", "amount": 85, "category": "transport" },
       { "date": "2026-03-24", "time": "05:22", "description": "Mobile load to 09278374069 via BPI", "amount": 59, "category": "load" },
       { "date": "2026-03-24", "time": "05:17", "description": "Cash to Arabelle", "amount": 600, "category": "transfer" },
-      { "date": "2026-03-24", "time": "06:45", "description": "Lugaw + Egg (with Bujah)", "amount": null, "category": "food" }
+      { "date": "2026-03-24", "time": "06:45", "description": "Lugaw + Egg (with Bujah)", "amount": null, "category": "food" },
+      { "date": "2026-03-24", "time": "09:50", "description": "Hotsilog (breakfast)", "amount": null, "category": "food" },
+      { "date": "2026-03-24", "time": "09:50", "description": "Pork steak (for lunch)", "amount": 80, "category": "food" }
     ],
     "todos": [
       { "text": "File leave at Informdata for Daet trip", "done": false, "due": "2026-03-27" },
@@ -189,5 +221,22 @@
     "transactions": [],
     "todos": [],
     "contacts": []
-  }
+  },
+  "logs": [
+    {"date":"2026-03-24","time":"9:46 AM","title":"Hotsilog breakfast","body":"RA eating at his desk -- hotdog, fried egg, sinangag in plastic bag. Puma mousepad and gaming mouse visible. Classic Filipino post-shift comfort food.","tags":["food","home"]},
+    {"date":"2026-03-24","time":"4:28 PM","title":"Arabelle feeding Baby Jah","body":"Arabelle wiping Baby Jah's hands in yellow feeding chair. Jah in blue patterned shirt, playroom with crib and scattered blocks.\n\nPattern: Jah consistently eats around 4-5 PM after his afternoon nap.","tags":["baby_jah","arabelle"]},
+    {"date":"2026-03-24","time":"4:29 PM","title":"Baby Jah's dinner","body":"Fettuccine pasta with chicken and cherry tomatoes in a wok. Home-cooked. This is Jah's food -- timestamp is 1 min after the feeding photo at 4:28 PM.\n\nJah is eating solid meals now (pasta, pork steak earlier). Growing up fast.","action":"Logged to baby_jah.feeding","tags":["baby_jah","food"]},
+    {"date":"2026-03-24","time":"5:11 PM","title":"BPI balance check","body":"BPI mobile app screenshot. Balance: P5,057.99. Down ~P116 since Meta ads went live on Mar 23 (P200/day budget).\n\nPattern: RA checks BPI regularly when money is going out (ads, bills).","action":"Updated shared.accounts.payroll balance","tags":["money"]},
+    {"date":"2026-03-24","time":"5:32 PM","title":"Doctor contact saved","body":"Contact card: 'Bella' -- Dr Charmaine Simon, 0928 942 0135, hours 12nn-4pm.\n\nLikely preparing for the ACE Hospital Pateros call scheduled for Mar 25 (PhilCare HMO) and the Mar 26 hospital visit for med cert.","tags":["health","errands"]},
+    {"date":"2026-03-25","time":"12:44 AM","title":"CCTV -- family sleeping","body":"Tapo CCTV night vision. Arabelle and Baby Jah sleeping together in the playpen bed. Jah sprawled out, blanket kicked off. Arabelle under blanket on the left.\n\nRA checking on family from work during night shift. Both asleep and safe.\n\nPattern: RA monitors home via Tapo CCTV during night shifts. Jah has been asleep since ~7 PM (6+ hours).","tags":["baby_jah","arabelle","home"]}
+  ],
+  "timeline": [
+    {"date":"2026-03-24","time":"09:46","type":"food","summary":"Hotsilog breakfast at desk -- hotdog, fried egg, sinangag","tags":["food","home"],"source":"mobile-cam"},
+    {"date":"2026-03-24","time":"16:28","type":"photo","summary":"Arabelle feeding Baby Jah in yellow chair, post-nap","tags":["baby_jah","arabelle","home"],"source":"mobile-cam"},
+    {"date":"2026-03-24","time":"16:29","type":"food","summary":"Baby Jah's dinner -- fettuccine pasta with chicken, home-cooked","tags":["baby_jah","food","home"],"source":"mobile-cam"},
+    {"date":"2026-03-24","time":"17:11","type":"balance","summary":"BPI balance: P5,057.99 -- down P116 since ads went live","tags":["money"],"source":"mobile-screenshots"},
+    {"date":"2026-03-24","time":"17:30","type":"activity","summary":"RA napped 5:30-7:15 PM -- pre-shift, ~1.75 hrs","tags":["health","home"],"source":"conversation"},
+    {"date":"2026-03-24","time":"17:32","type":"screenshot","summary":"Saved contact: Dr Charmaine Simon (Bella) -- 0928 942 0135, 12nn-4pm. Prep for hospital visit","tags":["health","errands"],"source":"mobile-screenshots"},
+    {"date":"2026-03-25","time":"00:44","type":"photo","summary":"CCTV check -- Arabelle and Baby Jah sleeping together in playpen bed. Both safe.","tags":["baby_jah","arabelle","home"],"source":"mobile-screenshots"}
+  ]
 }

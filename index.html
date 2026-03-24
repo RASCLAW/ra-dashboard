@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="mobile-web-app-capable" content="yes">
@@ -40,6 +40,33 @@ body{background:var(--bg);color:var(--text);font-family:'Space Grotesk',-apple-s
 .log-entry{display:flex;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--border)}
 .log-entry:last-of-type{border-bottom:none}
 .empty-state{text-align:center;padding:14px 0 2px;font-size:11px;color:#4a5568;font-style:italic}
+
+/* QUICK LOG */
+.fab{position:fixed;bottom:24px;right:20px;width:56px;height:56px;border-radius:50%;background:#22d3ee;color:#0a0a0f;border:none;font-size:28px;font-weight:700;cursor:pointer;z-index:1000;box-shadow:0 4px 20px rgba(34,211,238,.35);transition:transform .2s,box-shadow .2s;display:flex;align-items:center;justify-content:center}
+.fab:active{transform:scale(.92)}
+.ql-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:1500;display:none;align-items:flex-end;justify-content:center}
+.ql-overlay.open{display:flex}
+.ql-sheet{width:100%;max-width:500px;max-height:85vh;background:var(--card);border-radius:20px 20px 0 0;padding:20px 16px 32px;overflow-y:auto;animation:slideUp .25s ease}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.ql-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.ql-header h3{font-size:16px;font-weight:700}
+.ql-close{background:none;border:none;color:var(--muted);font-size:22px;cursor:pointer;padding:4px 8px}
+.ql-cats{display:flex;gap:6px;overflow-x:auto;margin-bottom:20px;padding-bottom:4px}
+.ql-cat{padding:8px 14px;border:1px solid var(--border);border-radius:20px;background:transparent;color:var(--muted);font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap}
+.ql-cat.a{background:#22d3ee;color:#0a0a0f;border-color:#22d3ee}
+.ql-form{display:none}.ql-form.a{display:block}
+.ql-field{margin-bottom:14px}
+.ql-field label{display:block;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:6px}
+.ql-field input,.ql-field select{width:100%;padding:12px;background:var(--input-bg);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:'Space Grotesk',sans-serif;font-size:14px;outline:none;transition:border-color .2s}
+.ql-field input:focus,.ql-field select:focus{border-color:#22d3ee}
+.ql-toggle{display:flex;gap:6px}
+.ql-toggle button{flex:1;padding:12px;border:1px solid var(--border);border-radius:10px;background:transparent;color:var(--muted);font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s}
+.ql-toggle button.a{background:#22d3ee;color:#0a0a0f;border-color:#22d3ee}
+.ql-submit{width:100%;padding:14px;background:#22d3ee;color:#0a0a0f;border:none;border-radius:10px;font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;cursor:pointer;margin-top:8px;transition:opacity .2s}
+.ql-submit:disabled{opacity:.4;cursor:not-allowed}
+.ql-done{text-align:center;padding:32px 0}
+.ql-done .check{font-size:48px;margin-bottom:8px}
+.ql-done p{color:var(--muted);font-size:13px}
 .profile-sw{display:flex;gap:6px;margin:0 16px 12px}
 .prof-btn{padding:8px 16px;border:1px solid var(--border);border-radius:20px;background:transparent;color:#64748b;font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s}
 .prof-btn.a{background:#22d3ee;color:#0a0a0f;border-color:#22d3ee}
@@ -47,15 +74,26 @@ body{background:var(--bg);color:var(--text);font-family:'Space Grotesk',-apple-s
 .weather-rec-moto{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.2);color:#10b981}
 .weather-rec-early{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);color:#f59e0b}
 .weather-rec-car{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#ef4444}
+.loader-screen{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .3s}
+.loader-screen.hide{opacity:0;pointer-events:none}
+.loader-dot{width:8px;height:8px;border-radius:50%;background:#22d3ee;display:inline-block;margin:0 4px;animation:pulse 1.2s infinite}
+.loader-dot:nth-child(2){animation-delay:.2s}
+.loader-dot:nth-child(3){animation-delay:.4s}
+@keyframes pulse{0%,80%,100%{opacity:.2;transform:scale(.8)}40%{opacity:1;transform:scale(1.2)}}
 </style>
 </head>
 <body>
+
+<div class="loader-screen" id="loader">
+  <div style="font-size:13px;color:var(--muted);margin-bottom:12px;font-family:'JetBrains Mono',monospace;letter-spacing:1px">PROJECT DASH</div>
+  <div><span class="loader-dot"></span><span class="loader-dot"></span><span class="loader-dot"></span></div>
+</div>
 
 <div style="padding:20px 16px 12px">
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
     <div style="display:flex;align-items:center;gap:8px">
       <div style="width:7px;height:7px;border-radius:50%;background:#10b981;box-shadow:0 0 6px #10b981" id="status-dot"></div>
-      <span class="m" style="font-size:10px;color:#64748b;text-transform:uppercase;letter-spacing:2px" id="dash-label">RA Dashboard</span>
+      <span class="m" style="font-size:10px;color:#64748b;letter-spacing:1px" id="dash-label"></span>
     </div>
     <div style="display:flex;align-items:center;gap:12px">
       <span class="m" style="font-size:14px;color:#22d3ee;font-weight:500" id="live-clock"></span>
@@ -78,11 +116,65 @@ body{background:var(--bg);color:var(--text);font-family:'Space Grotesk',-apple-s
   <div class="s" id="jh"></div>
   <div class="s" id="tr"></div>
   <div class="s" id="tl"></div>
+  <div class="s" id="lg"></div>
   <div class="s" id="ex"></div>
 </div>
 
 <div style="text-align:center;padding:20px 0 16px">
   <span class="m" style="font-size:9px;color:#334155" id="footer"></span>
+</div>
+
+<button class="fab" onclick="openQL()">+</button>
+
+<div class="ql-overlay" id="ql-overlay" onclick="if(event.target===this)closeQL()">
+  <div class="ql-sheet" id="ql-sheet">
+    <div class="ql-header"><h3 id="ql-title">Quick Log</h3><button class="ql-close" onclick="closeQL()">&times;</button></div>
+    <div class="ql-cats" id="ql-cats">
+      <button class="ql-cat a" onclick="setQL('diaper')">Diaper</button>
+      <button class="ql-cat" onclick="setQL('feeding')">Feeding</button>
+      <button class="ql-cat" onclick="setQL('transaction')">Transaction</button>
+      <button class="ql-cat" onclick="setQL('balance')">Balance</button>
+      <button class="ql-cat" onclick="setQL('activity')">Activity</button>
+      <button class="ql-cat" onclick="setQL('sleep')">Sleep</button>
+    </div>
+    <div id="ql-forms">
+      <div class="ql-form a" id="ql-diaper">
+        <div class="ql-field"><label>Type</label><div class="ql-toggle"><button class="a" onclick="qlToggle(this,'ql-diaper-type')">Wet</button><button onclick="qlToggle(this,'ql-diaper-type')">Poop</button></div></div>
+        <div class="ql-field"><label>Notes (optional)</label><input type="text" id="ql-diaper-notes" placeholder="e.g. semi-hard, after lunch"></div>
+        <input type="hidden" id="ql-diaper-type" value="wet">
+      </div>
+      <div class="ql-form" id="ql-feeding">
+        <div class="ql-field"><label>Food</label><input type="text" id="ql-feeding-food" placeholder="e.g. Lugaw + Egg, Milk"></div>
+        <div class="ql-field"><label>Who</label><div class="ql-toggle"><button class="a" onclick="qlToggle(this,'ql-feeding-who')">Baby Jah</button><button onclick="qlToggle(this,'ql-feeding-who')">RA</button><button onclick="qlToggle(this,'ql-feeding-who')">Arabelle</button></div></div>
+        <div class="ql-field"><label>Notes (optional)</label><input type="text" id="ql-feeding-notes" placeholder="e.g. ate well, only half"></div>
+        <input type="hidden" id="ql-feeding-who" value="Baby Jah">
+      </div>
+      <div class="ql-form" id="ql-transaction">
+        <div class="ql-field"><label>Amount (P)</label><input type="number" id="ql-tx-amount" placeholder="0"></div>
+        <div class="ql-field"><label>Description</label><input type="text" id="ql-tx-desc" placeholder="e.g. Parking, Lugaw"></div>
+        <div class="ql-field"><label>Category</label><select id="ql-tx-cat"><option value="food">Food</option><option value="transport">Transport</option><option value="shopping">Shopping</option><option value="load">Load</option><option value="transfer">Transfer</option></select></div>
+        <div class="ql-field"><label>Notes (optional)</label><input type="text" id="ql-tx-notes" placeholder=""></div>
+      </div>
+      <div class="ql-form" id="ql-balance">
+        <div class="ql-field"><label>Account</label><div class="ql-toggle"><button class="a" onclick="qlToggle(this,'ql-bal-acct')">Payroll</button><button onclick="qlToggle(this,'ql-bal-acct')">Savings</button><button onclick="qlToggle(this,'ql-bal-acct')">Pocket Cash</button></div></div>
+        <div class="ql-field"><label>New Balance (P)</label><input type="number" id="ql-bal-amount" placeholder="0"></div>
+        <input type="hidden" id="ql-bal-acct" value="payroll">
+      </div>
+      <div class="ql-form" id="ql-activity">
+        <div class="ql-field"><label>Activity</label><input type="text" id="ql-act-desc" placeholder="e.g. Morning walk, Watching Miss Rachel"></div>
+      </div>
+      <div class="ql-form" id="ql-sleep">
+        <div class="ql-field"><label>Who</label><div class="ql-toggle"><button class="a" onclick="qlToggle(this,'ql-sleep-who')">Baby Jah</button><button onclick="qlToggle(this,'ql-sleep-who')">RA</button></div></div>
+        <div class="ql-field"><label>Action</label><div class="ql-toggle"><button class="a" onclick="qlToggle(this,'ql-sleep-action')">Slept</button><button onclick="qlToggle(this,'ql-sleep-action')">Woke</button></div></div>
+        <div class="ql-field"><label>Time</label><input type="time" id="ql-sleep-time"></div>
+        <div class="ql-field"><label>Notes (optional)</label><input type="text" id="ql-sleep-notes" placeholder="e.g. Post-shift nap"></div>
+        <input type="hidden" id="ql-sleep-who" value="Baby Jah">
+        <input type="hidden" id="ql-sleep-action" value="slept">
+      </div>
+    </div>
+    <button class="ql-submit" id="ql-submit" onclick="submitQL()">Log It</button>
+    <div class="ql-done" id="ql-done" style="display:none"><div class="check">&#10003;</div><p>Logged!</p></div>
+  </div>
 </div>
 
 <script>
@@ -97,6 +189,8 @@ function toggleTheme(){
 
 // === GLOBALS ===
 let D=null, W=null, PROFILE='ra';
+let balHidden=localStorage.getItem('balHidden')==='true';
+function toggleBal(){balHidden=!balHidden;localStorage.setItem('balHidden',balHidden);render()}
 const catIcons={task:'#22d3ee',health:'#10b981',finance:'#f59e0b',travel:'#a78bfa',family:'#f472b6'};
 const catEmoji={task:'📋',health:'🏥',finance:'💰',travel:'✈️',family:'👨‍👩‍👦'};
 const foodEmoji=['🍚','🍲','🍖','🍗','🍳','🍪','🥘','🍜'];
@@ -112,10 +206,10 @@ function manilaMinute(){return parseInt(new Date().toLocaleString('en-US',{timeZ
 function manilaDayNum(){return new Date().toLocaleDateString('en-US',{timeZone:'Asia/Manila',weekday:'narrow'})==='S'?((new Date().toLocaleDateString('en-US',{timeZone:'Asia/Manila',weekday:'long'})==='Sunday')?0:6):['Monday','Tuesday','Wednesday','Thursday','Friday'].indexOf(new Date().toLocaleDateString('en-US',{timeZone:'Asia/Manila',weekday:'long'}))+1}
 function manilaDateStr(){return new Date().toLocaleDateString('en-CA',{timeZone:'Asia/Manila'})}
 function fmt(n){return n==null?'--':'P'+n.toLocaleString()}
-function fmt12(t){if(!t)return'';const[h,m]=t.split(':').map(Number);const ampm=h>=12?'PM':'AM';const h12=h%12||12;return h12+':'+String(m).padStart(2,'0')+' '+ampm}
+function fmt12(t){if(!t)return'';let s=typeof t==='string'?t:String(t);s=s.replace(/[^\d:]/g,'');const parts=s.match(/^(\d{1,2}):(\d{2})/);if(!parts)return'';const h=parseInt(parts[1]),m=parseInt(parts[2]);const ampm=h>=12?'PM':'AM';const h12=h%12||12;return h12+':'+String(m).padStart(2,'0')+' '+ampm}
 function fmtDate(d){const m=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];const parts=d.split('-');return m[parseInt(parts[1])-1]+' '+parseInt(parts[2])}
 function isStale(d,days){if(!d)return true;return(Date.now()-new Date(d+'T00:00:00+08:00').getTime())>days*86400000}
-function timeAgo(d,t){if(!d)return null;const then=new Date(d+'T'+(t||'12:00')+':00+08:00');const diff=Date.now()-then.getTime();if(diff<0)return 'just now';const mins=Math.floor(diff/60000);if(mins<60)return mins+'m ago';const hrs=Math.floor(mins/60);if(hrs<24)return hrs+'h ago';const days=Math.floor(hrs/24);return days+'d ago'}
+function timeAgo(d,t){if(!d)return null;let tStr=t||'12:00';if(typeof tStr!=='string')tStr=String(tStr);tStr=tStr.replace(/[^\d:]/g,'');if(tStr.length===1||tStr.length===2)tStr=tStr+':00';if(!tStr.match(/^\d{1,2}:\d{2}/))tStr='12:00';const parts=tStr.match(/^(\d{1,2}):(\d{2})/);if(!parts)return null;const clean=parts[1].padStart(2,'0')+':'+parts[2];const then=new Date(d+'T'+clean+':00+08:00');if(isNaN(then.getTime()))return null;const diff=Date.now()-then.getTime();if(diff<0)return 'just now';const mins=Math.floor(diff/60000);if(mins<60)return mins+'m ago';const hrs=Math.floor(mins/60);if(hrs<24)return hrs+'h ago';const days=Math.floor(hrs/24);return days+'d ago'}
 function daysUntil(d){const today=manilaDateStr();const todayMs=new Date(today+'T00:00:00+08:00').getTime();const thenMs=new Date(d+'T00:00:00+08:00').getTime();const diff=Math.round((thenMs-todayMs)/86400000);if(diff===0)return 'Today';if(diff===1)return 'Tomorrow';if(diff<0)return Math.abs(diff)+'d ago';return 'in '+diff+' days'}
 
 function getRAStatus(){
@@ -232,20 +326,32 @@ function setProfile(p){
 function buildTabs(){
   const bar=document.getElementById('tab-bar');
   const tabs=PROFILE==='ra'?
-    [{id:'ov',l:'Home'},{id:'jh',l:'Jah'},{id:'tr',l:'Trip'},{id:'tl',l:'Timeline'},{id:'ex',l:'Expenses'}]:
-    [{id:'ov',l:'Home'},{id:'jh',l:'Jah'},{id:'tr',l:'Trip'},{id:'tl',l:'Timeline'},{id:'ex',l:'Expenses'}];
+    [{id:'ov',l:'Home'},{id:'jh',l:'Jah'},{id:'tr',l:'Trip'},{id:'ex',l:'Expenses'},{id:'tl',l:'Timeline'},{id:'lg',l:'Log'}]:
+    [{id:'ov',l:'Home'},{id:'jh',l:'Jah'},{id:'tr',l:'Trip'},{id:'ex',l:'Expenses'},{id:'tl',l:'Timeline'},{id:'lg',l:'Log'}];
   bar.innerHTML=tabs.map((t,i)=>`<button class="tab${i===0?' a':''}" onclick="sw('${t.id}',this)">${t.l}</button>`).join('');
   document.querySelectorAll('.s').forEach(s=>s.classList.remove('a'));
   document.getElementById('ov').classList.add('a');
 }
 
-function sw(id,b){document.querySelectorAll('.s').forEach(s=>s.classList.remove('a'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('a'));document.getElementById(id).classList.add('a');b.classList.add('a')}
+const TAB_IDS=['ov','jh','tr','tl','ex'];
+let currentTabIdx=0;
+function sw(id,b){document.querySelectorAll('.s').forEach(s=>s.classList.remove('a'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('a'));document.getElementById(id).classList.add('a');b.classList.add('a');currentTabIdx=TAB_IDS.indexOf(id)}
+
+// Swipe between tabs
+(function(){let sx=0,sy=0;const cnt=document.querySelector('.cnt');
+cnt.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY},{passive:true});
+cnt.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-sx;const dy=e.changedTouches[0].clientY-sy;
+if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5){
+  const newIdx=dx<0?Math.min(currentTabIdx+1,TAB_IDS.length-1):Math.max(currentTabIdx-1,0);
+  if(newIdx!==currentTabIdx){const tabs=document.querySelectorAll('.tab');sw(TAB_IDS[newIdx],tabs[newIdx])}
+}},{passive:true})
+})()
 
 // === RENDER ===
 function render(){
   if(!D)return;
   if(PROFILE==='ra')renderRAHome();else renderArabelleHome();
-  renderJah();renderTrip();renderTimeline();renderExpenses();
+  renderJah();renderTrip();renderTimeline();renderLog();renderExpenses();
 }
 
 function renderRAHome(){
@@ -253,17 +359,21 @@ function renderRAHome(){
   const S=D.shared;const P=D.ra;
   const total=(S.accounts.payroll.balance||0)+(S.accounts.savings.balance||0)+(S.accounts.pocket_cash.balance||0);
   const nextEvents=S.calendar.filter(e=>new Date(e.date+'T23:59:59+08:00')>=new Date()).slice(0,3);
-  const pendingTodos=P.todos.filter(t=>!t.done).slice(0,4);
+  const pendingTodos=P.todos.filter(t=>!t.done).sort((a,b)=>{if(!a.due)return 1;if(!b.due)return-1;return a.due.localeCompare(b.due)}).slice(0,6);
   const contacts=P.contacts.slice(0,3);
   const jah=S.baby_jah;
 
   let h='';
 
   // Money
-  h+=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
-    <div class="c" style="margin-bottom:0"><div class="lbl m">Payroll</div><div class="m val" style="color:#22d3ee">${fmt(S.accounts.payroll.balance)}</div><div class="m" style="font-size:10px;color:#64748b;margin-top:2px">${S.accounts.payroll.account_masked}</div></div>
-    <div class="c" style="margin-bottom:0"><div class="lbl m">Pocket Cash</div><div class="m val" style="color:#f59e0b">${fmt(S.accounts.pocket_cash.balance)}</div></div>
-  </div>`;
+  const hid=balHidden;
+  h+=`<div style="margin-bottom:12px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><div class="lbl m" style="margin:0">Accounts</div><button onclick="toggleBal()" style="background:none;border:none;cursor:pointer;font-size:16px;color:var(--muted);padding:2px 4px">${hid?'🙈':'👁'}</button></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
+    <div class="c" style="margin-bottom:0"><div class="lbl m">Payroll</div><div class="m val" style="color:#22d3ee;font-size:16px">${hid?'****':fmt(S.accounts.payroll.balance)}</div><div class="m" style="font-size:9px;color:#64748b;margin-top:2px">${S.accounts.payroll.account_masked}</div></div>
+    <div class="c" style="margin-bottom:0"><div class="lbl m">Savings</div><div class="m val" style="color:#10b981;font-size:16px">${hid?'****':fmt(S.accounts.savings.balance)}</div><div class="m" style="font-size:9px;color:#64748b;margin-top:2px">${S.accounts.savings.account_masked}</div></div>
+    <div class="c" style="margin-bottom:0"><div class="lbl m">Pocket</div><div class="m val" style="color:#f59e0b;font-size:16px">${fmt(S.accounts.pocket_cash.balance)}</div></div>
+  </div></div>`;
 
   // Baby Jah card
   if(jah){
@@ -272,13 +382,13 @@ function renderRAHome(){
     const lastAct=jah.activities.length?jah.activities[jah.activities.length-1]:null;
     const sleepLabel=lastSleep?(lastSleep.woke&&!lastSleep.slept?'Woke up':lastSleep.type==='nap'?'Napping':'Sleeping'):'--';
     h+=`<div class="c jah-bg jah-border">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><div class="lbl m" style="margin-bottom:0"><span class="jah-accent">Baby Jah</span></div>${jah.mood_today?`<span style="font-size:16px">${jah.mood_today}</span>`:''}</div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><div style="font-size:16px;font-weight:700"><span class="jah-accent">Baby Jah</span></div><span style="font-size:15px;font-weight:600">${jahStatus().icon} ${jahStatus().text}</span></div>
       <div class="log-entry" style="border-bottom:1px solid rgba(244,114,182,.1)"><div class="icon-box" style="background:rgba(244,114,182,.1);font-size:13px">🍼</div>
         <div style="flex:1"><div style="font-size:13px;font-weight:600">${lastFed?lastFed.food:'--'}</div><div class="m" style="font-size:10px;color:#64748b">Last fed</div></div>
         <div style="text-align:right"><div style="font-size:12px;font-weight:600">${lastFed?timeAgo(lastFed.date,lastFed.time):'--'}</div><div class="m" style="font-size:10px;color:#64748b">${lastFed?fmt12(lastFed.time):''}</div></div></div>
       <div class="log-entry" style="border-bottom:1px solid rgba(244,114,182,.1)"><div class="icon-box" style="background:rgba(167,139,250,.1);font-size:13px">😴</div>
         <div style="flex:1"><div style="font-size:13px;font-weight:600">${sleepLabel}</div><div class="m" style="font-size:10px;color:#64748b">${lastSleep&&lastSleep.notes?lastSleep.notes:''}</div></div>
-        <div style="text-align:right"><div style="font-size:12px;font-weight:600">${lastSleep?timeAgo(lastSleep.date,lastSleep.slept||lastSleep.woke):'--'}</div><div class="m" style="font-size:10px;color:#64748b">${lastSleep?fmt12(lastSleep.slept||lastSleep.woke):''}</div></div></div>
+        <div style="text-align:right"><div style="font-size:12px;font-weight:600">${lastSleep?timeAgo(lastSleep.date,lastSleep.woke||lastSleep.slept):'--'}</div><div class="m" style="font-size:10px;color:#64748b">${lastSleep?fmt12(lastSleep.woke||lastSleep.slept):''}</div></div></div>
       <div class="log-entry" style="border-bottom:1px solid rgba(244,114,182,.1)"><div class="icon-box" style="background:rgba(34,211,238,.1);font-size:13px">🏃</div>
         <div style="flex:1"><div style="font-size:13px;font-weight:600">${lastAct?lastAct.activity:'--'}</div><div class="m" style="font-size:10px;color:#64748b">Last activity</div></div>
         <div style="text-align:right"><div style="font-size:12px;font-weight:600">${lastAct?timeAgo(lastAct.date,lastAct.time):'--'}</div><div class="m" style="font-size:10px;color:#64748b">${lastAct?fmt12(lastAct.time):''}</div></div></div>
@@ -294,8 +404,19 @@ function renderRAHome(){
   const gasLabel=isStale(gas.last_gas,8)?'Might need gas':'Probably good';
   const gasColor=isStale(gas.last_gas,8)?'#f59e0b':'#10b981';
   h+=`<div class="c" style="display:flex;justify-content:space-between;align-items:center">
-    <div><div class="lbl m">Scooter Gas</div><div style="font-size:15px;font-weight:600;color:${gasColor}">${gasLabel}</div><div class="m" style="font-size:11px;color:#64748b;margin-top:2px">${gasStatus}</div></div>
+    <div><div class="lbl m">Scooter Gas</div><div style="font-size:15px;font-weight:600;color:${gasColor}">${gasLabel}</div><div class="m" style="font-size:11px;color:#64748b;margin-top:2px">${gasStatus}</div>${gas.avg_price?`<div class="m" style="font-size:10px;color:#64748b;margin-top:2px">Avg: ${fmt(gas.avg_price)}/L</div>`:''}</div>
     <div style="font-size:28px">⛽</div></div>`;
+
+  // RA Meals
+  const raMeals=P.transactions.filter(t=>t.category==='food').slice(-4).reverse();
+  if(raMeals.length){
+    h+='<div class="c"><div class="lbl m">My Meals</div>';
+    raMeals.forEach(t=>{
+      h+=`<div class="log-entry"><div class="icon-box" style="background:#10b98118;font-size:13px">🍽</div>
+        <div style="flex:1"><span style="font-size:13px">${t.description}</span></div>
+        <span class="m" style="font-size:10px;color:#64748b">${fmt12(t.time)||''} ${timeAgo(t.date,t.time)||''}</span></div>`;
+    });h+='</div>';
+  }
 
   // Events
   if(nextEvents.length){
@@ -314,7 +435,7 @@ function renderRAHome(){
     pendingTodos.forEach((t,i)=>{
       const border=i<pendingTodos.length-1?'border-bottom:1px solid #1e293b':'';
       const dueTag=t.due?`<span class="m" style="font-size:9px;color:#64748b;margin-left:8px">${daysUntil(t.due)}</span>`:'';
-      h+=`<div style="display:flex;gap:10px;align-items:center;padding:8px 0;${border}"><div style="width:18px;height:18px;border-radius:4px;border:2px solid #64748b;flex-shrink:0"></div><span style="font-size:14px">${t.text}${dueTag}</span></div>`;
+      h+=`<div style="display:flex;gap:10px;align-items:center;padding:8px 0;${border};cursor:pointer" onclick="tickTodo(${i})"><div style="width:18px;height:18px;border-radius:4px;border:2px solid #64748b;flex-shrink:0;display:flex;align-items:center;justify-content:center" id="todo-check-${i}"></div><span style="font-size:14px" id="todo-text-${i}">${t.text}${dueTag}</span></div>`;
     });h+='</div></div>';
   }
 
@@ -345,9 +466,11 @@ function renderArabelleHome(){
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
       <div><div class="lbl m">RA</div><div style="font-size:16px;font-weight:600;color:${ra.color}">${ra.icon} ${ra.text}</div></div>
     </div>
-    <div style="display:flex;gap:8px">
-      <div style="flex:1;background:#0a0a0f;border-radius:8px;padding:10px 12px"><div class="m" style="font-size:9px;color:#64748b;margin-bottom:3px">PAYROLL</div><div class="m" style="font-size:16px;font-weight:700;color:#22d3ee">${fmt(S.accounts.payroll.balance)}</div></div>
-      <div style="flex:1;background:#0a0a0f;border-radius:8px;padding:10px 12px"><div class="m" style="font-size:9px;color:#64748b;margin-bottom:3px">POCKET CASH</div><div class="m" style="font-size:16px;font-weight:700;color:#f59e0b">${fmt(S.accounts.pocket_cash.balance)}</div></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><div class="m" style="font-size:9px;color:#64748b">BALANCES</div><button onclick="toggleBal()" style="background:none;border:none;cursor:pointer;font-size:14px;color:var(--muted);padding:2px 4px">${balHidden?'🙈':'👁'}</button></div>
+    <div style="display:flex;gap:6px">
+      <div style="flex:1;background:#0a0a0f;border-radius:8px;padding:10px 8px"><div class="m" style="font-size:9px;color:#64748b;margin-bottom:3px">PAYROLL</div><div class="m" style="font-size:14px;font-weight:700;color:#22d3ee">${balHidden?'****':fmt(S.accounts.payroll.balance)}</div></div>
+      <div style="flex:1;background:#0a0a0f;border-radius:8px;padding:10px 8px"><div class="m" style="font-size:9px;color:#64748b;margin-bottom:3px">SAVINGS</div><div class="m" style="font-size:14px;font-weight:700;color:#10b981">${balHidden?'****':fmt(S.accounts.savings.balance)}</div></div>
+      <div style="flex:1;background:#0a0a0f;border-radius:8px;padding:10px 8px"><div class="m" style="font-size:9px;color:#64748b;margin-bottom:3px">POCKET</div><div class="m" style="font-size:14px;font-weight:700;color:#f59e0b">${fmt(S.accounts.pocket_cash.balance)}</div></div>
     </div>
     <div style="margin-top:10px;padding-top:10px;border-top:1px solid #1e293b;font-size:12px;color:#64748b">
       Schedule: ${(() => {const day=manilaDayNum();const isWork=day>=1&&day<=5;if(!isWork)return'Rest day (off tonight)';return'Shift tonight 8 PM - 5 AM'})()}
@@ -385,16 +508,19 @@ function renderArabelleHome(){
     const lastAct=jah.activities.length?jah.activities[jah.activities.length-1]:null;
     const sleepLabel=lastSleep?(lastSleep.woke&&!lastSleep.slept?'Woke up':lastSleep.type==='nap'?'Napping':'Sleeping'):'--';
     h+=`<div class="c jah-bg jah-border">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><div class="lbl m" style="margin-bottom:0"><span class="jah-accent">Baby Jah</span></div>${jah.mood_today?`<span style="font-size:16px">${jah.mood_today}</span>`:''}</div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><div style="font-size:16px;font-weight:700"><span class="jah-accent">Baby Jah</span></div><span style="font-size:15px;font-weight:600">${jahStatus().icon} ${jahStatus().text}</span></div>
       <div class="log-entry" style="border-bottom:1px solid rgba(244,114,182,.1)"><div class="icon-box" style="background:rgba(244,114,182,.1);font-size:13px">🍼</div>
         <div style="flex:1"><div style="font-size:13px;font-weight:600">${lastFed?lastFed.food:'--'}</div><div class="m" style="font-size:10px;color:#64748b">Last fed</div></div>
         <div style="text-align:right"><div style="font-size:12px;font-weight:600">${lastFed?timeAgo(lastFed.date,lastFed.time):'--'}</div><div class="m" style="font-size:10px;color:#64748b">${lastFed?fmt12(lastFed.time):''}</div></div></div>
       <div class="log-entry" style="border-bottom:1px solid rgba(244,114,182,.1)"><div class="icon-box" style="background:rgba(167,139,250,.1);font-size:13px">😴</div>
         <div style="flex:1"><div style="font-size:13px;font-weight:600">${sleepLabel}</div><div class="m" style="font-size:10px;color:#64748b">${lastSleep&&lastSleep.notes?lastSleep.notes:''}</div></div>
-        <div style="text-align:right"><div style="font-size:12px;font-weight:600">${lastSleep?timeAgo(lastSleep.date,lastSleep.slept||lastSleep.woke):'--'}</div><div class="m" style="font-size:10px;color:#64748b">${lastSleep?fmt12(lastSleep.slept||lastSleep.woke):''}</div></div></div>
-      <div class="log-entry"><div class="icon-box" style="background:rgba(34,211,238,.1);font-size:13px">🏃</div>
+        <div style="text-align:right"><div style="font-size:12px;font-weight:600">${lastSleep?timeAgo(lastSleep.date,lastSleep.woke||lastSleep.slept):'--'}</div><div class="m" style="font-size:10px;color:#64748b">${lastSleep?fmt12(lastSleep.woke||lastSleep.slept):''}</div></div></div>
+      <div class="log-entry" style="border-bottom:1px solid rgba(244,114,182,.1)"><div class="icon-box" style="background:rgba(34,211,238,.1);font-size:13px">🏃</div>
         <div style="flex:1"><div style="font-size:13px;font-weight:600">${lastAct?lastAct.activity:'--'}</div><div class="m" style="font-size:10px;color:#64748b">Last activity</div></div>
         <div style="text-align:right"><div style="font-size:12px;font-weight:600">${lastAct?timeAgo(lastAct.date,lastAct.time):'--'}</div><div class="m" style="font-size:10px;color:#64748b">${lastAct?fmt12(lastAct.time):''}</div></div></div>
+      ${(()=>{const lastDiaper=jah.diapers&&jah.diapers.length?jah.diapers[jah.diapers.length-1]:null;return lastDiaper?`<div class="log-entry"><div class="icon-box" style="background:rgba(244,114,182,.1);font-size:13px">🧷</div>
+        <div style="flex:1"><div style="font-size:13px;font-weight:600">${lastDiaper.type==='poop'?'💩 Poop':'💧 Wet'}</div><div class="m" style="font-size:10px;color:#64748b">${lastDiaper.notes||'Diaper change'}</div></div>
+        <div style="text-align:right"><div style="font-size:12px;font-weight:600">${timeAgo(lastDiaper.date,lastDiaper.time)}</div><div class="m" style="font-size:10px;color:#64748b">${fmt12(lastDiaper.time)}</div></div></div>`:''})()}
       ${jah.next_checkup?`<div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(244,114,182,.15);font-size:12px;color:#64748b">Next checkup: <span class="jah-accent">${fmtDate(jah.next_checkup)}</span> (${daysUntil(jah.next_checkup)})</div>`:''}
     </div>`;
   }
@@ -403,19 +529,42 @@ function renderArabelleHome(){
   const raSleep=(D.ra.schedule.sleep||[]);
   const lastRASleep=raSleep.length?raSleep[raSleep.length-1]:null;
   if(lastRASleep){
-    h+=`<div class="c"><div class="lbl m">RA Sleep</div>
+    const raSleepLabel=lastRASleep.slept&&lastRASleep.woke?fmt12(lastRASleep.slept)+' - '+fmt12(lastRASleep.woke):lastRASleep.slept?'Napping since '+fmt12(lastRASleep.slept):lastRASleep.woke?'Woke at '+fmt12(lastRASleep.woke):'--';
+    h+=`<div class="c"><div class="lbl m">RA Sleep Log</div>
       <div class="log-entry"><div class="icon-box" style="background:rgba(167,139,250,.1);font-size:13px">😴</div>
-        <div style="flex:1"><div style="font-size:13px;font-weight:600">${lastRASleep.slept&&lastRASleep.woke?fmt12(lastRASleep.slept)+' - '+fmt12(lastRASleep.woke):lastRASleep.slept?'Slept '+fmt12(lastRASleep.slept):'--'}</div>
+        <div style="flex:1"><div style="font-size:13px;font-weight:600">${raSleepLabel}</div>
         <div class="m" style="font-size:10px;color:#64748b">${lastRASleep.notes||''}</div></div>
-        <div style="text-align:right"><div style="font-size:12px;font-weight:600">${timeAgo(lastRASleep.date,lastRASleep.slept)}</div><div class="m" style="font-size:10px;color:#64748b">${fmtDate(lastRASleep.date)}</div></div></div></div>`;
+        <div style="text-align:right"><div style="font-size:12px;font-weight:600">${timeAgo(lastRASleep.date,lastRASleep.woke||lastRASleep.slept)}</div><div class="m" style="font-size:10px;color:#64748b">${fmtDate(lastRASleep.date)}</div></div></div></div>`;
   }
 
   // RA ate
   const raEats=D.ra.transactions.filter(t=>t.category==='food').slice(-3).reverse();
   if(raEats.length){
-    h+='<div class="c"><div class="lbl m">RA Ate</div>';
+    h+='<div class="c"><div class="lbl m">RA Food Log</div>';
     raEats.forEach(t=>{
       h+=`<div class="log-entry"><div class="icon-box" style="background:#10b98118;font-size:13px">🍽</div>
+        <div style="flex:1"><span style="font-size:13px">${t.description}</span></div>
+        <span class="m" style="font-size:10px;color:#64748b">${fmt12(t.time)||''} ${timeAgo(t.date,t.time)||''}</span></div>`;
+    });h+='</div>';
+  }
+
+  // Arabelle Todos
+  const araTodos=D.arabelle.todos.filter(t=>!t.done).sort((a,b)=>{if(!a.due)return 1;if(!b.due)return-1;return a.due.localeCompare(b.due)}).slice(0,6);
+  if(araTodos.length){
+    h+='<div class="c"><div class="lbl m">To Do</div><div style="margin-top:6px">';
+    araTodos.forEach((t,i)=>{
+      const border=i<araTodos.length-1?'border-bottom:1px solid #1e293b':'';
+      const dueTag=t.due?`<span class="m" style="font-size:9px;color:#64748b;margin-left:8px">${daysUntil(t.due)}</span>`:'';
+      h+=`<div style="display:flex;gap:10px;align-items:center;padding:8px 0;${border};cursor:pointer" onclick="tickAraTodo(${i})"><div style="width:18px;height:18px;border-radius:4px;border:2px solid #64748b;flex-shrink:0;display:flex;align-items:center;justify-content:center" id="ara-todo-check-${i}"></div><span style="font-size:14px" id="ara-todo-text-${i}">${t.text}${dueTag}</span></div>`;
+    });h+='</div></div>';
+  }
+
+  // Arabelle Meals
+  const araMeals=(D.arabelle.transactions||[]).filter(t=>t.category==='food').slice(-3).reverse();
+  if(araMeals.length){
+    h+='<div class="c"><div class="lbl m">My Meals</div>';
+    araMeals.forEach(t=>{
+      h+=`<div class="log-entry"><div class="icon-box" style="background:#f472b618;font-size:13px">🍽</div>
         <div style="flex:1"><span style="font-size:13px">${t.description}</span></div>
         <span class="m" style="font-size:10px;color:#64748b">${fmt12(t.time)||''} ${timeAgo(t.date,t.time)||''}</span></div>`;
     });h+='</div>';
@@ -468,7 +617,8 @@ function renderJah(){
   const el=document.getElementById('jh');const jah=D.shared.baby_jah;
   if(!jah){el.innerHTML='<div class="c"><div class="ct m">No Data</div><p style="color:#64748b;font-size:13px">No Baby Jah data yet.</p></div>';return}
   let h='';
-  h+=`<div class="c jah-bg jah-border" style="text-align:center;padding:20px"><div style="font-size:40px;margin-bottom:8px">👶</div><div style="font-size:20px;font-weight:700" class="jah-accent">${jah.name}</div>${jah.mood_today?`<div style="font-size:20px;margin-top:8px">${jah.mood_today.split('(')[0].trim()}</div>${jah.mood_today.includes('(')?`<div style="font-size:11px;color:#64748b;margin-top:4px">${jah.mood_today.match(/\(([^)]+)\)/)?.[1]||''}</div>`:''}`:'<div style="font-size:12px;color:#64748b;margin-top:6px">Mood not logged today</div>'}${jah.next_checkup?`<div style="margin-top:10px;font-size:12px;color:#64748b">Next checkup: <span class="jah-accent">${fmtDate(jah.next_checkup)}</span> (${daysUntil(jah.next_checkup)})</div>`:''}</div>`;
+  const js=jahStatus();
+  h+=`<div class="c jah-bg jah-border" style="text-align:center;padding:20px"><div style="font-size:40px;margin-bottom:8px">${js.icon}</div><div style="font-size:20px;font-weight:700" class="jah-accent">${jah.name}</div><div style="font-size:16px;margin-top:8px">${js.text}</div><div class="m" style="font-size:11px;color:#64748b;margin-top:4px">${js.sub}</div>${jah.next_checkup?`<div style="margin-top:10px;font-size:12px;color:#64748b">Next checkup: <span class="jah-accent">${fmtDate(jah.next_checkup)}</span> (${daysUntil(jah.next_checkup)})</div>`:''}</div>`;
 
   [{key:'feeding',title:'Feeding',icon:'🍼',render:f=>`<div style="font-size:13px">${f.food}</div>${f.notes?`<div class="m" style="font-size:10px;color:#64748b">${f.notes}</div>`:''}`,time:f=>fmt12(f.time),empty:'No feeding logs yet'},
    {key:'sleep',title:'Sleep',icon:'💤',render:s=>`<div style="font-size:13px">${s.type==='nap'?'Nap':'Night'}</div>${s.notes?`<div class="m" style="font-size:10px;color:#64748b">${s.notes}</div>`:''}`,time:s=>fmt12(s.slept||s.woke),extra:s=>{const t=s.slept&&s.woke?`${fmt12(s.slept)} - ${fmt12(s.woke)}`:s.slept?`Slept ${fmt12(s.slept)}`:s.woke?`Woke ${fmt12(s.woke)}`:'--';return`<div class="m" style="font-size:10px;color:#64748b">${t}</div>`},empty:'No sleep logs yet'},
@@ -520,20 +670,105 @@ function renderTrip(){
   el.innerHTML=h;
 }
 
+function jahStatus(){
+  const jah=D.shared.baby_jah;if(!jah)return{icon:'👶',text:'No data',sub:''};
+  const toMin=(d,t)=>{if(!d||!t)return-Infinity;const[h,m]=(t||'0:0').split(':').map(Number);return(new Date(d+'T00:00:00+08:00').getTime()/60000)+h*60+m};
+  const nowMin=Date.now()/60000;
+  const ago=m=>{const d=nowMin-m;if(d<1)return'just now';if(d<60)return Math.round(d)+'m ago';if(d<1440)return Math.round(d/60)+'h ago';return Math.round(d/1440)+'d ago'};
+  // Find most recent event across all categories
+  const events=[];
+  (jah.feeding||[]).forEach(f=>events.push({type:'fed',min:toMin(f.date,f.time),label:f.food,time:f.time}));
+  (jah.sleep||[]).forEach(s=>{
+    if(s.slept)events.push({type:'slept',min:toMin(s.date,s.slept),label:s.type,time:s.slept});
+    if(s.woke)events.push({type:'woke',min:toMin(s.date,s.woke),label:s.type,time:s.woke});
+  });
+  (jah.diapers||[]).forEach(d=>events.push({type:'diaper',min:toMin(d.date,d.time),label:d.type,time:d.time}));
+  (jah.activities||[]).forEach(a=>events.push({type:'activity',min:toMin(a.date,a.time),label:a.activity,time:a.time}));
+  events.sort((a,b)=>b.min-a.min);
+  if(!events.length)return{icon:'👶',text:'No data yet',sub:''};
+  const latest=events[0];const sinceMin=nowMin-latest.min;
+  const lastFed=events.find(e=>e.type==='fed');const sinceFed=lastFed?(nowMin-lastFed.min):Infinity;
+  const lastSlept=events.find(e=>e.type==='slept');
+  const lastWoke=events.find(e=>e.type==='woke');
+  // Determine status
+  if(latest.type==='slept'){return{icon:'😴',text:'Sleeping',sub:ago(latest.min)+' ('+fmt12(latest.time)+')'};}
+  if(latest.type==='woke'){
+    if(sinceFed>120)return{icon:'🥱',text:'Just woke up -- probably hungry',sub:ago(latest.min)};
+    if(sinceMin<30)return{icon:'🥱',text:'Just woke up',sub:ago(latest.min)};
+  }
+  if(latest.type==='fed'){
+    if(sinceMin<30)return{icon:'🍼',text:'Just ate '+latest.label,sub:fmt12(latest.time)};
+    if(sinceMin<90)return{icon:'😊',text:'Fed -- '+latest.label,sub:ago(latest.min)};
+  }
+  if(latest.type==='activity'){
+    if(latest.label.toLowerCase().includes('bath'))return{icon:'🛁',text:'Fresh from bath',sub:fmt12(latest.time)};
+    if(sinceMin<60)return{icon:'🏃',text:latest.label,sub:ago(latest.min)};
+  }
+  if(latest.type==='diaper'){
+    if(sinceMin<15)return{icon:'🧷',text:'Just had a diaper change',sub:fmt12(latest.time)};
+  }
+  // Fallback: check hunger
+  if(sinceFed>180)return{icon:'😐',text:'Might be hungry soon',sub:'Last fed '+ago(lastFed.min)};
+  if(sinceFed>90)return{icon:'😊',text:'Playing/awake',sub:'Last fed '+ago(lastFed.min)};
+  return{icon:'😊',text:'Doing good',sub:ago(latest.min)};
+}
+
 function renderTimeline(){
   const el=document.getElementById('tl');
-  const events=D.shared.calendar.filter(e=>new Date(e.date+'T23:59:59+08:00')>=new Date(Date.now()-7*86400000)).sort((a,b)=>a.date.localeCompare(b.date));
-  let h=`<div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px">`;
-  Object.keys(catIcons).forEach(k=>{h+=`<div style="display:flex;align-items:center;gap:5px"><div class="d" style="background:${catIcons[k]}"></div><span class="m" style="font-size:9px;color:#64748b">${k}</span></div>`});
-  h+='</div><div class="c" style="padding:14px 16px">';
-  events.forEach((e,i)=>{
-    const color=catIcons[e.category]||'#64748b';
-    const line=i<events.length-1?`<div style="width:2px;flex-grow:1;background:#1e293b;min-height:18px"></div>`:'';
-    h+=`<div style="display:flex;gap:12px;padding:8px 0"><span class="m" style="min-width:60px;text-align:right;font-size:10px;color:#64748b">${fmtDate(e.date)}</span>
-      <div style="display:flex;flex-direction:column;align-items:center"><div style="width:10px;height:10px;border-radius:50%;background:${color};box-shadow:0 0 6px ${color}66;flex-shrink:0"></div>${line}</div>
-      <div style="flex:1"><span style="font-size:13px">${e.title}</span></div><span class="m" style="font-size:9px;color:#64748b;white-space:nowrap">${daysUntil(e.date)}</span></div>`;
+  const tlIcons={photo:'\ud83d\udcf7',screenshot:'\ud83d\udcf1',transaction:'\ud83d\udcb3',balance:'\ud83c\udfe6',food:'\ud83c\udf7d',activity:'\ud83c\udfc3',document:'\ud83d\udcc4',event:'\ud83d\udcc5'};
+  const tagColors={baby_jah:'#f472b6',arabelle:'#a78bfa',food:'#f59e0b',work:'#22d3ee',home:'#10b981',money:'#f59e0b',health:'#ef4444',errands:'#64748b',tech:'#22d3ee',social:'#818cf8',duberymnl:'#22d3ee'};
+  const cutoff=new Date(Date.now()-7*86400000);
+  // Merge life timeline + calendar events
+  const items=[];
+  (D.timeline||[]).forEach(e=>{if(new Date(e.date+'T23:59:59+08:00')>=cutoff)items.push({...e,src:'life'})});
+  const now=new Date(Date.now()+8*3600000);
+  (D.shared.calendar||[]).filter(e=>{const d=new Date(e.date+'T23:59:59+08:00');return d>=cutoff&&d<=now}).forEach(e=>{items.push({date:e.date,time:e.time||'00:00',type:'event',summary:e.title,tags:[e.category||'event'],src:'cal'})});
+  items.sort((a,b)=>(b.date+b.time).localeCompare(a.date+a.time));
+  // Group by date
+  const grouped={};items.forEach(e=>{(grouped[e.date]=grouped[e.date]||[]).push(e)});
+  const today=new Date(Date.now()+8*3600000).toISOString().slice(0,10);
+  const yesterday=new Date(Date.now()+8*3600000-86400000).toISOString().slice(0,10);
+  const dayLabel=d=>{if(d===today)return'Today';if(d===yesterday)return'Yesterday';const dt=new Date(d+'T12:00:00+08:00');return dt.toLocaleDateString('en-US',{weekday:'long',month:'short',day:'numeric'})};
+
+  let h='';
+  if(items.length===0){h='<div class="c"><div class="empty-state">No timeline entries yet. Life log will appear here as photos and screenshots are processed.</div></div>';el.innerHTML=h;return}
+
+  Object.keys(grouped).sort().reverse().forEach(date=>{
+    h+=`<div style="font-size:11px;font-weight:700;color:var(--muted);letter-spacing:1px;padding:12px 0 6px;border-bottom:1px solid var(--border);margin-bottom:4px;text-transform:uppercase" class="m">${dayLabel(date)}</div>`;
+    grouped[date].sort((a,b)=>(b.time||'').localeCompare(a.time||'')).forEach(e=>{
+      const icon=tlIcons[e.type]||'\ud83d\udccc';
+      const timeStr=e.time&&e.time!=='00:00'?`<span class="m" style="min-width:52px;text-align:right;font-size:10px;color:var(--muted)">${e.time.replace(/^(\d{2}):(\d{2})$/,(m,hh,mm)=>{const h12=((+hh%12)||12);return h12+':'+ mm+(+hh<12?' AM':' PM')})}</span>`:'<span style="min-width:52px"></span>';
+      const tags=(e.tags||[]).map(t=>`<span class="m" style="display:inline-block;padding:2px 6px;border-radius:10px;font-size:9px;margin-right:4px;margin-top:4px;background:${(tagColors[t]||'#64748b')}22;color:${tagColors[t]||'#64748b'}">${t}</span>`).join('');
+      const countdown=e.countdown?`<span class="m" style="font-size:9px;color:var(--muted);white-space:nowrap;margin-left:8px">${e.countdown}</span>`:'';
+      h+=`<div style="display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)">${timeStr}<span style="font-size:16px;flex-shrink:0;width:24px;text-align:center">${icon}</span><div style="flex:1"><div style="font-size:13px;line-height:1.4">${e.summary}</div>${tags?'<div>'+tags+'</div>':''}</div>${countdown}</div>`;
+    });
   });
-  h+='</div>';el.innerHTML=h;
+  el.innerHTML=h;
+}
+
+function renderLog(){
+  const el=document.getElementById('lg');
+  const logs=(D.logs||[]).slice().reverse();
+  if(!logs.length){el.innerHTML='<div class="c"><div class="empty-state">No log entries yet. Claude\'s observations will appear here.</div></div>';return}
+  let h='';
+  const today=new Date(Date.now()+8*3600000).toISOString().slice(0,10);
+  const yesterday=new Date(Date.now()+8*3600000-86400000).toISOString().slice(0,10);
+  const dayLabel=d=>{if(d===today)return'Today';if(d===yesterday)return'Yesterday';const dt=new Date(d+'T12:00:00+08:00');return dt.toLocaleDateString('en-US',{weekday:'long',month:'short',day:'numeric'})};
+  let lastDate='';
+  logs.forEach(e=>{
+    if(e.date!==lastDate){lastDate=e.date;h+=`<div style="font-size:11px;font-weight:700;color:var(--muted);letter-spacing:1px;padding:12px 0 6px;border-bottom:1px solid var(--border);margin-bottom:4px;text-transform:uppercase" class="m">${dayLabel(e.date)}</div>`}
+    const tags=(e.tags||[]).map(t=>`<span class="m" style="display:inline-block;padding:2px 6px;border-radius:10px;font-size:9px;margin-right:4px;background:rgba(34,211,238,.1);color:#22d3ee">${t}</span>`).join('');
+    h+=`<div class="c" style="margin-bottom:8px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <span style="font-size:14px;font-weight:600">${e.title||'Observation'}</span>
+        <span class="m" style="font-size:10px;color:var(--muted)">${e.time||''}</span>
+      </div>
+      <div style="font-size:13px;line-height:1.6;color:var(--text);white-space:pre-wrap">${e.body||''}</div>
+      ${e.action?`<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border);font-size:11px;color:#10b981">Action: ${e.action}</div>`:''}
+      ${tags?`<div style="margin-top:6px">${tags}</div>`:''}
+    </div>`;
+  });
+  el.innerHTML=h;
 }
 
 function renderExpenses(){
@@ -593,23 +828,243 @@ function renderExpenses(){
   el.innerHTML=h;
 }
 
+// === QUICK LOG ===
+const QUICKLOG_ENDPOINT='https://script.google.com/macros/s/AKfycbzq6DG2v4oYwnyt8IPWd97NJbVxu0kXdoMd1NGhrSJ1ns3kdSkT9wwVgR66jHOq62Zp/exec';
+let qlCat='diaper';
+
+
+function tickTodo(i){
+  const check=document.getElementById('todo-check-'+i);
+  const text=document.getElementById('todo-text-'+i);
+  const todoItem=D[PROFILE].todos.filter(t=>!t.done).sort((a,b)=>{if(!a.due)return 1;if(!b.due)return-1;return a.due.localeCompare(b.due)})[i];
+  const done=JSON.parse(localStorage.getItem('done_todos')||'[]');
+  if(check.innerHTML){
+    // Uncheck
+    check.innerHTML='';check.style.background='';check.style.borderColor='#64748b';check.style.color='';
+    text.style.textDecoration='';text.style.opacity='1';
+    if(todoItem){const idx=done.indexOf(todoItem.text);if(idx>-1)done.splice(idx,1)}
+  }else{
+    // Check
+    check.innerHTML='&#10003;';check.style.background='#10b981';check.style.borderColor='#10b981';check.style.color='#fff';check.style.fontSize='12px';
+    text.style.textDecoration='line-through';text.style.opacity='.4';
+    if(todoItem)done.push(todoItem.text);
+  }
+  localStorage.setItem('done_todos',JSON.stringify(done));
+}
+
+function tickAraTodo(i){
+  const check=document.getElementById('ara-todo-check-'+i);
+  const text=document.getElementById('ara-todo-text-'+i);
+  const todoItem=D.arabelle.todos.filter(t=>!t.done).sort((a,b)=>{if(!a.due)return 1;if(!b.due)return-1;return a.due.localeCompare(b.due)})[i];
+  const done=JSON.parse(localStorage.getItem('done_ara_todos')||'[]');
+  if(check.innerHTML){
+    check.innerHTML='';check.style.background='';check.style.borderColor='#64748b';check.style.color='';
+    text.style.textDecoration='';text.style.opacity='1';
+    if(todoItem){const idx=done.indexOf(todoItem.text);if(idx>-1)done.splice(idx,1)}
+  }else{
+    check.innerHTML='&#10003;';check.style.background='#10b981';check.style.borderColor='#10b981';check.style.color='#fff';check.style.fontSize='12px';
+    text.style.textDecoration='line-through';text.style.opacity='.4';
+    if(todoItem)done.push(todoItem.text);
+  }
+  localStorage.setItem('done_ara_todos',JSON.stringify(done));
+}
+
+function openQL(){
+  document.getElementById('ql-overlay').classList.add('open');
+  document.getElementById('ql-submit').style.display='';
+  document.getElementById('ql-done').style.display='none';
+  document.getElementById('ql-forms').style.display='';
+  document.getElementById('ql-cats').style.display='';
+  // Set default time for sleep
+  const now=new Date().toLocaleString('en-CA',{timeZone:'Asia/Manila',hour:'2-digit',minute:'2-digit',hour12:false}).slice(-5);
+  const sleepTime=document.getElementById('ql-sleep-time');
+  if(sleepTime)sleepTime.value=now;
+}
+function closeQL(){document.getElementById('ql-overlay').classList.remove('open')}
+
+function setQL(cat){
+  qlCat=cat;
+  document.querySelectorAll('.ql-cat').forEach(b=>b.classList.remove('a'));
+  event.target.classList.add('a');
+  document.querySelectorAll('.ql-form').forEach(f=>f.classList.remove('a'));
+  document.getElementById('ql-'+cat).classList.add('a');
+}
+
+function qlToggle(btn,hiddenId){
+  btn.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('a'));
+  btn.classList.add('a');
+  document.getElementById(hiddenId).value=btn.textContent.trim();
+}
+
+async function submitQL(){
+  const btn=document.getElementById('ql-submit');
+  btn.disabled=true;btn.textContent='Logging...';
+  let payload={category:qlCat,logged_by:PROFILE==='arabelle'?'Arabelle':'RA'};
+
+  switch(qlCat){
+    case 'diaper':
+      payload.who='Baby Jah';
+      payload.detail_1=document.getElementById('ql-diaper-type').value;
+      payload.notes=document.getElementById('ql-diaper-notes').value;
+      break;
+    case 'feeding':
+      payload.who=document.getElementById('ql-feeding-who').value;
+      payload.detail_1=document.getElementById('ql-feeding-food').value;
+      payload.notes=document.getElementById('ql-feeding-notes').value;
+      break;
+    case 'transaction':
+      payload.who=payload.logged_by;
+      payload.detail_1=document.getElementById('ql-tx-desc').value;
+      payload.detail_2=document.getElementById('ql-tx-cat').value;
+      payload.amount=parseFloat(document.getElementById('ql-tx-amount').value)||0;
+      payload.notes=document.getElementById('ql-tx-notes').value;
+      break;
+    case 'balance':
+      payload.detail_1=document.getElementById('ql-bal-acct').value;
+      payload.amount=parseFloat(document.getElementById('ql-bal-amount').value)||0;
+      break;
+    case 'activity':
+      payload.who='Baby Jah';
+      payload.detail_1=document.getElementById('ql-act-desc').value;
+      break;
+    case 'sleep':
+      payload.who=document.getElementById('ql-sleep-who').value;
+      payload.detail_1=document.getElementById('ql-sleep-action').value;
+      payload.detail_2=document.getElementById('ql-sleep-time').value;
+      payload.notes=document.getElementById('ql-sleep-notes').value;
+      break;
+  }
+
+  try{
+    const fd=new FormData();
+    fd.append('payload',JSON.stringify(payload));
+    await fetch(QUICKLOG_ENDPOINT,{method:'POST',body:fd,mode:'no-cors'});
+  }catch(e){}
+
+  // Show confirmation
+  document.getElementById('ql-forms').style.display='none';
+  document.getElementById('ql-cats').style.display='none';
+  btn.style.display='none';
+  document.getElementById('ql-done').style.display='';
+  setTimeout(()=>{closeQL();btn.disabled=false;btn.textContent='Log It';
+    // Clear inputs
+    document.querySelectorAll('#ql-forms input[type=text],#ql-forms input[type=number]').forEach(i=>i.value='');
+  },1500);
+}
+
+// === MERGE SHEET DATA ===
+function mergeSheetData(D,rows){
+  if(!rows||!rows.length)return;
+  const today=manilaDateStr();
+  for(const r of rows){
+    // Normalize date/time -- Google Sheets returns ISO Date objects
+    let date=r.date||today;
+    let time=r.time||'00:00';
+    // Date: "2026-03-24T00:00:00.000Z" -> "2026-03-24"
+    date=String(date);
+    if(date.includes('T'))date=date.split('T')[0];
+    if(!date.match(/^\d{4}-\d{2}-\d{2}$/))date=today;
+    // Time: "1899-12-30T14:36:00.000Z" -> "14:36"
+    time=String(time);
+    if(time.includes('T')){
+      const tMatch=time.match(/T(\d{2}):(\d{2})/);
+      time=tMatch?(tMatch[1]+':'+tMatch[2]):'00:00';
+    }
+    time=time.replace(/[^\d:]/g,'');
+    if(!time.match(/^\d{1,2}:\d{2}/))time='00:00';
+    const ts=r.timestamp||'';
+    switch(r.category){
+      case 'diaper':{
+        const dtype=(r.detail_1||'wet').toString().toLowerCase();
+        if(!D.shared.baby_jah.diapers.some(d=>d.date===date&&d.time===time&&d.type===dtype)){
+          D.shared.baby_jah.diapers.push({date,time,type:dtype,notes:r.notes||''});
+        }}break;
+      case 'feeding':{
+        if(!r.detail_1||!r.detail_1.toString().trim())break;
+        const feedWho=(r.who||'Baby Jah').toString().toLowerCase().replace(/_/g,' ');
+        if(feedWho==='baby jah'){
+          if(!D.shared.baby_jah.feeding.some(f=>f.date===date&&f.time===time&&f.food===r.detail_1)){
+            D.shared.baby_jah.feeding.push({date,time,food:r.detail_1||'',notes:r.notes||''});
+          }
+        }else{
+          const tgt=feedWho==='arabelle'?D.arabelle:D.ra;
+          if(!tgt.transactions.some(t=>t.date===date&&t.time===time&&t.description===r.detail_1)){
+            tgt.transactions.push({date,time,description:r.detail_1||'',amount:null,category:'food'});
+          }
+        }}break;
+      case 'transaction':{
+        const who=(r.logged_by||'RA').toLowerCase();
+        const tgt=who==='arabelle'?D.arabelle:D.ra;
+        if(!tgt.transactions.some(t=>t.date===date&&t.time===time&&t.description===r.detail_1)){
+          tgt.transactions.push({date,time,description:r.detail_1||'',amount:r.amount?parseFloat(r.amount):null,category:r.detail_2||'shopping'});
+        }}break;
+      case 'balance':{
+        const acct=(r.detail_1||'').toLowerCase().replace(/ /g,'_');
+        if(D.shared.accounts[acct]){
+          D.shared.accounts[acct].balance=parseFloat(r.amount)||0;
+          D.shared.accounts[acct].updated=date;
+        }}break;
+      case 'activity':
+        if(!D.shared.baby_jah.activities.some(a=>a.date===date&&a.time===time&&a.activity===r.detail_1)){
+          D.shared.baby_jah.activities.push({date,time,activity:r.detail_1||''});
+        }break;
+      case 'sleep':{
+        const action=(r.detail_1||'slept').toString().toLowerCase();
+        let sleepTime=r.detail_2||time;
+        sleepTime=String(sleepTime);if(sleepTime.includes('T')){const sm=sleepTime.match(/T(\d{2}):(\d{2})/);sleepTime=sm?(sm[1]+':'+sm[2]):time;}
+        const who=(r.who||'Baby Jah').toString().toLowerCase().replace(/_/g,' ');
+        if(who==='baby jah'||who==='baby_jah'){
+          const st=action==='slept'?sleepTime:null,wk=action==='woke'?sleepTime:null;
+          if(!D.shared.baby_jah.sleep.some(s=>s.date===date&&s.slept===st&&s.woke===wk)){
+            D.shared.baby_jah.sleep.push({date,slept:st,woke:wk,type:parseInt(sleepTime)>=18||parseInt(sleepTime)<6?'night':'nap',notes:r.notes||''});
+          }
+        }else{
+          const st=action==='slept'?sleepTime:null,wk=action==='woke'?sleepTime:null;
+          if(!D.ra.schedule.sleep.some(s=>s.date===date&&s.slept===st&&s.woke===wk)){
+            D.ra.schedule.sleep.push({date,slept:st,woke:wk,notes:r.notes||''});
+          }
+        }}break;
+    }
+  }
+  // Sort arrays by date+time
+  const sortDT=(a,b)=>(a.date+a.time).localeCompare(b.date+b.time);
+  D.shared.baby_jah.diapers.sort(sortDT);
+  D.shared.baby_jah.feeding.sort(sortDT);
+  D.shared.baby_jah.activities.sort(sortDT);
+  D.shared.baby_jah.sleep.sort((a,b)=>(a.date+(a.slept||a.woke||'')).localeCompare(b.date+(b.slept||b.woke||'')));
+  D.ra.schedule.sleep.sort((a,b)=>(a.date+(a.slept||a.woke||'')).localeCompare(b.date+(b.slept||b.woke||'')));
+  D.ra.transactions.sort(sortDT);
+}
+
 // === INIT ===
 async function init(){
   try{
     const [dataRes]=await Promise.all([fetch('dashboard-data.json'),fetchHolidays()]);
     D=await dataRes.json();
+
+    // Fetch Quick Log sheet data
+    try{
+      const sheetRes=await fetch(QUICKLOG_ENDPOINT);
+      const sheetRows=await sheetRes.json();
+      mergeSheetData(D,sheetRows);
+    }catch(e){/* Sheet unavailable, use JSON only */}
+
     W=await fetchWeather(D.location.lat,D.location.lon);
 
     updateHeader();buildTabs();render();
 
     const updated=new Date(D.last_updated);
-    document.getElementById('footer').textContent='Data: '+updated.toLocaleDateString('en-PH',{month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit'});
+    document.getElementById('dash-label').textContent='Updated '+updated.toLocaleString('en-PH',{timeZone:'Asia/Manila',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'});
+    document.getElementById('footer').textContent='RA Dashboard';
 
     if(isStale(D.last_updated,3)){
       document.getElementById('status-dot').style.background='#f59e0b';
       document.getElementById('status-dot').style.boxShadow='0 0 6px #f59e0b';
     }
+    document.getElementById('loader').classList.add('hide');
+    setTimeout(()=>{const l=document.getElementById('loader');if(l)l.remove()},500);
   }catch(e){
+    document.getElementById('loader').classList.add('hide');
     document.getElementById('ov').innerHTML=`<div class="c"><div class="ct m">Error</div><p style="color:#ef4444;font-size:13px">Could not load: ${e.message}</p></div>`;
   }
 }
