@@ -246,9 +246,17 @@ let HOLIDAYS=[];
 async function fetchHolidays(){
   try{
     const year=new Date().toLocaleDateString('en-CA',{timeZone:'Asia/Manila'}).split('-')[0];
-    const res=await fetch(`https://date.nager.at/api/v3/PublicHolidays/${year}/PH`);
+    const cacheKey='holidays_'+year;
+    const cached=localStorage.getItem(cacheKey);
+    if(cached){const c=JSON.parse(cached);if(c.ts&&Date.now()-c.ts<86400000){HOLIDAYS=c.data;return}}
+    const res=await fetchWithTimeout(`https://date.nager.at/api/v3/PublicHolidays/${year}/PH`,{},3000);
     HOLIDAYS=await res.json();
-  }catch(e){HOLIDAYS=[]}
+    localStorage.setItem(cacheKey,JSON.stringify({ts:Date.now(),data:HOLIDAYS}));
+  }catch(e){
+    const year=new Date().toLocaleDateString('en-CA',{timeZone:'Asia/Manila'}).split('-')[0];
+    const cached=localStorage.getItem('holidays_'+year);
+    if(cached){try{HOLIDAYS=JSON.parse(cached).data||[]}catch(_){HOLIDAYS=[]}}else{HOLIDAYS=[]}
+  }
 }
 function getTodayHoliday(){
   const today=manilaDateStr();
@@ -266,10 +274,20 @@ function getUpcomingHoliday(){
 // === WEATHER ===
 async function fetchWeather(lat,lon){
   try{
+    const cacheKey='weather_'+lat+'_'+lon;
+    const cached=localStorage.getItem(cacheKey);
+    if(cached){const c=JSON.parse(cached);if(c.ts&&Date.now()-c.ts<1800000){return c.data}}
     const url=`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=precipitation_probability,weathercode&timezone=Asia%2FManila&forecast_days=2`;
-    const res=await fetch(url);
-    return await res.json();
-  }catch(e){return null}
+    const res=await fetchWithTimeout(url,{},3000);
+    const data=await res.json();
+    localStorage.setItem(cacheKey,JSON.stringify({ts:Date.now(),data}));
+    return data;
+  }catch(e){
+    const cacheKey='weather_'+lat+'_'+lon;
+    const cached=localStorage.getItem(cacheKey);
+    if(cached){try{return JSON.parse(cached).data}catch(_){}}
+    return null;
+  }
 }
 
 function getCommuteWeather(weather,hour,dayOffset){
@@ -334,9 +352,12 @@ function buildTabs(){
   document.getElementById('ov').classList.add('a');
 }
 
-const TAB_IDS=['ov','jh','tr','tl','ex'];
+const TAB_IDS=['ov','jh','tr','tl','ex','sm','lg'];
 let currentTabIdx=0;
-function sw(id,b){document.querySelectorAll('.s').forEach(s=>s.classList.remove('a'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('a'));document.getElementById(id).classList.add('a');b.classList.add('a');currentTabIdx=TAB_IDS.indexOf(id)}
+const renderedTabs={};
+const TAB_RENDERERS={ov:()=>{if(PROFILE==='ra')renderRAHome();else renderArabelleHome()},jh:renderJah,tr:renderTrip,tl:renderTimeline,ex:renderExpenses,sm:renderBrief,lg:renderLog};
+function ensureTabRendered(id){if(!renderedTabs[id]&&TAB_RENDERERS[id]){TAB_RENDERERS[id]();renderedTabs[id]=true}}
+function sw(id,b){document.querySelectorAll('.s').forEach(s=>s.classList.remove('a'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('a'));document.getElementById(id).classList.add('a');b.classList.add('a');currentTabIdx=TAB_IDS.indexOf(id);ensureTabRendered(id)}
 
 // Swipe between tabs
 (function(){let sx=0,sy=0;const cnt=document.querySelector('.cnt');
@@ -351,8 +372,11 @@ if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5){
 // === RENDER ===
 function render(){
   if(!D)return;
+  // Reset rendered state so profile switch re-renders visited tabs
+  Object.keys(renderedTabs).forEach(k=>delete renderedTabs[k]);
+  // Only render the active tab (Home) on init -- others render on first visit
   if(PROFILE==='ra')renderRAHome();else renderArabelleHome();
-  renderJah();renderTrip();renderTimeline();renderBrief();renderLog();renderExpenses();
+  renderedTabs['ov']=true;
 }
 
 function renderRAHome(){
@@ -753,34 +777,20 @@ function renderBrief(){
   if(!b){el.innerHTML='<div class="c"><div class="empty-state">No briefing yet. Claude will populate this with research.</div></div>';return}
   let h='';
   h+=`<div class="m" style="font-size:10px;color:var(--muted);margin-bottom:8px">Last researched: ${b.updated||'--'}</div>`;
-  // Fuel
-  if(b.fuel){
-    h+='<div class="c"><div class="ct m">Fuel Prices (Metro Manila)</div>';
-    (b.fuel.prices||[]).forEach(f=>{
-      h+=`<div class="r"><span style="font-size:13px">${f.type}</span><span class="m" style="font-weight:600;color:#f59e0b">${f.price}</span></div>`;
-    });
-    if(b.fuel.trend)h+=`<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border);font-size:12px;color:var(--muted)">${b.fuel.trend}</div>`;
-    if(b.fuel.tip)h+=`<div style="margin-top:6px;font-size:12px;color:#10b981">Tip: ${b.fuel.tip}</div>`;
-    h+='</div>';
+  // 1. Career / Jobs
+  if(b.career&&b.career.length){
+    h+='<div class="c"><div class="ct m">Remote Job Matches</div>';
+    b.career.forEach(j=>{
+      const jLink=j.url?`<a href="${j.url}" target="_blank" style="color:inherit;text-decoration:none;display:block">`:'<div>';
+      const jLinkEnd=j.url?'</a>':'</div>';
+      h+=`${jLink}<div style="padding:8px 0;border-bottom:1px solid var(--border);cursor:${j.url?'pointer':'default'}">
+        <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:13px;font-weight:600">${j.title}</span><div style="display:flex;align-items:center;gap:8px">${j.pay?`<span class="m" style="font-size:12px;color:#10b981">${j.pay}</span>`:''}${j.url?'<span style="font-size:11px;color:#22d3ee">Apply ></span>':''}</div></div>
+        ${j.skills?`<div class="m" style="font-size:10px;color:var(--muted);margin-top:4px">${j.skills}</div>`:''}
+        ${j.match?`<div style="font-size:11px;color:#22d3ee;margin-top:4px">${j.match}</div>`:''}
+      </div>${jLinkEnd}`;
+    });h+='</div>';
   }
-  // Electricity
-  if(b.electricity){
-    h+=`<div class="c"><div class="ct m">Meralco Rate</div>
-      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:13px">Residential per kWh</span><span class="m" style="font-size:18px;font-weight:700;color:#22d3ee">${b.electricity.rate||'--'}</span></div>
-      ${b.electricity.trend?`<div style="margin-top:6px;font-size:12px;color:var(--muted)">${b.electricity.trend}</div>`:''}
-      ${b.electricity.tip?`<div style="margin-top:6px;font-size:12px;color:#10b981">Tip: ${b.electricity.tip}</div>`:''}
-    </div>`;
-  }
-  // Food prices
-  if(b.food){
-    h+='<div class="c"><div class="ct m">Food Prices</div>';
-    (b.food.items||[]).forEach(f=>{
-      h+=`<div class="r"><span style="font-size:13px">${f.item}</span><span class="m" style="font-weight:600">${f.price}</span></div>`;
-    });
-    if(b.food.tip)h+=`<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border);font-size:12px;color:#10b981">Tip: ${b.food.tip}</div>`;
-    h+='</div>';
-  }
-  // AI News
+  // 2. AI News
   if(b.ai_news&&b.ai_news.length){
     h+='<div class="c"><div class="ct m">AI News This Week</div>';
     b.ai_news.forEach(n=>{
@@ -793,18 +803,7 @@ function renderBrief(){
       </div>${linkEnd}`;
     });h+='</div>';
   }
-  // Career / Jobs
-  if(b.career&&b.career.length){
-    h+='<div class="c"><div class="ct m">Remote Job Matches</div>';
-    b.career.forEach(j=>{
-      h+=`<div style="padding:8px 0;border-bottom:1px solid var(--border)">
-        <div style="display:flex;justify-content:space-between"><span style="font-size:13px;font-weight:600">${j.title}</span>${j.pay?`<span class="m" style="font-size:12px;color:#10b981">${j.pay}</span>`:''}</div>
-        ${j.skills?`<div class="m" style="font-size:10px;color:var(--muted);margin-top:4px">${j.skills}</div>`:''}
-        ${j.match?`<div style="font-size:11px;color:#22d3ee;margin-top:4px">${j.match}</div>`:''}
-      </div>`;
-    });h+='</div>';
-  }
-  // Local News
+  // 3. Local News
   if(b.local_news&&b.local_news.length){
     h+='<div class="c"><div class="ct m">Local News</div>';
     b.local_news.forEach(n=>{
@@ -815,29 +814,7 @@ function renderBrief(){
       </div>`;
     });h+='</div>';
   }
-  // Parenting
-  if(b.parenting&&b.parenting.length){
-    h+='<div class="c"><div class="ct m">Parenting (Baby Jah)</div>';
-    b.parenting.forEach(p=>{
-      h+=`<div style="padding:8px 0;border-bottom:1px solid var(--border)">
-        <div style="font-size:13px;font-weight:600">${p.title}</div>
-        <div style="font-size:12px;color:var(--muted);margin-top:4px;line-height:1.5">${p.summary}</div>
-        ${p.tip?`<div style="font-size:11px;color:#f472b6;margin-top:4px">Tip: ${p.tip}</div>`:''}
-      </div>`;
-    });h+='</div>';
-  }
-  // Hardware
-  if(b.hardware&&b.hardware.length){
-    h+='<div class="c"><div class="ct m">Hardware / Edge AI</div>';
-    b.hardware.forEach(hw=>{
-      h+=`<div style="padding:8px 0;border-bottom:1px solid var(--border)">
-        <div style="font-size:13px;font-weight:600">${hw.title}</div>
-        <div style="font-size:12px;color:var(--muted);margin-top:4px;line-height:1.5">${hw.summary}</div>
-        ${hw.insight?`<div style="font-size:11px;color:#22d3ee;margin-top:4px">${hw.insight}</div>`:''}
-      </div>`;
-    });h+='</div>';
-  }
-  // YouTube Highlights
+  // 4. YouTube Highlights
   if(b.youtube_highlights&&b.youtube_highlights.length){
     h+='<div class="c"><div class="ct m">YouTube Highlights</div>';
     b.youtube_highlights.forEach(v=>{
@@ -848,7 +825,19 @@ function renderBrief(){
       </div>`;
     });h+='</div>';
   }
-  // Life hacks
+  // 5. Hardware / Edge AI (with source links)
+  if(b.hardware&&b.hardware.length){
+    h+='<div class="c"><div class="ct m">Hardware / Edge AI</div>';
+    b.hardware.forEach(hw=>{
+      h+=`<div style="padding:8px 0;border-bottom:1px solid var(--border)">
+        <div style="font-size:13px;font-weight:600">${hw.title}</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:4px;line-height:1.5">${hw.summary}</div>
+        ${hw.insight?`<div style="font-size:11px;color:#22d3ee;margin-top:4px">${hw.insight}</div>`:''}
+        ${hw.source?`<a href="${hw.source}" target="_blank" style="font-size:10px;color:#64748b;margin-top:4px;display:inline-block;text-decoration:underline">Source</a>`:''}
+      </div>`;
+    });h+='</div>';
+  }
+  // 6. Life Hacks
   if(b.life_hacks&&b.life_hacks.length){
     h+='<div class="c"><div class="ct m">Life Hacks This Week</div>';
     b.life_hacks.forEach(h2=>{
@@ -857,6 +846,44 @@ function renderBrief(){
         <div style="font-size:12px;color:var(--muted);margin-top:4px;line-height:1.5">${h2.body}</div>
       </div>`;
     });h+='</div>';
+  }
+  // 7. Parenting
+  if(b.parenting&&b.parenting.length){
+    h+='<div class="c"><div class="ct m">Parenting (Baby Jah)</div>';
+    b.parenting.forEach(p=>{
+      h+=`<div style="padding:8px 0;border-bottom:1px solid var(--border)">
+        <div style="font-size:13px;font-weight:600">${p.title}</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:4px;line-height:1.5">${p.summary}</div>
+        ${p.tip?`<div style="font-size:11px;color:#f472b6;margin-top:4px">Tip: ${p.tip}</div>`:''}
+      </div>`;
+    });h+='</div>';
+  }
+  // 8. Fuel
+  if(b.fuel){
+    h+='<div class="c"><div class="ct m">Fuel Prices (Metro Manila)</div>';
+    (b.fuel.prices||[]).forEach(f=>{
+      h+=`<div class="r"><span style="font-size:13px">${f.type}</span><span class="m" style="font-weight:600;color:#f59e0b">${f.price}</span></div>`;
+    });
+    if(b.fuel.trend)h+=`<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border);font-size:12px;color:var(--muted)">${b.fuel.trend}</div>`;
+    if(b.fuel.tip)h+=`<div style="margin-top:6px;font-size:12px;color:#10b981">Tip: ${b.fuel.tip}</div>`;
+    h+='</div>';
+  }
+  // 9. Food prices
+  if(b.food){
+    h+='<div class="c"><div class="ct m">Food Prices</div>';
+    (b.food.items||[]).forEach(f=>{
+      h+=`<div class="r"><span style="font-size:13px">${f.item}</span><span class="m" style="font-weight:600">${f.price}</span></div>`;
+    });
+    if(b.food.tip)h+=`<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border);font-size:12px;color:#10b981">Tip: ${b.food.tip}</div>`;
+    h+='</div>';
+  }
+  // 10. Electricity
+  if(b.electricity){
+    h+=`<div class="c"><div class="ct m">Meralco Rate</div>
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:13px">Residential per kWh</span><span class="m" style="font-size:18px;font-weight:700;color:#22d3ee">${b.electricity.rate||'--'}</span></div>
+      ${b.electricity.trend?`<div style="margin-top:6px;font-size:12px;color:var(--muted)">${b.electricity.trend}</div>`:''}
+      ${b.electricity.tip?`<div style="margin-top:6px;font-size:12px;color:#10b981">Tip: ${b.electricity.tip}</div>`:''}
+    </div>`;
   }
   el.innerHTML=h;
 }
@@ -1152,20 +1179,28 @@ function mergeSheetData(D,rows){
   D.ra.transactions.sort(sortDT);
 }
 
+// === TIMEOUT FETCH ===
+function fetchWithTimeout(url,opts={},ms=3000){
+  const ctrl=new AbortController();
+  const timer=setTimeout(()=>ctrl.abort(),ms);
+  return fetch(url,{...opts,signal:ctrl.signal}).finally(()=>clearTimeout(timer));
+}
+
 // === INIT ===
 async function init(){
   try{
-    const [dataRes]=await Promise.all([fetch('dashboard-data.json'),fetchHolidays()]);
+    // Load JSON first (critical path)
+    const dataRes=await fetch('dashboard-data.json');
     D=await dataRes.json();
 
-    // Fetch Quick Log sheet data
-    try{
-      const sheetRes=await fetch(QUICKLOG_ENDPOINT);
-      const sheetRows=await sheetRes.json();
-      mergeSheetData(D,sheetRows);
-    }catch(e){/* Sheet unavailable, use JSON only */}
-
-    W=await fetchWeather(D.location.lat,D.location.lon);
+    // Fire all 3 API calls in parallel with timeouts
+    const [,sheetRows,weather]=await Promise.all([
+      fetchHolidays(),
+      fetchWithTimeout(QUICKLOG_ENDPOINT,{},4000).then(r=>r.json()).catch(()=>null),
+      fetchWeather(D.location.lat,D.location.lon)
+    ]);
+    if(sheetRows)mergeSheetData(D,sheetRows);
+    W=weather;
 
     updateHeader();buildTabs();render();
 

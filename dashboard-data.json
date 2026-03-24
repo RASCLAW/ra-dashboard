@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-03-25T03:54:21+08:00",
+  "last_updated": "2026-03-25T04:51:40+08:00",
   "location": {
     "name": "San Joaquin, Pasig",
     "lat": 14.5764,
@@ -7,7 +7,7 @@
   },
   "shared": {
     "accounts": {
-      "payroll": { "balance": 5007.99, "account_masked": "***9713", "updated": "2026-03-25" },
+      "payroll": { "balance": 4957.99, "account_masked": "***9713", "updated": "2026-03-25" },
       "savings": { "balance": 10222, "account_masked": "***7397", "updated": "2026-03-23" },
       "pocket_cash": { "balance": 2115, "updated": "2026-03-24" }
     },
@@ -245,23 +245,59 @@
     {"date":"2026-03-24","time":"23:04","type":"screenshot","summary":"Meralco bill: 381 kWh, P5,503.15 due Apr 3. Up P2,234 from last month (+68%)","tags":["money","home"],"source":"mobile-screenshots"},
     {"date":"2026-03-24","time":"23:16","type":"transaction","summary":"P50 Globe load from BPI payroll. Balance now P5,007.99","tags":["money"],"source":"mobile-screenshots"},
     {"date":"2026-03-25","time":"00:06","type":"screenshot","summary":"Dashboard camera upload error test -- known CORS issue, feature removed","tags":["tech"],"source":"mobile-screenshots"},
-    {"date":"2026-03-25","time":"00:44","type":"photo","summary":"CCTV check -- Arabelle and Baby Jah sleeping together in playpen bed. Both safe.","tags":["baby_jah","arabelle","home"],"source":"mobile-screenshots"}
+    {"date":"2026-03-25","time":"00:44","type":"photo","summary":"CCTV check -- Arabelle and Baby Jah sleeping together in playpen bed. Both safe.","tags":["baby_jah","arabelle","home"],"source":"mobile-screenshots"},
+    {"date":"2026-03-25","time":"04:34","type":"photo","summary":"CCTV motion detected -- Baby Jah stirring/waking up in playpen bed","tags":["baby_jah","home"],"source":"mobile-screenshots"},
+    {"date":"2026-03-25","time":"04:36","type":"photo","summary":"CCTV -- Baby Jah sitting up at edge of playpen, awake. Arabelle not visible.","tags":["baby_jah","home"],"source":"mobile-screenshots"}
   ],
   "briefing": {
     "updated": "2026-03-25",
+    "career": [
+      {"title": "AI Automation Engineer -- n8n + Claude Code", "pay": "$35-60/hr", "skills": "n8n, Claude API, Claude Code, OpenAI, Google Gemini", "match": "This is literally your stack. n8n workflows + Claude Code + API integrations. Full-time (30+ hrs/week), contract-to-hire. Your DuberyMNL pipeline is the portfolio proof.", "url": "https://www.upwork.com/freelance-jobs/apply/Automation-Engineer-n8n-Claude-Code-API-Integrations_~022034043757444027443/"},
+      {"title": "AI Automation Integrator -- Real Estate Ops", "pay": "$1,200 fixed", "skills": "Claude, Zapier/n8n, CRM, SharePoint, Teams", "match": "Real estate agent-to-coordinator automation. Your TDCX lead qualification + n8n skills fit perfectly. They specifically list Claude and n8n as tools.", "url": "https://www.upwork.com/freelance-jobs/apply/Automation-Integrator-Real-Estate-Operation-Claude-Zapier-N8N-FUB-Skyslope-Sage-M360_~022029980076768635170/"},
+      {"title": "AI Automation Specialist (Claude Code + n8n)", "pay": "Contract-to-hire", "skills": "Claude Code, n8n, workflow design", "match": "Starts with paid consultation, then ongoing build. Low risk entry. Your skill set matches exactly -- this is what you do every session.", "url": "https://www.upwork.com/freelance-jobs/apply/Automation-Specialist-Claude-Code-n8n-Workflows_~022026725889600892349/"},
+      {"title": "Claude Bot Setup and Training", "pay": "$2,500 fixed", "skills": "Claude API, bot configuration, training docs", "match": "Set up a Claude bot and train the client. You could do this in a weekend based on your Claude Code expertise.", "url": "https://www.upwork.com/freelance-jobs/apply/Claude-Bot-Setup-and-Training_~022028980117954349314/"}
+    ],
+    "ai_news": [
+      {"title": "Claude Computer Use + Dispatch shipped", "summary": "Anthropic's biggest week: Claude can now control your Mac -- open apps, browse the web, fill spreadsheets. Dispatch lets you assign tasks from your phone and Claude runs them on your desktop while you're away. macOS only, Pro/Max subscribers.", "insight": "You already run Claude Code via VSCode tunnel. Dispatch could complement that -- assign tasks from phone during commute, come back to finished work. Computer Use is macOS only for now but shows where agentic is heading.", "article": "articles/claude-dispatch.html"},
+      {"title": "Claude Code Worktrees: ship 3 features at once", "summary": "New worktree feature lets you run multiple Claude Code agents on separate git branches simultaneously. Each works in isolation, no merge conflicts until you're ready.", "insight": "You're already using parallel agents for DuberyMNL (prompt writing, image gen). Worktrees would let you run dashboard + DuberyMNL + portfolio agents all at once without stepping on each other."},
+      {"title": "MAI-Image-2: Microsoft's #3 AI image gen", "summary": "Microsoft released MAI-Image-2, now ranked #3 on Arena leaderboard. Key wins: accurate text in images (no more gibberish), enhanced photorealism, detail density. Available in MAI Playground, rolling out to Copilot + Bing.", "insight": "Text-in-image is the holy grail for your ad pipeline. If MAI-Image-2 handles headline text better than NB2/kie.ai, it could solve the branding consistency issue. Worth testing for DuberyMNL creatives."},
+      {"title": "OpenAI offering 17.5% guaranteed return to investors", "summary": "OpenAI is offering investors guaranteed 17.5% returns to raise capital for enterprise AI scaling. Aggressive move to lock in funding and partners.", "insight": "Shows how much money is flowing into AI infrastructure. The companies building on top of these models (like you) are the ones who benefit from the spending war."}
+    ],
+    "local_news": [
+      {"title": "Water interruptions in Pasig and Taguig", "summary": "Taguig (Bagumbayan) had water cuts March 24-25, 10pm-4am. Pasig (Bagong Ilog) scheduled March 26-27, 10pm-4am. Pinagbuhatan also affected March 26-27.", "action": "Stock up water before your shift tonight in case Pasig gets hit. Check Maynilad advisories."},
+      {"title": "Summer officially started March 23", "summary": "PAGASA declared the warm/dry season. Expect fair weather with isolated thunderstorms. Temperatures will gradually increase through April.", "action": "Good news for the Daet trip (Mar 28 - Apr 2). Pack sunscreen and hydration for Baby Jah. Afternoons will be hot."},
+      {"title": "Fuel/commodity trucks exempt from number coding", "summary": "MMC exempted fuel delivery trucks and basic commodity transport from truck ban and number coding. Aimed at stabilizing supply during fuel crisis.", "action": "Should help prevent fuel station shortages. Fill up early in the week anyway -- Tuesday is hike day."},
+      {"title": "Ride-hailing drivers 2-day strike", "summary": "Thousands of Grab/InDrive drivers pledged a 2-day booking boycott starting March 23 over fare cuts and fuel costs.", "action": "If Arabelle uses Grab, expect longer wait times and surge pricing this week. Mototaxi or own vehicle is safer bet."}
+    ],
+    "youtube_highlights": [
+      {"title": "Claude Code MASSIVE Update! OS, Computer Use, /Schedule & More", "channel": "WorldofAI", "url": "https://youtube.com/watch?v=hWDXS35B15A", "summary": "Full walkthrough of all new Claude Code features: Computer Use, Dispatch, Cowork, /schedule command. Best overview of the week's updates."},
+      {"title": "Top 5 AI News March 24th", "channel": "Satya's Neural Lab", "url": "https://youtube.com/watch?v=dusjmkc0Kp0", "summary": "Quick 2-min roundup: OpenAI investor deals, Claude Computer Use, ChatGPT library feature, AI math breakthroughs, AI-assisted physics papers."},
+      {"title": "Microsoft's MAI-Image-2: #3 AI Image Generator", "channel": "Abhay Salagrama", "url": "https://youtube.com/watch?v=u_E9he2QP0s", "summary": "Deep dive on MAI-Image-2 capabilities: photorealism, text rendering, detail density. Comparison with top models. Free in MAI Playground."}
+    ],
+    "hardware": [
+      {"title": "Raspberry Pi AI HAT+ 2 (Hailo-10H)", "summary": "Released Jan 2026. 40 TOPS inference (INT4), 8GB dedicated LPDDR4X memory. Pairs with Pi 5 for serious edge AI -- generative tasks + vision + sensor input without cloud dependency.", "insight": "At ~P5,000-7,000 for the full setup (Pi 5 + HAT+ 2), this is your entry point to local inference. Could run a baby monitor AI or local smart home agent.", "source": "https://www.raspberrypi.com/news/when-and-why-you-might-need-the-raspberry-pi-ai-hat-plus-2/"},
+      {"title": "7 tiny AI models that run on Pi", "summary": "Meta Llama 3.1 8B, Qwen3-8B, GLM-4-9B can run on Pi 5 at 15+ tokens/sec with quantization. No GPU needed. Practical for on-device chatbots, document processing, home automation.", "insight": "Local LLM on a Pi means privacy-first AI for your family dashboard -- Baby Jah monitoring, receipt scanning, voice commands. All offline, no API costs.", "source": "https://dextralabs.com/blog/tiny-ai-models-for-raspberry-pi-edge-ai/"},
+      {"title": "Edge AI in 2026: bigger than you think", "summary": "On-device intelligence is growing fast across IoT, sensors, and personal devices. Companies shifting from cloud-first to edge-first for latency, privacy, and cost.", "insight": "Edge AI knowledge adds another dimension to your portfolio. 'I build cloud agents AND edge deployments' is a rare combo on Upwork.", "source": "https://www.codercops.com/blog/edge-ai-on-device-intelligence-iot-sensors-2026"}
+    ],
+    "life_hacks": [
+      {"title": "Fuel crisis: fill up before Tuesday", "body": "Another P6.47/L gas hike and P11.88/L diesel hike expected this week. Premium gas already hit P100/L mid-March. Fill your scooter and the Vios before Tuesday when hikes take effect. For the Daet trip, budget P4,000-5,000 for fuel (round trip ~680km)."},
+      {"title": "Toddler meal variety for Jah (21 months)", "body": "At 21 months, Jah can eat most family food cut into small pieces. Mix veggies into rice or pasta he already likes. Try kalabasa, carrots, broccoli. Tofu and eggs are cheap protein. 3 meals + 2 snacks per day. Don't replace meals with milk -- food first."},
+      {"title": "Chicken week: 40% cheaper than pork", "body": "Chicken at P180-220/kg vs pork liempo at P310-370/kg. Adobo, tinola, fried chicken all stretch the budget. DA is also eyeing P50/kg cap on imported rice -- watch for that."},
+      {"title": "Water interruption prep", "body": "Pasig water cuts scheduled Mar 26-27 (10pm-4am). Fill containers before your shift. If you're in Bagong Ilog or Pinagbuhatan area, stock extra for Baby Jah's bath and formula."}
+    ],
+    "parenting": [
+      {"title": "21-month milestones: independence phase", "summary": "At 21 months, Jah is walking confidently, possibly running. He should be using a spoon on his own, saying 10-50 words, and starting to assert independence (saying 'no', tantrums). This is all normal development.", "tip": "Let Jah do things himself even if it's messy -- eating with a spoon, picking clothes, helping with small tasks. It builds confidence and motor skills."},
+      {"title": "Toddler meals: 3 meals + 2 snacks", "summary": "At 21 months, Jah should eat what the family eats (cut smaller). 3 meals + 2 snacks daily. Focus on calcium (milk, cheese), iron (meat, leafy greens), and fiber (fruits, veggies). 1 cup veggies, 1 cup fruit, 3 servings of rice/bread per day.", "tip": "Jah already eats lugaw, pasta, pork, bread. Try adding more veggies -- steamed kalabasa, carrots, broccoli mixed into his rice. Tofu and eggs are cheap protein wins."},
+      {"title": "Picky eating is normal at this age", "summary": "Toddlers at 21 months often refuse foods they used to love. It's a phase -- they're testing boundaries. Offer variety, don't force. It can take 10-15 exposures before a toddler accepts a new food.", "tip": "If Jah rejects something, try again in a few days prepared differently. Don't replace meals with milk -- offer food first, milk after. Keep portions small so it's not overwhelming."}
+    ],
     "fuel": {
       "prices": [
-        {"type": "Gasoline (Regular)", "price": "P56-63/L"},
-        {"type": "Gasoline (Premium)", "price": "P58-67/L"},
-        {"type": "Diesel", "price": "P57-91/L"}
+        {"type": "Gasoline RON 91", "price": "~P78-85/L"},
+        {"type": "Gasoline RON 95", "price": "~P85-95/L"},
+        {"type": "Diesel", "price": "~P90-100/L"}
       ],
-      "trend": "4th consecutive week of increases. Gasoline up P36/L year-to-date, diesel up P58/L. Caused by US-Israel-Iran conflict disrupting oil supply from Strait of Hormuz.",
-      "tip": "Fill up early in the week -- price hikes usually take effect Tuesday. Your scooter uses gasoline, not diesel, so you're less affected. Budget ~P250-300/fill-up instead of P200."
-    },
-    "electricity": {
-      "rate": "P13.82/kWh",
-      "trend": "Up P0.64/kWh from February. A 200 kWh household pays ~P129 more this month. Driven by 70% jump in NGCP ancillary charges + higher generation costs.",
-      "tip": "Summer demand is pushing rates up. Unplug idle chargers, use fan instead of AC when possible. Wash clothes at night (off-peak). Check your bill for time-of-use tier details."
+      "trend": "Massive escalation in March. Diesel up P24/L in one week (Mar 10), another P12/L hike announced Mar 23. Premium gas hit P100/L mid-March. Caused by Middle East conflict disrupting Strait of Hormuz oil supply.",
+      "tip": "Fill up Monday before Tuesday hikes. For the Daet trip (Mar 28), fill the Vios tank completely before leaving Manila. Budget P4,000-5,000 for fuel round trip."
     },
     "food": {
       "items": [
@@ -272,24 +308,12 @@
         {"item": "Pork kasim", "price": "P270-330/kg"},
         {"item": "Pandesal", "price": "P5.80-7.50/pc"}
       ],
-      "tip": "Rice prices elevated due to Middle East freight costs (doubled). Chicken is 40% cheaper than pork right now -- best budget protein. Subsidized rice at P20/kg available for seniors/PWD/minimum wage."
+      "tip": "DA eyeing P50/kg cap on imported rice. Chicken remains the budget protein winner at 40% less than pork. Inflation at 2.4% in February, driven by food prices. Stock up on rice and eggs before the Daet trip."
     },
-    "ai_news": [
-      {"title": "Claude Dispatch: run agents from your phone", "summary": "Anthropic shipped Dispatch -- assign Claude tasks from your iPhone, it runs on your Mac while you're away. Persistent conversation across devices. Pairs with new Computer Use feature (macOS only, Pro/Max).", "insight": "This is directly relevant to our setup. You already use Claude Code at work via tunnel. Dispatch could replace the tunnel workflow -- assign tasks from phone, come back to results. Worth testing on your Mac plan.", "article": "articles/claude-dispatch.html"},
-      {"title": "Claude Code hits $1B annualized revenue", "summary": "Anthropic shipped voice mode, Cowork, interactive visuals, $100M partner fund, doubled usage limits. Claude Code alone crossed $1B ARR.", "insight": "The tool you're building your entire career on is the fastest-growing AI product. That's validation. Your portfolio of Claude Code skills + agentic workflows is increasingly valuable."},
-      {"title": "AI execution > AI text -- GitHub's new direction", "summary": "GitHub declared 'AI as text is over, execution is the new interface.' AWS added policy layers for agents. Stack Overflow warned enterprise AI fails without context. Supply chain attacks hitting repos.", "insight": "The industry is shifting from 'AI writes text' to 'AI takes actions.' That's exactly what your DuberyMNL pipeline does -- autonomous execution with human-in-the-loop. You're ahead of the curve."},
-      {"title": "n8n automation classes going viral", "summary": "Multiple creators running live n8n automation courses on YouTube. Error handling, autonomous business workflows, monetization guides.", "insight": "n8n content is booming. Your n8n portfolio strategy (31 workflows, Tier 1-4) is well-timed. Consider creating n8n tutorial content yourself -- the audience is growing fast."}
-    ],
-    "youtube_highlights": [
-      {"title": "Claude Dispatch Just Dropped, And It Kills OpenClaw", "channel": "Nick Saraev", "url": "https://youtube.com/watch?v=yTkS8oClCIc", "summary": "Deep dive on Dispatch vs OpenClaw. How to set it up, security advantages, running agents from phone."},
-      {"title": "All The Claude Code Features You DONT Know About", "channel": "Build In Public", "url": "https://youtube.com/watch?v=UleBatIXVeE", "summary": "Full roundup of Anthropic's week: voice mode, Cowork, interactive visuals, $1B revenue milestone."},
-      {"title": "The Real AI Story This Week: Execution Without Control", "channel": "MostProductive", "url": "https://youtube.com/watch?v=GNB9PsCQoAI", "summary": "Why AI execution (not text) is the real story. GitHub, AWS, Stack Overflow all shifting to agentic."}
-    ],
-    "life_hacks": [
-      {"title": "Gas savings for the Daet trip", "body": "Diesel is up P58/L this year. Your Vios uses gasoline (less affected). For the 340km Daet trip: drive steady at 80-90 kph, avoid full AC blast in traffic. Could save P200-400 on the round trip vs aggressive driving."},
-      {"title": "Baby Jah meal prep hack", "body": "Jah is eating solids consistently now (pasta, pork, lugaw). Batch-cook 3-4 portions on rest days, freeze in small containers. Saves Arabelle 20-30 min per meal on weekdays."},
-      {"title": "Electricity: P129 more this month", "body": "Meralco rate jumped to P13.82/kWh (+P0.64). For your household: unplug idle chargers, use fan over AC when tolerable, wash clothes at night. Summer will push rates higher -- April/May bills will be painful."},
-      {"title": "Go chicken over pork this week", "body": "Pork liempo at P310-370/kg vs chicken at P180-220/kg. Chicken is 40% cheaper right now. Adobo, tinola, or fried chicken stretches the budget further than pork dishes."}
-    ]
+    "electricity": {
+      "rate": "P13.82/kWh",
+      "trend": "Up P0.64/kWh from February. 200 kWh household pays ~P129 more. Your April bill (P5,503.15) is already pending. Summer demand will push rates higher in April-May.",
+      "tip": "April Meralco bill is due Apr 3 -- P5,503.15 pending. Unplug idle chargers, minimize AC. Summer peak is coming. Fan + open windows at night saves P500-800/month vs AC."
+    }
   }
 }
