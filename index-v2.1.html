@@ -2,265 +2,453 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="theme-color" content="#0f0f14">
-<title>RA Life OS</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0d0d12">
+<title>Life OS</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
+/* === DESIGN TOKENS === */
 :root {
-  --bg: #0f0f14;
-  --surface: #1a1a22;
-  --card: #22222e;
-  --card-hover: #2a2a38;
-  --border: #2e2e3a;
-  --text: #eae8e4;
-  --muted: #7a7880;
-  --accent: #6bc9a0;
-  --accent-dim: rgba(107,201,160,0.12);
+  /* Backgrounds (3-tier depth) */
+  --bg: #0d0d12;
+  --surface: #161620;
+  --card: #1c1c28;
+  --card-hover: #242432;
+  --border: rgba(255,255,255,0.06);
+
+  /* Text */
+  --text: #f0ede8;
+  --text-secondary: #a09a92;
+  --text-muted: #5e5a54;
+
+  /* Accents */
+  --green: #6bc9a0;
+  --green-dim: rgba(107,201,160,0.10);
+  --green-glow: rgba(107,201,160,0.15);
   --blue: #5b9bd5;
-  --blue-dim: rgba(91,155,213,0.12);
+  --blue-dim: rgba(91,155,213,0.10);
   --pink: #e07ea8;
-  --pink-dim: rgba(224,126,168,0.12);
+  --pink-dim: rgba(224,126,168,0.10);
+  --pink-glow: rgba(224,126,168,0.12);
   --orange: #e0a050;
-  --orange-dim: rgba(224,160,80,0.12);
+  --orange-dim: rgba(224,160,80,0.10);
   --red: #e06060;
-  --red-dim: rgba(224,96,96,0.12);
-  --radius: 20px;
-  --radius-sm: 14px;
+  --red-dim: rgba(224,96,96,0.10);
+  --purple: #9b8ec4;
+  --purple-dim: rgba(155,142,196,0.10);
+
+  /* Radius */
+  --r-xl: 24px;
+  --r-lg: 18px;
+  --r-md: 14px;
+  --r-sm: 10px;
+  --r-pill: 50px;
+
+  /* Spacing (8px grid) */
+  --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 20px; --s6: 24px; --s8: 32px; --s10: 40px; --s12: 48px;
+
+  /* Shadows */
+  --shadow-card: 0 2px 8px rgba(0,0,0,0.2), 0 1px 2px rgba(0,0,0,0.15);
+  --shadow-elevated: 0 8px 24px rgba(0,0,0,0.3), 0 2px 8px rgba(0,0,0,0.2);
+
+  /* Fonts */
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
 }
-* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
-body { background:var(--bg); color:var(--text); font-family:'Inter',sans-serif; min-height:100vh; overflow-x:hidden; }
-.container { max-width:480px; margin:0 auto; padding:0 16px 80px; }
 
-/* Hero */
-.hero { padding:48px 16px 24px; text-align:center; position:relative; }
-.hero-time { font-size:48px; font-weight:800; letter-spacing:-2px; line-height:1; }
-.hero-date { font-size:13px; color:var(--muted); margin-top:6px; font-weight:500; }
-.hero-greeting { font-size:14px; color:var(--accent); margin-top:12px; font-weight:600; }
+/* === RESET === */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+html { scroll-behavior: smooth; }
+body { background:var(--bg); color:var(--text); font-family:var(--font-body); min-height:100vh; overflow-x:hidden; -webkit-font-smoothing:antialiased; }
 
-/* Stale */
-.stale { background:var(--red-dim); border:1px solid rgba(224,96,96,0.2); border-radius:var(--radius-sm); padding:10px 16px; margin:0 16px 16px; font-size:12px; color:var(--red); display:none; text-align:center; }
+/* === LAYOUT === */
+.page { max-width:420px; margin:0 auto; padding:0 var(--s4) var(--s12); }
 
-/* Status Pills */
-.pills { display:flex; gap:8px; padding:0 16px 20px; overflow-x:auto; }
+/* === HERO === */
+.hero {
+  padding: var(--s12) var(--s4) var(--s6);
+  text-align:center;
+  position:relative;
+}
+.hero::after {
+  content:'';
+  position:absolute;
+  top:0; left:50%; transform:translateX(-50%);
+  width:300px; height:300px;
+  background:radial-gradient(circle, var(--green-glow) 0%, transparent 70%);
+  pointer-events:none;
+  opacity:0.4;
+}
+.hero-time {
+  font-family:var(--font-display);
+  font-size:54px; font-weight:700;
+  letter-spacing:-3px; line-height:1;
+  position:relative; z-index:1;
+}
+.hero-date {
+  font-size:13px; color:var(--text-secondary);
+  margin-top:var(--s2); font-weight:500;
+  position:relative; z-index:1;
+}
+.hero-greeting {
+  font-size:13px; color:var(--green);
+  margin-top:var(--s3); font-weight:600;
+  position:relative; z-index:1;
+}
+
+/* === STALE BANNER === */
+.stale {
+  background:var(--red-dim); border:1px solid rgba(224,96,96,0.15);
+  border-radius:var(--r-md); padding:var(--s3) var(--s4);
+  margin:0 0 var(--s4); font-size:12px; color:var(--red);
+  text-align:center; display:none;
+}
+
+/* === STATUS PILLS === */
+.pills { display:flex; gap:var(--s2); margin-bottom:var(--s5); overflow-x:auto; padding-bottom:var(--s1); }
 .pills::-webkit-scrollbar { display:none; }
-.pill { display:flex; align-items:center; gap:7px; padding:10px 16px; border-radius:24px; font-size:12px; font-weight:600; white-space:nowrap; backdrop-filter:blur(10px); }
-.pill .dot { width:8px; height:8px; border-radius:50%; }
-.pill-accent { background:var(--accent-dim); color:var(--accent); }
-.pill-accent .dot { background:var(--accent); }
-.pill-blue { background:var(--blue-dim); color:var(--blue); }
-.pill-blue .dot { background:var(--blue); }
-.pill-pink { background:var(--pink-dim); color:var(--pink); }
-.pill-pink .dot { background:var(--pink); }
-.pill-orange { background:var(--orange-dim); color:var(--orange); }
-.pill-orange .dot { background:var(--orange); }
+.pill {
+  display:flex; align-items:center; gap:var(--s2);
+  padding:var(--s2) var(--s3); border-radius:var(--r-pill);
+  font-size:11px; font-weight:600; white-space:nowrap;
+  border:1px solid var(--border);
+  background:var(--surface);
+  transition:transform 0.15s ease, background 0.15s ease;
+}
+.pill:active { transform:scale(0.96); }
+.pill-dot {
+  width:6px; height:6px; border-radius:50%;
+  flex-shrink:0;
+}
+.pill-dot.live { animation:pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1}50%{opacity:0.4} }
 
-/* Tabs */
-.tabs { display:flex; gap:4px; padding:0 16px 20px; }
-.tab { flex:1; padding:11px 0; border:none; border-radius:14px; cursor:pointer; font-size:12px; font-weight:600; font-family:inherit; background:var(--surface); color:var(--muted); transition:all 0.2s; text-align:center; }
-.tab.active { background:var(--accent); color:#0f0f14; }
+/* === TABS === */
+.tabs {
+  display:flex; gap:var(--s1); margin-bottom:var(--s5);
+  background:var(--surface); border-radius:var(--r-md); padding:3px;
+}
+.tab {
+  flex:1; padding:10px 0; border:none; cursor:pointer;
+  font-size:12px; font-weight:600; font-family:var(--font-body);
+  background:transparent; color:var(--text-muted); border-radius:var(--r-sm);
+  transition:color 0.15s ease, background 0.15s ease;
+  text-align:center;
+}
+.tab:active { transform:scale(0.97); }
+.tab.active { background:var(--card); color:var(--text); box-shadow:var(--shadow-card); }
 
-/* Sections */
+/* === SECTIONS === */
 .section { display:none; }
-.section.active { display:block; }
+.section.active { display:block; animation:fadeIn 0.2s ease; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)} }
 
-/* Card */
-.card { background:var(--card); border-radius:var(--radius); padding:18px; margin-bottom:14px; }
-.card-label { font-size:10px; text-transform:uppercase; letter-spacing:1.5px; color:var(--muted); font-weight:600; margin-bottom:14px; }
+/* === CARD === */
+.card {
+  background:var(--card); border-radius:var(--r-xl);
+  padding:var(--s5); margin-bottom:var(--s3);
+  box-shadow:var(--shadow-card);
+  border:1px solid var(--border);
+  transition:transform 0.15s ease;
+}
+.card-label {
+  font-size:10px; text-transform:uppercase;
+  letter-spacing:1.5px; color:var(--text-muted);
+  font-weight:600; margin-bottom:var(--s3);
+  font-family:var(--font-display);
+}
 
-/* 2-col grid */
-.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:14px; }
-.grid-card { background:var(--card); border-radius:var(--radius); padding:16px; }
-.grid-icon { width:40px; height:40px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:20px; margin-bottom:10px; }
-.grid-title { font-size:14px; font-weight:700; }
-.grid-sub { font-size:11px; color:var(--muted); margin-top:3px; }
-.grid-value { font-size:18px; font-weight:800; margin-top:8px; }
+/* === GLASS CARD (featured) === */
+.glass {
+  background:rgba(255,255,255,0.03);
+  backdrop-filter:blur(16px) saturate(140%);
+  -webkit-backdrop-filter:blur(16px) saturate(140%);
+  border:1px solid rgba(255,255,255,0.07);
+}
+@supports not (backdrop-filter:blur(10px)) {
+  .glass { background:var(--card); }
+}
 
-/* Baby Jah featured */
-.jah-card { background:linear-gradient(135deg, #2a1f35 0%, #1e2838 100%); border-radius:var(--radius); padding:20px; margin-bottom:14px; }
-.jah-header { display:flex; align-items:center; gap:14px; margin-bottom:16px; }
-.jah-avatar { width:52px; height:52px; border-radius:50%; background:var(--pink-dim); display:flex; align-items:center; justify-content:center; font-size:26px; }
-.jah-name { font-size:18px; font-weight:800; }
+/* === BABY JAH CARD === */
+.jah-card {
+  border-radius:var(--r-xl);
+  padding:var(--s5); margin-bottom:var(--s3);
+  background:linear-gradient(145deg, rgba(224,126,168,0.08) 0%, rgba(91,155,213,0.06) 100%);
+  border:1px solid rgba(224,126,168,0.1);
+  box-shadow:var(--shadow-card), 0 0 40px var(--pink-glow);
+  position:relative; overflow:hidden;
+}
+.jah-card::before {
+  content:''; position:absolute; top:-60px; right:-60px;
+  width:160px; height:160px; border-radius:50%;
+  background:radial-gradient(circle, var(--pink-dim) 0%, transparent 70%);
+  pointer-events:none;
+}
+.jah-top { display:flex; align-items:center; gap:var(--s3); margin-bottom:var(--s4); position:relative; z-index:1; }
+.jah-avatar {
+  width:48px; height:48px; border-radius:50%;
+  background:var(--pink-dim); border:2px solid rgba(224,126,168,0.2);
+  display:flex; align-items:center; justify-content:center; font-size:24px;
+}
+.jah-name { font-family:var(--font-display); font-size:17px; font-weight:700; }
 .jah-state { font-size:12px; color:var(--pink); font-weight:500; margin-top:2px; }
-.jah-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; }
-.jah-stat { text-align:center; }
-.jah-stat-label { font-size:9px; text-transform:uppercase; letter-spacing:1px; color:var(--muted); }
-.jah-stat-value { font-size:13px; font-weight:700; margin-top:4px; }
+.jah-stats {
+  display:grid; grid-template-columns:1fr 1fr 1fr; gap:var(--s2);
+  position:relative; z-index:1;
+}
+.jah-stat {
+  background:rgba(0,0,0,0.2); border-radius:var(--r-md);
+  padding:var(--s3); text-align:center;
+}
+.jah-stat-label { font-size:9px; text-transform:uppercase; letter-spacing:1px; color:var(--text-muted); }
+.jah-stat-val { font-size:13px; font-weight:700; margin-top:var(--s1); line-height:1.2; }
+.jah-stat-sub { font-size:10px; color:var(--text-secondary); margin-top:2px; }
 
-/* Finance rows */
-.fin-row { display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px solid var(--border); }
+/* === GRID === */
+.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:var(--s3); margin-bottom:var(--s3); }
+.grid-card {
+  background:var(--card); border-radius:var(--r-xl);
+  padding:var(--s4); box-shadow:var(--shadow-card);
+  border:1px solid var(--border);
+  transition:transform 0.15s ease;
+}
+.grid-icon {
+  width:38px; height:38px; border-radius:var(--r-sm);
+  display:flex; align-items:center; justify-content:center;
+  font-size:18px; margin-bottom:var(--s3);
+}
+.grid-title { font-family:var(--font-display); font-size:14px; font-weight:700; }
+.grid-sub { font-size:11px; color:var(--text-secondary); margin-top:3px; line-height:1.3; }
+
+/* === FINANCE === */
+.fin-row {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:var(--s3) 0; border-bottom:1px solid var(--border);
+}
 .fin-row:last-child { border-bottom:none; }
-.fin-left { display:flex; align-items:center; gap:12px; }
-.fin-icon { width:36px; height:36px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:16px; }
+.fin-left { display:flex; align-items:center; gap:var(--s3); }
+.fin-icon {
+  width:34px; height:34px; border-radius:var(--r-sm);
+  display:flex; align-items:center; justify-content:center; font-size:15px;
+}
 .fin-name { font-size:13px; font-weight:600; }
-.fin-sub { font-size:10px; color:var(--muted); }
-.fin-amount { font-size:15px; font-weight:700; }
-.fin-total { display:flex; justify-content:space-between; padding:14px 0 4px; border-top:2px solid var(--accent); margin-top:8px; }
-.fin-total span { font-size:16px; font-weight:800; }
+.fin-detail { font-size:10px; color:var(--text-muted); margin-top:1px; }
+.fin-amt { font-family:var(--font-display); font-size:15px; font-weight:700; }
+.fin-total {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:var(--s4) 0 var(--s1); margin-top:var(--s2);
+  border-top:2px solid var(--green);
+}
+.fin-total-label { font-size:12px; font-weight:600; color:var(--text-secondary); text-transform:uppercase; letter-spacing:1px; }
+.fin-total-val { font-family:var(--font-display); font-size:20px; font-weight:700; color:var(--green); }
 
-/* Spending */
-.spend-row { display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--border); }
-.spend-row:last-child { border-bottom:none; }
-.spend-desc { font-size:13px; }
-.spend-time { font-size:10px; color:var(--muted); }
-.spend-amt { font-size:13px; font-weight:700; color:var(--red); }
+/* === SPENDING === */
+.spend-item {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:var(--s3) 0; border-bottom:1px solid var(--border);
+}
+.spend-item:last-of-type { border-bottom:none; }
+.spend-desc { font-size:13px; font-weight:500; }
+.spend-time { font-size:10px; color:var(--text-muted); margin-top:2px; }
+.spend-amt { font-family:var(--font-display); font-size:13px; font-weight:700; color:var(--red); }
+.spend-total {
+  display:flex; justify-content:space-between; padding:var(--s3) 0 0;
+  margin-top:var(--s2); border-top:2px solid var(--red);
+}
+.spend-total span { font-weight:700; }
+.spend-total .amt { font-family:var(--font-display); color:var(--red); font-size:16px; }
 
-/* Timeline */
-.tl-group-label { font-size:10px; text-transform:uppercase; letter-spacing:1.5px; color:var(--muted); font-weight:600; padding:14px 0 6px; }
-.tl-item { display:flex; gap:12px; padding:10px 0; }
-.tl-time { font-size:11px; color:var(--muted); width:44px; flex-shrink:0; padding-top:1px; }
-.tl-bar { display:flex; flex-direction:column; align-items:center; width:16px; flex-shrink:0; }
-.tl-dot { width:10px; height:10px; border-radius:50%; }
-.tl-line { width:2px; flex:1; background:var(--border); margin-top:4px; }
-.tl-text { font-size:13px; line-height:1.4; padding-bottom:4px; }
-.dot-food { background:var(--orange); }
-.dot-cctv { background:var(--blue); }
-.dot-money { background:var(--red); }
-.dot-baby { background:var(--pink); }
-.dot-default { background:var(--accent); }
+/* === TIMELINE === */
+.tl-date-label {
+  font-size:10px; text-transform:uppercase; letter-spacing:1.5px;
+  color:var(--text-muted); font-weight:600; padding:var(--s4) 0 var(--s2);
+  font-family:var(--font-display);
+}
+.tl-item { display:flex; gap:var(--s3); min-height:44px; }
+.tl-time {
+  font-size:11px; color:var(--text-muted); width:40px; flex-shrink:0;
+  padding-top:2px; font-family:var(--font-display); font-weight:500;
+}
+.tl-track { display:flex; flex-direction:column; align-items:center; width:20px; flex-shrink:0; }
+.tl-dot {
+  width:10px; height:10px; border-radius:50%; flex-shrink:0;
+  box-shadow:0 0 8px rgba(255,255,255,0.05);
+}
+.tl-line { width:2px; flex:1; background:var(--border); min-height:16px; }
+.tl-body { flex:1; padding-bottom:var(--s3); }
+.tl-text { font-size:13px; line-height:1.45; }
+
+.dot-food { background:var(--orange); box-shadow:0 0 10px var(--orange-dim); }
+.dot-cctv { background:var(--blue); box-shadow:0 0 10px var(--blue-dim); }
+.dot-money { background:var(--red); box-shadow:0 0 10px var(--red-dim); }
+.dot-baby { background:var(--pink); box-shadow:0 0 10px var(--pink-dim); }
 .dot-vehicle { background:var(--orange); }
+.dot-default { background:var(--green); box-shadow:0 0 10px var(--green-dim); }
+.dot-sleep { background:var(--purple); box-shadow:0 0 10px var(--purple-dim); }
 
-/* Bills */
-.bill-item { display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid var(--border); }
+/* === BILLS === */
+.bill-item {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:var(--s3) 0; border-bottom:1px solid var(--border);
+}
 .bill-item:last-child { border-bottom:none; }
-.bill-badge { font-size:10px; font-weight:700; padding:4px 10px; border-radius:10px; }
-.badge-paid { background:var(--accent-dim); color:var(--accent); }
+.bill-name { font-size:13px; font-weight:500; }
+.bill-badge {
+  font-size:10px; font-weight:700; padding:4px 10px;
+  border-radius:var(--r-pill);
+}
+.badge-paid { background:var(--green-dim); color:var(--green); }
 .badge-pending { background:var(--orange-dim); color:var(--orange); }
+.bills-sub-label {
+  font-size:10px; text-transform:uppercase; letter-spacing:1.5px;
+  color:var(--text-muted); font-weight:600; padding:var(--s4) 0 var(--s2);
+}
 
-/* Gas */
-.gas-wrap { display:flex; align-items:center; gap:16px; }
-.gas-info { flex:1; }
-.gas-model { font-size:14px; font-weight:700; }
-.gas-sub { font-size:11px; color:var(--muted); margin-top:2px; }
-.gas-level { font-size:28px; font-weight:800; }
-.gas-bar { height:6px; background:var(--surface); border-radius:3px; margin-top:12px; overflow:hidden; }
-.gas-fill { height:100%; border-radius:3px; }
+/* === VEHICLE === */
+.vehicle-wrap { display:flex; justify-content:space-between; align-items:center; }
+.vehicle-model { font-family:var(--font-display); font-size:14px; font-weight:700; }
+.vehicle-sub { font-size:11px; color:var(--text-secondary); margin-top:3px; }
+.vehicle-level { font-family:var(--font-display); font-size:28px; font-weight:700; }
+.gas-track { height:6px; background:var(--surface); border-radius:3px; margin-top:var(--s3); overflow:hidden; }
+.gas-bar { height:100%; border-radius:3px; transition:width 0.4s ease; }
 
-/* Footer */
-.footer { text-align:center; padding:24px 0; font-size:10px; color:var(--muted); }
+/* === EMPTY STATE === */
+.empty { font-size:12px; color:var(--text-muted); padding:var(--s4) 0; text-align:center; font-style:italic; }
+
+/* === FOOTER === */
+.footer {
+  text-align:center; padding:var(--s8) 0 var(--s6);
+  font-size:10px; color:var(--text-muted);
+  font-family:var(--font-display);
+}
+
+/* === LOADING SHIMMER === */
+.shimmer {
+  background:linear-gradient(90deg, var(--card) 25%, var(--card-hover) 50%, var(--card) 75%);
+  background-size:200% 100%;
+  animation:shimmer 1.5s infinite;
+  border-radius:var(--r-md);
+  height:20px;
+}
+@keyframes shimmer { 0%{background-position:200% 0}100%{background-position:-200% 0} }
 </style>
 </head>
 <body>
 
+<!-- HERO -->
 <div class="hero">
   <div class="hero-time" id="clock"></div>
   <div class="hero-date" id="dateStr"></div>
   <div class="hero-greeting" id="greeting"></div>
 </div>
 
-<div class="stale" id="staleBanner">Data may be stale -- last sync: <span id="staleTime"></span></div>
+<div class="page">
 
+<div class="stale" id="staleBanner">Data may be stale. Last sync: <span id="staleTime"></span></div>
+
+<!-- STATUS PILLS -->
 <div class="pills" id="statusBar"></div>
 
+<!-- TABS -->
 <div class="tabs">
-  <button class="tab active" onclick="switchTab('home')">Home</button>
-  <button class="tab" onclick="switchTab('finance')">Finance</button>
-  <button class="tab" onclick="switchTab('timeline')">Timeline</button>
+  <button class="tab active" data-tab="home">Home</button>
+  <button class="tab" data-tab="finance">Finance</button>
+  <button class="tab" data-tab="timeline">Timeline</button>
 </div>
 
-<div class="container">
-
-<!-- HOME TAB -->
+<!-- ===== HOME ===== -->
 <div class="section active" id="tab-home">
-
-  <!-- Baby Jah -->
-  <div class="jah-card">
-    <div class="jah-header">
+  <div class="jah-card" id="jahCard">
+    <div class="jah-top">
       <div class="jah-avatar">👶</div>
-      <div>
-        <div class="jah-name">Baby Jah</div>
-        <div class="jah-state" id="jahState">Loading...</div>
-      </div>
+      <div><div class="jah-name">Baby Jah</div><div class="jah-state" id="jahState">...</div></div>
     </div>
-    <div class="jah-grid" id="jahStats"></div>
+    <div class="jah-stats" id="jahStats"><div class="shimmer" style="grid-column:span 3;height:64px"></div></div>
   </div>
 
-  <!-- RA + Arabelle -->
   <div class="grid-2">
-    <div class="grid-card">
+    <div class="grid-card" id="raCard">
       <div class="grid-icon" style="background:var(--blue-dim)">👨</div>
       <div class="grid-title">RA</div>
       <div class="grid-sub" id="raStatus">...</div>
-      <div class="grid-sub" id="raDetail" style="margin-top:2px"></div>
+      <div class="grid-sub" id="raDetail" style="color:var(--text-muted)"></div>
     </div>
-    <div class="grid-card">
+    <div class="grid-card" id="araCard">
       <div class="grid-icon" style="background:var(--pink-dim)">👩</div>
       <div class="grid-title">Arabelle</div>
       <div class="grid-sub" id="araStatus">...</div>
-      <div class="grid-sub" id="araDetail" style="margin-top:2px"></div>
+      <div class="grid-sub" id="araDetail" style="color:var(--text-muted)"></div>
     </div>
   </div>
 
-  <!-- Vehicle -->
   <div class="card">
     <div class="card-label">Vehicle</div>
-    <div id="vehicle"></div>
+    <div id="vehicle"><div class="shimmer"></div></div>
   </div>
 
-  <!-- Quick glance: recent timeline -->
   <div class="card">
-    <div class="card-label">Recent</div>
-    <div id="recentTimeline"></div>
+    <div class="card-label">Recent Activity</div>
+    <div id="recentTL"><div class="shimmer" style="height:120px"></div></div>
   </div>
-
 </div>
 
-<!-- FINANCE TAB -->
+<!-- ===== FINANCE ===== -->
 <div class="section" id="tab-finance">
-
   <div class="card">
     <div class="card-label">Accounts</div>
-    <div id="finAccounts"></div>
+    <div id="finAccounts"><div class="shimmer" style="height:100px"></div></div>
     <div id="finTotal"></div>
   </div>
-
   <div class="card">
     <div class="card-label">Today's Spending</div>
     <div id="todaySpend"></div>
   </div>
-
   <div class="card">
-    <div class="card-label">Bills</div>
+    <div class="card-label">Bills &amp; Subs</div>
     <div id="bills"></div>
   </div>
-
 </div>
 
-<!-- TIMELINE TAB -->
+<!-- ===== TIMELINE ===== -->
 <div class="section" id="tab-timeline">
   <div class="card">
     <div class="card-label">Activity Feed</div>
-    <div id="fullTimeline"></div>
+    <div id="fullTL"><div class="shimmer" style="height:200px"></div></div>
   </div>
 </div>
 
-</div>
+</div><!-- .page -->
 
 <div class="footer">
-  Last synced: <span id="lastUpdated">--</span><br>
-  RA Life OS v2.1
+  synced <span id="lastUpdated">--</span><br>
+  Life OS v2.1
 </div>
 
 <script>
-const DATA_URL = 'dashboard-data.json';
+const DATA = 'dashboard-data.json';
 let D = null;
 
-// Tabs
-function switchTab(name) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  document.getElementById('tab-' + name).classList.add('active');
-  event.target.classList.add('active');
-}
+/* === TABS === */
+document.querySelectorAll('.tab').forEach(t => {
+  t.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    t.classList.add('active');
+    document.getElementById('tab-' + t.dataset.tab).classList.add('active');
+  });
+});
 
-// Clock
+/* === CLOCK === */
 function tick() {
-  const now = new Date();
-  document.getElementById('clock').textContent = now.toLocaleTimeString('en-PH', { hour:'2-digit', minute:'2-digit', hour12:true }).replace(' ', '');
-  document.getElementById('dateStr').textContent = now.toLocaleDateString('en-PH', { weekday:'long', month:'long', day:'numeric', year:'numeric' });
-  const h = now.getHours();
+  const n = new Date();
+  const h = n.getHours(), m = n.getMinutes();
+  const ampm = h >= 12 ? 'PM' : 'AM';
+  const h12 = h % 12 || 12;
+  document.getElementById('clock').textContent = `${h12}:${String(m).padStart(2,'0')} ${ampm}`;
+  document.getElementById('dateStr').textContent = n.toLocaleDateString('en-PH', { weekday:'long', month:'long', day:'numeric' });
   let g = 'Good evening, RA';
   if (h >= 5 && h < 12) g = 'Good morning, RA';
   else if (h >= 12 && h < 17) g = 'Good afternoon, RA';
@@ -268,229 +456,163 @@ function tick() {
 }
 setInterval(tick, 1000); tick();
 
-// RA Status
+/* === HELPERS === */
+const money = n => n == null ? '--' : '\u20B1' + Number(n).toLocaleString('en-PH', {minimumFractionDigits:0, maximumFractionDigits:2});
+const isToday = d => d === new Date().toISOString().slice(0,10);
+const latest = arr => arr && arr.length ? arr[arr.length-1] : null;
+
+/* === STATUS LOGIC === */
 function raStatus() {
-  const h = new Date().getHours();
-  const day = new Date().getDay();
-  if (day === 0 || day === 6) return { s:'Rest day', d:'Home with family' };
-  if (h >= 20 || h < 5) return { s:'At work', d:'McKinley Hills' };
-  if (h >= 5 && h < 8) return { s:'Post-shift', d:'Heading home' };
-  if (h >= 8 && h < 15) return { s:'Sleeping', d:'Do not disturb' };
-  return { s:'Awake', d:'Home, pre-shift' };
+  const h = new Date().getHours(), d = new Date().getDay();
+  if (d===0||d===6) return {s:'Rest day',d:'Home with family',c:'green'};
+  if (h>=20||h<5) return {s:'At work',d:'McKinley Hills',c:'blue'};
+  if (h>=5&&h<8) return {s:'Post-shift',d:'Heading home',c:'blue'};
+  if (h>=8&&h<15) return {s:'Sleeping',d:'Do not disturb',c:'purple'};
+  return {s:'Awake',d:'Home',c:'green'};
 }
-
-// Arabelle Status
 function araStatus() {
-  const h = new Date().getHours();
-  const day = new Date().getDay();
-  if (day === 0 || day === 6) return { s:'Rest day', d:'Home' };
-  const wfh = (day === 1 || day === 5);
-  if (h >= 6 && h < 15) return wfh ? { s:'WFH', d:'Working' } : { s:'Office', d:'Working' };
-  return { s:'Home', d:'With Baby Jah' };
+  const h = new Date().getHours(), d = new Date().getDay();
+  if (d===0||d===6) return {s:'Rest day',d:'Home',c:'pink'};
+  const wfh = d===1||d===5;
+  if (h>=6&&h<15) return wfh ? {s:'WFH',d:'Working',c:'green'} : {s:'Office',d:'Working',c:'orange'};
+  return {s:'Home',d:'With Baby Jah',c:'pink'};
 }
 
-// Baby Jah
-function renderJah() {
-  const bj = D.shared?.baby_jah || {};
-  const sleep = bj.sleep || [];
-  const feed = bj.feeding || [];
-  const diaper = bj.diapers || [];
-
-  const ls = sleep.length ? sleep[sleep.length-1] : null;
-  const lf = feed.length ? feed[feed.length-1] : null;
-  const ld = diaper.length ? diaper[diaper.length-1] : null;
-
-  const state = ls ? (ls.state === 'asleep' ? 'Asleep since ' + ls.time : 'Awake since ' + ls.time) : '...';
-  document.getElementById('jahState').textContent = state;
-
-  document.getElementById('jahStats').innerHTML = `
-    <div class="jah-stat"><div class="jah-stat-label">Last Meal</div><div class="jah-stat-value">${lf ? lf.food : '--'}</div><div class="jah-stat-label" style="margin-top:2px">${lf ? lf.time : ''}</div></div>
-    <div class="jah-stat"><div class="jah-stat-label">Diaper</div><div class="jah-stat-value">${ld ? ld.type : '--'}</div><div class="jah-stat-label" style="margin-top:2px">${ld ? ld.time : ''}</div></div>
-    <div class="jah-stat"><div class="jah-stat-label">Sleep</div><div class="jah-stat-value">${ls ? ls.state : '--'}</div><div class="jah-stat-label" style="margin-top:2px">${ls ? ls.time : ''}</div></div>
+/* === RENDER: Pills === */
+function renderPills() {
+  const ra = raStatus(), ara = araStatus();
+  const bj = latest(D.shared?.baby_jah?.sleep);
+  const jahLabel = bj ? (bj.state==='asleep' ? 'Sleeping' : 'Awake') : '...';
+  const jahColor = bj && bj.state==='asleep' ? 'var(--purple)' : 'var(--green)';
+  document.getElementById('statusBar').innerHTML = `
+    <div class="pill"><span class="pill-dot live" style="background:var(--${ra.c})"></span>RA: ${ra.s}</div>
+    <div class="pill"><span class="pill-dot" style="background:var(--${ara.c})"></span>Ara: ${ara.s}</div>
+    <div class="pill"><span class="pill-dot" style="background:${jahColor}"></span>Jah: ${jahLabel}</div>
   `;
 }
 
-// People
+/* === RENDER: Baby Jah === */
+function renderJah() {
+  const bj = D.shared?.baby_jah || {};
+  const ls = latest(bj.sleep), lf = latest(bj.feeding), ld = latest(bj.diapers);
+  const state = ls ? (ls.state==='asleep' ? `Asleep since ${ls.time}` : `Awake since ${ls.time}`) : 'No data';
+  document.getElementById('jahState').textContent = state;
+  document.getElementById('jahStats').innerHTML = `
+    <div class="jah-stat"><div class="jah-stat-label">Last Meal</div><div class="jah-stat-val">${lf?lf.food:'--'}</div><div class="jah-stat-sub">${lf?lf.time:''}</div></div>
+    <div class="jah-stat"><div class="jah-stat-label">Diaper</div><div class="jah-stat-val">${ld?ld.type:'--'}</div><div class="jah-stat-sub">${ld?ld.time:''}</div></div>
+    <div class="jah-stat"><div class="jah-stat-label">Sleep</div><div class="jah-stat-val">${ls?ls.state:'--'}</div><div class="jah-stat-sub">${ls?ls.time:''}</div></div>
+  `;
+}
+
+/* === RENDER: People === */
 function renderPeople() {
-  const ra = raStatus();
-  const ara = araStatus();
+  const ra = raStatus(), ara = araStatus();
   document.getElementById('raStatus').textContent = ra.s;
   document.getElementById('raDetail').textContent = ra.d;
   document.getElementById('araStatus').textContent = ara.s;
   document.getElementById('araDetail').textContent = ara.d;
 }
 
-// Status pills
-function renderPills() {
-  const ra = raStatus();
-  const ara = araStatus();
-  const bj = D.shared?.baby_jah?.sleep || [];
-  const ls = bj.length ? bj[bj.length-1] : null;
-  const jahLabel = ls ? (ls.state === 'asleep' ? 'Sleeping' : 'Awake') : '...';
-  const jahPill = ls && ls.state === 'asleep' ? 'pill-pink' : 'pill-accent';
-
-  document.getElementById('statusBar').innerHTML = `
-    <div class="pill pill-blue"><span class="dot"></span>${ra.s}</div>
-    <div class="pill pill-pink"><span class="dot"></span>${ara.s}</div>
-    <div class="pill ${jahPill}"><span class="dot"></span>Jah: ${jahLabel}</div>
-  `;
-}
-
-// Vehicle
+/* === RENDER: Vehicle === */
 function renderVehicle() {
   const sc = D.shared?.vehicle?.scooter || {};
-  const lvl = parseInt(sc.gas_level) || 0;
-  const color = lvl > 60 ? 'var(--accent)' : lvl > 30 ? 'var(--orange)' : 'var(--red)';
+  const lvl = parseInt(sc.gas_level)||0;
+  const clr = lvl>60?'var(--green)':lvl>30?'var(--orange)':'var(--red)';
   document.getElementById('vehicle').innerHTML = `
-    <div class="gas-wrap">
-      <div class="gas-info">
-        <div class="gas-model">${sc.model || 'Scooter'}</div>
-        <div class="gas-sub">Last gas: ${sc.last_gas || '--'}</div>
-      </div>
-      <div class="gas-level" style="color:${color}">${sc.gas_level || '--'}</div>
-    </div>
-    <div class="gas-bar"><div class="gas-fill" style="width:${lvl}%;background:${color}"></div></div>
-  `;
+    <div class="vehicle-wrap"><div><div class="vehicle-model">${sc.model||'Scooter'}</div><div class="vehicle-sub">Last gas: ${sc.last_gas||'--'}</div></div>
+    <div class="vehicle-level" style="color:${clr}">${sc.gas_level||'--'}</div></div>
+    <div class="gas-track"><div class="gas-bar" style="width:${lvl}%;background:${clr}"></div></div>`;
 }
 
-// Recent timeline (home tab, last 5)
-function renderRecent() {
-  const entries = (D.timeline || []).slice().reverse().slice(0, 5);
-  if (!entries.length) { document.getElementById('recentTimeline').innerHTML = '<div style="color:var(--muted);font-size:12px;padding:8px 0">No recent activity</div>'; return; }
-  let h = '';
-  entries.forEach((e, i) => {
-    const dc = dotClass(e);
-    const last = i === entries.length - 1;
-    h += `<div class="tl-item">
-      <div class="tl-time">${e.time || '--'}</div>
-      <div class="tl-bar"><div class="tl-dot ${dc}"></div>${last ? '' : '<div class="tl-line"></div>'}</div>
-      <div class="tl-text">${e.summary || ''}</div>
-    </div>`;
-  });
-  document.getElementById('recentTimeline').innerHTML = h;
-}
-
-// Full timeline
-function renderFullTimeline() {
-  const entries = (D.timeline || []).slice().reverse().slice(0, 30);
-  if (!entries.length) { document.getElementById('fullTimeline').innerHTML = '<div style="color:var(--muted);font-size:12px">No activity</div>'; return; }
-  let h = '', lastDate = '';
-  entries.forEach((e, i) => {
-    if (e.date !== lastDate) {
-      const label = isToday(e.date) ? 'Today' : new Date(e.date+'T00:00').toLocaleDateString('en-PH', { weekday:'short', month:'short', day:'numeric' });
-      h += `<div class="tl-group-label">${label}</div>`;
+/* === RENDER: Timeline (shared) === */
+function buildTL(entries, limit) {
+  if (!entries.length) return '<div class="empty">No recent activity</div>';
+  let html='', lastDate='';
+  entries.slice(0,limit).forEach((e,i,arr) => {
+    if (e.date!==lastDate) {
+      const lbl = isToday(e.date)?'Today':new Date(e.date+'T00:00').toLocaleDateString('en-PH',{weekday:'short',month:'short',day:'numeric'});
+      html += `<div class="tl-date-label">${lbl}</div>`;
       lastDate = e.date;
     }
-    const dc = dotClass(e);
-    const last = i === entries.length - 1;
-    h += `<div class="tl-item">
-      <div class="tl-time">${e.time || '--'}</div>
-      <div class="tl-bar"><div class="tl-dot ${dc}"></div>${last ? '' : '<div class="tl-line"></div>'}</div>
-      <div class="tl-text">${e.summary || ''}</div>
-    </div>`;
+    const dc = dotCls(e);
+    const isLast = i===arr.slice(0,limit).length-1;
+    html += `<div class="tl-item"><div class="tl-time">${e.time||'--'}</div><div class="tl-track"><div class="tl-dot ${dc}"></div>${isLast?'':'<div class="tl-line"></div>'}</div><div class="tl-body"><div class="tl-text">${e.summary||''}</div></div></div>`;
   });
-  document.getElementById('fullTimeline').innerHTML = h;
+  return html;
 }
-
-function dotClass(e) {
-  const t = e.type || '';
-  const tags = e.tags || [];
-  if (t === 'food' || t === 'feeding') return 'dot-food';
-  if (t === 'cctv') return 'dot-cctv';
-  if (t === 'transaction' || t === 'bank') return 'dot-money';
-  if (t === 'vehicle') return 'dot-vehicle';
-  if (tags.includes('baby_jah') || t === 'diaper') return 'dot-baby';
+function dotCls(e) {
+  const t=e.type||'',tags=e.tags||[];
+  if (t==='food'||t==='feeding') return 'dot-food';
+  if (t==='cctv') return 'dot-cctv';
+  if (t==='transaction'||t==='bank') return 'dot-money';
+  if (t==='vehicle') return 'dot-vehicle';
+  if (tags.includes('baby_jah')||t==='diaper') return 'dot-baby';
+  if (t==='sleep'||tags.includes('sleep')) return 'dot-sleep';
   return 'dot-default';
 }
+function renderRecent() { document.getElementById('recentTL').innerHTML = buildTL((D.timeline||[]).slice().reverse(), 5); }
+function renderFullTL() { document.getElementById('fullTL').innerHTML = buildTL((D.timeline||[]).slice().reverse(), 30); }
 
-// Finance
+/* === RENDER: Finance === */
 function renderFinance() {
-  const accts = D.shared?.accounts || {};
-  let h = '', total = 0;
-  const icons = { payroll:'💳', savings:'🏦', pocket_cash:'💵' };
-  const colors = { payroll:'var(--blue-dim)', savings:'var(--accent-dim)', pocket_cash:'var(--orange-dim)' };
-  for (const [k, a] of Object.entries(accts)) {
-    const name = k.replace('_',' ').replace(/\b\w/g, c => c.toUpperCase());
-    const bal = a.balance || 0;
-    total += bal;
-    h += `<div class="fin-row">
-      <div class="fin-left">
-        <div class="fin-icon" style="background:${colors[k]||'var(--surface)'}">${icons[k]||'💰'}</div>
-        <div><div class="fin-name">${name}</div><div class="fin-sub">${a.account_masked||''} ${a.updated ? '-- '+a.updated : ''}</div></div>
-      </div>
-      <div class="fin-amount">${money(bal)}</div>
-    </div>`;
+  const accts = D.shared?.accounts||{};
+  const icons = {payroll:'💳',savings:'🏦',pocket_cash:'💵'};
+  const colors = {payroll:'var(--blue-dim)',savings:'var(--green-dim)',pocket_cash:'var(--orange-dim)'};
+  let html='', total=0;
+  for (const [k,a] of Object.entries(accts)) {
+    const name = k.replace(/_/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
+    const bal = a.balance||0; total+=bal;
+    html += `<div class="fin-row"><div class="fin-left"><div class="fin-icon" style="background:${colors[k]||'var(--surface)'}">${icons[k]||'💰'}</div><div><div class="fin-name">${name}</div><div class="fin-detail">${a.account_masked||''} ${a.updated?'-- '+a.updated:''}</div></div></div><div class="fin-amt">${money(bal)}</div></div>`;
   }
-  document.getElementById('finAccounts').innerHTML = h;
-  document.getElementById('finTotal').innerHTML = `<div class="fin-total"><span>Total</span><span>${money(total)}</span></div>`;
+  document.getElementById('finAccounts').innerHTML = html;
+  document.getElementById('finTotal').innerHTML = `<div class="fin-total"><div class="fin-total-label">Total Available</div><div class="fin-total-val">${money(total)}</div></div>`;
 }
 
-// Today spending
+/* === RENDER: Spending === */
 function renderSpending() {
   const today = new Date().toISOString().slice(0,10);
-  const txns = (D.ra?.transactions||[]).filter(t => t.date === today);
-  if (!txns.length) { document.getElementById('todaySpend').innerHTML = '<div style="color:var(--muted);font-size:12px;padding:8px 0">Nothing yet</div>'; return; }
-  let h = '', total = 0;
+  const txns = (D.ra?.transactions||[]).filter(t=>t.date===today);
+  if (!txns.length) { document.getElementById('todaySpend').innerHTML='<div class="empty">No spending today</div>'; return; }
+  let html='', total=0;
   txns.forEach(t => {
-    const a = t.amount || 0; total += a;
-    h += `<div class="spend-row"><div><div class="spend-desc">${t.description}</div><div class="spend-time">${t.time||''}</div></div><div class="spend-amt">-${money(a)}</div></div>`;
+    const a=t.amount||0; total+=a;
+    html+=`<div class="spend-item"><div><div class="spend-desc">${t.description}</div><div class="spend-time">${t.time||''}</div></div><div class="spend-amt">-${money(a)}</div></div>`;
   });
-  h += `<div style="display:flex;justify-content:space-between;padding:12px 0 4px;border-top:2px solid var(--red);margin-top:8px"><span style="font-weight:700">Total</span><span style="font-weight:800;color:var(--red)">-${money(total)}</span></div>`;
-  document.getElementById('todaySpend').innerHTML = h;
+  html+=`<div class="spend-total"><span>Total</span><span class="amt">-${money(total)}</span></div>`;
+  document.getElementById('todaySpend').innerHTML = html;
 }
 
-// Bills
+/* === RENDER: Bills === */
 function renderBills() {
-  const items = D.shared?.bills?.items || [];
-  const subs = D.shared?.bills?.subscriptions || [];
-  let h = '';
+  const items = D.shared?.bills?.items||[], subs = D.shared?.bills?.subscriptions||[];
+  let html='';
   items.forEach(b => {
-    const badge = b.status === 'paid'
-      ? `<span class="bill-badge badge-paid">Paid</span>`
-      : `<span class="bill-badge badge-pending">${money(b.amount)}</span>`;
-    h += `<div class="bill-item"><span style="font-size:13px">${b.name}</span>${badge}</div>`;
+    const badge = b.status==='paid' ? `<span class="bill-badge badge-paid">Paid</span>` : `<span class="bill-badge badge-pending">${money(b.amount)}</span>`;
+    html+=`<div class="bill-item"><span class="bill-name">${b.name}</span>${badge}</div>`;
   });
   if (subs.length) {
-    h += '<div style="font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);font-weight:600;padding:14px 0 6px">Subscriptions</div>';
-    subs.forEach(s => {
-      h += `<div class="bill-item"><span style="font-size:13px">${s.name}</span><span style="font-size:12px;color:var(--muted)">${money(s.amount)}/mo</span></div>`;
-    });
+    html+='<div class="bills-sub-label">Subscriptions</div>';
+    subs.forEach(s => { html+=`<div class="bill-item"><span class="bill-name">${s.name}</span><span style="font-size:12px;color:var(--text-muted)">${money(s.amount)}/mo</span></div>`; });
   }
-  document.getElementById('bills').innerHTML = h;
+  document.getElementById('bills').innerHTML = html;
 }
 
-// Stale
+/* === STALE === */
 function checkStale() {
-  const u = D.last_updated;
-  if (!u) return;
-  const diff = (Date.now() - new Date(u).getTime()) / 60000;
-  if (diff > 60) {
-    document.getElementById('staleBanner').style.display = 'block';
-    document.getElementById('staleTime').textContent = new Date(u).toLocaleTimeString('en-PH', { hour:'2-digit', minute:'2-digit' });
-  }
-  document.getElementById('lastUpdated').textContent = new Date(u).toLocaleString('en-PH', { hour:'2-digit', minute:'2-digit', month:'short', day:'numeric' });
+  const u = D.last_updated; if (!u) return;
+  const diff = (Date.now()-new Date(u).getTime())/60000;
+  if (diff>60) { document.getElementById('staleBanner').style.display='block'; document.getElementById('staleTime').textContent=new Date(u).toLocaleTimeString('en-PH',{hour:'2-digit',minute:'2-digit'}); }
+  document.getElementById('lastUpdated').textContent = new Date(u).toLocaleString('en-PH',{hour:'2-digit',minute:'2-digit',month:'short',day:'numeric'});
 }
 
-// Helpers
-function money(n) { return n == null ? '--' : '\u20B1' + Number(n).toLocaleString('en-PH', { minimumFractionDigits:0, maximumFractionDigits:2 }); }
-function isToday(d) { return d === new Date().toISOString().slice(0,10); }
-
-// Load
+/* === LOAD === */
 async function load() {
   try {
-    const r = await fetch(DATA_URL + '?t=' + Date.now());
+    const r = await fetch(DATA+'?t='+Date.now());
     D = await r.json();
-    renderPills();
-    renderJah();
-    renderPeople();
-    renderVehicle();
-    renderRecent();
-    renderFinance();
-    renderSpending();
-    renderFullTimeline();
-    renderBills();
-    checkStale();
-  } catch(e) { console.error(e); }
+    renderPills(); renderJah(); renderPeople(); renderVehicle();
+    renderRecent(); renderFinance(); renderSpending(); renderFullTL(); renderBills(); checkStale();
+  } catch(e) { console.error('Load failed:',e); }
 }
 load();
 setInterval(load, 60000);
