@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-03-25T04:51:40+08:00",
+  "last_updated": "2026-03-25T10:18:59+08:00",
   "location": {
     "name": "San Joaquin, Pasig",
     "lat": 14.5764,
@@ -9,7 +9,7 @@
     "accounts": {
       "payroll": { "balance": 4957.99, "account_masked": "***9713", "updated": "2026-03-25" },
       "savings": { "balance": 10222, "account_masked": "***7397", "updated": "2026-03-23" },
-      "pocket_cash": { "balance": 2115, "updated": "2026-03-24" }
+      "pocket_cash": { "balance": 2023, "updated": "2026-03-25" }
     },
     "bills": {
       "month": "2026-03",
@@ -92,14 +92,16 @@
         { "date": "2026-03-24", "time": "12:00", "food": "Pork steak", "notes": "Lunch with RA" },
         { "date": "2026-03-24", "time": "16:29", "food": "Fettuccine pasta with chicken", "notes": "Dinner, home-cooked" },
         { "date": "2026-03-24", "time": "17:35", "food": "Bread", "notes": "Snack (logged by RA)" },
-        { "date": "2026-03-24", "time": "18:41", "food": "Milk", "notes": "Evening milk before bed (logged by Arabelle)" }
+        { "date": "2026-03-24", "time": "18:41", "food": "Milk", "notes": "Evening milk before bed (logged by Arabelle)" },
+        { "date": "2026-03-25", "time": "06:30", "food": "Lugaw + Egg", "notes": "Morning walk with RA, bought from outside" },
+        { "date": "2026-03-25", "time": "08:00", "food": "Milk (7oz)", "notes": "After walk and poops" }
       ],
       "sleep": [
         { "date": "2026-03-22", "slept": null, "woke": "02:30", "type": "night", "notes": "Woke up ~2:30 AM" },
         { "date": "2026-03-23", "slept": "11:40", "woke": null, "type": "nap" },
         { "date": "2026-03-23", "slept": "18:00", "woke": null, "type": "night", "notes": "Asleep since 6 PM" },
         { "date": "2026-03-24", "slept": "09:30", "woke": "14:30", "type": "nap", "notes": "Milk + diaper change, ~5 hrs" },
-        { "date": "2026-03-24", "slept": "19:00", "woke": null, "type": "night", "notes": "Bath 6:40 PM, milk 6:41 PM, likely asleep by ~7 PM" }
+        { "date": "2026-03-24", "slept": "19:00", "woke": "04:34", "type": "night", "notes": "Bath 6:40 PM, milk 6:41 PM, asleep ~7 PM, woke 4:34 AM (CCTV motion)" }
       ],
       "diapers": [
         {
@@ -131,6 +133,24 @@
           "time": "18:40",
           "type": "wet",
           "notes": "Bath time (inferred)"
+        },
+        {
+          "date": "2026-03-25",
+          "time": "06:30",
+          "type": "poop",
+          "notes": "Before morning walk"
+        },
+        {
+          "date": "2026-03-25",
+          "time": "07:30",
+          "type": "poop",
+          "notes": "After walk"
+        },
+        {
+          "date": "2026-03-25",
+          "time": "08:50",
+          "type": "poop",
+          "notes": "Big one -- hard poops followed by softer ones. Had been straining since morning trying to get it out."
         }
       ],
       "milestones": [],
@@ -195,7 +215,11 @@
       { "date": "2026-03-24", "time": "06:45", "description": "Lugaw + Egg (with Bujah)", "amount": null, "category": "food" },
       { "date": "2026-03-24", "time": "09:50", "description": "Hotsilog (breakfast)", "amount": null, "category": "food" },
       { "date": "2026-03-24", "time": "09:50", "description": "Pork steak (for lunch)", "amount": 80, "category": "food" },
-      { "date": "2026-03-24", "time": "23:16", "description": "Globe load (09776852325)", "amount": 50, "category": "bills" }
+      { "date": "2026-03-24", "time": "23:16", "description": "Globe load (09776852325)", "amount": 50, "category": "bills" },
+      { "date": "2026-03-25", "time": "02:10", "description": "7-Eleven Fried Chicken (McKinley Hill)", "amount": 92, "category": "food" },
+      { "date": "2026-03-25", "time": "06:30", "description": "Lugaw + Egg (with Bujah)", "amount": 30, "category": "food" },
+      { "date": "2026-03-25", "time": "06:30", "description": "Pocket money to Arabelle", "amount": 600, "category": "transfer" },
+      { "date": "2026-03-25", "time": "10:30", "description": "Adobong Manok + Rice x2 (ate 1, saved 1 for later)", "amount": 150, "category": "food" }
     ],
     "todos": [
       { "text": "File leave at Informdata for Daet trip", "done": false, "due": "2026-03-27" },
@@ -233,7 +257,8 @@
     {"date":"2026-03-24","time":"11:04 PM","title":"Meralco bill -- P5,503.15","body":"March billing period (Feb 22 - Mar 22). 381 kWh consumed. Due April 3.\n\nBig jump: +P2,234 from last month's P3,269 (+68%). 381 kWh is high -- summer heat or AC usage increasing. April/May bills will be worse.","action":"Added to pending bills. Due Apr 3.","tags":["money","home"]},
     {"date":"2026-03-24","time":"11:16 PM","title":"P50 Globe load from BPI","body":"RegularLoad P50 to Globe 09776852325 from payroll account (***9713). Payroll balance: P5,007.99.","action":"Deducted P50 from payroll, logged transaction.","tags":["money"]},
     {"date":"2026-03-25","time":"12:06 AM","title":"Dashboard camera upload test","body":"Two screenshots of the camera upload error ('Failed to fetch'). RA testing at work. Known CORS issue with Apps Script -- feature removed. Photos taken 4 sec apart (retake).","tags":["tech"]},
-    {"date":"2026-03-25","time":"12:44 AM","title":"CCTV -- family sleeping","body":"Tapo CCTV night vision. Arabelle and Baby Jah sleeping together in the playpen bed. Jah sprawled out, blanket kicked off. Arabelle under blanket on the left.\n\nRA checking on family from work during night shift. Both asleep and safe.\n\nPattern: RA monitors home via Tapo CCTV during night shifts. Jah has been asleep since ~7 PM (6+ hours).","tags":["baby_jah","arabelle","home"]}
+    {"date":"2026-03-25","time":"12:44 AM","title":"CCTV -- family sleeping","body":"Tapo CCTV night vision. Arabelle and Baby Jah sleeping together in the playpen bed. Jah sprawled out, blanket kicked off. Arabelle under blanket on the left.\n\nRA checking on family from work during night shift. Both asleep and safe.\n\nPattern: RA monitors home via Tapo CCTV during night shifts. Jah has been asleep since ~7 PM (6+ hours).","tags":["baby_jah","arabelle","home"]},
+    {"date":"2026-03-25","time":"2:10 AM","title":"7-Eleven fried chicken receipt","body":"1pc Fried Chicken P92.00. Store #2110, McKinley Hill, BGC. Cash P1,000, change P908. Staff: Rica Boyco. RA's night shift snack. Quick Log entry at 2:18 AM confirms.","tags":["food","work"]}
   ],
   "timeline": [
     {"date":"2026-03-24","time":"09:46","type":"food","summary":"Hotsilog breakfast at desk -- hotdog, fried egg, sinangag","tags":["food","home"],"source":"mobile-cam"},
@@ -246,6 +271,8 @@
     {"date":"2026-03-24","time":"23:16","type":"transaction","summary":"P50 Globe load from BPI payroll. Balance now P5,007.99","tags":["money"],"source":"mobile-screenshots"},
     {"date":"2026-03-25","time":"00:06","type":"screenshot","summary":"Dashboard camera upload error test -- known CORS issue, feature removed","tags":["tech"],"source":"mobile-screenshots"},
     {"date":"2026-03-25","time":"00:44","type":"photo","summary":"CCTV check -- Arabelle and Baby Jah sleeping together in playpen bed. Both safe.","tags":["baby_jah","arabelle","home"],"source":"mobile-screenshots"},
+    {"date":"2026-03-25","time":"02:06","type":"photo","summary":"CCTV check -- Baby Jah and Arabelle still asleep. Night vision.","tags":["baby_jah","arabelle","home"],"source":"mobile-screenshots"},
+    {"date":"2026-03-25","time":"02:10","type":"transaction","summary":"7-Eleven 1pc Fried Chicken P92 (cash). McKinley Hill, BGC. Receipt photo.","tags":["food","work"],"source":"mobile-cam"},
     {"date":"2026-03-25","time":"04:34","type":"photo","summary":"CCTV motion detected -- Baby Jah stirring/waking up in playpen bed","tags":["baby_jah","home"],"source":"mobile-screenshots"},
     {"date":"2026-03-25","time":"04:36","type":"photo","summary":"CCTV -- Baby Jah sitting up at edge of playpen, awake. Arabelle not visible.","tags":["baby_jah","home"],"source":"mobile-screenshots"}
   ],

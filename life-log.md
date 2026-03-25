@@ -55,3 +55,16 @@ Append-only. Never prune.
 - **Screenshot:** Tapo CCTV -- Arabelle and Baby Jah sleeping together in the playpen bed. Night vision. Jah sprawled out, blanket kicked off. Arabelle under blanket on the left.
 - **Context:** RA checking on family from work during night shift. Both asleep and safe.
 - **Pattern:** RA monitors home via Tapo CCTV during night shifts. Jah has been asleep since ~7 PM (6+ hours). Arabelle asleep by midnight.
+
+### 2:10 AM
+- **Photo:** 7-Eleven receipt. Store #2110, McKinley Hill, BGC, Taguig. 1pc Fried Chicken P92.00. Cash P1,000, change P908.
+- **Context:** RA grabbed a snack during night shift. McKinley Hill is near the office (McKinley Town Center area). Quick Log entry at 2:18 AM confirms: "Chicken 711."
+- **Action:** Logged P92 food transaction (cash). Updated pocket cash.
+
+### 2:06 AM
+- **Screenshot:** Tapo CCTV -- Baby Jah and Arabelle still asleep. Night vision.
+- **Context:** RA's second CCTV check of the night. Family sleeping soundly.
+
+### 4:34 AM
+- **Screenshot:** Tapo CCTV x2 -- Motion detected. Baby Jah stirring/woke up in playpen.
+- **Context:** Jah woke early (~4:34 AM). RA caught it on CCTV from work. Third CCTV check of the shift.
