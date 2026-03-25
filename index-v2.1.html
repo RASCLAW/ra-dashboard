@@ -65,7 +65,7 @@ html { scroll-behavior: smooth; }
 body { background:var(--bg); color:var(--text); font-family:var(--font-body); min-height:100vh; overflow-x:hidden; -webkit-font-smoothing:antialiased; }
 
 /* === LAYOUT === */
-.page { max-width:420px; margin:0 auto; padding:0 var(--s4) var(--s12); }
+.page { max-width:420px; margin:0 auto; padding:0 var(--s4) 80px; }
 
 /* === HERO === */
 .hero {
@@ -126,20 +126,52 @@ body { background:var(--bg); color:var(--text); font-family:var(--font-body); mi
 .pill-dot.live { animation:pulse 2s infinite; }
 @keyframes pulse { 0%,100%{opacity:1}50%{opacity:0.4} }
 
-/* === TABS === */
-.tabs {
-  display:flex; gap:var(--s1); margin-bottom:var(--s5);
-  background:var(--surface); border-radius:var(--r-md); padding:3px;
+/* === PROFILE TOGGLE === */
+.profiles {
+  display:flex; gap:var(--s2); margin-bottom:var(--s5); justify-content:center;
 }
-.tab {
-  flex:1; padding:10px 0; border:none; cursor:pointer;
-  font-size:12px; font-weight:600; font-family:var(--font-body);
-  background:transparent; color:var(--text-muted); border-radius:var(--r-sm);
-  transition:color 0.15s ease, background 0.15s ease;
-  text-align:center;
+.profile-btn {
+  display:flex; flex-direction:column; align-items:center; gap:4px;
+  padding:var(--s2) var(--s4); border-radius:var(--r-md);
+  border:2px solid transparent; background:var(--surface);
+  cursor:pointer; transition:all 0.15s ease; min-width:72px;
 }
-.tab:active { transform:scale(0.97); }
-.tab.active { background:var(--card); color:var(--text); box-shadow:var(--shadow-card); }
+.profile-btn:active { transform:scale(0.95); }
+.profile-btn.active { border-color:var(--green); background:var(--green-dim); }
+.profile-btn[data-profile="ara"].active { border-color:var(--pink); background:var(--pink-dim); }
+.profile-btn[data-profile="jah"].active { border-color:var(--pink); background:var(--pink-dim); }
+.profile-avatar {
+  width:32px; height:32px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center; font-size:16px;
+}
+.profile-name { font-size:10px; font-weight:600; color:var(--text-secondary); }
+.profile-btn.active .profile-name { color:var(--text); }
+
+/* === BOTTOM NAV === */
+.bottom-nav {
+  position:fixed; bottom:0; left:0; right:0;
+  background:var(--surface);
+  border-top:1px solid var(--border);
+  display:flex; justify-content:center;
+  padding:var(--s2) 0 calc(var(--s2) + env(safe-area-inset-bottom, 0px));
+  z-index:100;
+  backdrop-filter:blur(20px) saturate(150%);
+  -webkit-backdrop-filter:blur(20px) saturate(150%);
+  background:rgba(22,22,32,0.85);
+}
+.bottom-nav-inner {
+  display:flex; gap:0; max-width:420px; width:100%;
+}
+.nav-btn {
+  flex:1; display:flex; flex-direction:column; align-items:center; gap:3px;
+  padding:var(--s2) 0; border:none; background:none;
+  cursor:pointer; color:var(--text-muted); transition:color 0.15s ease;
+  font-family:var(--font-body);
+}
+.nav-btn:active { transform:scale(0.92); }
+.nav-btn.active { color:var(--green); }
+.nav-icon { font-size:20px; line-height:1; }
+.nav-label { font-size:9px; font-weight:600; letter-spacing:0.5px; }
 
 /* === SECTIONS === */
 .section { display:none; }
@@ -352,15 +384,28 @@ body { background:var(--bg); color:var(--text); font-family:var(--font-body); mi
 <!-- STATUS PILLS -->
 <div class="pills" id="statusBar"></div>
 
-<!-- TABS -->
-<div class="tabs">
-  <button class="tab active" data-tab="home">Home</button>
-  <button class="tab" data-tab="finance">Finance</button>
-  <button class="tab" data-tab="timeline">Timeline</button>
+<!-- PROFILE TOGGLE -->
+<div class="profiles">
+  <button class="profile-btn active" data-profile="home">
+    <div class="profile-avatar" style="background:var(--green-dim)">🏠</div>
+    <div class="profile-name">Home</div>
+  </button>
+  <button class="profile-btn" data-profile="ra">
+    <div class="profile-avatar" style="background:var(--blue-dim)">👨</div>
+    <div class="profile-name">RA</div>
+  </button>
+  <button class="profile-btn" data-profile="ara">
+    <div class="profile-avatar" style="background:var(--pink-dim)">👩</div>
+    <div class="profile-name">Ara</div>
+  </button>
+  <button class="profile-btn" data-profile="jah">
+    <div class="profile-avatar" style="background:var(--pink-dim)">👶</div>
+    <div class="profile-name">Jah</div>
+  </button>
 </div>
 
-<!-- ===== HOME ===== -->
-<div class="section active" id="tab-home">
+<!-- ===== HOME VIEW ===== -->
+<div class="section active" id="view-home">
   <div class="jah-card" id="jahCard">
     <div class="jah-top">
       <div class="jah-avatar">👶</div>
@@ -370,13 +415,13 @@ body { background:var(--bg); color:var(--text); font-family:var(--font-body); mi
   </div>
 
   <div class="grid-2">
-    <div class="grid-card" id="raCard">
+    <div class="grid-card">
       <div class="grid-icon" style="background:var(--blue-dim)">👨</div>
       <div class="grid-title">RA</div>
       <div class="grid-sub" id="raStatus">...</div>
       <div class="grid-sub" id="raDetail" style="color:var(--text-muted)"></div>
     </div>
-    <div class="grid-card" id="araCard">
+    <div class="grid-card">
       <div class="grid-icon" style="background:var(--pink-dim)">👩</div>
       <div class="grid-title">Arabelle</div>
       <div class="grid-sub" id="araStatus">...</div>
@@ -395,8 +440,16 @@ body { background:var(--bg); color:var(--text); font-family:var(--font-body); mi
   </div>
 </div>
 
-<!-- ===== FINANCE ===== -->
-<div class="section" id="tab-finance">
+<!-- ===== RA VIEW ===== -->
+<div class="section" id="view-ra">
+  <div class="card">
+    <div class="card-label">Status</div>
+    <div style="display:flex;align-items:center;gap:var(--s3);margin-bottom:var(--s4)">
+      <div class="grid-icon" style="background:var(--blue-dim);width:48px;height:48px;border-radius:50%;font-size:24px">👨</div>
+      <div><div style="font-family:var(--font-display);font-size:17px;font-weight:700">RA</div><div id="raViewStatus" style="font-size:12px;color:var(--blue);margin-top:2px"></div></div>
+    </div>
+    <div id="raViewDetail" style="font-size:13px;color:var(--text-secondary)"></div>
+  </div>
   <div class="card">
     <div class="card-label">Accounts</div>
     <div id="finAccounts"><div class="shimmer" style="height:100px"></div></div>
@@ -410,13 +463,90 @@ body { background:var(--bg); color:var(--text); font-family:var(--font-body); mi
     <div class="card-label">Bills &amp; Subs</div>
     <div id="bills"></div>
   </div>
+  <div class="card">
+    <div class="card-label">Todos</div>
+    <div id="raTodos"></div>
+  </div>
 </div>
 
-<!-- ===== TIMELINE ===== -->
-<div class="section" id="tab-timeline">
+<!-- ===== ARABELLE VIEW ===== -->
+<div class="section" id="view-ara">
+  <div class="card">
+    <div class="card-label">Status</div>
+    <div style="display:flex;align-items:center;gap:var(--s3);margin-bottom:var(--s4)">
+      <div class="grid-icon" style="background:var(--pink-dim);width:48px;height:48px;border-radius:50%;font-size:24px">👩</div>
+      <div><div style="font-family:var(--font-display);font-size:17px;font-weight:700">Arabelle</div><div id="araViewStatus" style="font-size:12px;color:var(--pink);margin-top:2px"></div></div>
+    </div>
+    <div id="araViewDetail" style="font-size:13px;color:var(--text-secondary)"></div>
+  </div>
+  <div class="card">
+    <div class="card-label">Schedule</div>
+    <div id="araSchedule"></div>
+  </div>
+</div>
+
+<!-- ===== BABY JAH VIEW ===== -->
+<div class="section" id="view-jah">
+  <div class="jah-card">
+    <div class="jah-top">
+      <div class="jah-avatar">👶</div>
+      <div><div class="jah-name">Baby Jah</div><div class="jah-state" id="jahViewState">...</div></div>
+    </div>
+    <div class="jah-stats" id="jahViewStats"></div>
+  </div>
+  <div class="card">
+    <div class="card-label">Feeding Log</div>
+    <div id="jahFeeding"></div>
+  </div>
+  <div class="card">
+    <div class="card-label">Sleep Log</div>
+    <div id="jahSleep"></div>
+  </div>
+  <div class="card">
+    <div class="card-label">Diapers</div>
+    <div id="jahDiapers"></div>
+  </div>
+  <div class="card">
+    <div class="card-label">Activities</div>
+    <div id="jahActivities"></div>
+  </div>
+</div>
+
+<!-- ===== TIMELINE VIEW (bottom nav) ===== -->
+<div class="section" id="nav-timeline">
   <div class="card">
     <div class="card-label">Activity Feed</div>
     <div id="fullTL"><div class="shimmer" style="height:200px"></div></div>
+  </div>
+</div>
+
+<!-- ===== FINANCE VIEW (bottom nav) ===== -->
+<div class="section" id="nav-finance">
+  <div class="card">
+    <div class="card-label">Accounts</div>
+    <div id="navFinAccounts"><div class="shimmer" style="height:100px"></div></div>
+    <div id="navFinTotal"></div>
+  </div>
+  <div class="card">
+    <div class="card-label">Today's Spending</div>
+    <div id="navTodaySpend"></div>
+  </div>
+  <div class="card">
+    <div class="card-label">Bills &amp; Subs</div>
+    <div id="navBills"></div>
+  </div>
+</div>
+
+<!-- ===== SETTINGS VIEW ===== -->
+<div class="section" id="nav-settings">
+  <div class="card">
+    <div class="card-label">Dashboard Info</div>
+    <div style="font-size:13px;color:var(--text-secondary);line-height:1.6">
+      <div style="margin-bottom:var(--s3)">RA Life OS v2.1</div>
+      <div>Data syncs every 15 minutes via cron pipeline.</div>
+      <div style="margin-top:var(--s2)">Last sync: <span id="settingsLastSync">--</span></div>
+      <div style="margin-top:var(--s2)">Dashboard DB entries: <span id="settingsDbSize">--</span></div>
+    </div>
   </div>
 </div>
 
@@ -427,19 +557,54 @@ body { background:var(--bg); color:var(--text); font-family:var(--font-body); mi
   Life OS v2.1
 </div>
 
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav">
+  <div class="bottom-nav-inner">
+    <button class="nav-btn active" data-nav="home"><div class="nav-icon">🏠</div><div class="nav-label">Home</div></button>
+    <button class="nav-btn" data-nav="timeline"><div class="nav-icon">📋</div><div class="nav-label">Timeline</div></button>
+    <button class="nav-btn" data-nav="finance"><div class="nav-icon">💰</div><div class="nav-label">Finance</div></button>
+    <button class="nav-btn" data-nav="settings"><div class="nav-icon">⚙️</div><div class="nav-label">Settings</div></button>
+  </div>
+</nav>
+
 <script>
 const DATA = 'dashboard-data.json';
 let D = null;
 
-/* === TABS === */
-document.querySelectorAll('.tab').forEach(t => {
-  t.addEventListener('click', () => {
-    document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-    t.classList.add('active');
-    document.getElementById('tab-' + t.dataset.tab).classList.add('active');
+/* === NAVIGATION STATE === */
+let currentNav = 'home';
+let currentProfile = 'home';
+
+/* === PROFILE TOGGLE === */
+document.querySelectorAll('.profile-btn').forEach(b => {
+  b.addEventListener('click', () => {
+    document.querySelectorAll('.profile-btn').forEach(p => p.classList.remove('active'));
+    b.classList.add('active');
+    currentProfile = b.dataset.profile;
+    showView();
   });
 });
+
+/* === BOTTOM NAV === */
+document.querySelectorAll('.nav-btn').forEach(b => {
+  b.addEventListener('click', () => {
+    document.querySelectorAll('.nav-btn').forEach(n => n.classList.remove('active'));
+    b.classList.add('active');
+    currentNav = b.dataset.nav;
+    // Show profiles only on home nav
+    document.querySelector('.profiles').style.display = currentNav === 'home' ? 'flex' : 'none';
+    showView();
+  });
+});
+
+function showView() {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  if (currentNav === 'home') {
+    document.getElementById('view-' + currentProfile).classList.add('active');
+  } else {
+    document.getElementById('nav-' + currentNav).classList.add('active');
+  }
+}
 
 /* === CLOCK === */
 function tick() {
@@ -511,6 +676,59 @@ function renderPeople() {
   document.getElementById('raDetail').textContent = ra.d;
   document.getElementById('araStatus').textContent = ara.s;
   document.getElementById('araDetail').textContent = ara.d;
+  // RA view
+  document.getElementById('raViewStatus').textContent = ra.s;
+  document.getElementById('raViewDetail').textContent = ra.d;
+  // Ara view
+  document.getElementById('araViewStatus').textContent = ara.s;
+  document.getElementById('araViewDetail').textContent = ara.d;
+  // RA todos
+  const todos = D.ra?.todos || [];
+  document.getElementById('raTodos').innerHTML = todos.length
+    ? todos.map(t => `<div style="padding:var(--s2) 0;border-bottom:1px solid var(--border);font-size:13px">${t.task||t}</div>`).join('')
+    : '<div class="empty">No todos</div>';
+  // Ara schedule
+  const araS = D.arabelle?.schedule || {};
+  document.getElementById('araSchedule').innerHTML = `
+    <div style="font-size:13px;line-height:1.8;color:var(--text-secondary)">
+      <div>Work hours: ${araS.work_start||'06:00'} - ${araS.work_end||'15:00'}</div>
+      <div>WFH days: Mon, Fri</div>
+      <div>Office days: Tue, Wed, Thu</div>
+      <div>Commute: ${araS.commute_method||'mototaxi'}</div>
+    </div>`;
+}
+
+/* === RENDER: Baby Jah Profile === */
+function renderJahProfile() {
+  const bj = D.shared?.baby_jah || {};
+  const ls = latest(bj.sleep), lf = latest(bj.feeding), ld = latest(bj.diapers);
+  const state = ls ? (ls.state==='asleep'?`Asleep since ${ls.time}`:`Awake since ${ls.time}`) : 'No data';
+  document.getElementById('jahViewState').textContent = state;
+  document.getElementById('jahViewStats').innerHTML = document.getElementById('jahStats').innerHTML;
+
+  // Feeding log
+  const feeds = (bj.feeding||[]).slice().reverse().slice(0,10);
+  document.getElementById('jahFeeding').innerHTML = feeds.length
+    ? feeds.map(f => `<div style="display:flex;justify-content:space-between;padding:var(--s2) 0;border-bottom:1px solid var(--border);font-size:13px"><span>${f.food}</span><span style="color:var(--text-muted);font-size:11px">${f.date} ${f.time}</span></div>`).join('')
+    : '<div class="empty">No feeding data</div>';
+
+  // Sleep log
+  const sleeps = (bj.sleep||[]).slice().reverse().slice(0,10);
+  document.getElementById('jahSleep').innerHTML = sleeps.length
+    ? sleeps.map(s => `<div style="display:flex;justify-content:space-between;padding:var(--s2) 0;border-bottom:1px solid var(--border);font-size:13px"><span style="text-transform:capitalize">${s.state}</span><span style="color:var(--text-muted);font-size:11px">${s.date} ${s.time}</span></div>`).join('')
+    : '<div class="empty">No sleep data</div>';
+
+  // Diapers
+  const diapers = (bj.diapers||[]).slice().reverse().slice(0,10);
+  document.getElementById('jahDiapers').innerHTML = diapers.length
+    ? diapers.map(d => `<div style="display:flex;justify-content:space-between;padding:var(--s2) 0;border-bottom:1px solid var(--border);font-size:13px"><span style="text-transform:capitalize">${d.type}</span><span style="color:var(--text-muted);font-size:11px">${d.date} ${d.time}</span></div>`).join('')
+    : '<div class="empty">No diaper data</div>';
+
+  // Activities
+  const acts = (bj.activities||[]).slice().reverse().slice(0,10);
+  document.getElementById('jahActivities').innerHTML = acts.length
+    ? acts.map(a => `<div style="display:flex;justify-content:space-between;padding:var(--s2) 0;border-bottom:1px solid var(--border);font-size:13px"><span>${a.activity}</span><span style="color:var(--text-muted);font-size:11px">${a.date} ${a.time}</span></div>`).join('')
+    : '<div class="empty">No activity data</div>';
 }
 
 /* === RENDER: Vehicle === */
@@ -566,13 +784,16 @@ function renderFinance() {
   }
   document.getElementById('finAccounts').innerHTML = html;
   document.getElementById('finTotal').innerHTML = `<div class="fin-total"><div class="fin-total-label">Total Available</div><div class="fin-total-val">${money(total)}</div></div>`;
+  // Also populate nav finance view
+  document.getElementById('navFinAccounts').innerHTML = html;
+  document.getElementById('navFinTotal').innerHTML = `<div class="fin-total"><div class="fin-total-label">Total Available</div><div class="fin-total-val">${money(total)}</div></div>`;
 }
 
 /* === RENDER: Spending === */
 function renderSpending() {
   const today = new Date().toISOString().slice(0,10);
   const txns = (D.ra?.transactions||[]).filter(t=>t.date===today);
-  if (!txns.length) { document.getElementById('todaySpend').innerHTML='<div class="empty">No spending today</div>'; return; }
+  if (!txns.length) { document.getElementById('todaySpend').innerHTML='<div class="empty">No spending today</div>'; document.getElementById('navTodaySpend').innerHTML='<div class="empty">No spending today</div>'; return; }
   let html='', total=0;
   txns.forEach(t => {
     const a=t.amount||0; total+=a;
@@ -580,6 +801,7 @@ function renderSpending() {
   });
   html+=`<div class="spend-total"><span>Total</span><span class="amt">-${money(total)}</span></div>`;
   document.getElementById('todaySpend').innerHTML = html;
+  document.getElementById('navTodaySpend').innerHTML = html;
 }
 
 /* === RENDER: Bills === */
@@ -595,6 +817,7 @@ function renderBills() {
     subs.forEach(s => { html+=`<div class="bill-item"><span class="bill-name">${s.name}</span><span style="font-size:12px;color:var(--text-muted)">${money(s.amount)}/mo</span></div>`; });
   }
   document.getElementById('bills').innerHTML = html;
+  document.getElementById('navBills').innerHTML = html;
 }
 
 /* === STALE === */
@@ -610,8 +833,10 @@ async function load() {
   try {
     const r = await fetch(DATA+'?t='+Date.now());
     D = await r.json();
-    renderPills(); renderJah(); renderPeople(); renderVehicle();
+    renderPills(); renderJah(); renderJahProfile(); renderPeople(); renderVehicle();
     renderRecent(); renderFinance(); renderSpending(); renderFullTL(); renderBills(); checkStale();
+    document.getElementById('settingsLastSync').textContent = new Date(D.last_updated).toLocaleString('en-PH',{hour:'2-digit',minute:'2-digit',month:'short',day:'numeric'});
+    document.getElementById('settingsDbSize').textContent = (D.timeline||[]).length + ' timeline entries';
   } catch(e) { console.error('Load failed:',e); }
 }
 load();
