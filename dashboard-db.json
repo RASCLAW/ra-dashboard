@@ -1,0 +1,1373 @@
+{
+  "last_updated": "2026-03-26T00:26:20+08:00",
+  "location": {
+    "name": "San Joaquin, Pasig",
+    "lat": 14.5764,
+    "lon": 121.0851
+  },
+  "shared": {
+    "accounts": {
+      "payroll": {
+        "balance": 4137.99,
+        "account_masked": "***9713",
+        "updated": "2026-03-25"
+      },
+      "savings": {
+        "balance": 10222,
+        "account_masked": "***7397",
+        "updated": "2026-03-23"
+      },
+      "pocket_cash": {
+        "balance": 1023,
+        "updated": "2026-03-25"
+      }
+    },
+    "bills": {
+      "month": "2026-03",
+      "items": [
+        {
+          "name": "Rent",
+          "amount": 4000,
+          "due_day": 15,
+          "status": "paid",
+          "paid_date": "2026-03-15"
+        },
+        {
+          "name": "Meralco",
+          "amount": 3269,
+          "due_day": null,
+          "status": "paid",
+          "paid_date": "2026-03-23"
+        },
+        {
+          "name": "PLDT Fibr",
+          "amount": 1700,
+          "due_day": 17,
+          "status": "paid",
+          "paid_date": "2026-03-17"
+        },
+        {
+          "name": "Maynilad",
+          "amount": 887,
+          "due_day": null,
+          "status": "paid",
+          "paid_date": "2026-03-23"
+        },
+        {
+          "name": "Parking",
+          "amount": 3000,
+          "due_day": 28,
+          "status": "pending",
+          "paid_date": null
+        },
+        {
+          "name": "Meralco (Apr)",
+          "amount": 5503.15,
+          "due_day": 3,
+          "status": "pending",
+          "paid_date": null
+        }
+      ],
+      "subscriptions": [
+        {
+          "name": "YouTube Premium",
+          "amount": 189,
+          "next_due": "2026-04-15"
+        },
+        {
+          "name": "TP-Link Tapo",
+          "amount": 140,
+          "next_due": "2026-04-11"
+        },
+        {
+          "name": "Arabelle Google Cloud",
+          "amount": 179,
+          "next_due": null
+        }
+      ]
+    },
+    "calendar": [
+      {
+        "date": "2026-03-25",
+        "title": "Call ACE Hospital Pateros",
+        "category": "health",
+        "time": null
+      },
+      {
+        "date": "2026-03-26",
+        "title": "Hospital visit -- Med Cert",
+        "category": "health",
+        "time": null
+      },
+      {
+        "date": "2026-03-27",
+        "title": "Withdraw cash, check weather",
+        "category": "finance",
+        "time": null
+      },
+      {
+        "date": "2026-03-28",
+        "title": "Pay parking P3,000",
+        "category": "finance",
+        "time": null
+      },
+      {
+        "date": "2026-03-28",
+        "title": "Depart for Daet 8-9 PM",
+        "category": "travel",
+        "time": "20:00"
+      },
+      {
+        "date": "2026-03-28",
+        "title": "Zach's Elementary Graduation",
+        "category": "family",
+        "time": null
+      },
+      {
+        "date": "2026-04-02",
+        "title": "Return from Daet (latest)",
+        "category": "travel",
+        "time": null
+      },
+      {
+        "date": "2026-04-11",
+        "title": "Iver Sage 1st Birthday -- Jollibee Green Meadows",
+        "category": "family",
+        "time": "16:00"
+      },
+      {
+        "date": "2026-06-06",
+        "title": "Arabelle's Birthday",
+        "category": "family",
+        "time": null
+      },
+      {
+        "date": "2026-06-24",
+        "title": "Baby Jah's Birthday",
+        "category": "family",
+        "time": null
+      },
+      {
+        "date": "2027-01-03",
+        "title": "RA's Birthday",
+        "category": "family",
+        "time": null
+      }
+    ],
+    "trips": [
+      {
+        "name": "Zach's Graduation + Family Visit",
+        "destination": "Daet, Camarines Norte",
+        "dates": "Mar 28 - Apr 2",
+        "route": "SLEX > STAR Tollway > exit Sto. Tomas > Maharlika Highway",
+        "distance_km": 340,
+        "drive_hours": "8-9",
+        "accommodation": "Arabelle's family",
+        "budget": {
+          "tolls": 320,
+          "gas": 2750,
+          "food": 4000,
+          "misc": 1500,
+          "total": 8570
+        },
+        "alerts": [
+          {
+            "type": "danger",
+            "text": "Sta. Elena to Labo curves -- accident-prone, slow down at night"
+          },
+          {
+            "type": "warning",
+            "text": "Eme shortcut -- winding, poorly lit at night"
+          },
+          {
+            "type": "ok",
+            "text": "DPWH clearing obstructions by end of March"
+          },
+          {
+            "type": "money",
+            "text": "Avoid gas in Lopez-Tagkawayan (P3-4/L pricier)"
+          }
+        ],
+        "highlights": [
+          "Bagasbas Beach (surfing P400/hr, shallow for Baby Jah)",
+          "Pineapple Island Resort (pool with slides for Baby Jah)",
+          "Mampurog River (riverside picnic)",
+          "Mercedes Islands (island hopping)"
+        ],
+        "food_spots": [
+          "Hoogpaan Restaurant",
+          "Green Earth Cafe",
+          "Oh Bang Ramen",
+          "Leo's Cuisine (Bagasbas)",
+          "Kusina ni Angel (Bagasbas)"
+        ],
+        "pasalubong": "laing, pinangat, Bicol Express, kinunot, pili nut treats",
+        "status": "upcoming"
+      }
+    ],
+    "vehicle": {
+      "scooter": {
+        "model": "Yamaha Mio Sporty 2013",
+        "last_gas": "2026-03-23",
+        "gas_level": "90%",
+        "usual_cost": 200,
+        "frequency": "weekly",
+        "avg_price": 98.0
+      },
+      "car": {
+        "model": "Toyota Vios 2015",
+        "last_maintenance": "2026-03-23",
+        "notes": "Brake shoes replaced"
+      }
+    },
+    "baby_jah": {
+      "name": "Baby Jah",
+      "feeding": [
+        {
+          "date": "2026-03-23",
+          "time": "08:00",
+          "food": "Lugaw + Egg",
+          "notes": null
+        },
+        {
+          "date": "2026-03-23",
+          "time": "11:00",
+          "food": "Bread",
+          "notes": "While RA ate bangus"
+        },
+        {
+          "date": "2026-03-23",
+          "time": "12:30",
+          "food": "Nilagang Baboy",
+          "notes": "Same time as RA"
+        },
+        {
+          "date": "2026-03-24",
+          "time": "04:00",
+          "food": "Milk",
+          "notes": "From Arabelle"
+        },
+        {
+          "date": "2026-03-24",
+          "time": "06:45",
+          "food": "Lugaw + Egg",
+          "notes": "Morning outing with RA"
+        },
+        {
+          "date": "2026-03-24",
+          "time": "09:20",
+          "food": "Milk",
+          "notes": "Before bed"
+        },
+        {
+          "date": "2026-03-24",
+          "time": "12:00",
+          "food": "Pork steak",
+          "notes": "Lunch with RA"
+        },
+        {
+          "date": "2026-03-24",
+          "time": "16:29",
+          "food": "Fettuccine pasta with chicken",
+          "notes": "Dinner, home-cooked"
+        },
+        {
+          "date": "2026-03-24",
+          "time": "17:35",
+          "food": "Bread",
+          "notes": "Snack (logged by RA)"
+        },
+        {
+          "date": "2026-03-24",
+          "time": "18:41",
+          "food": "Milk",
+          "notes": "Evening milk before bed (logged by Arabelle)"
+        },
+        {
+          "date": "2026-03-25",
+          "time": "06:30",
+          "food": "Lugaw + Egg",
+          "notes": "Morning walk with RA, bought from outside"
+        },
+        {
+          "date": "2026-03-25",
+          "time": "08:00",
+          "food": "Milk (7oz)",
+          "notes": "After walk and poops"
+        },
+        {
+          "date": "2026-03-25",
+          "time": "14:30",
+          "food": "Milk",
+          "notes": "After nap"
+        },
+        {
+          "date": "2026-03-25",
+          "time": "15:30",
+          "food": "Adobo rice",
+          "notes": "With Arabelle"
+        }
+      ],
+      "sleep": [
+        {
+          "date": "2026-03-22",
+          "slept": null,
+          "woke": "02:30",
+          "type": "night",
+          "notes": "Woke up ~2:30 AM"
+        },
+        {
+          "date": "2026-03-23",
+          "slept": "11:40",
+          "woke": null,
+          "type": "nap"
+        },
+        {
+          "date": "2026-03-23",
+          "slept": "18:00",
+          "woke": null,
+          "type": "night",
+          "notes": "Asleep since 6 PM"
+        },
+        {
+          "date": "2026-03-24",
+          "slept": "09:30",
+          "woke": "14:30",
+          "type": "nap",
+          "notes": "Milk + diaper change, ~5 hrs"
+        },
+        {
+          "date": "2026-03-24",
+          "slept": "19:00",
+          "woke": "04:34",
+          "type": "night",
+          "notes": "Bath 6:40 PM, milk 6:41 PM, asleep ~7 PM, woke 4:34 AM (CCTV motion)"
+        },
+        {
+          "date": "2026-03-25",
+          "slept": null,
+          "woke": "13:30",
+          "type": "nap",
+          "notes": "Woke up 1:30 PM, milk at 2:30 PM"
+        }
+      ],
+      "diapers": [
+        {
+          "date": "2026-03-24",
+          "time": "04:00",
+          "type": "wet",
+          "notes": "Milk at 4 AM, diaper change (from Arabelle)"
+        },
+        {
+          "date": "2026-03-24",
+          "time": "06:30",
+          "type": "poop",
+          "notes": "Small round poops, semi-hard. Changed by RA."
+        },
+        {
+          "date": "2026-03-24",
+          "time": "09:20",
+          "type": "wet",
+          "notes": "Diaper change before bed"
+        },
+        {
+          "date": "2026-03-24",
+          "time": "14:36",
+          "type": "wet",
+          "notes": "After nap, changed by RA"
+        },
+        {
+          "date": "2026-03-24",
+          "time": "18:40",
+          "type": "wet",
+          "notes": "Bath time (inferred)"
+        },
+        {
+          "date": "2026-03-25",
+          "time": "06:30",
+          "type": "poop",
+          "notes": "Before morning walk"
+        },
+        {
+          "date": "2026-03-25",
+          "time": "07:30",
+          "type": "poop",
+          "notes": "After walk"
+        },
+        {
+          "date": "2026-03-25",
+          "time": "08:50",
+          "type": "poop",
+          "notes": "Big one -- hard poops followed by softer ones. Had been straining since morning trying to get it out."
+        }
+      ],
+      "milestones": [],
+      "growth": [],
+      "medicine": [],
+      "activities": [
+        {
+          "date": "2026-03-23",
+          "activity": "Morning walk with RA",
+          "time": "08:00"
+        },
+        {
+          "date": "2026-03-23",
+          "activity": "Afternoon walk with Arabelle",
+          "time": "15:00"
+        },
+        {
+          "date": "2026-03-24",
+          "activity": "Morning outing with RA -- bought lugaw",
+          "time": "06:30"
+        },
+        {
+          "date": "2026-03-24",
+          "activity": "Watching Miss Rachel",
+          "time": "07:45"
+        },
+        {
+          "date": "2026-03-24",
+          "activity": "Fed by Arabelle in yellow chair",
+          "time": "16:28"
+        },
+        {
+          "date": "2026-03-24",
+          "activity": "Bath time (logged by Arabelle)",
+          "time": "18:40"
+        }
+      ],
+      "next_checkup": null,
+      "mood_today": "Good mood (2026-03-24 6:30 AM)"
+    },
+    "buki": {
+      "name": "Buki",
+      "fed_today": null,
+      "last_vet": null,
+      "notes": null
+    },
+    "kitchen": {
+      "inventory": [],
+      "meal_plan": [],
+      "grocery_list": []
+    },
+    "patterns": [
+      {
+        "category": "Scooter Gas",
+        "frequency": "~weekly",
+        "amount": 200
+      },
+      {
+        "category": "MagicData Mobile",
+        "frequency": "as needed",
+        "amount": null
+      },
+      {
+        "category": "Monthly Fixed Costs",
+        "frequency": "monthly",
+        "amount": 13300
+      }
+    ]
+  },
+  "ra": {
+    "schedule": {
+      "work_start": "20:00",
+      "work_end": "05:00",
+      "commute_to": "19:45",
+      "sleep": [
+        {
+          "date": "2026-03-23",
+          "slept": "15:00",
+          "woke": "19:00",
+          "notes": "Pre-shift nap"
+        },
+        {
+          "date": "2026-03-24",
+          "slept": "09:30",
+          "woke": null,
+          "notes": "Post-shift sleep with Bujah"
+        },
+        {
+          "date": "2026-03-24",
+          "slept": "10:00",
+          "woke": "14:30",
+          "notes": "Post-shift sleep, ~4.5 hrs"
+        },
+        {
+          "date": "2026-03-24",
+          "slept": "17:30",
+          "woke": "19:15",
+          "notes": "Pre-shift nap, ~1.75 hrs"
+        },
+        {
+          "date": "2026-03-25",
+          "slept": "11:00",
+          "woke": "15:00",
+          "notes": "Post-shift sleep, 4 hrs"
+        }
+      ],
+      "commute_from": "05:00",
+      "work_days": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "workplace": "McKinley Hills, Taguig"
+    },
+    "transactions": [
+      {
+        "date": "2026-03-22",
+        "time": "00:56",
+        "description": "Presto PB Cookies",
+        "amount": null,
+        "category": "food"
+      },
+      {
+        "date": "2026-03-22",
+        "time": "02:40",
+        "description": "Chicken Nuggets + Rice",
+        "amount": null,
+        "category": "food"
+      },
+      {
+        "date": "2026-03-23",
+        "time": "08:00",
+        "description": "Lugaw + Egg (Baby Jah)",
+        "amount": null,
+        "category": "food"
+      },
+      {
+        "date": "2026-03-23",
+        "time": "11:00",
+        "description": "Bangus Silog",
+        "amount": null,
+        "category": "food"
+      },
+      {
+        "date": "2026-03-23",
+        "time": "12:30",
+        "description": "Nilagang Baboy + Rice",
+        "amount": null,
+        "category": "food"
+      },
+      {
+        "date": "2026-03-23",
+        "time": null,
+        "description": "Brake shoes replaced (Vios)",
+        "amount": null,
+        "category": "transport"
+      },
+      {
+        "date": "2026-03-23",
+        "time": null,
+        "description": "duberymnl.com domain (Namecheap)",
+        "amount": null,
+        "category": "shopping"
+      },
+      {
+        "date": "2026-03-23",
+        "time": "23:06",
+        "description": "Spaghetti with hotdog (work)",
+        "amount": null,
+        "category": "food"
+      },
+      {
+        "date": "2026-03-24",
+        "time": "02:08",
+        "description": "Nilagang Baboy + Rice (packed by Arabelle)",
+        "amount": null,
+        "category": "food"
+      },
+      {
+        "date": "2026-03-24",
+        "time": "05:05",
+        "description": "Parking -- McKinley Town Center (9 hrs)",
+        "amount": 85,
+        "category": "transport"
+      },
+      {
+        "date": "2026-03-24",
+        "time": "05:22",
+        "description": "Mobile load to 09278374069 via BPI",
+        "amount": 59,
+        "category": "load"
+      },
+      {
+        "date": "2026-03-24",
+        "time": "05:17",
+        "description": "Cash to Arabelle",
+        "amount": 600,
+        "category": "transfer"
+      },
+      {
+        "date": "2026-03-24",
+        "time": "06:45",
+        "description": "Lugaw + Egg (with Bujah)",
+        "amount": null,
+        "category": "food"
+      },
+      {
+        "date": "2026-03-24",
+        "time": "09:50",
+        "description": "Hotsilog (breakfast)",
+        "amount": null,
+        "category": "food"
+      },
+      {
+        "date": "2026-03-24",
+        "time": "09:50",
+        "description": "Pork steak (for lunch)",
+        "amount": 80,
+        "category": "food"
+      },
+      {
+        "date": "2026-03-24",
+        "time": "23:16",
+        "description": "Globe load (09776852325)",
+        "amount": 50,
+        "category": "bills"
+      },
+      {
+        "date": "2026-03-25",
+        "time": "02:10",
+        "description": "7-Eleven Fried Chicken (McKinley Hill)",
+        "amount": 92,
+        "category": "food"
+      },
+      {
+        "date": "2026-03-25",
+        "time": "06:30",
+        "description": "Lugaw + Egg (with Bujah)",
+        "amount": 30,
+        "category": "food"
+      },
+      {
+        "date": "2026-03-25",
+        "time": "06:30",
+        "description": "Pocket money to Arabelle",
+        "amount": 600,
+        "category": "transfer"
+      },
+      {
+        "date": "2026-03-25",
+        "time": "10:30",
+        "description": "Adobong Manok + Rice x2 (ate 1, saved 1 for later)",
+        "amount": 150,
+        "category": "food"
+      },
+      {
+        "date": "2026-03-25",
+        "time": "15:30",
+        "description": "Rice + Egg (RA)",
+        "amount": null,
+        "category": "food"
+      },
+      {
+        "date": "2026-03-25",
+        "time": "10:26",
+        "description": "InstaPay to Arabelle GoTyme (010397148927)",
+        "amount": 610,
+        "category": "transfer",
+        "notes": "P600 + P10 fee"
+      },
+      {
+        "date": "2026-03-25",
+        "time": "10:28",
+        "description": "InstaPay to Arabelle GoTyme (010397148927)",
+        "amount": 210,
+        "category": "transfer",
+        "notes": "P200 + P10 fee"
+      }
+    ],
+    "todos": [
+      {
+        "text": "File leave at Informdata for Daet trip",
+        "done": false,
+        "due": "2026-03-27"
+      },
+      {
+        "text": "Pay parking P3,000",
+        "done": false,
+        "due": "2026-03-28"
+      },
+      {
+        "text": "Withdraw cash before Daet trip",
+        "done": false,
+        "due": "2026-03-27"
+      },
+      {
+        "text": "Call ACE Hospital Pateros -- confirm PhilCare HMO",
+        "done": true,
+        "due": "2026-03-25",
+        "notes": "Confirmed via PhilDigiMed app -- WITH ACCESS"
+      },
+      {
+        "text": "Empty recycle bin (3.1GB)",
+        "done": false,
+        "due": null
+      },
+      {
+        "text": "Delete Google Photos library (takeout done, 28GB)",
+        "done": false,
+        "due": null
+      }
+    ],
+    "contacts": [
+      {
+        "name": "ACE Hospital Pateros",
+        "purpose": "Confirm PhilCare HMO acceptance",
+        "due": "2026-03-25"
+      },
+      {
+        "name": "Informdata HR",
+        "purpose": "File leave for Mar 28+",
+        "due": "2026-03-27"
+      }
+    ]
+  },
+  "arabelle": {
+    "schedule": {
+      "work_start": "06:00",
+      "work_end": "15:00",
+      "leave_home": "05:30",
+      "work_days_wfh": [
+        1,
+        5
+      ],
+      "work_days_office": [
+        2,
+        3,
+        4
+      ],
+      "rest_days": [
+        0,
+        6
+      ],
+      "commute_method": "mototaxi (default) / car if heavy rain"
+    },
+    "transactions": [],
+    "todos": [],
+    "contacts": []
+  },
+  "logs": [
+    {
+      "date": "2026-03-24",
+      "time": "9:46 AM",
+      "title": "Hotsilog breakfast",
+      "body": "RA eating at his desk -- hotdog, fried egg, sinangag in plastic bag. Puma mousepad and gaming mouse visible. Classic Filipino post-shift comfort food.",
+      "tags": [
+        "food",
+        "home"
+      ]
+    },
+    {
+      "date": "2026-03-24",
+      "time": "4:28 PM",
+      "title": "Arabelle feeding Baby Jah",
+      "body": "Arabelle wiping Baby Jah's hands in yellow feeding chair. Jah in blue patterned shirt, playroom with crib and scattered blocks.\n\nPattern: Jah consistently eats around 4-5 PM after his afternoon nap.",
+      "tags": [
+        "baby_jah",
+        "arabelle"
+      ]
+    },
+    {
+      "date": "2026-03-24",
+      "time": "4:29 PM",
+      "title": "Baby Jah's dinner",
+      "body": "Fettuccine pasta with chicken and cherry tomatoes in a wok. Home-cooked. This is Jah's food -- timestamp is 1 min after the feeding photo at 4:28 PM.\n\nJah is eating solid meals now (pasta, pork steak earlier). Growing up fast.",
+      "action": "Logged to baby_jah.feeding",
+      "tags": [
+        "baby_jah",
+        "food"
+      ]
+    },
+    {
+      "date": "2026-03-24",
+      "time": "5:11 PM",
+      "title": "BPI balance check",
+      "body": "BPI mobile app screenshot. Balance: P5,057.99. Down ~P116 since Meta ads went live on Mar 23 (P200/day budget).\n\nPattern: RA checks BPI regularly when money is going out (ads, bills).",
+      "action": "Updated shared.accounts.payroll balance",
+      "tags": [
+        "money"
+      ]
+    },
+    {
+      "date": "2026-03-24",
+      "time": "5:32 PM",
+      "title": "Doctor contact saved",
+      "body": "Contact card: 'Bella' -- Dr Charmaine Simon, 0928 942 0135, hours 12nn-4pm.\n\nLikely preparing for the ACE Hospital Pateros call scheduled for Mar 25 (PhilCare HMO) and the Mar 26 hospital visit for med cert.",
+      "tags": [
+        "health",
+        "errands"
+      ]
+    },
+    {
+      "date": "2026-03-24",
+      "time": "11:04 PM",
+      "title": "Meralco bill -- P5,503.15",
+      "body": "March billing period (Feb 22 - Mar 22). 381 kWh consumed. Due April 3.\n\nBig jump: +P2,234 from last month's P3,269 (+68%). 381 kWh is high -- summer heat or AC usage increasing. April/May bills will be worse.",
+      "action": "Added to pending bills. Due Apr 3.",
+      "tags": [
+        "money",
+        "home"
+      ]
+    },
+    {
+      "date": "2026-03-24",
+      "time": "11:16 PM",
+      "title": "P50 Globe load from BPI",
+      "body": "RegularLoad P50 to Globe 09776852325 from payroll account (***9713). Payroll balance: P5,007.99.",
+      "action": "Deducted P50 from payroll, logged transaction.",
+      "tags": [
+        "money"
+      ]
+    },
+    {
+      "date": "2026-03-25",
+      "time": "12:06 AM",
+      "title": "Dashboard camera upload test",
+      "body": "Two screenshots of the camera upload error ('Failed to fetch'). RA testing at work. Known CORS issue with Apps Script -- feature removed. Photos taken 4 sec apart (retake).",
+      "tags": [
+        "tech"
+      ]
+    },
+    {
+      "date": "2026-03-25",
+      "time": "12:44 AM",
+      "title": "CCTV -- family sleeping",
+      "body": "Tapo CCTV night vision. Arabelle and Baby Jah sleeping together in the playpen bed. Jah sprawled out, blanket kicked off. Arabelle under blanket on the left.\n\nRA checking on family from work during night shift. Both asleep and safe.\n\nPattern: RA monitors home via Tapo CCTV during night shifts. Jah has been asleep since ~7 PM (6+ hours).",
+      "tags": [
+        "baby_jah",
+        "arabelle",
+        "home"
+      ]
+    },
+    {
+      "date": "2026-03-25",
+      "time": "2:10 AM",
+      "title": "7-Eleven fried chicken receipt",
+      "body": "1pc Fried Chicken P92.00. Store #2110, McKinley Hill, BGC. Cash P1,000, change P908. Staff: Rica Boyco. RA's night shift snack. Quick Log entry at 2:18 AM confirms.",
+      "tags": [
+        "food",
+        "work"
+      ]
+    },
+    {
+      "date": "2026-03-25",
+      "time": "5:06 AM",
+      "title": "Parking receipt",
+      "body": "McKinley Hill parking. P85 total (P50 first bracket + P35 succeeding). In: Mar 24 7:48 PM, Out: Mar 25 5:04 AM. 9 hrs 16 min. Cash P100, change P15.",
+      "tags": [
+        "money",
+        "work"
+      ]
+    },
+    {
+      "date": "2026-03-25",
+      "time": "5:31 AM",
+      "title": "Tunnel check from phone",
+      "body": "RA checking Claude Code conversation via dubery-dev tunnel on Chrome. Reviewing the conversation about missed CCTV files. Working from phone after shift.",
+      "tags": [
+        "tech"
+      ]
+    },
+    {
+      "date": "2026-03-25",
+      "time": "8:24 AM",
+      "title": "PhilCare HMO -- ACE Hospital confirmed",
+      "body": "PhilDigiMed app lookup. ZZ Allied Care Experts (ACE) Medical Center - Pateros. 884 P. Herrera, Pateros. Provider Code 1950. Phone (02) 8706-9398. Access: WITH ACCESS.\n\nPhilCare HMO accepted here. Good to go for Mar 26 hospital visit for med cert.",
+      "tags": [
+        "health",
+        "errands"
+      ]
+    },
+    {
+      "date": "2026-03-25",
+      "time": "10:26 AM",
+      "title": "InstaPay to Arabelle -- P600",
+      "body": "BPI to GoTyme (Arabelle Pabico, 010397148927). P600 + P10 fee = P610. Confirmation #1774405729232.",
+      "action": "Updated payroll balance",
+      "tags": [
+        "money"
+      ]
+    },
+    {
+      "date": "2026-03-25",
+      "time": "10:28 AM",
+      "title": "InstaPay to Arabelle -- P200",
+      "body": "Second transfer same morning. P200 + P10 fee = P210. Total sent today: P800 + P20 fees = P820.",
+      "action": "Payroll now P4,137.99",
+      "tags": [
+        "money"
+      ]
+    },
+    {
+      "date": "2026-03-25",
+      "time": "11:24 AM",
+      "title": "CCTV -- RA and Baby Jah napping",
+      "body": "Tapo CCTV daytime. RA and Baby Jah asleep together in playpen bed. RA in dark shirt, Jah sprawled out. Post-shift sleep.\n\nRA slept 11 AM - 3 PM (4 hrs). Jah woke 1:30 PM.",
+      "tags": [
+        "baby_jah",
+        "home"
+      ]
+    }
+  ],
+  "timeline": [
+    {
+      "date": "2026-03-24",
+      "time": "09:46",
+      "type": "food",
+      "summary": "Hotsilog breakfast at desk -- hotdog, fried egg, sinangag",
+      "tags": [
+        "food",
+        "home"
+      ],
+      "source": "mobile-cam"
+    },
+    {
+      "date": "2026-03-24",
+      "time": "16:28",
+      "type": "photo",
+      "summary": "Arabelle feeding Baby Jah in yellow chair, post-nap",
+      "tags": [
+        "baby_jah",
+        "arabelle",
+        "home"
+      ],
+      "source": "mobile-cam"
+    },
+    {
+      "date": "2026-03-24",
+      "time": "16:29",
+      "type": "food",
+      "summary": "Baby Jah's dinner -- fettuccine pasta with chicken, home-cooked",
+      "tags": [
+        "baby_jah",
+        "food",
+        "home"
+      ],
+      "source": "mobile-cam"
+    },
+    {
+      "date": "2026-03-24",
+      "time": "17:11",
+      "type": "balance",
+      "summary": "BPI balance: P5,057.99 -- down P116 since ads went live",
+      "tags": [
+        "money"
+      ],
+      "source": "mobile-screenshots"
+    },
+    {
+      "date": "2026-03-24",
+      "time": "17:30",
+      "type": "activity",
+      "summary": "RA napped 5:30-7:15 PM -- pre-shift, ~1.75 hrs",
+      "tags": [
+        "health",
+        "home"
+      ],
+      "source": "conversation"
+    },
+    {
+      "date": "2026-03-24",
+      "time": "17:32",
+      "type": "screenshot",
+      "summary": "Saved contact: Dr Charmaine Simon (Bella) -- 0928 942 0135, 12nn-4pm. Prep for hospital visit",
+      "tags": [
+        "health",
+        "errands"
+      ],
+      "source": "mobile-screenshots"
+    },
+    {
+      "date": "2026-03-24",
+      "time": "23:04",
+      "type": "screenshot",
+      "summary": "Meralco bill: 381 kWh, P5,503.15 due Apr 3. Up P2,234 from last month (+68%)",
+      "tags": [
+        "money",
+        "home"
+      ],
+      "source": "mobile-screenshots"
+    },
+    {
+      "date": "2026-03-24",
+      "time": "23:16",
+      "type": "transaction",
+      "summary": "P50 Globe load from BPI payroll. Balance now P5,007.99",
+      "tags": [
+        "money"
+      ],
+      "source": "mobile-screenshots"
+    },
+    {
+      "date": "2026-03-25",
+      "time": "00:06",
+      "type": "screenshot",
+      "summary": "Dashboard camera upload error test -- known CORS issue, feature removed",
+      "tags": [
+        "tech"
+      ],
+      "source": "mobile-screenshots"
+    },
+    {
+      "date": "2026-03-25",
+      "time": "00:44",
+      "type": "photo",
+      "summary": "CCTV check -- Arabelle and Baby Jah sleeping together in playpen bed. Both safe.",
+      "tags": [
+        "baby_jah",
+        "arabelle",
+        "home"
+      ],
+      "source": "mobile-screenshots"
+    },
+    {
+      "date": "2026-03-25",
+      "time": "02:06",
+      "type": "photo",
+      "summary": "CCTV check -- Baby Jah and Arabelle still asleep. Night vision.",
+      "tags": [
+        "baby_jah",
+        "arabelle",
+        "home"
+      ],
+      "source": "mobile-screenshots"
+    },
+    {
+      "date": "2026-03-25",
+      "time": "02:10",
+      "type": "transaction",
+      "summary": "7-Eleven 1pc Fried Chicken P92 (cash). McKinley Hill, BGC. Receipt photo.",
+      "tags": [
+        "food",
+        "work"
+      ],
+      "source": "mobile-cam"
+    },
+    {
+      "date": "2026-03-25",
+      "time": "04:34",
+      "type": "photo",
+      "summary": "CCTV motion detected -- Baby Jah stirring/waking up in playpen bed",
+      "tags": [
+        "baby_jah",
+        "home"
+      ],
+      "source": "mobile-screenshots"
+    },
+    {
+      "date": "2026-03-25",
+      "time": "04:36",
+      "type": "photo",
+      "summary": "CCTV -- Baby Jah sitting up at edge of playpen, awake. Arabelle not visible.",
+      "tags": [
+        "baby_jah",
+        "home"
+      ],
+      "source": "mobile-screenshots"
+    },
+    {
+      "date": "2026-03-25",
+      "time": "05:06",
+      "type": "photo",
+      "summary": "Parking receipt -- McKinley Hill, P85. In 7:48 PM Mar 24, Out 5:04 AM Mar 25, 9h16m",
+      "tags": [
+        "money",
+        "work"
+      ],
+      "source": "mobile-cam"
+    },
+    {
+      "date": "2026-03-25",
+      "time": "05:31",
+      "type": "screenshot",
+      "summary": "RA checking dubery-dev tunnel from phone via vscode.dev Chrome",
+      "tags": [
+        "tech"
+      ],
+      "source": "mobile-screenshots"
+    },
+    {
+      "date": "2026-03-25",
+      "time": "08:24",
+      "type": "screenshot",
+      "summary": "PhilDigiMed: ACE Hospital Pateros confirmed WITH ACCESS for PhilCare HMO. Provider 1950, (02) 8706-9398",
+      "tags": [
+        "health"
+      ],
+      "source": "mobile-screenshots"
+    },
+    {
+      "date": "2026-03-25",
+      "time": "10:26",
+      "type": "transaction",
+      "summary": "InstaPay P600 + P10 fee to Arabelle GoTyme. Payroll balance dropping.",
+      "tags": [
+        "money"
+      ],
+      "source": "mobile-screenshots"
+    },
+    {
+      "date": "2026-03-25",
+      "time": "10:28",
+      "type": "transaction",
+      "summary": "InstaPay P200 + P10 fee to Arabelle GoTyme. Payroll now P4,137.99.",
+      "tags": [
+        "money"
+      ],
+      "source": "mobile-screenshots"
+    },
+    {
+      "date": "2026-03-25",
+      "time": "11:24",
+      "type": "photo",
+      "summary": "CCTV -- RA and Baby Jah napping together in playpen bed. Both asleep.",
+      "tags": [
+        "baby_jah",
+        "home"
+      ],
+      "source": "mobile-screenshots"
+    },
+    {
+      "date": "2026-03-25",
+      "time": "13:30",
+      "type": "activity",
+      "summary": "Baby Jah woke from nap",
+      "tags": [
+        "baby_jah"
+      ],
+      "source": "conversation"
+    },
+    {
+      "date": "2026-03-25",
+      "time": "14:30",
+      "type": "food",
+      "summary": "Baby Jah milk after nap",
+      "tags": [
+        "baby_jah",
+        "food"
+      ],
+      "source": "conversation"
+    },
+    {
+      "date": "2026-03-25",
+      "time": "15:30",
+      "type": "food",
+      "summary": "Baby Jah adobo rice with Arabelle. RA ate rice + egg.",
+      "tags": [
+        "baby_jah",
+        "food",
+        "home"
+      ],
+      "source": "conversation"
+    }
+  ],
+  "briefing": {
+    "updated": "2026-03-25",
+    "career": [
+      {
+        "title": "AI Automation Engineer -- n8n + Claude Code",
+        "pay": "$35-60/hr",
+        "skills": "n8n, Claude API, Claude Code, OpenAI, Google Gemini",
+        "match": "This is literally your stack. n8n workflows + Claude Code + API integrations. Full-time (30+ hrs/week), contract-to-hire. Your DuberyMNL pipeline is the portfolio proof.",
+        "url": "https://www.upwork.com/freelance-jobs/apply/Automation-Engineer-n8n-Claude-Code-API-Integrations_~022034043757444027443/"
+      },
+      {
+        "title": "AI Automation Integrator -- Real Estate Ops",
+        "pay": "$1,200 fixed",
+        "skills": "Claude, Zapier/n8n, CRM, SharePoint, Teams",
+        "match": "Real estate agent-to-coordinator automation. Your TDCX lead qualification + n8n skills fit perfectly. They specifically list Claude and n8n as tools.",
+        "url": "https://www.upwork.com/freelance-jobs/apply/Automation-Integrator-Real-Estate-Operation-Claude-Zapier-N8N-FUB-Skyslope-Sage-M360_~022029980076768635170/"
+      },
+      {
+        "title": "AI Automation Specialist (Claude Code + n8n)",
+        "pay": "Contract-to-hire",
+        "skills": "Claude Code, n8n, workflow design",
+        "match": "Starts with paid consultation, then ongoing build. Low risk entry. Your skill set matches exactly -- this is what you do every session.",
+        "url": "https://www.upwork.com/freelance-jobs/apply/Automation-Specialist-Claude-Code-n8n-Workflows_~022026725889600892349/"
+      },
+      {
+        "title": "Claude Bot Setup and Training",
+        "pay": "$2,500 fixed",
+        "skills": "Claude API, bot configuration, training docs",
+        "match": "Set up a Claude bot and train the client. You could do this in a weekend based on your Claude Code expertise.",
+        "url": "https://www.upwork.com/freelance-jobs/apply/Claude-Bot-Setup-and-Training_~022028980117954349314/"
+      }
+    ],
+    "ai_news": [
+      {
+        "title": "Claude Computer Use + Dispatch shipped",
+        "summary": "Anthropic's biggest week: Claude can now control your Mac -- open apps, browse the web, fill spreadsheets. Dispatch lets you assign tasks from your phone and Claude runs them on your desktop while you're away. macOS only, Pro/Max subscribers.",
+        "insight": "You already run Claude Code via VSCode tunnel. Dispatch could complement that -- assign tasks from phone during commute, come back to finished work. Computer Use is macOS only for now but shows where agentic is heading.",
+        "article": "articles/claude-dispatch.html"
+      },
+      {
+        "title": "Claude Code Worktrees: ship 3 features at once",
+        "summary": "New worktree feature lets you run multiple Claude Code agents on separate git branches simultaneously. Each works in isolation, no merge conflicts until you're ready.",
+        "insight": "You're already using parallel agents for DuberyMNL (prompt writing, image gen). Worktrees would let you run dashboard + DuberyMNL + portfolio agents all at once without stepping on each other."
+      },
+      {
+        "title": "MAI-Image-2: Microsoft's #3 AI image gen",
+        "summary": "Microsoft released MAI-Image-2, now ranked #3 on Arena leaderboard. Key wins: accurate text in images (no more gibberish), enhanced photorealism, detail density. Available in MAI Playground, rolling out to Copilot + Bing.",
+        "insight": "Text-in-image is the holy grail for your ad pipeline. If MAI-Image-2 handles headline text better than NB2/kie.ai, it could solve the branding consistency issue. Worth testing for DuberyMNL creatives."
+      },
+      {
+        "title": "OpenAI offering 17.5% guaranteed return to investors",
+        "summary": "OpenAI is offering investors guaranteed 17.5% returns to raise capital for enterprise AI scaling. Aggressive move to lock in funding and partners.",
+        "insight": "Shows how much money is flowing into AI infrastructure. The companies building on top of these models (like you) are the ones who benefit from the spending war."
+      }
+    ],
+    "local_news": [
+      {
+        "title": "Water interruptions in Pasig and Taguig",
+        "summary": "Taguig (Bagumbayan) had water cuts March 24-25, 10pm-4am. Pasig (Bagong Ilog) scheduled March 26-27, 10pm-4am. Pinagbuhatan also affected March 26-27.",
+        "action": "Stock up water before your shift tonight in case Pasig gets hit. Check Maynilad advisories."
+      },
+      {
+        "title": "Summer officially started March 23",
+        "summary": "PAGASA declared the warm/dry season. Expect fair weather with isolated thunderstorms. Temperatures will gradually increase through April.",
+        "action": "Good news for the Daet trip (Mar 28 - Apr 2). Pack sunscreen and hydration for Baby Jah. Afternoons will be hot."
+      },
+      {
+        "title": "Fuel/commodity trucks exempt from number coding",
+        "summary": "MMC exempted fuel delivery trucks and basic commodity transport from truck ban and number coding. Aimed at stabilizing supply during fuel crisis.",
+        "action": "Should help prevent fuel station shortages. Fill up early in the week anyway -- Tuesday is hike day."
+      },
+      {
+        "title": "Ride-hailing drivers 2-day strike",
+        "summary": "Thousands of Grab/InDrive drivers pledged a 2-day booking boycott starting March 23 over fare cuts and fuel costs.",
+        "action": "If Arabelle uses Grab, expect longer wait times and surge pricing this week. Mototaxi or own vehicle is safer bet."
+      }
+    ],
+    "youtube_highlights": [
+      {
+        "title": "Claude Code MASSIVE Update! OS, Computer Use, /Schedule & More",
+        "channel": "WorldofAI",
+        "url": "https://youtube.com/watch?v=hWDXS35B15A",
+        "summary": "Full walkthrough of all new Claude Code features: Computer Use, Dispatch, Cowork, /schedule command. Best overview of the week's updates."
+      },
+      {
+        "title": "Top 5 AI News March 24th",
+        "channel": "Satya's Neural Lab",
+        "url": "https://youtube.com/watch?v=dusjmkc0Kp0",
+        "summary": "Quick 2-min roundup: OpenAI investor deals, Claude Computer Use, ChatGPT library feature, AI math breakthroughs, AI-assisted physics papers."
+      },
+      {
+        "title": "Microsoft's MAI-Image-2: #3 AI Image Generator",
+        "channel": "Abhay Salagrama",
+        "url": "https://youtube.com/watch?v=u_E9he2QP0s",
+        "summary": "Deep dive on MAI-Image-2 capabilities: photorealism, text rendering, detail density. Comparison with top models. Free in MAI Playground."
+      }
+    ],
+    "hardware": [
+      {
+        "title": "Raspberry Pi AI HAT+ 2 (Hailo-10H)",
+        "summary": "Released Jan 2026. 40 TOPS inference (INT4), 8GB dedicated LPDDR4X memory. Pairs with Pi 5 for serious edge AI -- generative tasks + vision + sensor input without cloud dependency.",
+        "insight": "At ~P5,000-7,000 for the full setup (Pi 5 + HAT+ 2), this is your entry point to local inference. Could run a baby monitor AI or local smart home agent.",
+        "source": "https://www.raspberrypi.com/news/when-and-why-you-might-need-the-raspberry-pi-ai-hat-plus-2/"
+      },
+      {
+        "title": "7 tiny AI models that run on Pi",
+        "summary": "Meta Llama 3.1 8B, Qwen3-8B, GLM-4-9B can run on Pi 5 at 15+ tokens/sec with quantization. No GPU needed. Practical for on-device chatbots, document processing, home automation.",
+        "insight": "Local LLM on a Pi means privacy-first AI for your family dashboard -- Baby Jah monitoring, receipt scanning, voice commands. All offline, no API costs.",
+        "source": "https://dextralabs.com/blog/tiny-ai-models-for-raspberry-pi-edge-ai/"
+      },
+      {
+        "title": "Edge AI in 2026: bigger than you think",
+        "summary": "On-device intelligence is growing fast across IoT, sensors, and personal devices. Companies shifting from cloud-first to edge-first for latency, privacy, and cost.",
+        "insight": "Edge AI knowledge adds another dimension to your portfolio. 'I build cloud agents AND edge deployments' is a rare combo on Upwork.",
+        "source": "https://www.codercops.com/blog/edge-ai-on-device-intelligence-iot-sensors-2026"
+      }
+    ],
+    "life_hacks": [
+      {
+        "title": "Fuel crisis: fill up before Tuesday",
+        "body": "Another P6.47/L gas hike and P11.88/L diesel hike expected this week. Premium gas already hit P100/L mid-March. Fill your scooter and the Vios before Tuesday when hikes take effect. For the Daet trip, budget P4,000-5,000 for fuel (round trip ~680km)."
+      },
+      {
+        "title": "Toddler meal variety for Jah (21 months)",
+        "body": "At 21 months, Jah can eat most family food cut into small pieces. Mix veggies into rice or pasta he already likes. Try kalabasa, carrots, broccoli. Tofu and eggs are cheap protein. 3 meals + 2 snacks per day. Don't replace meals with milk -- food first."
+      },
+      {
+        "title": "Chicken week: 40% cheaper than pork",
+        "body": "Chicken at P180-220/kg vs pork liempo at P310-370/kg. Adobo, tinola, fried chicken all stretch the budget. DA is also eyeing P50/kg cap on imported rice -- watch for that."
+      },
+      {
+        "title": "Water interruption prep",
+        "body": "Pasig water cuts scheduled Mar 26-27 (10pm-4am). Fill containers before your shift. If you're in Bagong Ilog or Pinagbuhatan area, stock extra for Baby Jah's bath and formula."
+      }
+    ],
+    "parenting": [
+      {
+        "title": "21-month milestones: independence phase",
+        "summary": "At 21 months, Jah is walking confidently, possibly running. He should be using a spoon on his own, saying 10-50 words, and starting to assert independence (saying 'no', tantrums). This is all normal development.",
+        "tip": "Let Jah do things himself even if it's messy -- eating with a spoon, picking clothes, helping with small tasks. It builds confidence and motor skills."
+      },
+      {
+        "title": "Toddler meals: 3 meals + 2 snacks",
+        "summary": "At 21 months, Jah should eat what the family eats (cut smaller). 3 meals + 2 snacks daily. Focus on calcium (milk, cheese), iron (meat, leafy greens), and fiber (fruits, veggies). 1 cup veggies, 1 cup fruit, 3 servings of rice/bread per day.",
+        "tip": "Jah already eats lugaw, pasta, pork, bread. Try adding more veggies -- steamed kalabasa, carrots, broccoli mixed into his rice. Tofu and eggs are cheap protein wins."
+      },
+      {
+        "title": "Picky eating is normal at this age",
+        "summary": "Toddlers at 21 months often refuse foods they used to love. It's a phase -- they're testing boundaries. Offer variety, don't force. It can take 10-15 exposures before a toddler accepts a new food.",
+        "tip": "If Jah rejects something, try again in a few days prepared differently. Don't replace meals with milk -- offer food first, milk after. Keep portions small so it's not overwhelming."
+      }
+    ],
+    "fuel": {
+      "prices": [
+        {
+          "type": "Gasoline RON 91",
+          "price": "~P78-85/L"
+        },
+        {
+          "type": "Gasoline RON 95",
+          "price": "~P85-95/L"
+        },
+        {
+          "type": "Diesel",
+          "price": "~P90-100/L"
+        }
+      ],
+      "trend": "Massive escalation in March. Diesel up P24/L in one week (Mar 10), another P12/L hike announced Mar 23. Premium gas hit P100/L mid-March. Caused by Middle East conflict disrupting Strait of Hormuz oil supply.",
+      "tip": "Fill up Monday before Tuesday hikes. For the Daet trip (Mar 28), fill the Vios tank completely before leaving Manila. Budget P4,000-5,000 for fuel round trip."
+    },
+    "food": {
+      "items": [
+        {
+          "item": "Rice (well-milled)",
+          "price": "P50-63/kg"
+        },
+        {
+          "item": "Eggs",
+          "price": "P6-8.50/pc"
+        },
+        {
+          "item": "Chicken (dressed)",
+          "price": "P180-220/kg"
+        },
+        {
+          "item": "Pork liempo",
+          "price": "P310-370/kg"
+        },
+        {
+          "item": "Pork kasim",
+          "price": "P270-330/kg"
+        },
+        {
+          "item": "Pandesal",
+          "price": "P5.80-7.50/pc"
+        }
+      ],
+      "tip": "DA eyeing P50/kg cap on imported rice. Chicken remains the budget protein winner at 40% less than pork. Inflation at 2.4% in February, driven by food prices. Stock up on rice and eggs before the Daet trip."
+    },
+    "electricity": {
+      "rate": "P13.82/kWh",
+      "trend": "Up P0.64/kWh from February. 200 kWh household pays ~P129 more. Your April bill (P5,503.15) is already pending. Summer demand will push rates higher in April-May.",
+      "tip": "April Meralco bill is due Apr 3 -- P5,503.15 pending. Unplug idle chargers, minimize AC. Summer peak is coming. Fan + open windows at night saves P500-800/month vs AC."
+    }
+  }
+}
