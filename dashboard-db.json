@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-03-26T01:51:08+08:00",
+  "last_updated": "2026-03-26T02:41:33+08:00",
   "location": {
     "name": "San Joaquin, Pasig",
     "lat": 14.5764,
@@ -698,6 +698,13 @@
         "amount": 210,
         "category": "transfer",
         "notes": "P200 + P10 fee"
+      },
+      {
+        "date": "2026-03-26",
+        "time": "02:00",
+        "description": "7-Eleven Fried Chicken + Rice",
+        "amount": 92,
+        "category": "food"
       }
     ],
     "todos": [
@@ -1229,6 +1236,18 @@
       "tags": [
         "vehicle",
         "errands"
+      ],
+      "source": "opus_processed"
+    },
+    {
+      "date": "2026-03-26",
+      "time": "02:00",
+      "type": "food",
+      "summary": "RA lunch: 7-Eleven fried chicken + rice, P92 cash",
+      "tags": [
+        "ra",
+        "food",
+        "work"
       ],
       "source": "opus_processed"
     }
