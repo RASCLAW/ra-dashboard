@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-03-26T00:49:20+08:00",
+  "last_updated": "2026-03-26T01:03:39+08:00",
   "location": {
     "name": "San Joaquin, Pasig",
     "lat": 14.5764,
@@ -1221,6 +1221,39 @@
       "summary": "Tapo camera screenshot",
       "tags": [
         "tapo_camera"
+      ],
+      "source": "auto_sync"
+    },
+    {
+      "date": "2026-03-25",
+      "time": "23:16",
+      "type": "cctv",
+      "summary": "CCTV playback from Tapo camera showing a baby in a crib/playpen with a woman in an orange top (likely Arabelle) tending to the baby. Timestamp on footage: 2026-03-25 18:23:27.",
+      "tags": [
+        "cctv",
+        "baby_jah"
+      ],
+      "source": "auto_sync"
+    },
+    {
+      "date": "2026-03-25",
+      "time": "23:15",
+      "type": "cctv",
+      "summary": "Tapo CCTV playback showing overhead view of baby and adult sleeping together in a playpen/crib at 19:51:56 on 2026-03-25",
+      "tags": [
+        "cctv",
+        "baby_jah"
+      ],
+      "source": "auto_sync"
+    },
+    {
+      "date": "2026-03-25",
+      "time": "23:15",
+      "type": "cctv",
+      "summary": "Tapo CCTV playback showing overhead view of a playpen. Baby Jah is lying on the right side. An adult (likely Arabelle) is sitting/leaning over on the left side. Timestamp on footage: 2026-03-25 19:11:31.",
+      "tags": [
+        "cctv",
+        "baby_jah"
       ],
       "source": "auto_sync"
     }

@@ -76,3 +76,6 @@ Append-only. Never prune.
 - **23:16** [SCREENSHOT] Tapo camera screenshot
 - **23:15** [SCREENSHOT] Tapo camera screenshot
 - **23:15** [SCREENSHOT] Tapo camera screenshot
+- **23:16** [CCTV] CCTV playback from Tapo camera showing a baby in a crib/playpen with a woman in an orange top (likely Arabelle) tending to the baby. Timestamp on footage: 2026-03-25 18:23:27.
+- **23:15** [CCTV] Tapo CCTV playback showing overhead view of baby and adult sleeping together in a playpen/crib at 19:51:56 on 2026-03-25
+- **23:15** [CCTV] Tapo CCTV playback showing overhead view of a playpen. Baby Jah is lying on the right side. An adult (likely Arabelle) is sitting/leaning over on the left side. Timestamp on footage: 2026-03-25 19:11:31.
