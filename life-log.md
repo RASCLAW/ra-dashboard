@@ -68,3 +68,8 @@ Append-only. Never prune.
 ### 4:34 AM
 - **Screenshot:** Tapo CCTV x2 -- Motion detected. Baby Jah stirring/woke up in playpen.
 - **Context:** Jah woke early (~4:34 AM). RA caught it on CCTV from work. Third CCTV check of the shift.
+
+## 2026-03-26
+- **23:16** [SCREENSHOT] Tapo camera screenshot
+- **23:15** [SCREENSHOT] Tapo camera screenshot
+- **23:15** [SCREENSHOT] Tapo camera screenshot

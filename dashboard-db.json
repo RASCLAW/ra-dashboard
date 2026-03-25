@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-03-26T00:26:20+08:00",
+  "last_updated": "2026-03-26T00:38:56+08:00",
   "location": {
     "name": "San Joaquin, Pasig",
     "lat": 14.5764,
@@ -1163,6 +1163,36 @@
         "home"
       ],
       "source": "conversation"
+    },
+    {
+      "date": "2026-03-25",
+      "time": "23:16",
+      "type": "screenshot",
+      "summary": "Tapo camera screenshot",
+      "tags": [
+        "tapo_camera"
+      ],
+      "source": "auto_sync"
+    },
+    {
+      "date": "2026-03-25",
+      "time": "23:15",
+      "type": "screenshot",
+      "summary": "Tapo camera screenshot",
+      "tags": [
+        "tapo_camera"
+      ],
+      "source": "auto_sync"
+    },
+    {
+      "date": "2026-03-25",
+      "time": "23:15",
+      "type": "screenshot",
+      "summary": "Tapo camera screenshot",
+      "tags": [
+        "tapo_camera"
+      ],
+      "source": "auto_sync"
     }
   ],
   "briefing": {
