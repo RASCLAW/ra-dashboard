@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-03-26T01:35:00+08:00",
+  "last_updated": "2026-03-26T01:51:08+08:00",
   "location": {
     "name": "San Joaquin, Pasig",
     "lat": 14.5764,
@@ -209,7 +209,7 @@
       "scooter": {
         "model": "Yamaha Mio Sporty 2013",
         "last_gas": "2026-03-23",
-        "gas_level": "90%",
+        "gas_level": "40%",
         "usual_cost": 200,
         "frequency": "weekly",
         "avg_price": 98.0
@@ -1218,6 +1218,17 @@
         "baby_jah",
         "arabelle",
         "home"
+      ],
+      "source": "opus_processed"
+    },
+    {
+      "date": "2026-03-26",
+      "time": "01:50",
+      "type": "vehicle",
+      "summary": "Scooter gas below half (~40%). Gas up before Daet trip.",
+      "tags": [
+        "vehicle",
+        "errands"
       ],
       "source": "opus_processed"
     }
