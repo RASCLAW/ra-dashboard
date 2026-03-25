@@ -9,7 +9,7 @@
     "accounts": {
       "payroll": { "balance": 4137.99, "account_masked": "***9713", "updated": "2026-03-25" },
       "savings": { "balance": 10222, "account_masked": "***7397", "updated": "2026-03-23" },
-      "pocket_cash": { "balance": 2023, "updated": "2026-03-25" }
+      "pocket_cash": { "balance": 1023, "updated": "2026-03-25" }
     },
     "bills": {
       "month": "2026-03",
