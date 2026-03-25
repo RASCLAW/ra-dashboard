@@ -352,8 +352,9 @@
         },
         {
           "date": "2026-03-25",
-          "time": "19:52",
-          "state": "asleep"
+          "slept": "19:52",
+          "woke": null,
+          "type": "night"
         }
       ],
       "diapers": [
@@ -521,8 +522,9 @@
         },
         {
           "date": "2026-03-25",
-          "time": "19:11",
-          "state": "woke"
+          "slept": null,
+          "woke": "19:11",
+          "notes": "Pre-shift wake"
         }
       ],
       "commute_from": "05:00",
