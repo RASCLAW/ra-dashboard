@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0f0f14">
+<title>RA Life OS</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0f0f14;
+  --surface: #1a1a22;
+  --card: #22222e;
+  --card-hover: #2a2a38;
+  --border: #2e2e3a;
+  --text: #eae8e4;
+  --muted: #7a7880;
+  --accent: #6bc9a0;
+  --accent-dim: rgba(107,201,160,0.12);
+  --blue: #5b9bd5;
+  --blue-dim: rgba(91,155,213,0.12);
+  --pink: #e07ea8;
+  --pink-dim: rgba(224,126,168,0.12);
+  --orange: #e0a050;
+  --orange-dim: rgba(224,160,80,0.12);
+  --red: #e06060;
+  --red-dim: rgba(224,96,96,0.12);
+  --radius: 20px;
+  --radius-sm: 14px;
+}
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+body { background:var(--bg); color:var(--text); font-family:'Inter',sans-serif; min-height:100vh; overflow-x:hidden; }
+.container { max-width:480px; margin:0 auto; padding:0 16px 80px; }
+
+/* Hero */
+.hero { padding:48px 16px 24px; text-align:center; position:relative; }
+.hero-time { font-size:48px; font-weight:800; letter-spacing:-2px; line-height:1; }
+.hero-date { font-size:13px; color:var(--muted); margin-top:6px; font-weight:500; }
+.hero-greeting { font-size:14px; color:var(--accent); margin-top:12px; font-weight:600; }
+
+/* Stale */
+.stale { background:var(--red-dim); border:1px solid rgba(224,96,96,0.2); border-radius:var(--radius-sm); padding:10px 16px; margin:0 16px 16px; font-size:12px; color:var(--red); display:none; text-align:center; }
+
+/* Status Pills */
+.pills { display:flex; gap:8px; padding:0 16px 20px; overflow-x:auto; }
+.pills::-webkit-scrollbar { display:none; }
+.pill { display:flex; align-items:center; gap:7px; padding:10px 16px; border-radius:24px; font-size:12px; font-weight:600; white-space:nowrap; backdrop-filter:blur(10px); }
+.pill .dot { width:8px; height:8px; border-radius:50%; }
+.pill-accent { background:var(--accent-dim); color:var(--accent); }
+.pill-accent .dot { background:var(--accent); }
+.pill-blue { background:var(--blue-dim); color:var(--blue); }
+.pill-blue .dot { background:var(--blue); }
+.pill-pink { background:var(--pink-dim); color:var(--pink); }
+.pill-pink .dot { background:var(--pink); }
+.pill-orange { background:var(--orange-dim); color:var(--orange); }
+.pill-orange .dot { background:var(--orange); }
+
+/* Tabs */
+.tabs { display:flex; gap:4px; padding:0 16px 20px; }
+.tab { flex:1; padding:11px 0; border:none; border-radius:14px; cursor:pointer; font-size:12px; font-weight:600; font-family:inherit; background:var(--surface); color:var(--muted); transition:all 0.2s; text-align:center; }
+.tab.active { background:var(--accent); color:#0f0f14; }
+
+/* Sections */
+.section { display:none; }
+.section.active { display:block; }
+
+/* Card */
+.card { background:var(--card); border-radius:var(--radius); padding:18px; margin-bottom:14px; }
+.card-label { font-size:10px; text-transform:uppercase; letter-spacing:1.5px; color:var(--muted); font-weight:600; margin-bottom:14px; }
+
+/* 2-col grid */
+.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:14px; }
+.grid-card { background:var(--card); border-radius:var(--radius); padding:16px; }
+.grid-icon { width:40px; height:40px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:20px; margin-bottom:10px; }
+.grid-title { font-size:14px; font-weight:700; }
+.grid-sub { font-size:11px; color:var(--muted); margin-top:3px; }
+.grid-value { font-size:18px; font-weight:800; margin-top:8px; }
+
+/* Baby Jah featured */
+.jah-card { background:linear-gradient(135deg, #2a1f35 0%, #1e2838 100%); border-radius:var(--radius); padding:20px; margin-bottom:14px; }
+.jah-header { display:flex; align-items:center; gap:14px; margin-bottom:16px; }
+.jah-avatar { width:52px; height:52px; border-radius:50%; background:var(--pink-dim); display:flex; align-items:center; justify-content:center; font-size:26px; }
+.jah-name { font-size:18px; font-weight:800; }
+.jah-state { font-size:12px; color:var(--pink); font-weight:500; margin-top:2px; }
+.jah-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; }
+.jah-stat { text-align:center; }
+.jah-stat-label { font-size:9px; text-transform:uppercase; letter-spacing:1px; color:var(--muted); }
+.jah-stat-value { font-size:13px; font-weight:700; margin-top:4px; }
+
+/* Finance rows */
+.fin-row { display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px solid var(--border); }
+.fin-row:last-child { border-bottom:none; }
+.fin-left { display:flex; align-items:center; gap:12px; }
+.fin-icon { width:36px; height:36px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:16px; }
+.fin-name { font-size:13px; font-weight:600; }
+.fin-sub { font-size:10px; color:var(--muted); }
+.fin-amount { font-size:15px; font-weight:700; }
+.fin-total { display:flex; justify-content:space-between; padding:14px 0 4px; border-top:2px solid var(--accent); margin-top:8px; }
+.fin-total span { font-size:16px; font-weight:800; }
+
+/* Spending */
+.spend-row { display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--border); }
+.spend-row:last-child { border-bottom:none; }
+.spend-desc { font-size:13px; }
+.spend-time { font-size:10px; color:var(--muted); }
+.spend-amt { font-size:13px; font-weight:700; color:var(--red); }
+
+/* Timeline */
+.tl-group-label { font-size:10px; text-transform:uppercase; letter-spacing:1.5px; color:var(--muted); font-weight:600; padding:14px 0 6px; }
+.tl-item { display:flex; gap:12px; padding:10px 0; }
+.tl-time { font-size:11px; color:var(--muted); width:44px; flex-shrink:0; padding-top:1px; }
+.tl-bar { display:flex; flex-direction:column; align-items:center; width:16px; flex-shrink:0; }
+.tl-dot { width:10px; height:10px; border-radius:50%; }
+.tl-line { width:2px; flex:1; background:var(--border); margin-top:4px; }
+.tl-text { font-size:13px; line-height:1.4; padding-bottom:4px; }
+.dot-food { background:var(--orange); }
+.dot-cctv { background:var(--blue); }
+.dot-money { background:var(--red); }
+.dot-baby { background:var(--pink); }
+.dot-default { background:var(--accent); }
+.dot-vehicle { background:var(--orange); }
+
+/* Bills */
+.bill-item { display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid var(--border); }
+.bill-item:last-child { border-bottom:none; }
+.bill-badge { font-size:10px; font-weight:700; padding:4px 10px; border-radius:10px; }
+.badge-paid { background:var(--accent-dim); color:var(--accent); }
+.badge-pending { background:var(--orange-dim); color:var(--orange); }
+
+/* Gas */
+.gas-wrap { display:flex; align-items:center; gap:16px; }
+.gas-info { flex:1; }
+.gas-model { font-size:14px; font-weight:700; }
+.gas-sub { font-size:11px; color:var(--muted); margin-top:2px; }
+.gas-level { font-size:28px; font-weight:800; }
+.gas-bar { height:6px; background:var(--surface); border-radius:3px; margin-top:12px; overflow:hidden; }
+.gas-fill { height:100%; border-radius:3px; }
+
+/* Footer */
+.footer { text-align:center; padding:24px 0; font-size:10px; color:var(--muted); }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-time" id="clock"></div>
+  <div class="hero-date" id="dateStr"></div>
+  <div class="hero-greeting" id="greeting"></div>
+</div>
+
+<div class="stale" id="staleBanner">Data may be stale -- last sync: <span id="staleTime"></span></div>
+
+<div class="pills" id="statusBar"></div>
+
+<div class="tabs">
+  <button class="tab active" onclick="switchTab('home')">Home</button>
+  <button class="tab" onclick="switchTab('finance')">Finance</button>
+  <button class="tab" onclick="switchTab('timeline')">Timeline</button>
+</div>
+
+<div class="container">
+
+<!-- HOME TAB -->
+<div class="section active" id="tab-home">
+
+  <!-- Baby Jah -->
+  <div class="jah-card">
+    <div class="jah-header">
+      <div class="jah-avatar">👶</div>
+      <div>
+        <div class="jah-name">Baby Jah</div>
+        <div class="jah-state" id="jahState">Loading...</div>
+      </div>
+    </div>
+    <div class="jah-grid" id="jahStats"></div>
+  </div>
+
+  <!-- RA + Arabelle -->
+  <div class="grid-2">
+    <div class="grid-card">
+      <div class="grid-icon" style="background:var(--blue-dim)">👨</div>
+      <div class="grid-title">RA</div>
+      <div class="grid-sub" id="raStatus">...</div>
+      <div class="grid-sub" id="raDetail" style="margin-top:2px"></div>
+    </div>
+    <div class="grid-card">
+      <div class="grid-icon" style="background:var(--pink-dim)">👩</div>
+      <div class="grid-title">Arabelle</div>
+      <div class="grid-sub" id="araStatus">...</div>
+      <div class="grid-sub" id="araDetail" style="margin-top:2px"></div>
+    </div>
+  </div>
+
+  <!-- Vehicle -->
+  <div class="card">
+    <div class="card-label">Vehicle</div>
+    <div id="vehicle"></div>
+  </div>
+
+  <!-- Quick glance: recent timeline -->
+  <div class="card">
+    <div class="card-label">Recent</div>
+    <div id="recentTimeline"></div>
+  </div>
+
+</div>
+
+<!-- FINANCE TAB -->
+<div class="section" id="tab-finance">
+
+  <div class="card">
+    <div class="card-label">Accounts</div>
+    <div id="finAccounts"></div>
+    <div id="finTotal"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-label">Today's Spending</div>
+    <div id="todaySpend"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-label">Bills</div>
+    <div id="bills"></div>
+  </div>
+
+</div>
+
+<!-- TIMELINE TAB -->
+<div class="section" id="tab-timeline">
+  <div class="card">
+    <div class="card-label">Activity Feed</div>
+    <div id="fullTimeline"></div>
+  </div>
+</div>
+
+</div>
+
+<div class="footer">
+  Last synced: <span id="lastUpdated">--</span><br>
+  RA Life OS v2.1
+</div>
+
+<script>
+const DATA_URL = 'dashboard-data.json';
+let D = null;
+
+// Tabs
+function switchTab(name) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// Clock
+function tick() {
+  const now = new Date();
+  document.getElementById('clock').textContent = now.toLocaleTimeString('en-PH', { hour:'2-digit', minute:'2-digit', hour12:true }).replace(' ', '');
+  document.getElementById('dateStr').textContent = now.toLocaleDateString('en-PH', { weekday:'long', month:'long', day:'numeric', year:'numeric' });
+  const h = now.getHours();
+  let g = 'Good evening, RA';
+  if (h >= 5 && h < 12) g = 'Good morning, RA';
+  else if (h >= 12 && h < 17) g = 'Good afternoon, RA';
+  document.getElementById('greeting').textContent = g;
+}
+setInterval(tick, 1000); tick();
+
+// RA Status
+function raStatus() {
+  const h = new Date().getHours();
+  const day = new Date().getDay();
+  if (day === 0 || day === 6) return { s:'Rest day', d:'Home with family' };
+  if (h >= 20 || h < 5) return { s:'At work', d:'McKinley Hills' };
+  if (h >= 5 && h < 8) return { s:'Post-shift', d:'Heading home' };
+  if (h >= 8 && h < 15) return { s:'Sleeping', d:'Do not disturb' };
+  return { s:'Awake', d:'Home, pre-shift' };
+}
+
+// Arabelle Status
+function araStatus() {
+  const h = new Date().getHours();
+  const day = new Date().getDay();
+  if (day === 0 || day === 6) return { s:'Rest day', d:'Home' };
+  const wfh = (day === 1 || day === 5);
+  if (h >= 6 && h < 15) return wfh ? { s:'WFH', d:'Working' } : { s:'Office', d:'Working' };
+  return { s:'Home', d:'With Baby Jah' };
+}
+
+// Baby Jah
+function renderJah() {
+  const bj = D.shared?.baby_jah || {};
+  const sleep = bj.sleep || [];
+  const feed = bj.feeding || [];
+  const diaper = bj.diapers || [];
+
+  const ls = sleep.length ? sleep[sleep.length-1] : null;
+  const lf = feed.length ? feed[feed.length-1] : null;
+  const ld = diaper.length ? diaper[diaper.length-1] : null;
+
+  const state = ls ? (ls.state === 'asleep' ? 'Asleep since ' + ls.time : 'Awake since ' + ls.time) : '...';
+  document.getElementById('jahState').textContent = state;
+
+  document.getElementById('jahStats').innerHTML = `
+    <div class="jah-stat"><div class="jah-stat-label">Last Meal</div><div class="jah-stat-value">${lf ? lf.food : '--'}</div><div class="jah-stat-label" style="margin-top:2px">${lf ? lf.time : ''}</div></div>
+    <div class="jah-stat"><div class="jah-stat-label">Diaper</div><div class="jah-stat-value">${ld ? ld.type : '--'}</div><div class="jah-stat-label" style="margin-top:2px">${ld ? ld.time : ''}</div></div>
+    <div class="jah-stat"><div class="jah-stat-label">Sleep</div><div class="jah-stat-value">${ls ? ls.state : '--'}</div><div class="jah-stat-label" style="margin-top:2px">${ls ? ls.time : ''}</div></div>
+  `;
+}
+
+// People
+function renderPeople() {
+  const ra = raStatus();
+  const ara = araStatus();
+  document.getElementById('raStatus').textContent = ra.s;
+  document.getElementById('raDetail').textContent = ra.d;
+  document.getElementById('araStatus').textContent = ara.s;
+  document.getElementById('araDetail').textContent = ara.d;
+}
+
+// Status pills
+function renderPills() {
+  const ra = raStatus();
+  const ara = araStatus();
+  const bj = D.shared?.baby_jah?.sleep || [];
+  const ls = bj.length ? bj[bj.length-1] : null;
+  const jahLabel = ls ? (ls.state === 'asleep' ? 'Sleeping' : 'Awake') : '...';
+  const jahPill = ls && ls.state === 'asleep' ? 'pill-pink' : 'pill-accent';
+
+  document.getElementById('statusBar').innerHTML = `
+    <div class="pill pill-blue"><span class="dot"></span>${ra.s}</div>
+    <div class="pill pill-pink"><span class="dot"></span>${ara.s}</div>
+    <div class="pill ${jahPill}"><span class="dot"></span>Jah: ${jahLabel}</div>
+  `;
+}
+
+// Vehicle
+function renderVehicle() {
+  const sc = D.shared?.vehicle?.scooter || {};
+  const lvl = parseInt(sc.gas_level) || 0;
+  const color = lvl > 60 ? 'var(--accent)' : lvl > 30 ? 'var(--orange)' : 'var(--red)';
+  document.getElementById('vehicle').innerHTML = `
+    <div class="gas-wrap">
+      <div class="gas-info">
+        <div class="gas-model">${sc.model || 'Scooter'}</div>
+        <div class="gas-sub">Last gas: ${sc.last_gas || '--'}</div>
+      </div>
+      <div class="gas-level" style="color:${color}">${sc.gas_level || '--'}</div>
+    </div>
+    <div class="gas-bar"><div class="gas-fill" style="width:${lvl}%;background:${color}"></div></div>
+  `;
+}
+
+// Recent timeline (home tab, last 5)
+function renderRecent() {
+  const entries = (D.timeline || []).slice().reverse().slice(0, 5);
+  if (!entries.length) { document.getElementById('recentTimeline').innerHTML = '<div style="color:var(--muted);font-size:12px;padding:8px 0">No recent activity</div>'; return; }
+  let h = '';
+  entries.forEach((e, i) => {
+    const dc = dotClass(e);
+    const last = i === entries.length - 1;
+    h += `<div class="tl-item">
+      <div class="tl-time">${e.time || '--'}</div>
+      <div class="tl-bar"><div class="tl-dot ${dc}"></div>${last ? '' : '<div class="tl-line"></div>'}</div>
+      <div class="tl-text">${e.summary || ''}</div>
+    </div>`;
+  });
+  document.getElementById('recentTimeline').innerHTML = h;
+}
+
+// Full timeline
+function renderFullTimeline() {
+  const entries = (D.timeline || []).slice().reverse().slice(0, 30);
+  if (!entries.length) { document.getElementById('fullTimeline').innerHTML = '<div style="color:var(--muted);font-size:12px">No activity</div>'; return; }
+  let h = '', lastDate = '';
+  entries.forEach((e, i) => {
+    if (e.date !== lastDate) {
+      const label = isToday(e.date) ? 'Today' : new Date(e.date+'T00:00').toLocaleDateString('en-PH', { weekday:'short', month:'short', day:'numeric' });
+      h += `<div class="tl-group-label">${label}</div>`;
+      lastDate = e.date;
+    }
+    const dc = dotClass(e);
+    const last = i === entries.length - 1;
+    h += `<div class="tl-item">
+      <div class="tl-time">${e.time || '--'}</div>
+      <div class="tl-bar"><div class="tl-dot ${dc}"></div>${last ? '' : '<div class="tl-line"></div>'}</div>
+      <div class="tl-text">${e.summary || ''}</div>
+    </div>`;
+  });
+  document.getElementById('fullTimeline').innerHTML = h;
+}
+
+function dotClass(e) {
+  const t = e.type || '';
+  const tags = e.tags || [];
+  if (t === 'food' || t === 'feeding') return 'dot-food';
+  if (t === 'cctv') return 'dot-cctv';
+  if (t === 'transaction' || t === 'bank') return 'dot-money';
+  if (t === 'vehicle') return 'dot-vehicle';
+  if (tags.includes('baby_jah') || t === 'diaper') return 'dot-baby';
+  return 'dot-default';
+}
+
+// Finance
+function renderFinance() {
+  const accts = D.shared?.accounts || {};
+  let h = '', total = 0;
+  const icons = { payroll:'💳', savings:'🏦', pocket_cash:'💵' };
+  const colors = { payroll:'var(--blue-dim)', savings:'var(--accent-dim)', pocket_cash:'var(--orange-dim)' };
+  for (const [k, a] of Object.entries(accts)) {
+    const name = k.replace('_',' ').replace(/\b\w/g, c => c.toUpperCase());
+    const bal = a.balance || 0;
+    total += bal;
+    h += `<div class="fin-row">
+      <div class="fin-left">
+        <div class="fin-icon" style="background:${colors[k]||'var(--surface)'}">${icons[k]||'💰'}</div>
+        <div><div class="fin-name">${name}</div><div class="fin-sub">${a.account_masked||''} ${a.updated ? '-- '+a.updated : ''}</div></div>
+      </div>
+      <div class="fin-amount">${money(bal)}</div>
+    </div>`;
+  }
+  document.getElementById('finAccounts').innerHTML = h;
+  document.getElementById('finTotal').innerHTML = `<div class="fin-total"><span>Total</span><span>${money(total)}</span></div>`;
+}
+
+// Today spending
+function renderSpending() {
+  const today = new Date().toISOString().slice(0,10);
+  const txns = (D.ra?.transactions||[]).filter(t => t.date === today);
+  if (!txns.length) { document.getElementById('todaySpend').innerHTML = '<div style="color:var(--muted);font-size:12px;padding:8px 0">Nothing yet</div>'; return; }
+  let h = '', total = 0;
+  txns.forEach(t => {
+    const a = t.amount || 0; total += a;
+    h += `<div class="spend-row"><div><div class="spend-desc">${t.description}</div><div class="spend-time">${t.time||''}</div></div><div class="spend-amt">-${money(a)}</div></div>`;
+  });
+  h += `<div style="display:flex;justify-content:space-between;padding:12px 0 4px;border-top:2px solid var(--red);margin-top:8px"><span style="font-weight:700">Total</span><span style="font-weight:800;color:var(--red)">-${money(total)}</span></div>`;
+  document.getElementById('todaySpend').innerHTML = h;
+}
+
+// Bills
+function renderBills() {
+  const items = D.shared?.bills?.items || [];
+  const subs = D.shared?.bills?.subscriptions || [];
+  let h = '';
+  items.forEach(b => {
+    const badge = b.status === 'paid'
+      ? `<span class="bill-badge badge-paid">Paid</span>`
+      : `<span class="bill-badge badge-pending">${money(b.amount)}</span>`;
+    h += `<div class="bill-item"><span style="font-size:13px">${b.name}</span>${badge}</div>`;
+  });
+  if (subs.length) {
+    h += '<div style="font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);font-weight:600;padding:14px 0 6px">Subscriptions</div>';
+    subs.forEach(s => {
+      h += `<div class="bill-item"><span style="font-size:13px">${s.name}</span><span style="font-size:12px;color:var(--muted)">${money(s.amount)}/mo</span></div>`;
+    });
+  }
+  document.getElementById('bills').innerHTML = h;
+}
+
+// Stale
+function checkStale() {
+  const u = D.last_updated;
+  if (!u) return;
+  const diff = (Date.now() - new Date(u).getTime()) / 60000;
+  if (diff > 60) {
+    document.getElementById('staleBanner').style.display = 'block';
+    document.getElementById('staleTime').textContent = new Date(u).toLocaleTimeString('en-PH', { hour:'2-digit', minute:'2-digit' });
+  }
+  document.getElementById('lastUpdated').textContent = new Date(u).toLocaleString('en-PH', { hour:'2-digit', minute:'2-digit', month:'short', day:'numeric' });
+}
+
+// Helpers
+function money(n) { return n == null ? '--' : '\u20B1' + Number(n).toLocaleString('en-PH', { minimumFractionDigits:0, maximumFractionDigits:2 }); }
+function isToday(d) { return d === new Date().toISOString().slice(0,10); }
+
+// Load
+async function load() {
+  try {
+    const r = await fetch(DATA_URL + '?t=' + Date.now());
+    D = await r.json();
+    renderPills();
+    renderJah();
+    renderPeople();
+    renderVehicle();
+    renderRecent();
+    renderFinance();
+    renderSpending();
+    renderFullTimeline();
+    renderBills();
+    checkStale();
+  } catch(e) { console.error(e); }
+}
+load();
+setInterval(load, 60000);
+</script>
+</body>
+</html>
