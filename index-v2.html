@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#f5f0eb">
+<title>RA Life OS</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f0eb;
+  --card: #ffffff;
+  --card-hover: #fafafa;
+  --border: #e8e2db;
+  --text: #1a1a1a;
+  --muted: #8c8478;
+  --accent: #5b8a72;
+  --accent-light: #e8f0ec;
+  --danger: #d4564e;
+  --danger-light: #fce8e6;
+  --warning: #c4922a;
+  --warning-light: #fef3d6;
+  --blue: #4a7fb5;
+  --blue-light: #e3eef7;
+  --pink: #c06b8a;
+  --pink-light: #f8e8ef;
+  --radius: 16px;
+  --radius-sm: 10px;
+  --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.06);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:'Inter',sans-serif; min-height:100vh; padding:16px; max-width:480px; margin:0 auto; }
+
+/* Header */
+.header { display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; padding:4px 0; }
+.header-left h1 { font-size:22px; font-weight:700; }
+.header-left .sub { font-size:12px; color:var(--muted); margin-top:2px; }
+.header-right { text-align:right; }
+.header-right .time { font-size:28px; font-weight:700; letter-spacing:-1px; }
+.header-right .date { font-size:11px; color:var(--muted); }
+
+/* Status Bar */
+.status-bar { display:flex; gap:8px; margin-bottom:16px; overflow-x:auto; padding-bottom:4px; }
+.status-pill { display:flex; align-items:center; gap:6px; padding:8px 14px; border-radius:20px; font-size:11px; font-weight:600; white-space:nowrap; }
+.status-pill .dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.pill-green { background:var(--accent-light); color:var(--accent); }
+.pill-green .dot { background:var(--accent); }
+.pill-blue { background:var(--blue-light); color:var(--blue); }
+.pill-blue .dot { background:var(--blue); }
+.pill-pink { background:var(--pink-light); color:var(--pink); }
+.pill-pink .dot { background:var(--pink); }
+.pill-warning { background:var(--warning-light); color:var(--warning); }
+.pill-warning .dot { background:var(--warning); }
+
+/* Cards */
+.card { background:var(--card); border-radius:var(--radius); padding:16px; margin-bottom:12px; box-shadow:var(--shadow); }
+.card-title { font-size:11px; text-transform:uppercase; letter-spacing:1.2px; color:var(--muted); font-weight:600; margin-bottom:12px; }
+.card-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px; }
+
+/* Baby Jah Card */
+.jah-status { display:flex; align-items:center; gap:12px; margin-bottom:14px; }
+.jah-avatar { width:44px; height:44px; border-radius:50%; background:var(--pink-light); display:flex; align-items:center; justify-content:center; font-size:22px; }
+.jah-info .name { font-size:15px; font-weight:700; }
+.jah-info .state { font-size:12px; color:var(--muted); }
+.jah-row { display:flex; justify-content:space-between; padding:8px 0; border-top:1px solid var(--border); }
+.jah-row:first-of-type { border-top:none; }
+.jah-label { font-size:12px; color:var(--muted); }
+.jah-value { font-size:12px; font-weight:600; }
+
+/* People Row */
+.people-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px; }
+.person-card { background:var(--card); border-radius:var(--radius); padding:14px; box-shadow:var(--shadow); }
+.person-header { display:flex; align-items:center; gap:10px; margin-bottom:8px; }
+.person-avatar { width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:16px; }
+.person-name { font-size:13px; font-weight:700; }
+.person-status { font-size:11px; color:var(--muted); }
+.person-detail { font-size:11px; color:var(--muted); margin-top:4px; }
+
+/* Finance */
+.finance-row { display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid var(--border); }
+.finance-row:last-child { border-bottom:none; }
+.finance-label { font-size:13px; }
+.finance-label .sub { font-size:10px; color:var(--muted); display:block; }
+.finance-amount { font-size:14px; font-weight:700; }
+.finance-amount.danger { color:var(--danger); }
+.finance-total { display:flex; justify-content:space-between; padding:10px 0; margin-top:4px; border-top:2px solid var(--text); }
+.finance-total span { font-size:14px; font-weight:700; }
+
+/* Timeline */
+.tl-entry { display:flex; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+.tl-entry:last-child { border-bottom:none; }
+.tl-time { font-size:11px; color:var(--muted); width:48px; flex-shrink:0; padding-top:2px; }
+.tl-dot { width:8px; height:8px; border-radius:50%; background:var(--accent); margin-top:5px; flex-shrink:0; }
+.tl-dot.food { background:var(--warning); }
+.tl-dot.cctv { background:var(--blue); }
+.tl-dot.money { background:var(--danger); }
+.tl-dot.baby { background:var(--pink); }
+.tl-content { font-size:13px; line-height:1.4; }
+
+/* Bills */
+.bill-row { display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px solid var(--border); }
+.bill-row:last-child { border-bottom:none; }
+.bill-name { font-size:13px; }
+.bill-badge { font-size:10px; font-weight:600; padding:3px 8px; border-radius:10px; }
+.bill-paid { background:var(--accent-light); color:var(--accent); }
+.bill-pending { background:var(--warning-light); color:var(--warning); }
+
+/* Vehicle */
+.gas-bar { height:8px; background:#eee; border-radius:4px; overflow:hidden; margin-top:6px; }
+.gas-fill { height:100%; border-radius:4px; transition:width 0.3s; }
+
+/* Stale Warning */
+.stale-banner { background:var(--danger-light); border:1px solid #f0c0bd; border-radius:var(--radius-sm); padding:10px 14px; margin-bottom:12px; font-size:12px; color:var(--danger); display:none; }
+
+/* Footer */
+.footer { text-align:center; padding:20px 0 40px; font-size:10px; color:var(--muted); }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <h1>Life OS</h1>
+    <div class="sub" id="greeting"></div>
+  </div>
+  <div class="header-right">
+    <div class="time" id="clock"></div>
+    <div class="date" id="dateStr"></div>
+  </div>
+</div>
+
+<div class="stale-banner" id="staleBanner">Data may be stale. Last updated: <span id="staleTime"></span></div>
+
+<div class="status-bar" id="statusBar"></div>
+
+<!-- Baby Jah -->
+<div class="card" id="jahCard">
+  <div class="card-title">Baby Jah</div>
+  <div class="jah-status">
+    <div class="jah-avatar">👶</div>
+    <div class="jah-info">
+      <div class="name">Baby Jah</div>
+      <div class="state" id="jahState">Loading...</div>
+    </div>
+  </div>
+  <div id="jahDetails"></div>
+</div>
+
+<!-- People -->
+<div class="people-grid">
+  <div class="person-card">
+    <div class="person-header">
+      <div class="person-avatar" style="background:var(--blue-light)">👨</div>
+      <div>
+        <div class="person-name">RA</div>
+        <div class="person-status" id="raStatus">...</div>
+      </div>
+    </div>
+    <div class="person-detail" id="raDetail"></div>
+  </div>
+  <div class="person-card">
+    <div class="person-header">
+      <div class="person-avatar" style="background:var(--pink-light)">👩</div>
+      <div>
+        <div class="person-name">Arabelle</div>
+        <div class="person-status" id="araStatus">...</div>
+      </div>
+    </div>
+    <div class="person-detail" id="araDetail"></div>
+  </div>
+</div>
+
+<!-- Finance -->
+<div class="card">
+  <div class="card-title">Finance</div>
+  <div id="financeAccounts"></div>
+  <div id="financeTotal"></div>
+</div>
+
+<!-- Today's Spending -->
+<div class="card">
+  <div class="card-title">Today's Spending</div>
+  <div id="todaySpending"></div>
+</div>
+
+<!-- Timeline -->
+<div class="card">
+  <div class="card-title">Timeline</div>
+  <div id="timeline"></div>
+</div>
+
+<!-- Bills -->
+<div class="card">
+  <div class="card-title">Bills &amp; Subscriptions</div>
+  <div id="bills"></div>
+</div>
+
+<!-- Vehicle -->
+<div class="card">
+  <div class="card-title">Vehicle</div>
+  <div id="vehicle"></div>
+</div>
+
+<div class="footer">
+  Last synced: <span id="lastUpdated">--</span><br>
+  RA Life OS v2
+</div>
+
+<script>
+const DATA_URL = 'dashboard-data.json';
+
+// Clock
+function updateClock() {
+  const now = new Date();
+  document.getElementById('clock').textContent = now.toLocaleTimeString('en-PH', { hour:'2-digit', minute:'2-digit', hour12:true });
+  document.getElementById('dateStr').textContent = now.toLocaleDateString('en-PH', { weekday:'long', month:'short', day:'numeric' });
+}
+setInterval(updateClock, 1000);
+updateClock();
+
+// Greeting
+function setGreeting() {
+  const h = new Date().getHours();
+  let g = 'Good evening, RA';
+  if (h >= 5 && h < 12) g = 'Good morning, RA';
+  else if (h >= 12 && h < 17) g = 'Good afternoon, RA';
+  document.getElementById('greeting').textContent = g;
+}
+setGreeting();
+
+// Derive RA status from schedule + time
+function getRAStatus(data) {
+  const now = new Date();
+  const h = now.getHours();
+  const day = now.getDay(); // 0=Sun
+
+  // Check latest sleep entry
+  const sleepEntries = data.ra?.schedule?.sleep || [];
+  const latest = sleepEntries.length ? sleepEntries[sleepEntries.length - 1] : null;
+
+  if (day === 0 || day === 6) return { status: 'Rest day', detail: 'Home with family' };
+
+  // Night shift: 8pm-5am
+  if (h >= 20 || h < 5) return { status: 'At work', detail: 'McKinley Hills, Taguig' };
+  if (h >= 5 && h < 8) return { status: 'Post-shift', detail: 'Commute / just got home' };
+  if (h >= 8 && h < 15) {
+    if (latest && latest.state === 'woke') return { status: 'Awake', detail: 'Home' };
+    return { status: 'Sleeping', detail: 'Do not disturb' };
+  }
+  if (h >= 15 && h < 20) {
+    if (latest && latest.state === 'woke') return { status: 'Awake', detail: 'Pre-shift, home' };
+    return { status: 'Waking up', detail: 'Getting ready for work' };
+  }
+  return { status: 'Home', detail: '' };
+}
+
+// Derive Arabelle status
+function getAraStatus() {
+  const now = new Date();
+  const h = now.getHours();
+  const day = now.getDay();
+
+  if (day === 0 || day === 6) return { status: 'Rest day', detail: 'Home with Baby Jah' };
+
+  const isWFH = (day === 1 || day === 5); // Mon, Fri
+  const isOffice = (day >= 2 && day <= 4); // Tue-Thu
+
+  if (h >= 6 && h < 15) {
+    if (isWFH) return { status: 'WFH', detail: 'Working 6am-3pm' };
+    if (isOffice) return { status: 'At office', detail: 'Working 6am-3pm' };
+  }
+  return { status: 'Home', detail: 'With Baby Jah' };
+}
+
+// Derive Baby Jah status
+function getJahStatus(data) {
+  const bj = data.shared?.baby_jah || {};
+  const sleep = bj.sleep || [];
+  const feeding = bj.feeding || [];
+  const diapers = bj.diapers || [];
+  const activities = bj.activities || [];
+
+  const latestSleep = sleep.length ? sleep[sleep.length - 1] : null;
+  const latestFeed = feeding.length ? feeding[feeding.length - 1] : null;
+  const latestDiaper = diapers.length ? diapers[diapers.length - 1] : null;
+  const latestActivity = activities.length ? activities[activities.length - 1] : null;
+
+  let state = 'Unknown';
+  if (latestSleep) {
+    state = latestSleep.state === 'asleep'
+      ? `Asleep since ${latestSleep.time}`
+      : `Awake since ${latestSleep.time}`;
+  }
+
+  return {
+    state,
+    lastMeal: latestFeed ? `${latestFeed.food} at ${latestFeed.time}` : 'No data',
+    lastDiaper: latestDiaper ? `${latestDiaper.type} at ${latestDiaper.time}` : 'No data',
+    lastActivity: latestActivity ? `${latestActivity.activity} at ${latestActivity.time}` : 'No data',
+  };
+}
+
+// Status pills
+function renderStatusBar(data) {
+  const ra = getRAStatus(data);
+  const ara = getAraStatus();
+  const jah = getJahStatus(data);
+
+  const jahPill = jah.state.includes('Asleep') ? 'pill-pink' : 'pill-green';
+
+  document.getElementById('statusBar').innerHTML = `
+    <div class="status-pill pill-blue"><span class="dot"></span>RA: ${ra.status}</div>
+    <div class="status-pill pill-pink"><span class="dot"></span>Ara: ${ara.status}</div>
+    <div class="status-pill ${jahPill}"><span class="dot"></span>Jah: ${jah.state.includes('Asleep') ? 'Asleep' : 'Awake'}</div>
+  `;
+}
+
+// Baby Jah card
+function renderJah(data) {
+  const jah = getJahStatus(data);
+  document.getElementById('jahState').textContent = jah.state;
+  document.getElementById('jahDetails').innerHTML = `
+    <div class="jah-row"><span class="jah-label">Last meal</span><span class="jah-value">${jah.lastMeal}</span></div>
+    <div class="jah-row"><span class="jah-label">Last diaper</span><span class="jah-value">${jah.lastDiaper}</span></div>
+    <div class="jah-row"><span class="jah-label">Last activity</span><span class="jah-value">${jah.lastActivity}</span></div>
+  `;
+}
+
+// People cards
+function renderPeople(data) {
+  const ra = getRAStatus(data);
+  const ara = getAraStatus();
+  document.getElementById('raStatus').textContent = ra.status;
+  document.getElementById('raDetail').textContent = ra.detail;
+  document.getElementById('araStatus').textContent = ara.status;
+  document.getElementById('araDetail').textContent = ara.detail;
+}
+
+// Finance
+function renderFinance(data) {
+  const accts = data.shared?.accounts || {};
+  let html = '';
+  let total = 0;
+  for (const [key, acct] of Object.entries(accts)) {
+    const name = key.charAt(0).toUpperCase() + key.slice(1).replace('_', ' ');
+    const bal = acct.balance || 0;
+    total += bal;
+    html += `<div class="finance-row">
+      <div class="finance-label">${name}<span class="sub">${acct.account_masked || ''} ${acct.updated ? '· ' + acct.updated : ''}</span></div>
+      <div class="finance-amount">${formatMoney(bal)}</div>
+    </div>`;
+  }
+  document.getElementById('financeAccounts').innerHTML = html;
+  document.getElementById('financeTotal').innerHTML = `
+    <div class="finance-total"><span>Total</span><span>${formatMoney(total)}</span></div>
+  `;
+}
+
+// Today's spending
+function renderTodaySpending(data) {
+  const today = new Date().toISOString().slice(0, 10);
+  const txns = (data.ra?.transactions || []).filter(t => t.date === today);
+
+  if (!txns.length) {
+    document.getElementById('todaySpending').innerHTML = '<div style="font-size:13px;color:var(--muted);padding:8px 0">No spending today</div>';
+    return;
+  }
+
+  let html = '';
+  let total = 0;
+  for (const t of txns) {
+    const amt = t.amount || 0;
+    total += amt;
+    html += `<div class="finance-row">
+      <div class="finance-label">${t.description}<span class="sub">${t.time || ''}</span></div>
+      <div class="finance-amount danger">-${formatMoney(amt)}</div>
+    </div>`;
+  }
+  html += `<div class="finance-total"><span>Total today</span><span style="color:var(--danger)">-${formatMoney(total)}</span></div>`;
+  document.getElementById('todaySpending').innerHTML = html;
+}
+
+// Timeline
+function renderTimeline(data) {
+  const entries = (data.timeline || []).slice().reverse().slice(0, 15);
+  if (!entries.length) {
+    document.getElementById('timeline').innerHTML = '<div style="font-size:13px;color:var(--muted);padding:8px 0">No recent activity</div>';
+    return;
+  }
+
+  let html = '';
+  let lastDate = '';
+  for (const e of entries) {
+    if (e.date !== lastDate) {
+      const d = new Date(e.date + 'T00:00:00');
+      const label = isToday(e.date) ? 'Today' : d.toLocaleDateString('en-PH', { weekday:'short', month:'short', day:'numeric' });
+      html += `<div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;padding:10px 0 4px;font-weight:600">${label}</div>`;
+      lastDate = e.date;
+    }
+    const dotClass = getDotClass(e.type, e.tags);
+    html += `<div class="tl-entry">
+      <div class="tl-time">${e.time || '--'}</div>
+      <div class="tl-dot ${dotClass}"></div>
+      <div class="tl-content">${e.summary || ''}</div>
+    </div>`;
+  }
+  document.getElementById('timeline').innerHTML = html;
+}
+
+function getDotClass(type, tags) {
+  if (type === 'food' || type === 'feeding') return 'food';
+  if (type === 'cctv') return 'cctv';
+  if (type === 'transaction' || type === 'bank') return 'money';
+  if (tags && (tags.includes('baby_jah') || tags.includes('diaper'))) return 'baby';
+  return '';
+}
+
+// Bills
+function renderBills(data) {
+  const bills = data.shared?.bills?.items || [];
+  const subs = data.shared?.bills?.subscriptions || [];
+
+  let html = '';
+  for (const b of bills) {
+    const badge = b.status === 'paid'
+      ? `<span class="bill-badge bill-paid">Paid</span>`
+      : `<span class="bill-badge bill-pending">${formatMoney(b.amount)}</span>`;
+    html += `<div class="bill-row"><span class="bill-name">${b.name}</span>${badge}</div>`;
+  }
+  if (subs.length) {
+    html += '<div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;padding:12px 0 6px;font-weight:600">Subscriptions</div>';
+    for (const s of subs) {
+      html += `<div class="bill-row"><span class="bill-name">${s.name}</span><span style="font-size:12px;color:var(--muted)">${formatMoney(s.amount)}/mo</span></div>`;
+    }
+  }
+  document.getElementById('bills').innerHTML = html;
+}
+
+// Vehicle
+function renderVehicle(data) {
+  const v = data.shared?.vehicle || {};
+  const scooter = v.scooter || {};
+  const gasLevel = parseInt(scooter.gas_level) || 0;
+  const color = gasLevel > 60 ? 'var(--accent)' : gasLevel > 30 ? 'var(--warning)' : 'var(--danger)';
+
+  document.getElementById('vehicle').innerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <div>
+        <div style="font-size:14px;font-weight:600">${scooter.model || 'Scooter'}</div>
+        <div style="font-size:12px;color:var(--muted)">Last gas: ${scooter.last_gas || '--'}</div>
+      </div>
+      <div style="font-size:20px;font-weight:700;color:${color}">${scooter.gas_level || '--'}</div>
+    </div>
+    <div class="gas-bar"><div class="gas-fill" style="width:${gasLevel}%;background:${color}"></div></div>
+  `;
+}
+
+// Stale check
+function checkStale(data) {
+  const updated = data.last_updated;
+  if (!updated) return;
+  const diff = (Date.now() - new Date(updated).getTime()) / 1000 / 60;
+  if (diff > 60) {
+    document.getElementById('staleBanner').style.display = 'block';
+    document.getElementById('staleTime').textContent = new Date(updated).toLocaleTimeString('en-PH', { hour:'2-digit', minute:'2-digit' });
+  }
+  document.getElementById('lastUpdated').textContent = new Date(updated).toLocaleString('en-PH', { hour:'2-digit', minute:'2-digit', month:'short', day:'numeric' });
+}
+
+// Helpers
+function formatMoney(n) {
+  if (n === null || n === undefined) return '--';
+  return '₱' + Number(n).toLocaleString('en-PH', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+}
+function isToday(dateStr) {
+  return dateStr === new Date().toISOString().slice(0, 10);
+}
+
+// Load and render
+async function load() {
+  try {
+    const res = await fetch(DATA_URL + '?t=' + Date.now());
+    const data = await res.json();
+    renderStatusBar(data);
+    renderJah(data);
+    renderPeople(data);
+    renderFinance(data);
+    renderTodaySpending(data);
+    renderTimeline(data);
+    renderBills(data);
+    renderVehicle(data);
+    checkStale(data);
+  } catch (e) {
+    console.error('Failed to load dashboard data:', e);
+  }
+}
+
+load();
+setInterval(load, 60000); // refresh every minute
+</script>
+</body>
+</html>
