@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-03-26T02:41:33+08:00",
+  "last_updated": "2026-03-27T21:00:05+08:00",
   "location": {
     "name": "San Joaquin, Pasig",
     "lat": 14.5764,
@@ -8,9 +8,9 @@
   "shared": {
     "accounts": {
       "payroll": {
-        "balance": 4137.99,
+        "balance": 8460.59,
         "account_masked": "***9713",
-        "updated": "2026-03-25"
+        "updated": "2026-03-26"
       },
       "savings": {
         "balance": 10222,
@@ -18,8 +18,8 @@
         "updated": "2026-03-23"
       },
       "pocket_cash": {
-        "balance": 1023,
-        "updated": "2026-03-25"
+        "balance": 65,
+        "updated": "2026-03-26"
       }
     },
     "bills": {
@@ -100,9 +100,27 @@
         "time": null
       },
       {
+        "date": "2026-03-26",
+        "title": "Send sickline form to Informdata",
+        "category": "work",
+        "time": null
+      },
+      {
+        "date": "2026-03-27",
+        "title": "Send sickline form to Informdata",
+        "category": "work",
+        "time": null
+      },
+      {
         "date": "2026-03-27",
         "title": "Withdraw cash, check weather",
         "category": "finance",
+        "time": null
+      },
+      {
+        "date": "2026-03-30",
+        "title": "Send sickline form to Informdata",
+        "category": "work",
         "time": null
       },
       {
@@ -112,7 +130,7 @@
         "time": null
       },
       {
-        "date": "2026-03-28",
+        "date": "2026-03-26",
         "title": "Depart for Daet 8-9 PM",
         "category": "travel",
         "time": "20:00"
@@ -158,17 +176,17 @@
       {
         "name": "Zach's Graduation + Family Visit",
         "destination": "Daet, Camarines Norte",
-        "dates": "Mar 28 - Apr 2",
+        "dates": "Mar 26 - Apr 2",
         "route": "SLEX > STAR Tollway > exit Sto. Tomas > Maharlika Highway",
         "distance_km": 340,
         "drive_hours": "8-9",
         "accommodation": "Arabelle's family",
         "budget": {
           "tolls": 320,
-          "gas": 2750,
+          "gas": 5500,
           "food": 4000,
           "misc": 1500,
-          "total": 8570
+          "total": 11320
         },
         "alerts": [
           {
@@ -180,12 +198,24 @@
             "text": "Eme shortcut -- winding, poorly lit at night"
           },
           {
+            "type": "warning",
+            "text": "Maharlika Highway reblocking -- stop-and-go sections, expect delays"
+          },
+          {
             "type": "ok",
-            "text": "DPWH clearing obstructions by end of March"
+            "text": "DPWH says one-way sections open before Holy Week"
           },
           {
             "type": "money",
-            "text": "Avoid gas in Lopez-Tagkawayan (P3-4/L pricier)"
+            "text": "Gas up FULL in Pasig before leaving. Avoid Lopez-Tagkawayan (P3-4/L pricier)"
+          },
+          {
+            "type": "money",
+            "text": "Gas prices spiked P8-12/L (Strait of Hormuz crisis). Budget revised to P5,500 round trip"
+          },
+          {
+            "type": "ok",
+            "text": "Weather: 25-30C, light showers, mostly clear. Pack sunscreen + light rain gear"
           }
         ],
         "highlights": [
@@ -202,14 +232,14 @@
           "Kusina ni Angel (Bagasbas)"
         ],
         "pasalubong": "laing, pinangat, Bicol Express, kinunot, pili nut treats",
-        "status": "upcoming"
+        "status": "active"
       }
     ],
     "vehicle": {
       "scooter": {
         "model": "Yamaha Mio Sporty 2013",
         "last_gas": "2026-03-23",
-        "gas_level": "40%",
+        "gas_level": "30%",
         "usual_cost": 200,
         "frequency": "weekly",
         "avg_price": 98.0
@@ -217,7 +247,9 @@
       "car": {
         "model": "Toyota Vios 2015",
         "last_maintenance": "2026-03-23",
-        "notes": "Brake shoes replaced"
+        "notes": "Brake shoes replaced",
+        "gas_level": "100%",
+        "last_gas": "2026-03-26"
       }
     },
     "baby_jah": {
@@ -306,6 +338,48 @@
           "time": "15:30",
           "food": "Adobo rice",
           "notes": "With Arabelle"
+        },
+        {
+          "date": "2026-03-25",
+          "time": "19:00",
+          "food": "Milk",
+          "notes": "Evening milk before bed (estimated from pattern)"
+        },
+        {
+          "date": "2026-03-26",
+          "time": "06:45",
+          "food": "Lugaw + Egg",
+          "notes": "Morning walk with RA, bought from outside"
+        },
+        {
+          "date": "2026-03-26",
+          "time": "04:00",
+          "food": "Milk",
+          "notes": "Night feed from Arabelle (estimated)"
+        },
+        {
+          "date": "2026-03-26",
+          "time": "08:50",
+          "food": "Bread",
+          "notes": "Morning snack at home"
+        },
+        {
+          "date": "2026-03-26",
+          "time": "09:00",
+          "food": "Milk",
+          "notes": "Before sleep, fed by RA"
+        },
+        {
+          "date": "2026-03-26",
+          "time": "13:30",
+          "food": "Milk",
+          "notes": "After nap, fed by RA"
+        },
+        {
+          "date": "2026-03-26",
+          "time": "15:00",
+          "food": "Jollibee Chicken Supermeal",
+          "notes": "Shared meal with RA"
         }
       ],
       "sleep": [
@@ -355,6 +429,20 @@
           "slept": "19:52",
           "woke": null,
           "type": "night"
+        },
+        {
+          "date": "2026-03-26",
+          "slept": null,
+          "woke": "04:00",
+          "type": "night",
+          "notes": "Woke ~4 AM, milk from Arabelle"
+        },
+        {
+          "date": "2026-03-26",
+          "slept": "09:00",
+          "woke": "13:00",
+          "type": "nap",
+          "notes": "Milk + diaper change, slept with RA. ~4 hrs"
         }
       ],
       "diapers": [
@@ -405,6 +493,41 @@
           "time": "08:50",
           "type": "poop",
           "notes": "Big one -- hard poops followed by softer ones. Had been straining since morning trying to get it out."
+        },
+        {
+          "date": "2026-03-26",
+          "time": "04:00",
+          "type": "wet",
+          "notes": "Night wake, milk + diaper change (inferred)"
+        },
+        {
+          "date": "2026-03-26",
+          "time": "06:30",
+          "type": "wet",
+          "notes": "Morning wake, before walk (inferred)"
+        },
+        {
+          "date": "2026-03-26",
+          "time": "09:00",
+          "type": "wet",
+          "notes": "Before sleep, changed by RA"
+        },
+        {
+          "date": "2026-03-26",
+          "time": "13:30",
+          "type": "wet",
+          "notes": "After nap, changed by RA"
+        },
+        {
+          "date": "2026-03-26",
+          "time": "15:30",
+          "type": "poop",
+          "notes": "Changed by RA"
+        },
+        {
+          "date": "2026-03-27",
+          "time": "17:02",
+          "type": "Poop"
         }
       ],
       "milestones": [],
@@ -450,16 +573,26 @@
           "date": "2026-03-25",
           "time": "19:11",
           "activity": "RA checked in after waking up"
+        },
+        {
+          "date": "2026-03-26",
+          "time": "06:45",
+          "activity": "Morning walk with RA -- bought lugaw"
+        },
+        {
+          "date": "2026-03-26",
+          "time": "15:30",
+          "activity": "Nail cutting by Arabelle"
         }
       ],
       "next_checkup": null,
-      "mood_today": "Good mood (2026-03-24 6:30 AM)"
+      "mood_today": "Good mood (2026-03-26 6:45 AM)"
     },
     "buki": {
       "name": "Buki",
       "fed_today": null,
       "last_vet": null,
-      "notes": null
+      "notes": "Litter box cleaned 2026-03-26"
     },
     "kitchen": {
       "inventory": [],
@@ -525,6 +658,12 @@
           "slept": null,
           "woke": "19:11",
           "notes": "Pre-shift wake"
+        },
+        {
+          "date": "2026-03-26",
+          "slept": "07:30",
+          "woke": "13:30",
+          "notes": "Post-shift sleep with Bujah. ~6 hrs (7:30 AM counted from sleep attempt, actual ~9 AM - 1:30 PM = 4.5 hrs)"
         }
       ],
       "commute_from": "05:00",
@@ -706,6 +845,62 @@
         "time": "02:00",
         "description": "7-Eleven Fried Chicken + Rice",
         "amount": 92,
+        "category": "food"
+      },
+      {
+        "date": "2026-03-26",
+        "time": "06:45",
+        "description": "Lugaw + Egg (with Bujah)",
+        "amount": 30,
+        "category": "food"
+      },
+      {
+        "date": "2026-03-26",
+        "time": "06:45",
+        "description": "Spaghetti (RA)",
+        "amount": 30,
+        "category": "food"
+      },
+      {
+        "date": "2026-03-26",
+        "time": null,
+        "description": "Meta Ads (Facebook)",
+        "amount": 568.4,
+        "category": "ads"
+      },
+      {
+        "date": "2026-03-26",
+        "time": null,
+        "description": "Seattle's Coffee (Arabelle, work)",
+        "amount": 144,
+        "category": "food"
+      },
+      {
+        "date": "2026-03-26",
+        "time": null,
+        "description": "Arabelle scatter winnings (incoming)",
+        "amount": -2000,
+        "category": "income"
+      },
+      {
+        "date": "2026-03-26",
+        "time": null,
+        "description": "Friend debt repaid (incoming)",
+        "amount": -2985,
+        "category": "income"
+      },
+      {
+        "date": "2026-03-26",
+        "time": "13:30",
+        "description": "Shopee delivery (Arabelle)",
+        "amount": 125,
+        "category": "shopping"
+      },
+      {
+        "date": "2026-03-26",
+        "time": "15:00",
+        "description": "Jollibee Chicken Supermeal",
+        "amount": 250,
         "category": "food"
       }
     ],
@@ -1252,6 +1447,29 @@
         "work"
       ],
       "source": "opus_processed"
+    },
+    {
+      "date": "2026-03-26",
+      "time": "06:45",
+      "type": "activity",
+      "summary": "Morning walk with Bujah. Bought lugaw for Jah + spaghetti for RA (P60 total)",
+      "tags": [
+        "baby_jah",
+        "food",
+        "home"
+      ],
+      "source": "conversation"
+    },
+    {
+      "date": "2026-03-27",
+      "time": "17:02",
+      "type": "diaper",
+      "summary": "Baby Jah: Poop",
+      "tags": [
+        "diaper",
+        "baby_jah"
+      ],
+      "source": "quick_log"
     }
   ],
   "briefing": {
