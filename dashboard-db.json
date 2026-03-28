@@ -1,25 +1,28 @@
 {
-  "last_updated": "2026-03-27T21:00:05+08:00",
+  "last_updated": "2026-03-28T10:30:05+08:00",
   "location": {
-    "name": "San Joaquin, Pasig",
-    "lat": 14.5764,
-    "lon": 121.0851
+    "name": "Daet, Camarines Norte",
+    "lat": 14.1122,
+    "lon": 122.9553
   },
   "shared": {
     "accounts": {
       "payroll": {
-        "balance": 8460.59,
+        "balance": 30788.84,
         "account_masked": "***9713",
-        "updated": "2026-03-26"
+        "updated": "2026-03-27",
+        "notes": "Consolidated -- Arabelle salary + savings transferred in for Daet trip ATM access"
       },
       "savings": {
-        "balance": 10222,
+        "balance": 0,
         "account_masked": "***7397",
-        "updated": "2026-03-23"
+        "updated": "2026-03-27",
+        "notes": "Funds consolidated to payroll for trip. RA will transfer back if money remains."
       },
       "pocket_cash": {
-        "balance": 65,
-        "updated": "2026-03-26"
+        "balance": 6065,
+        "updated": "2026-03-27",
+        "notes": "P65 prior + P6,000 ATM withdrawal in Daet. Minus trip spending."
       }
     },
     "bills": {
@@ -139,13 +142,14 @@
         "date": "2026-03-28",
         "title": "Zach's Elementary Graduation",
         "category": "family",
-        "time": null
+        "time": "13:00",
+        "notes": "1 PM in Daet"
       },
       {
-        "date": "2026-04-02",
-        "title": "Return from Daet (latest)",
+        "date": "2026-03-30",
+        "title": "Return to Pasig from Daet (night drive)",
         "category": "travel",
-        "time": null
+        "time": "20:00"
       },
       {
         "date": "2026-04-11",
@@ -170,13 +174,20 @@
         "title": "RA's Birthday",
         "category": "family",
         "time": null
+      },
+      {
+        "date": "2026-03-28",
+        "title": "Beach morning with Baby Jah (low tide 7:17 AM)",
+        "category": "family",
+        "time": "06:30",
+        "notes": "Talisay/Daet. Low tide at 7:17 AM -- ideal for Jah. Before graduation at 1 PM."
       }
     ],
     "trips": [
       {
         "name": "Zach's Graduation + Family Visit",
         "destination": "Daet, Camarines Norte",
-        "dates": "Mar 26 - Apr 2",
+        "dates": "Mar 26 - Mar 30 (night drive back)",
         "route": "SLEX > STAR Tollway > exit Sto. Tomas > Maharlika Highway",
         "distance_km": 340,
         "drive_hours": "8-9",
@@ -232,7 +243,104 @@
           "Kusina ni Angel (Bagasbas)"
         ],
         "pasalubong": "laing, pinangat, Bicol Express, kinunot, pili nut treats",
-        "status": "active"
+        "status": "active",
+        "actual_spending": {
+          "food": 3748,
+          "medicine": 33,
+          "cash_withdrawn": 11000,
+          "notes": "Food: McD P440 + Dunkin P219 + Hoogpaan DP P3,000 + sisig silog P89. Hoogpaan balance P2,769 still due Mar 28."
+        },
+        "milestones": [
+          {
+            "time": "2026-03-26 20:30",
+            "event": "Departed San Joaquin, Pasig"
+          },
+          {
+            "time": "2026-03-26 23:28",
+            "event": "Rest stop Sto. Tomas, Batangas (McDonald's + Mercury Drug)"
+          },
+          {
+            "time": "2026-03-27 04:11",
+            "event": "Arrived Gateway to Bicolandia arch, Camarines Norte"
+          },
+          {
+            "time": "2026-03-27 21:00",
+            "event": "Baby Jah asleep after full day playing with cousins"
+          },
+          {
+            "time": "2026-03-30 20:00",
+            "event": "Depart Daet for Pasig (planned)"
+          }
+        ],
+        "schedule": [
+          {
+            "date": "2026-03-28",
+            "label": "Saturday",
+            "items": [
+              {
+                "time": "06:30",
+                "event": "Beach with Baby Jah",
+                "notes": "Talisay/Daet. Low tide at 7:17 AM -- shallow, safe for Jah.",
+                "icon": "beach",
+                "location": "Talisay Beach, Daet, Camarines Norte"
+              },
+              {
+                "time": "13:00",
+                "event": "Zach's Elementary Graduation",
+                "notes": "Main event of the trip",
+                "icon": "event",
+                "location": "Daet, Camarines Norte"
+              },
+              {
+                "time": "19:00",
+                "event": "Hoogpaan Restaurant -- Graduation Dinner",
+                "notes": "14 pax. Reservation 7-8 PM. Balance due: P2,769\nhttps://www.facebook.com/hoogpaanbagasbas",
+                "icon": "food",
+                "location": "Daet, Camarines Norte",
+                "url": "https://www.facebook.com/hoogpaanbagasbas"
+              }
+            ]
+          },
+          {
+            "date": "2026-03-29",
+            "label": "Sunday",
+            "items": [
+              {
+                "time": "06:30",
+                "event": "Gumaus Beach morning",
+                "notes": "Family beach day. Check tide before heading out.",
+                "icon": "beach",
+                "location": "Gumaus Beach, Daet, Camarines Norte"
+              }
+            ]
+          }
+        ],
+        "tide": {
+          "date": "2026-03-28",
+          "location": "Talisay/Daet",
+          "schedule": [
+            {
+              "time": "02:28",
+              "type": "High Tide",
+              "height": "5.02 ft (1.53 m)"
+            },
+            {
+              "time": "07:17",
+              "type": "Low Tide",
+              "height": "-1.15 ft (-0.35 m)"
+            },
+            {
+              "time": "13:06",
+              "type": "High Tide",
+              "height": "0.72 ft (0.22 m)"
+            },
+            {
+              "time": "19:44",
+              "type": "Low Tide",
+              "height": "-1.51 ft (-0.46 m)"
+            }
+          ]
+        }
       }
     ],
     "vehicle": {
@@ -380,6 +488,16 @@
           "time": "15:00",
           "food": "Jollibee Chicken Supermeal",
           "notes": "Shared meal with RA"
+        },
+        {
+          "date": "2026-03-28",
+          "time": "10:19",
+          "food": "Lugaw & Bread"
+        },
+        {
+          "date": "2026-03-28",
+          "time": "10:20",
+          "food": "Milk"
         }
       ],
       "sleep": [
@@ -443,6 +561,13 @@
           "woke": "13:00",
           "type": "nap",
           "notes": "Milk + diaper change, slept with RA. ~4 hrs"
+        },
+        {
+          "date": "2026-03-27",
+          "slept": "21:00",
+          "woke": null,
+          "type": "night",
+          "notes": "Asleep after a big day playing with cousins in Daet. Less food/milk than usual -- excitement overload."
         }
       ],
       "diapers": [
@@ -528,9 +653,45 @@
           "date": "2026-03-27",
           "time": "17:02",
           "type": "Poop"
+        },
+        {
+          "date": "2026-03-27",
+          "time": "21:00",
+          "type": "fresh",
+          "notes": "Fresh diaper before bed. In Daet with family."
+        },
+        {
+          "date": "2026-03-28",
+          "time": "10:20",
+          "type": "wet"
         }
       ],
-      "milestones": [],
+      "milestones": [
+        {
+          "date": "2026-03-28",
+          "age": "21 months",
+          "milestone": "First beach walk -- walked on wet sand, scared of dry soft sand (texture sensitivity, normal for age)",
+          "location": "Talisay Beach, Daet"
+        },
+        {
+          "date": "2026-03-28",
+          "age": "21 months",
+          "milestone": "Put on sandals by himself -- first time wearing footwear independently",
+          "location": "Daet"
+        },
+        {
+          "date": "2026-03-28",
+          "age": "21 months",
+          "milestone": "Speech check: only says 'papa' consistently. Receptive language likely ahead of expressive. Monitor for word explosion 22-26 months.",
+          "location": "Daet"
+        },
+        {
+          "date": "2026-03-28",
+          "age": "21 months",
+          "milestone": "Strong receptive language: follows specific instructions (pick up toy, get blanket, fetch specific items). Understands object names. Expressive will follow.",
+          "location": "Daet"
+        }
+      ],
       "growth": [],
       "medicine": [],
       "activities": [
@@ -586,7 +747,29 @@
         }
       ],
       "next_checkup": null,
-      "mood_today": "Good mood (2026-03-26 6:45 AM)"
+      "mood_today": "Good mood (2026-03-26 6:45 AM)",
+      "feedings": [
+        {
+          "date": "2026-03-27",
+          "time": null,
+          "food": "Less than usual -- too excited playing with cousins in Daet",
+          "notes": "Reduced food and milk intake. Normal for overstimulated toddler in new environment."
+        }
+      ],
+      "health": [
+        {
+          "date": "2026-03-28",
+          "condition": "Eczema / skin asthma",
+          "status": "ongoing",
+          "notes": "Body only, face is clear. Scratches until bleeding. Wears long sleeves and pajamas to protect skin. Tried multiple lotions and moisturizers -- nothing worked so far. Possible triggers to investigate: milk, detergent, fabric, heat. Needs pediatric dermatologist consult.",
+          "action_items": [
+            "Schedule pediatric dermatologist appointment",
+            "Try fragrance-free detergent if not already",
+            "Ask doctor about cow's milk elimination trial",
+            "Track which lotions were tried and failed"
+          ]
+        }
+      ]
     },
     "buki": {
       "name": "Buki",
@@ -902,13 +1085,152 @@
         "description": "Jollibee Chicken Supermeal",
         "amount": 250,
         "category": "food"
+      },
+      {
+        "date": "2026-03-26",
+        "time": null,
+        "description": "Arabelle salary (bi-weekly, incoming)",
+        "amount": -21000,
+        "category": "income",
+        "notes": "Deposited to payroll for trip consolidation"
+      },
+      {
+        "date": "2026-03-26",
+        "time": null,
+        "description": "RA savings transfer to payroll (incoming)",
+        "amount": -7192,
+        "category": "transfer",
+        "notes": "Consolidation for trip ATM access"
+      },
+      {
+        "date": "2026-03-26",
+        "time": null,
+        "description": "ATM Withdrawal BPI @WELLS FA",
+        "amount": 5000,
+        "category": "cash",
+        "notes": "Trip cash"
+      },
+      {
+        "date": "2026-03-26",
+        "time": "23:28",
+        "description": "McDonald's Sto. Tomas Batangas (road trip stop)",
+        "amount": 440,
+        "category": "food",
+        "notes": "McNuggets, Chicken McFry, fries. En route to Daet."
+      },
+      {
+        "date": "2026-03-26",
+        "time": "23:30",
+        "description": "Mercury Drug Sto. Tomas (Ricam Tab 10mg x2)",
+        "amount": 33,
+        "category": "health",
+        "notes": "Medicine stop during Daet drive"
+      },
+      {
+        "date": "2026-03-27",
+        "time": null,
+        "description": "Dunkin' Donuts (road trip, 13 items)",
+        "amount": 219,
+        "category": "food",
+        "notes": "Bacon + bavarian donuts, en route or arrival"
+      },
+      {
+        "date": "2026-03-27",
+        "time": null,
+        "description": "ATM Withdrawal RCI @MDC PASI",
+        "amount": 6000,
+        "category": "cash",
+        "notes": "ATM in Daet area"
+      },
+      {
+        "date": "2026-03-27",
+        "time": null,
+        "description": "Payment to Merchant",
+        "amount": 1300,
+        "category": "shopping",
+        "notes": "From BPI screenshot"
+      },
+      {
+        "date": "2026-03-27",
+        "time": null,
+        "description": "InstaPay Transfer",
+        "amount": 250,
+        "category": "transfer"
+      },
+      {
+        "date": "2026-03-27",
+        "time": null,
+        "description": "InstaPay Transfer",
+        "amount": 300,
+        "category": "transfer"
+      },
+      {
+        "date": "2026-03-27",
+        "time": null,
+        "description": "InstaPay Transfer Fees (3x)",
+        "amount": 30,
+        "category": "fees"
+      },
+      {
+        "date": "2026-03-27",
+        "time": null,
+        "description": "Purchase @APPLE.CO",
+        "amount": 253.75,
+        "category": "subscription",
+        "notes": "Apple subscription charge"
+      },
+      {
+        "date": "2026-03-27",
+        "time": null,
+        "description": "Purchase @FACEBK (Meta Ads)",
+        "amount": 241,
+        "category": "ads",
+        "notes": "Traffic v2 campaign billing"
+      },
+      {
+        "date": "2026-03-27",
+        "time": null,
+        "description": "Prepaid Phone Reload",
+        "amount": 59,
+        "category": "load"
+      },
+      {
+        "date": "2026-03-27",
+        "time": null,
+        "description": "Hoogpaan Restaurant -- DP for Zach's graduation dinner (14 pax, 7-8 PM)",
+        "amount": 3000,
+        "category": "food",
+        "notes": "Total P5,769. DP P3,000. Balance P2,769 due Mar 28."
+      },
+      {
+        "date": "2026-03-28",
+        "time": "00:00",
+        "description": "Sisig silog + Coke (late night, Daet)",
+        "amount": 89,
+        "category": "food",
+        "notes": "Province eatery. Vios parked outside."
+      },
+      {
+        "date": "2026-03-28",
+        "time": "10:18",
+        "description": "Cash Withdrawal ",
+        "amount": null,
+        "category": "misc"
+      },
+      {
+        "date": "2026-03-28",
+        "time": "10:18",
+        "description": "Hair Cut ",
+        "amount": null,
+        "category": "misc"
       }
     ],
     "todos": [
       {
         "text": "File leave at Informdata for Daet trip",
-        "done": false,
-        "due": "2026-03-27"
+        "done": true,
+        "due": "2026-03-27",
+        "notes": "Sickline forms submitted Mar 26 + 27 via Microsoft Forms. Mar 30 still pending."
       },
       {
         "text": "Pay parking P3,000",
@@ -917,8 +1239,9 @@
       },
       {
         "text": "Withdraw cash before Daet trip",
-        "done": false,
-        "due": "2026-03-27"
+        "done": true,
+        "due": "2026-03-27",
+        "notes": "P5,000 ATM Mar 26 (BPI Wells FA) + P6,000 ATM Mar 27 (MDC PASI in Daet)"
       },
       {
         "text": "Call ACE Hospital Pateros -- confirm PhilCare HMO",
@@ -947,6 +1270,16 @@
         "name": "Informdata HR",
         "purpose": "File leave for Mar 28+",
         "due": "2026-03-27"
+      }
+    ],
+    "sleep": [
+      {
+        "date": "2026-03-27",
+        "slept": "08:00",
+        "woke": "17:00",
+        "hours": 9,
+        "type": "post-drive",
+        "notes": "Arrived Daet ~4-5 AM after 8hr drive. Crashed 8 AM, woke 5 PM. Solid recovery block."
       }
     ]
   },
@@ -1468,6 +1801,81 @@
       "tags": [
         "diaper",
         "baby_jah"
+      ],
+      "source": "quick_log"
+    },
+    {
+      "date": "2026-03-28",
+      "time": "10:18",
+      "type": "transaction",
+      "summary": "RA: Cash Withdrawal ",
+      "tags": [
+        "transaction",
+        "ra"
+      ],
+      "source": "quick_log"
+    },
+    {
+      "date": "2026-03-28",
+      "time": "10:18",
+      "type": "transaction",
+      "summary": "RA: Hair Cut ",
+      "tags": [
+        "transaction",
+        "ra"
+      ],
+      "source": "quick_log"
+    },
+    {
+      "date": "2026-03-28",
+      "time": "10:19",
+      "type": "feeding",
+      "summary": "Baby Jah: Lugaw & Bread",
+      "tags": [
+        "feeding",
+        "baby_jah"
+      ],
+      "source": "quick_log"
+    },
+    {
+      "date": "2026-03-28",
+      "time": "10:20",
+      "type": "feeding",
+      "summary": "Baby Jah: Milk",
+      "tags": [
+        "feeding",
+        "baby_jah"
+      ],
+      "source": "quick_log"
+    },
+    {
+      "date": "2026-03-28",
+      "time": "10:20",
+      "type": "diaper",
+      "summary": "Baby Jah: wet",
+      "tags": [
+        "diaper",
+        "baby_jah"
+      ],
+      "source": "quick_log"
+    },
+    {
+      "date": "2026-03-28",
+      "time": "10:24",
+      "type": "balance",
+      "summary": "payroll",
+      "tags": [
+        "balance"
+      ],
+      "source": "quick_log"
+    },
+    {
+      "date": "2026-03-28",
+      "time": "10:24",
+      "type": "balance",
+      "summary": "Pocket Cash",
+      "tags": [
+        "balance"
       ],
       "source": "quick_log"
     }
