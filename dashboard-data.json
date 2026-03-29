@@ -1,17 +1,35 @@
 {
-  "last_updated": "2026-03-29T04:01:02+08:00",
+  "last_updated": "2026-03-30T02:35:20+08:00",
   "location": {
     "name": "Daet, Camarines Norte",
     "lat": 14.1122,
     "lon": 122.9553
   },
   "shared": {
+    "pay_schedule": {
+      "ra": {
+        "type": "semi-monthly",
+        "days": [
+          15,
+          31
+        ],
+        "rule": "If payday falls on Sat or Sun, pay comes the Friday before",
+        "source": "Informdata"
+      },
+      "arabelle": {
+        "type": "bi-weekly",
+        "day": "friday",
+        "anchor": "2026-03-27",
+        "interval_days": 14,
+        "source": "Arabelle employer"
+      }
+    },
     "accounts": {
       "payroll": {
-        "balance": 23270,
+        "balance": 14711.81,
         "account_masked": "***9713",
-        "updated": "2026-03-28",
-        "notes": "Updated by Arabelle via Quick Log"
+        "updated": "2026-03-30",
+        "notes": "RA confirmed 1:27 AM"
       },
       "savings": {
         "balance": 0,
@@ -20,9 +38,9 @@
         "notes": "Funds consolidated to payroll for trip. RA will transfer back if money remains."
       },
       "pocket_cash": {
-        "balance": 7200,
-        "updated": "2026-03-28",
-        "notes": "P65 prior + P6,000 ATM withdrawal in Daet. Minus trip spending."
+        "balance": 7926,
+        "updated": "2026-03-30",
+        "notes": "P8,000 cash on hand - P74 sisilog = P7,926"
       }
     },
     "bills": {
@@ -31,42 +49,42 @@
         {
           "name": "Rent",
           "amount": 4000,
-          "due_day": 15,
+          "due_date": "2026-03-15",
           "status": "paid",
           "paid_date": "2026-03-15"
         },
         {
           "name": "Meralco",
           "amount": 3269,
-          "due_day": null,
+          "due_date": null,
           "status": "paid",
           "paid_date": "2026-03-23"
         },
         {
           "name": "PLDT Fibr",
           "amount": 1700,
-          "due_day": 17,
+          "due_date": "2026-03-17",
           "status": "paid",
           "paid_date": "2026-03-17"
         },
         {
           "name": "Maynilad",
           "amount": 887,
-          "due_day": null,
+          "due_date": null,
           "status": "paid",
           "paid_date": "2026-03-23"
         },
         {
           "name": "Parking",
           "amount": 3000,
-          "due_day": 28,
+          "due_date": "2026-03-28",
           "status": "pending",
           "paid_date": null
         },
         {
           "name": "Meralco (Apr)",
           "amount": 5503.15,
-          "due_day": 3,
+          "due_date": "2026-04-03",
           "status": "pending",
           "paid_date": null
         }
@@ -146,10 +164,10 @@
         "notes": "1 PM in Daet"
       },
       {
-        "date": "2026-03-30",
-        "title": "Return to Pasig from Daet (night drive)",
+        "date": "2026-03-31",
+        "title": "Return to Pasig from Daet (day drive)",
         "category": "travel",
-        "time": "20:00"
+        "time": "06:00"
       },
       {
         "date": "2026-04-11",
@@ -249,7 +267,8 @@
           "medicine": 33,
           "cash_withdrawn": 18500,
           "notes": "Food: McD P440 + Dunkin P219 + Hoogpaan P6,600 + sisig P89 = P7,348 total",
-          "misc": 300
+          "misc": 300,
+          "gas_actual": 2800
         },
         "milestones": [
           {
@@ -269,8 +288,8 @@
             "event": "Baby Jah asleep after full day playing with cousins"
           },
           {
-            "time": "2026-03-30 20:00",
-            "event": "Depart Daet for Pasig (planned)"
+            "time": "2026-03-31 06:00",
+            "event": "Depart Daet for Pasig (day drive, planned)"
           }
         ],
         "schedule": [
@@ -303,13 +322,13 @@
             ]
           },
           {
-            "date": "2026-03-29",
-            "label": "Sunday",
+            "date": "2026-03-30",
+            "label": "Monday",
             "items": [
               {
-                "time": "06:30",
-                "event": "Gumaus Beach morning",
-                "notes": "Family beach day. Check tide before heading out.",
+                "time": "14:00",
+                "event": "Gumaus Beach",
+                "notes": "Afternoon beach trip. Rescheduled from Mar 29.",
                 "icon": "beach",
                 "location": "Gumaus Beach, Daet, Camarines Norte"
               }
@@ -499,16 +518,21 @@
           "date": "2026-03-28",
           "time": "10:20",
           "food": "Milk"
+        },
+        {
+          "date": "2026-03-29",
+          "time": "15:00",
+          "food": "S&R bacon and chicken rolls sandwich",
+          "notes": "Ate with Arabelle and Zach"
+        },
+        {
+          "date": "2026-03-29",
+          "time": "19:00",
+          "food": "Bread and lugaw",
+          "notes": "Family dinner -- sinigang na fish and shrimp for adults"
         }
       ],
       "sleep": [
-        {
-          "date": "2026-03-22",
-          "slept": null,
-          "woke": "02:30",
-          "type": "night",
-          "notes": "Woke up ~2:30 AM"
-        },
         {
           "date": "2026-03-23",
           "slept": "11:40",
@@ -576,6 +600,20 @@
           "woke": null,
           "type": "night",
           "notes": "Slept after Hoogpaan dinner. Big day -- beach + graduation + dinner."
+        },
+        {
+          "date": "2026-03-29",
+          "slept": "11:00",
+          "woke": "14:00",
+          "type": "nap",
+          "notes": "3 hr nap in Daet. Vacation day."
+        },
+        {
+          "date": "2026-03-29",
+          "slept": "22:00",
+          "woke": null,
+          "type": "night",
+          "notes": "Slept with Arabelle ~10 PM. Last night in Daet."
         }
       ],
       "diapers": [
@@ -710,6 +748,18 @@
           "age": "21 months",
           "milestone": "Strong receptive language: follows specific instructions (pick up toy, get blanket, fetch specific items). Understands object names. Expressive will follow.",
           "location": "Daet"
+        },
+        {
+          "date": "2026-03-29",
+          "age": "21 months",
+          "milestone": "Walks on sand confidently with sandals -- was afraid of sand on earlier trips. Sensory growth.",
+          "location": "Daet"
+        },
+        {
+          "date": "2026-03-29",
+          "age": "21 months",
+          "milestone": "First real engagement with extended family -- playing with cousins, grandparents, aunts. Social milestone.",
+          "location": "Daet"
         }
       ],
       "growth": [],
@@ -764,6 +814,26 @@
           "date": "2026-03-26",
           "time": "15:30",
           "activity": "Nail cutting by Arabelle"
+        },
+        {
+          "date": "2026-03-29",
+          "time": "07:00",
+          "activity": "Morning beach walk in Daet -- walks on sand with sandals now"
+        },
+        {
+          "date": "2026-03-29",
+          "time": "15:00",
+          "activity": "Playing with cousins, grandparents, aunts -- first real extended family engagement"
+        },
+        {
+          "date": "2026-03-29",
+          "time": "17:00",
+          "activity": "Watching Ms. Rachel"
+        },
+        {
+          "date": "2026-03-29",
+          "time": "19:00",
+          "activity": "Family dinner -- sinigang na fish and shrimp"
         }
       ],
       "next_checkup": null,
@@ -792,6 +862,18 @@
           "time": "13:45",
           "food": "Milk",
           "notes": "Afternoon milk"
+        },
+        {
+          "date": "2026-03-29",
+          "time": "15:00",
+          "food": "S&R bacon and chicken rolls sandwich",
+          "notes": "Ate with Arabelle and Zach"
+        },
+        {
+          "date": "2026-03-29",
+          "time": "19:00",
+          "food": "Bread and lugaw",
+          "notes": "Family dinner. Adults had sinigang na fish and shrimp."
         }
       ],
       "health": [
@@ -841,7 +923,7 @@
       {
         "name": "Toyota Vios 2015",
         "type": "car",
-        "gas_level": 30,
+        "gas_level": 100,
         "last_maintenance": "2026-03-23",
         "maintenance_notes": "Brake shoes replaced",
         "updated": "2026-03-29"
@@ -908,20 +990,6 @@
       "workplace": "McKinley Hills, Taguig"
     },
     "transactions": [
-      {
-        "date": "2026-03-22",
-        "time": "00:56",
-        "description": "Presto PB Cookies",
-        "amount": null,
-        "category": "food"
-      },
-      {
-        "date": "2026-03-22",
-        "time": "02:40",
-        "description": "Chicken Nuggets + Rice",
-        "amount": null,
-        "category": "food"
-      },
       {
         "date": "2026-03-23",
         "time": "08:00",
@@ -1302,6 +1370,22 @@
         "amount": 89,
         "category": "food",
         "notes": "Province eatery, 2:45 AM"
+      },
+      {
+        "date": "2026-03-29",
+        "time": null,
+        "description": "Gas full tank (Vios, Daet)",
+        "amount": 2800,
+        "category": "gas",
+        "notes": "Filled to 100% before Monday night drive back"
+      },
+      {
+        "date": "2026-03-30",
+        "time": "01:00",
+        "description": "Sisilog (late night, Daet)",
+        "amount": 74,
+        "category": "food",
+        "notes": "Before drive home"
       }
     ],
     "todos": [
@@ -1367,6 +1451,14 @@
         "hours": 5,
         "type": "vacation",
         "notes": "Post-graduation day. Slept after Hoogpaan dinner, woke 3 AM."
+      },
+      {
+        "date": "2026-03-29",
+        "slept": "13:00",
+        "woke": "19:00",
+        "hours": 6,
+        "type": "vacation",
+        "notes": "Vacation rest day in Daet. Planning all-night Claude Code session."
       }
     ]
   },
@@ -1965,6 +2057,83 @@
         "balance"
       ],
       "source": "quick_log"
+    },
+    {
+      "date": "2026-03-29",
+      "time": "07:00",
+      "type": "activity",
+      "summary": "Morning beach walk in Daet. Baby Jah walks on sand with sandals -- sensory milestone.",
+      "tags": [
+        "baby_jah",
+        "family",
+        "travel"
+      ],
+      "source": "life-log"
+    },
+    {
+      "date": "2026-03-29",
+      "time": "11:00",
+      "type": "sleep",
+      "summary": "Baby Jah nap 11 AM - 2 PM (3 hrs)",
+      "tags": [
+        "baby_jah"
+      ],
+      "source": "life-log"
+    },
+    {
+      "date": "2026-03-29",
+      "time": "13:00",
+      "type": "sleep",
+      "summary": "RA slept 1 PM - 7 PM (6 hrs). Vacation rest day.",
+      "tags": [
+        "ra",
+        "health"
+      ],
+      "source": "life-log"
+    },
+    {
+      "date": "2026-03-29",
+      "time": "15:00",
+      "type": "food",
+      "summary": "S&R bacon and chicken rolls sandwich -- Arabelle, Zach, Baby Jah ate together.",
+      "tags": [
+        "food",
+        "family"
+      ],
+      "source": "life-log"
+    },
+    {
+      "date": "2026-03-29",
+      "time": "15:00",
+      "type": "activity",
+      "summary": "Baby Jah playing with cousins, grandparents, aunts -- first real extended family engagement. Social milestone.",
+      "tags": [
+        "baby_jah",
+        "family"
+      ],
+      "source": "life-log"
+    },
+    {
+      "date": "2026-03-29",
+      "time": "17:00",
+      "type": "activity",
+      "summary": "Baby Jah watching Ms. Rachel -- comfort show.",
+      "tags": [
+        "baby_jah"
+      ],
+      "source": "life-log"
+    },
+    {
+      "date": "2026-03-29",
+      "time": "19:00",
+      "type": "food",
+      "summary": "Family dinner: sinigang na fish and shrimp. Baby Jah had bread and lugaw.",
+      "tags": [
+        "food",
+        "family",
+        "baby_jah"
+      ],
+      "source": "life-log"
     }
   ],
   "briefing": {

@@ -73,3 +73,13 @@ Append-only. Never prune.
 - **18:23** [CCTV] Arabelle tending to Baby Jah in playpen. Evening routine starting.
 - **19:11** [CCTV] RA woke up, checked on Baby Jah. Buki in the playpen too.
 - **19:52** [CCTV] Baby Jah and Arabelle asleep in playpen. Lights off.
+
+## 2026-03-29
+- **07:00** [Sync] Morning beach walk in Daet. Baby Jah walks on sand with sandals now -- was afraid of sand on earlier trips. Big sensory milestone.
+- **11:00** [Sync] Baby Jah nap 11 AM - 2 PM (3 hrs).
+- **13:00** [Sync] RA slept 1 PM - 7 PM (6 hrs). Vacation rest day, planning all-night Claude Code session.
+- **15:00** [Sync] S&R bacon and chicken rolls sandwich -- Arabelle, Zach, Baby Jah ate together.
+- **15:00** [Sync] Baby Jah playing with cousins, grandparents, aunts. First time really engaging with extended family. Social milestone.
+- **17:00** [Sync] Baby Jah watching Ms. Rachel -- comfort show, relaxed.
+- **19:00** [Sync] Family dinner: sinigang na fish and shrimp. RA, Arabelle, Zach, family. Baby Jah had bread and lugaw.
+- **21:00** [Sync] No beach today (everyone tired), but morning walk happened. Drive home tomorrow night (Mon Mar 30). Rain forecast ~35mm.
