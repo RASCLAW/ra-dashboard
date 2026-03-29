@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-03-28T10:30:05+08:00",
+  "last_updated": "2026-03-29T10:06:13+08:00",
   "location": {
     "name": "Daet, Camarines Norte",
     "lat": 14.1122,
@@ -8,10 +8,10 @@
   "shared": {
     "accounts": {
       "payroll": {
-        "balance": 30788.84,
+        "balance": 23270,
         "account_masked": "***9713",
-        "updated": "2026-03-27",
-        "notes": "Consolidated -- Arabelle salary + savings transferred in for Daet trip ATM access"
+        "updated": "2026-03-28",
+        "notes": "Updated by Arabelle via Quick Log"
       },
       "savings": {
         "balance": 0,
@@ -20,8 +20,8 @@
         "notes": "Funds consolidated to payroll for trip. RA will transfer back if money remains."
       },
       "pocket_cash": {
-        "balance": 6065,
-        "updated": "2026-03-27",
+        "balance": 7200,
+        "updated": "2026-03-28",
         "notes": "P65 prior + P6,000 ATM withdrawal in Daet. Minus trip spending."
       }
     },
@@ -245,10 +245,12 @@
         "pasalubong": "laing, pinangat, Bicol Express, kinunot, pili nut treats",
         "status": "active",
         "actual_spending": {
-          "food": 3748,
+          "food": 7437,
           "medicine": 33,
-          "cash_withdrawn": 11000,
-          "notes": "Food: McD P440 + Dunkin P219 + Hoogpaan DP P3,000 + sisig silog P89. Hoogpaan balance P2,769 still due Mar 28."
+          "cash_withdrawn": 18500,
+          "notes": "Food: McD P440 + Dunkin P219 + Hoogpaan P6,600 + sisig P89 = P7,348 total",
+          "misc": 300,
+          "gas_actual": 2800
         },
         "milestones": [
           {
@@ -568,6 +570,13 @@
           "woke": null,
           "type": "night",
           "notes": "Asleep after a big day playing with cousins in Daet. Less food/milk than usual -- excitement overload."
+        },
+        {
+          "date": "2026-03-28",
+          "slept": "22:00",
+          "woke": null,
+          "type": "night",
+          "notes": "Slept after Hoogpaan dinner. Big day -- beach + graduation + dinner."
         }
       ],
       "diapers": [
@@ -664,6 +673,18 @@
           "date": "2026-03-28",
           "time": "10:20",
           "type": "wet"
+        },
+        {
+          "date": "2026-03-28",
+          "time": "10:20",
+          "type": "wet",
+          "notes": "After breakfast"
+        },
+        {
+          "date": "2026-03-28",
+          "time": "13:45",
+          "type": "wet",
+          "notes": "Afternoon change"
         }
       ],
       "milestones": [
@@ -754,6 +775,24 @@
           "time": null,
           "food": "Less than usual -- too excited playing with cousins in Daet",
           "notes": "Reduced food and milk intake. Normal for overstimulated toddler in new environment."
+        },
+        {
+          "date": "2026-03-28",
+          "time": "10:18",
+          "food": "Lugaw & bread",
+          "notes": "Few spoons only -- still low appetite"
+        },
+        {
+          "date": "2026-03-28",
+          "time": "10:20",
+          "food": "Milk (full bottle)",
+          "notes": "Finished entire 7oz bottle"
+        },
+        {
+          "date": "2026-03-28",
+          "time": "13:45",
+          "food": "Milk",
+          "notes": "Afternoon milk"
         }
       ],
       "health": [
@@ -797,6 +836,16 @@
         "category": "Monthly Fixed Costs",
         "frequency": "monthly",
         "amount": 13300
+      }
+    ],
+    "vehicles": [
+      {
+        "name": "Toyota Vios 2015",
+        "type": "car",
+        "gas_level": 100,
+        "last_maintenance": "2026-03-23",
+        "maintenance_notes": "Brake shoes replaced",
+        "updated": "2026-03-29"
       }
     ]
   },
@@ -1200,7 +1249,7 @@
         "description": "Hoogpaan Restaurant -- DP for Zach's graduation dinner (14 pax, 7-8 PM)",
         "amount": 3000,
         "category": "food",
-        "notes": "Total P5,769. DP P3,000. Balance P2,769 due Mar 28."
+        "notes": "Down payment. Total bill P6,600."
       },
       {
         "date": "2026-03-28",
@@ -1223,6 +1272,45 @@
         "description": "Hair Cut ",
         "amount": null,
         "category": "misc"
+      },
+      {
+        "date": "2026-03-28",
+        "time": "10:18",
+        "description": "ATM Cash Withdrawal",
+        "amount": 7500,
+        "category": "cash",
+        "notes": "Daet"
+      },
+      {
+        "date": "2026-03-28",
+        "time": "10:18",
+        "description": "Haircut for Zach (graduation prep)",
+        "amount": 300,
+        "category": "shopping"
+      },
+      {
+        "date": "2026-03-28",
+        "time": "20:00",
+        "description": "Hoogpaan Restaurant -- graduation dinner balance",
+        "amount": 3600,
+        "category": "food",
+        "notes": "Balance paid. Total bill P6,600 (14 pax graduation dinner)."
+      },
+      {
+        "date": "2026-03-29",
+        "time": "02:45",
+        "description": "Sisilog + Coke (late night, Daet)",
+        "amount": 89,
+        "category": "food",
+        "notes": "Province eatery, 2:45 AM"
+      },
+      {
+        "date": "2026-03-29",
+        "time": null,
+        "description": "Gas full tank (Vios, Daet)",
+        "amount": 2800,
+        "category": "gas",
+        "notes": "Filled to 100% before Monday night drive back"
       }
     ],
     "todos": [
@@ -1280,6 +1368,14 @@
         "hours": 9,
         "type": "post-drive",
         "notes": "Arrived Daet ~4-5 AM after 8hr drive. Crashed 8 AM, woke 5 PM. Solid recovery block."
+      },
+      {
+        "date": "2026-03-28",
+        "slept": "22:00",
+        "woke": "03:00",
+        "hours": 5,
+        "type": "vacation",
+        "notes": "Post-graduation day. Slept after Hoogpaan dinner, woke 3 AM."
       }
     ]
   },
