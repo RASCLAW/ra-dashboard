@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-03-30T02:35:20+08:00",
+  "last_updated": "2026-03-30T13:15:05+08:00",
   "location": {
     "name": "Daet, Camarines Norte",
     "lat": 14.1122,
@@ -530,21 +530,34 @@
           "time": "19:00",
           "food": "Bread and lugaw",
           "notes": "Family dinner -- sinigang na fish and shrimp for adults"
+        },
+        {
+          "date": "2026-03-30",
+          "time": "07:00",
+          "food": "Milk and bread",
+          "notes": "Breakfast in Daet"
+        },
+        {
+          "date": "2026-03-30",
+          "time": "10:15",
+          "food": "Milk",
+          "notes": "Before nap attempt"
         }
       ],
       "sleep": [
         {
           "date": "2026-03-23",
           "slept": "11:40",
-          "woke": null,
-          "type": "nap"
+          "woke": "14:00",
+          "type": "nap",
+          "notes": "[auto-closed: estimated +3h]"
         },
         {
           "date": "2026-03-23",
           "slept": "18:00",
-          "woke": null,
+          "woke": "06:30",
           "type": "night",
-          "notes": "Asleep since 6 PM"
+          "notes": "Asleep since 6 PM [auto-closed: estimated wake 6:30 AM]"
         },
         {
           "date": "2026-03-24",
@@ -570,8 +583,9 @@
         {
           "date": "2026-03-25",
           "slept": "19:52",
-          "woke": null,
-          "type": "night"
+          "woke": "06:30",
+          "type": "night",
+          "notes": "[auto-closed: estimated wake 6:30 AM]"
         },
         {
           "date": "2026-03-26",
@@ -590,16 +604,16 @@
         {
           "date": "2026-03-27",
           "slept": "21:00",
-          "woke": null,
+          "woke": "06:30",
           "type": "night",
-          "notes": "Asleep after a big day playing with cousins in Daet. Less food/milk than usual -- excitement overload."
+          "notes": "Asleep after a big day playing with cousins in Daet. Less food/milk than usual -- excitement overload. [auto-closed: estimated wake 6:30 AM]"
         },
         {
           "date": "2026-03-28",
           "slept": "22:00",
-          "woke": null,
+          "woke": "06:30",
           "type": "night",
-          "notes": "Slept after Hoogpaan dinner. Big day -- beach + graduation + dinner."
+          "notes": "Slept after Hoogpaan dinner. Big day -- beach + graduation + dinner. [auto-closed: estimated wake 6:30 AM]"
         },
         {
           "date": "2026-03-29",
@@ -611,9 +625,28 @@
         {
           "date": "2026-03-29",
           "slept": "22:00",
-          "woke": null,
+          "woke": "06:30",
           "type": "night",
-          "notes": "Slept with Arabelle ~10 PM. Last night in Daet."
+          "notes": "Slept with Arabelle ~10 PM, woke 6:30 AM. ~8.5 hrs."
+        },
+        {
+          "date": "2026-03-30",
+          "slept": "10:15",
+          "woke": "13:05",
+          "type": "nap",
+          "notes": "Woke up, logged via dashboard pencil"
+        },
+        {
+          "date": "2026-03-30",
+          "slept": null,
+          "woke": "13:05",
+          "type": "night"
+        },
+        {
+          "date": "2026-03-30",
+          "slept": null,
+          "woke": "13:07",
+          "type": "night"
         }
       ],
       "diapers": [
@@ -722,6 +755,18 @@
           "time": "13:45",
           "type": "wet",
           "notes": "Afternoon change"
+        },
+        {
+          "date": "2026-03-30",
+          "time": "07:00",
+          "type": "wet",
+          "notes": "Morning change"
+        },
+        {
+          "date": "2026-03-30",
+          "time": "07:30",
+          "type": "poop",
+          "notes": "Morning poop in Daet"
         }
       ],
       "milestones": [
@@ -834,10 +879,35 @@
           "date": "2026-03-29",
           "time": "19:00",
           "activity": "Family dinner -- sinigang na fish and shrimp"
+        },
+        {
+          "date": "2026-03-30",
+          "time": "07:30",
+          "activity": "Playing with cousins in Daet"
+        },
+        {
+          "date": "2026-03-30",
+          "time": "09:45",
+          "activity": "Bath time"
+        },
+        {
+          "date": "2026-03-30",
+          "time": "13:01",
+          "activity": "Playing"
+        },
+        {
+          "date": "2026-03-30",
+          "time": "13:02",
+          "activity": "Dreaming"
+        },
+        {
+          "date": "2026-03-30",
+          "time": "13:05",
+          "activity": "Dreaming"
         }
       ],
       "next_checkup": null,
-      "mood_today": "Good mood (2026-03-26 6:45 AM)",
+      "mood_today": "Playing with cousins (2026-03-30 9:45 AM)",
       "feedings": [
         {
           "date": "2026-03-27",
@@ -874,6 +944,18 @@
           "time": "19:00",
           "food": "Bread and lugaw",
           "notes": "Family dinner. Adults had sinigang na fish and shrimp."
+        },
+        {
+          "date": "2026-03-30",
+          "time": "07:00",
+          "food": "Milk and bread",
+          "notes": "Breakfast in Daet"
+        },
+        {
+          "date": "2026-03-30",
+          "time": "10:15",
+          "food": "Milk",
+          "notes": "Before nap attempt"
         }
       ],
       "health": [
@@ -977,6 +1059,14 @@
           "slept": "07:30",
           "woke": "13:30",
           "notes": "Post-shift sleep with Bujah. ~6 hrs (7:30 AM counted from sleep attempt, actual ~9 AM - 1:30 PM = 4.5 hrs)"
+        },
+        {
+          "date": "2026-03-30",
+          "slept": "03:00",
+          "woke": "06:30",
+          "hours": 3.5,
+          "type": "vacation",
+          "notes": "Slept after coding session. Short block."
         }
       ],
       "commute_from": "05:00",
@@ -1386,6 +1476,13 @@
         "amount": 74,
         "category": "food",
         "notes": "Before drive home"
+      },
+      {
+        "date": "2026-03-30",
+        "time": "07:00",
+        "description": "Longsilog (breakfast, Daet)",
+        "amount": null,
+        "category": "food"
       }
     ],
     "todos": [
@@ -1460,7 +1557,93 @@
         "type": "vacation",
         "notes": "Vacation rest day in Daet. Planning all-night Claude Code session."
       }
-    ]
+    ],
+    "builder": {
+      "projects": [
+        {
+          "name": "DuberyMNL Command Center",
+          "status": "in-progress",
+          "next": "Polish Creative Studio UI, test kie.ai end-to-end, wire Ad Staging tab",
+          "priority": 1
+        },
+        {
+          "name": "Job Hunt Agent",
+          "status": "in-progress",
+          "next": "Wire cron for scout + market intel, add Jobicy API + WWR RSS sources",
+          "priority": 2
+        },
+        {
+          "name": "Dashboard v4",
+          "status": "in-progress",
+          "next": "RA profile revamp, system health cron",
+          "priority": 3
+        },
+        {
+          "name": "DuberyMNL Ads",
+          "status": "in-progress",
+          "next": "Monitor Traffic v2 performance, Meta Pixel setup",
+          "priority": 4
+        },
+        {
+          "name": "Portfolio",
+          "status": "in-progress",
+          "next": "Record Loom video, story panels v4",
+          "priority": 5
+        },
+        {
+          "name": "Belle Bot",
+          "status": "in-progress",
+          "next": "Improve response quality, add expense tracking",
+          "priority": 6
+        },
+        {
+          "name": "RAG System",
+          "status": "queued",
+          "next": "Research + build, powers WF4 chatbot, unlocks AI engineer roles",
+          "priority": 7
+        }
+      ],
+      "review_queue": {
+        "pipeline_pending": 15,
+        "image_queue": 42,
+        "job_leads_unseen": 14,
+        "skills_need_audit": 3
+      },
+      "learning": [
+        {
+          "topic": "Playwright",
+          "status": "learned",
+          "notes": "Browser automation, saw demos, ready to build"
+        },
+        {
+          "topic": "RAG Systems",
+          "status": "queued",
+          "notes": "Powers WF4 chatbot, AI engineer positioning"
+        },
+        {
+          "topic": "Edge AI / Raspberry Pi",
+          "status": "exploring",
+          "notes": "Local inference, baby monitor AI"
+        },
+        {
+          "topic": "Voice AI (Vapi/Retell)",
+          "status": "backlog",
+          "notes": "Voice agents, future offering"
+        },
+        {
+          "topic": "Facebook Ads 2026",
+          "status": "backlog",
+          "notes": "Advanced targeting, scaling"
+        }
+      ],
+      "systems": {
+        "belle_bot": "check_live",
+        "dashboard_cron": "check_live",
+        "ads_dayparting": "check_live",
+        "landing_page": "duberymnl.vercel.app",
+        "portfolio": "ras-portfolio.vercel.app"
+      }
+    }
   },
   "arabelle": {
     "schedule": {
@@ -2134,6 +2317,71 @@
         "baby_jah"
       ],
       "source": "life-log"
+    },
+    {
+      "date": "2026-03-30",
+      "time": "13:01",
+      "type": "activity",
+      "summary": "Baby Jah: Playing",
+      "tags": [
+        "activity",
+        "baby_jah"
+      ],
+      "source": "quick_log"
+    },
+    {
+      "date": "2026-03-30",
+      "time": "13:02",
+      "type": "activity",
+      "summary": "Baby Jah: Dreaming",
+      "tags": [
+        "activity",
+        "baby_jah"
+      ],
+      "source": "quick_log"
+    },
+    {
+      "date": "2026-03-30",
+      "time": "13:04",
+      "type": "todo",
+      "summary": "Eat",
+      "tags": [
+        "todo"
+      ],
+      "source": "quick_log"
+    },
+    {
+      "date": "2026-03-30",
+      "time": "13:05",
+      "type": "activity",
+      "summary": "Baby Jah: Dreaming",
+      "tags": [
+        "activity",
+        "baby_jah"
+      ],
+      "source": "quick_log"
+    },
+    {
+      "date": "2026-03-30",
+      "time": "13:05",
+      "type": "sleep",
+      "summary": "Baby Jah: woke",
+      "tags": [
+        "sleep",
+        "baby_jah"
+      ],
+      "source": "quick_log"
+    },
+    {
+      "date": "2026-03-30",
+      "time": "13:07",
+      "type": "sleep",
+      "summary": "Baby Jah: woke",
+      "tags": [
+        "sleep",
+        "baby_jah"
+      ],
+      "source": "quick_log"
     }
   ],
   "briefing": {
