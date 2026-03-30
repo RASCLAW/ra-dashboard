@@ -132,6 +132,19 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);min-hei
 .more-btn{display:flex;align-items:center;gap:12px;width:100%;padding:16px;border:none;background:var(--surface);border-radius:var(--r-md);color:var(--text);font-family:var(--font-body);font-size:15px;font-weight:600;cursor:pointer;margin-bottom:8px;transition:background .15s}
 .more-btn:active{background:var(--card-hover)}
 .more-icon{font-size:20px;width:32px;text-align:center}
+.card-edit{background:none;border:none;cursor:pointer;font-size:14px;color:var(--muted);padding:2px 4px;transition:color .15s}
+.card-edit:active{color:var(--green)}
+.card-edit.active{color:var(--green)}
+.edit-row{display:flex;gap:6px;margin-bottom:8px;animation:fadeIn .15s ease}
+.edit-row input{flex:1;padding:8px 10px;background:var(--input-bg);border:1px solid var(--border);border-radius:var(--r-sm);color:var(--text);font-family:var(--font-body);font-size:13px;outline:none}
+.edit-row input:focus{border-color:var(--green)}
+.edit-row button{padding:8px 12px;border:none;border-radius:var(--r-sm);font-family:var(--font-body);font-size:12px;font-weight:600;cursor:pointer}
+.edit-add{background:var(--green);color:var(--btn-text)}
+.edit-done{background:var(--surface);color:var(--green);border:1px solid var(--green) !important}
+.edit-del{background:none;color:var(--red);font-size:14px;padding:0 6px;border:none;cursor:pointer}
+.jah-quick{display:flex;gap:6px;margin-bottom:8px;animation:fadeIn .15s ease}
+.jah-quick button{flex:1;padding:8px;border:1px solid var(--border);border-radius:var(--r-sm);background:var(--surface);color:var(--text);font-size:11px;font-weight:600;cursor:pointer;font-family:var(--font-body)}
+.jah-quick button:active{background:var(--pink-dim);border-color:var(--pink)}
 </style>
 </head>
 <body>
@@ -593,169 +606,95 @@ function render(){
 
 function renderRAHome(){
   const el=document.getElementById('ov');
-  const S=D.shared;const P=D.ra;
-  const total=(S.accounts.payroll.balance||0)+(S.accounts.savings.balance||0)+(S.accounts.pocket_cash.balance||0);
-  const nextEvents=S.calendar.filter(e=>new Date(e.date+'T23:59:59+08:00')>=new Date()).sort((a,b)=>a.date.localeCompare(b.date)||(a.time||'').localeCompare(b.time||'')).slice(0,4);
-  const pendingTodos=P.todos.filter(t=>!t.done).sort((a,b)=>{if(!a.due)return 1;if(!b.due)return-1;return a.due.localeCompare(b.due)}).slice(0,6);
-  const contacts=P.contacts.slice(0,3);
-  const jah=S.baby_jah;
-  const hid=balHidden;
-
+  const P=D.ra;const B=P.builder||{};
   let h='';
 
-  // 1. TODAY'S SCHEDULE
-  const todayStr=manilaDateStr();
-  const todayEvents=nextEvents.filter(e=>e.date===todayStr);
-  const upcomingEvents=nextEvents.filter(e=>e.date!==todayStr).slice(0,2);
-  if(todayEvents.length||upcomingEvents.length){
-    h+='<div class="c"><div class="ct m">Schedule</div>';
-    if(todayEvents.length){
-      todayEvents.forEach(e=>{
-        h+=`<div style="display:flex;gap:10px;align-items:center;padding:6px 0">
-          <div class="icon-box" style="background:${catDims[e.category]||'var(--surface)'};font-size:12px">${catEmoji[e.category]||'📌'}</div>
-          <div style="flex:1"><div style="font-size:13px;font-weight:600">${e.title}</div><div class="m" style="font-size:10px;color:var(--muted)">${e.time?fmt12(e.time):'All day'}${e.notes?' -- '+e.notes:''}</div></div></div>`;
-      });
-    } else {
-      h+='<div style="font-size:12px;color:var(--muted);padding:4px 0">Nothing scheduled today</div>';
-    }
-    if(upcomingEvents.length){
-      h+='<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border)">';
-      upcomingEvents.forEach(e=>{
-        h+=`<div style="display:flex;gap:10px;align-items:center;padding:4px 0">
-          <div class="icon-box" style="background:${catDims[e.category]||'var(--surface)'};font-size:11px">${catEmoji[e.category]||'📌'}</div>
-          <div style="flex:1"><div style="font-size:12px;font-weight:500">${e.title}</div><div class="m" style="font-size:9px;color:var(--muted)">${fmtDate(e.date)} ${daysUntil(e.date)}</div></div></div>`;
-      });
-      h+='</div>';
-    }
+  // 1. PROJECTS
+  const projects=B.projects||[];
+  const statusIcon={live:'var(--green)','in-progress':'var(--blue)',queued:'var(--muted)',stale:'var(--orange)'};
+  const statusLabel={live:'LIVE','in-progress':'BUILDING',queued:'QUEUED',stale:'STALE'};
+  if(projects.length){
+    h+='<div class="c"><div class="ct m">Projects</div>';
+    projects.forEach(p=>{
+      const col=statusIcon[p.status]||'var(--muted)';
+      const lbl=statusLabel[p.status]||p.status.toUpperCase();
+      h+=`<div style="padding:8px 0;border-bottom:1px solid var(--border)">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div style="font-size:13px;font-weight:600">${p.name}</div>
+          <span class="m" style="font-size:9px;color:${col};font-weight:700;letter-spacing:0.5px">${lbl}</span>
+        </div>
+        <div style="font-size:11px;color:var(--text-secondary);margin-top:3px">${p.next}</div>
+      </div>`;
+    });
     h+='</div>';
   }
 
-  // 2. FINANCE SNAPSHOT (merged accounts + quick stats + insight)
-  const pendingBills=S.bills.items.filter(b=>b.status!=='paid');
-  const pendingTotal=pendingBills.reduce((s,b)=>s+b.amount,0);
-  const tripEst=S.trips.find(t=>t.status==='upcoming'||t.status==='active');
-  const tripTotal=tripEst?tripEst.budget.total:0;
-  h+=`<div class="c">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-      <div class="ct m" style="margin:0;padding:0;border:none">Finances</div>
-      <button onclick="toggleBal()" style="background:none;border:none;cursor:pointer;font-size:14px;color:var(--muted);padding:2px 4px">${hid?'🙈':'👁'}</button>
-    </div>
-    <div style="display:flex;gap:6px;margin-bottom:8px">
-      ${(S.accounts.payroll.balance||0)>100?`<div style="flex:1;background:var(--surface);border-radius:${CSS_R_SM};padding:8px"><div class="m" style="font-size:8px;color:var(--muted);letter-spacing:0.5px">PAYROLL</div><div class="m" style="font-size:14px;font-weight:700;color:var(--blue);margin-top:2px">${hid?'****':fmt(S.accounts.payroll.balance)}</div></div>`:''}
-      ${(S.accounts.savings.balance||0)>100?`<div style="flex:1;background:var(--surface);border-radius:${CSS_R_SM};padding:8px"><div class="m" style="font-size:8px;color:var(--muted);letter-spacing:0.5px">SAVINGS</div><div class="m" style="font-size:14px;font-weight:700;color:var(--green);margin-top:2px">${hid?'****':fmt(S.accounts.savings.balance)}</div></div>`:''}
-      ${(S.accounts.pocket_cash.balance||0)>100?`<div style="flex:1;background:var(--surface);border-radius:${CSS_R_SM};padding:8px"><div class="m" style="font-size:8px;color:var(--muted);letter-spacing:0.5px">POCKET</div><div class="m" style="font-size:14px;font-weight:700;color:var(--orange);margin-top:2px">${fmt(S.accounts.pocket_cash.balance)}</div></div>`:''}
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
-      <div style="background:var(--surface);border-radius:${CSS_R_SM};padding:8px"><div class="m" style="font-size:8px;color:var(--muted);letter-spacing:0.5px">TOTAL</div><div class="m" style="font-size:15px;font-weight:700;color:var(--green);margin-top:2px">${hid?'****':fmt(total)}</div></div>
-      <div style="background:var(--surface);border-radius:${CSS_R_SM};padding:8px"><div class="m" style="font-size:8px;color:var(--muted);letter-spacing:0.5px">BILLS DUE</div><div class="m" style="font-size:15px;font-weight:700;color:var(--orange);margin-top:2px">${hid?'****':fmt(pendingTotal)}</div></div>
-    </div>
-    ${(()=>{
-      const pocket=S.accounts.pocket_cash.balance||0;
-      const remaining=total-pendingTotal-tripTotal;
-      const soonBills=pendingBills.filter(b=>{const dl=billDaysLeft(b);return dl===null||dl<=3});
-      let insight='',color='var(--green)';
-      if(remaining<0){insight='Bills + trip exceed cash by '+fmt(Math.abs(remaining))+'. You will go negative.';color='var(--red)'}
-      else if(pocket<500&&isOnTrip()){insight='Pocket cash at '+fmt(pocket)+'. Withdraw before you hit the road.';color='var(--red)'}
-      else if(pocket<500){insight='Pocket cash at '+fmt(pocket)+'. Top up soon.';color='var(--orange)'}
-      else if(isOnTrip()&&remaining<2000){insight='Tight. Only '+fmt(remaining)+' left after bills + trip.';color='var(--orange)'}
-      else if(isOnTrip()){insight='Trip covered. '+fmt(remaining)+' left after bills + trip budget.';color='var(--green)'}
-      else if(soonBills.length){insight=soonBills.map(b=>b.name).join(', ')+' due soon.';color='var(--orange)'}
-      else if(pendingBills.length){insight=fmt(pendingTotal)+' in pending bills. '+fmt(total-pendingTotal)+' free after.';color='var(--text-secondary)'}
-      else{insight='All bills paid. '+fmt(total)+' available.';color='var(--green)'}
-      const pays=nextPaydays().filter(p=>p.daysUntil<=7);
-      if(pays.length){const p=pays[0];insight+=(insight?' ':'')+(p.daysUntil===0?p.label+' today.':p.daysUntil===1?p.label+' tomorrow.':p.label+' in '+p.daysUntil+' days.')}
-      return '<div style="margin-top:8px;padding:8px 10px;background:var(--surface);border-radius:'+CSS_R_SM+';font-size:11px;color:'+color+';line-height:1.4">'+insight+'</div>';
-    })()}
-  </div>`;
-
-  // 3. BABY JAH COMPACT
-  if(jah){
-    const lastFed=jah.feeding.length?jah.feeding[jah.feeding.length-1]:null;
-    const lastSleep=jah.sleep.length?jah.sleep[jah.sleep.length-1]:null;
-    const js=jahStatus();
-    h+=`<div class="c" style="border:1px solid rgba(224,126,168,0.1);background:linear-gradient(145deg,rgba(224,126,168,0.05) 0%,rgba(91,155,213,0.03) 100%)">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-        <div class="ct m" style="margin:0;padding:0;border:none"><span class="jah-accent">Baby Jah</span></div>
-        <span style="font-size:12px;font-weight:600">${js.icon} ${js.text}</span>
-      </div>
-      <div style="display:flex;gap:8px">
-        <div style="flex:1;display:flex;gap:8px;align-items:center">
-          <span style="font-size:14px">🍼</span>
-          <div><div style="font-size:12px;font-weight:600">${lastFed?lastFed.food:'--'}</div><div class="m" style="font-size:9px;color:var(--muted)">${lastFed?timeAgo(lastFed.date,lastFed.time):'--'}</div></div>
-        </div>
-        <div style="flex:1;display:flex;gap:8px;align-items:center">
-          <span style="font-size:14px">😴</span>
-          <div><div style="font-size:12px;font-weight:600">${lastSleep?(lastSleep.woke&&!lastSleep.slept?'Woke up':lastSleep.type==='nap'?'Napping':'Sleeping'):'--'}</div><div class="m" style="font-size:9px;color:var(--muted)">${lastSleep?timeAgo(lastSleep.date,lastSleep.woke||lastSleep.slept):'--'}</div></div>
-        </div>
-      </div>
-    </div>`;
+  // 2. LEARNING
+  const learning=B.learning||[];
+  if(learning.length){
+    const learnIcon={learned:'var(--green)',queued:'var(--blue)',exploring:'var(--orange)',backlog:'var(--muted)'};
+    const learnLabel={learned:'LEARNED',queued:'UP NEXT',exploring:'EXPLORING',backlog:'BACKLOG'};
+    h+='<div class="c"><div class="ct m">Upskilling</div>';
+    learning.forEach(l=>{
+      const col=learnIcon[l.status]||'var(--muted)';
+      h+=`<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border)">
+        <div><div style="font-size:12px;font-weight:600">${l.topic}</div><div style="font-size:10px;color:var(--muted);margin-top:2px">${l.notes}</div></div>
+        <span class="m" style="font-size:9px;color:${col};font-weight:700;white-space:nowrap;margin-left:8px">${learnLabel[l.status]||l.status}</span>
+      </div>`;
+    });
+    h+='</div>';
   }
 
-  // 4. ALERTS / PENDING
-  const alerts=[];
-  pendingBills.forEach(b=>{
-    const dl=billDaysLeft(b);
-    if(dl===null||dl<=5)alerts.push({icon:'💰',text:b.name+' '+fmt(b.amount),sub:dl===null?'due soon':dl<0?Math.abs(dl)+'d overdue':daysUntil(b.due_date),color:dl!==null&&dl<0?'var(--red)':'var(--orange)'});
-  });
-  if((S.accounts.pocket_cash.balance||0)<500)alerts.push({icon:'💵',text:'Pocket cash low: '+fmt(S.accounts.pocket_cash.balance),sub:'Withdraw soon',color:'var(--red)'});
-  if(isStale(S.accounts.payroll.updated,7))alerts.push({icon:'🏦',text:'Account balances stale',sub:'Send a bank screenshot',color:'var(--orange)'});
-
-  if(alerts.length||pendingTodos.length){
-    h+='<div class="c"><div class="ct m">Alerts & To Do</div>';
-    alerts.forEach(a=>{
-      h+=`<div style="display:flex;gap:10px;align-items:center;padding:6px 0;border-bottom:1px solid var(--border)">
-        <span style="font-size:14px">${a.icon}</span>
-        <div style="flex:1"><div style="font-size:12px;font-weight:600;color:${a.color}">${a.text}</div><div class="m" style="font-size:9px;color:var(--muted)">${a.sub}</div></div></div>`;
+  // 4. SYSTEM ALERTS
+  const sysAlerts=[];
+  if(isStale(D.briefing.updated,3))sysAlerts.push({text:'Briefing stale ('+D.briefing.updated+')',color:'var(--orange)'});
+  if(isStale(D.last_updated,0.5))sysAlerts.push({text:'Dashboard data >12h old',color:'var(--orange)'});
+  const rq2=B.review_queue||{};
+  if((rq2.image_queue||0)>20)sysAlerts.push({text:rq2.image_queue+' images in queue -- process soon',color:'var(--orange)'});
+  if(sysAlerts.length){
+    h+='<div class="c"><div class="ct m">System Alerts</div>';
+    sysAlerts.forEach(a=>{
+      h+=`<div style="display:flex;gap:8px;align-items:center;padding:6px 0;border-bottom:1px solid var(--border)">
+        <div class="d" style="background:${a.color}"></div>
+        <span style="font-size:12px;color:${a.color}">${a.text}</span>
+      </div>`;
     });
+    h+='</div>';
+  }
+
+  // 5. REVIEW QUEUE
+  const rq=B.review_queue||{};
+  const queueItems=[
+    {label:'Pipeline pending',count:rq.pipeline_pending||0,color:'var(--orange)'},
+    {label:'Image queue',count:rq.image_queue||0,color:'var(--purple)'},
+    {label:'Job leads (Apply Now)',count:rq.job_leads_unseen||0,color:'var(--green)'},
+    {label:'Skills need audit',count:rq.skills_need_audit||0,color:'var(--blue)'}
+  ].filter(q=>q.count>0);
+  if(queueItems.length){
+    h+='<div class="c"><div class="ct m">Review Queue</div>';
+    queueItems.forEach(q=>{
+      h+=`<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border)">
+        <span style="font-size:12px">${q.label}</span>
+        <span class="m" style="font-size:14px;font-weight:700;color:${q.color}">${q.count}</span>
+      </div>`;
+    });
+    h+='</div>';
+  }
+
+  // 6. TODOS
+  const removedTodos=JSON.parse(localStorage.getItem('removed_todos')||'[]');
+  const addedRATodos=JSON.parse(localStorage.getItem('added_todos_ra')||'[]');
+  const pendingTodos=[...P.todos.filter(t=>!t.done&&!removedTodos.includes(t.text)),...addedRATodos].sort((a,b)=>{if(!a.due)return 1;if(!b.due)return-1;return a.due.localeCompare(b.due)}).slice(0,6);
+  h+=`<div class="c"><div style="display:flex;justify-content:space-between;align-items:center"><div class="ct m" style="margin-bottom:0;border:none;padding:0">To Do</div>${pencilBtn('todos-ra')}</div>
+    <div id="edit-todos-ra" style="display:none;margin:8px 0"><div class="edit-row"><input type="text" id="todo-input-ra" placeholder="Add todo" onkeydown="if(event.key==='Enter')addTodo('ra')"><button class="edit-add" onclick="addTodo('ra')">+</button></div></div>`;
+  if(pendingTodos.length){
     pendingTodos.forEach((t,i)=>{
-      h+=`<div style="display:flex;gap:10px;align-items:center;padding:6px 0;${i<pendingTodos.length-1?'border-bottom:1px solid var(--border)':''};cursor:pointer" onclick="tickTodo(${i})">
-        <div style="width:16px;height:16px;border-radius:4px;border:2px solid var(--muted);flex-shrink:0;display:flex;align-items:center;justify-content:center" id="todo-check-${i}"></div>
-        <span style="font-size:12px" id="todo-text-${i}">${t.text}${t.due?'<span class="m" style="font-size:9px;color:var(--muted);margin-left:6px">'+daysUntil(t.due)+'</span>':''}</span></div>`;
+      h+=`<div style="display:flex;gap:10px;align-items:center;padding:6px 0;${i<pendingTodos.length-1?'border-bottom:1px solid var(--border)':''}">
+        <div style="flex:1;font-size:12px">${t.text}${t.due?'<span class="m" style="font-size:9px;color:var(--muted);margin-left:6px">'+daysUntil(t.due)+'</span>':''}</div>
+        <button onclick="removeTodo('${t.text.replace(/'/g,"\\'")}','ra')" style="background:none;border:none;cursor:pointer;color:var(--muted);font-size:14px;padding:0 2px">&times;</button></div>`;
     });
-    h+='</div>';
-  }
-
-  // 5. GAS
-  if(isOnTrip()&&S.vehicle.car){
-    const car=S.vehicle.car;const carGas=parseInt(car.gas_level)||0;
-    const barColor=carGas<30?'var(--red)':carGas<60?'var(--orange)':'var(--green)';
-    h+=`<div class="c"><div style="display:flex;justify-content:space-between;align-items:center">
-      <div><div class="lbl m">${car.model}</div><div style="font-size:10px;color:var(--text-secondary);margin-top:2px">${car.last_gas?'Filled: '+fmtDate(car.last_gas):''}</div></div>
-      <div style="font-family:var(--font-display);font-size:24px;font-weight:700;color:${barColor}">${car.gas_level}</div></div>
-      <div style="height:5px;background:var(--surface);border-radius:3px;margin-top:10px;overflow:hidden"><div style="height:100%;width:${carGas}%;background:${barColor};border-radius:3px;transition:width .4s ease"></div></div></div>`;
-  }else{
-    const gas=S.vehicle.scooter;const gasLevel=parseInt(gas.gas_level)||0;
-    const gasColor=gasLevel<30?'var(--red)':gasLevel<60?'var(--orange)':'var(--green)';
-    h+=`<div class="c"><div style="display:flex;justify-content:space-between;align-items:center">
-      <div><div class="lbl m">Scooter Gas</div><div style="font-size:10px;color:var(--text-secondary);margin-top:2px">${gas.last_gas?'Last: '+fmtDate(gas.last_gas):''}</div></div>
-      <div style="font-family:var(--font-display);font-size:24px;font-weight:700;color:${gasColor}">${gas.gas_level}</div></div>
-      <div style="height:5px;background:var(--surface);border-radius:3px;margin-top:10px;overflow:hidden"><div style="height:100%;width:${gasLevel}%;background:${gasColor};border-radius:3px;transition:width .4s ease"></div></div></div>`;
-  }
-
-  // 6. MY MEALS (compact)
-  const raMeals=P.transactions.filter(t=>t.category==='food').slice(-3).reverse();
-  if(raMeals.length){
-    h+='<div class="c"><div class="ct m">My Meals</div>';
-    raMeals.forEach(t=>{
-      h+=`<div style="display:flex;gap:8px;align-items:center;padding:5px 0">
-        <span style="font-size:12px">🍽</span>
-        <div style="flex:1;font-size:12px">${t.description}</div>
-        <span class="m" style="font-size:9px;color:var(--muted)">${timeAgo(t.date,t.time)||''}</span></div>`;
-    });h+='</div>';
-  }
-
-  // 7. CONTACTS (dismissable)
-  const dismissedContacts=JSON.parse(localStorage.getItem('dismissedContacts')||'[]');
-  const visibleContacts=contacts.filter(c=>!dismissedContacts.includes(c.name));
-  if(visibleContacts.length){
-    h+='<div class="c"><div class="ct m">Need to Contact</div>';
-    visibleContacts.forEach(c=>{
-      h+=`<div class="r"><div class="rl">
-        <button onclick="dismissContact('${c.name.replace(/'/g,"\\'")}')" style="background:none;border:1px solid var(--border);border-radius:4px;width:18px;height:18px;cursor:pointer;color:var(--muted);font-size:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0">&#10003;</button>
-        <div><div style="font-size:13px;font-weight:500">${c.name}</div><div class="m" style="font-size:10px;color:var(--muted)">${c.purpose}</div></div></div>
-        ${c.due?`<span class="m" style="font-size:9px;color:var(--purple)">${daysUntil(c.due)}</span>`:''}</div>`;
-    });h+='</div>';
-  }
+  }else{h+='<div class="empty-state">All clear</div>'}
+  h+='</div>';
 
   el.innerHTML=h;
 }
@@ -765,10 +704,130 @@ function renderArabelleHome(){
   const S=D.shared;const jah=S.baby_jah;
   const ra=getRAStatus();
   const h_now=manilaHour();
-  const hid=balHidden;
   let h='';
+  const pendingBills=S.bills.items.filter(b=>b.status!=='paid');
 
-  // 1. TODAY'S SCHEDULE
+  // 1. COMMUTE FORECAST
+  if(W&&W.hourly){
+    const isToday=h_now<5;
+    const targetHour=5;
+    const dayOff=isToday?0:1;
+    const cw=getCommuteWeather(W,targetHour,dayOff);
+    if(cw){
+      const rec=getCommuteRec(cw.rain,cw.code);
+      const wIcon=wcIcon[cw.code]||'🌤';
+      const wDesc=wcDesc[cw.code]||'Unknown';
+      const label=isToday?'This morning 5 AM':'Tomorrow 5 AM';
+      h+=`<div class="c"><div class="ct m">Commute Forecast</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin:4px 0 8px">
+          <div><div style="font-size:15px;font-weight:600">${wIcon} ${wDesc}</div><div class="m" style="font-size:10px;color:var(--muted);margin-top:2px">${label} // ${cw.rain}% rain</div></div>
+          <div style="font-size:28px">${rec.icon}</div>
+        </div>
+        <div class="${rec.cls}" style="padding:8px;font-size:12px;font-weight:600;text-align:center">${rec.text}</div>
+      </div>`;
+    }
+  }
+
+  // 2. BABY JAH 4-ROW CARD
+  if(jah){
+    const lastFed=jah.feeding.length?jah.feeding[jah.feeding.length-1]:null;
+    const lastSleep=jah.sleep.length?jah.sleep[jah.sleep.length-1]:null;
+    const lastAct=jah.activities.length?jah.activities[jah.activities.length-1]:null;
+    const lastDiaper=jah.diapers.length?jah.diapers[jah.diapers.length-1]:null;
+    const js=jahStatus();
+    h+=`<div class="c" style="border:1px solid rgba(224,126,168,0.1);background:linear-gradient(145deg,rgba(224,126,168,0.05) 0%,rgba(91,155,213,0.03) 100%)">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+        <div class="ct m" style="margin:0;padding:0;border:none;cursor:pointer" onclick="setProfile('jah')"><span class="jah-accent">Baby Jah</span></div>
+        <div style="display:flex;align-items:center;gap:6px"><span style="font-size:12px;font-weight:600;cursor:pointer" onclick="setProfile('jah')">${js.icon} ${js.text}</span>${pencilBtn('jah-ara')}</div>
+      </div>
+      <div id="edit-jah-ara" style="display:none">
+        <div class="jah-quick">
+          <button onclick="jahQuickSelect('fed','jah-ara')">🍼 Fed</button>
+          <button onclick="jahQuickSelect('diaper','jah-ara')">🧷 Diaper</button>
+          <button onclick="jahQuickSelect('sleep','jah-ara')">😴 Sleep</button>
+          <button onclick="jahQuickSelect('woke','jah-ara')">🥱 Woke</button>
+          <button onclick="jahQuickSelect('activity','jah-ara')">🏃 Activity</button>
+        </div>
+        <div id="jah-form-jah-ara"></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <div style="display:flex;gap:8px;align-items:center">
+          <span style="font-size:14px">🍼</span>
+          <div><div style="font-size:12px;font-weight:600">${lastFed?lastFed.food:'--'}</div><div class="m" style="font-size:9px;color:var(--muted)">${lastFed?timeAgo(lastFed.date,lastFed.time):'--'}</div></div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <span style="font-size:14px">😴</span>
+          <div><div style="font-size:12px;font-weight:600">${lastSleep?(lastSleep.woke&&!lastSleep.slept?'Woke up':lastSleep.type==='nap'?'Napping':'Sleeping'):'--'}</div><div class="m" style="font-size:9px;color:var(--muted)">${lastSleep?timeAgo(lastSleep.date,lastSleep.woke||lastSleep.slept):'--'}</div></div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <span style="font-size:14px">🏃</span>
+          <div><div style="font-size:12px;font-weight:600">${lastAct?lastAct.activity:'--'}</div><div class="m" style="font-size:9px;color:var(--muted)">${lastAct?timeAgo(lastAct.date,lastAct.time):'--'}</div></div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <span style="font-size:14px">🧷</span>
+          <div><div style="font-size:12px;font-weight:600">${lastDiaper?(lastDiaper.type==='poop'?'Poop':'Wet'):'--'}</div><div class="m" style="font-size:9px;color:var(--muted)">${lastDiaper?timeAgo(lastDiaper.date,lastDiaper.time):'--'}</div></div>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  // 3. RA STATUS CARD
+  const raSleep=(D.ra.schedule.sleep||[]);
+  const lastRASleep=raSleep.length?raSleep[raSleep.length-1]:null;
+  h+=`<div class="c">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+      <div class="ct m" style="margin:0;padding:0;border:none">RA</div>
+      <span style="font-size:12px;font-weight:600;color:var(--blue)">${ra.icon} ${ra.text}</span>
+    </div>
+    ${lastRASleep?`<div style="display:flex;gap:8px;align-items:center">
+      <span style="font-size:14px">😴</span>
+      <div><div style="font-size:12px;font-weight:600">${lastRASleep.slept&&lastRASleep.woke?fmt12(lastRASleep.slept)+' - '+fmt12(lastRASleep.woke):lastRASleep.slept?'Napping since '+fmt12(lastRASleep.slept):lastRASleep.woke?'Woke at '+fmt12(lastRASleep.woke):'--'}</div><div class="m" style="font-size:9px;color:var(--muted)">${lastRASleep.notes||fmtDate(lastRASleep.date)}</div></div>
+    </div>`:''}
+    <div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border);font-size:11px;color:var(--muted)">
+      ${(()=>{const day=manilaDayNum();const isWork=day>=1&&day<=5;if(!isWork)return'Rest day (off tonight)';return'Shift tonight 8 PM - 5 AM'})()}
+    </div>
+  </div>`;
+
+  // 4. MY MEALS
+  const addedAraMeals=JSON.parse(localStorage.getItem('added_meals_arabelle')||'[]');
+  const araMeals=[...(D.arabelle.transactions||[]).filter(t=>t.category==='food'),...addedAraMeals].slice(-3).reverse();
+  h+=`<div class="c"><div style="display:flex;justify-content:space-between;align-items:center"><div class="ct m" style="margin-bottom:0;border:none;padding:0">My Meals</div>${pencilBtn('meals-ara')}</div>
+    <div id="edit-meals-ara" style="display:none;margin:8px 0"><div class="edit-row"><input type="text" id="meal-input-arabelle" placeholder="What did you eat?" onkeydown="if(event.key==='Enter')addMeal('arabelle')"><button class="edit-add" onclick="addMeal('arabelle')">+</button></div></div>`;
+  if(araMeals.length){
+    araMeals.forEach(t=>{
+      h+=`<div style="display:flex;gap:8px;align-items:center;padding:5px 0">
+        <span style="font-size:12px">🍽</span>
+        <div style="flex:1;font-size:12px">${t.description}</div>
+        <span class="m" style="font-size:9px;color:var(--muted)">${timeAgo(t.date,t.time)||''}</span></div>`;
+    });
+  }else{h+='<div class="empty-state">No meals logged. Tap pencil to add.</div>'}
+  h+='</div>';
+
+  // 5. ALERTS & TO DO
+  const alerts=[];
+  pendingBills.forEach(b=>{
+    const dl=billDaysLeft(b);
+    if(dl===null||dl<=5)alerts.push({icon:'💰',text:b.name+' '+fmt(b.amount),sub:dl===null?'due soon':dl<0?Math.abs(dl)+'d overdue':daysUntil(b.due_date),color:dl!==null&&dl<0?'var(--red)':'var(--orange)'});
+  });
+  const removedAraTodos=JSON.parse(localStorage.getItem('removed_todos')||'[]');
+  const addedAraTodos=JSON.parse(localStorage.getItem('added_todos_arabelle')||'[]');
+  const araTodos=[...D.arabelle.todos.filter(t=>!t.done&&!removedAraTodos.includes(t.text)),...addedAraTodos].sort((a,b)=>{if(!a.due)return 1;if(!b.due)return-1;return a.due.localeCompare(b.due)}).slice(0,6);
+  h+=`<div class="c"><div style="display:flex;justify-content:space-between;align-items:center"><div class="ct m" style="margin-bottom:0;border:none;padding:0">Alerts & To Do</div>${pencilBtn('todos-ara')}</div>
+    <div id="edit-todos-ara" style="display:none;margin:8px 0"><div class="edit-row"><input type="text" id="todo-input-arabelle" placeholder="Add todo" onkeydown="if(event.key==='Enter')addTodo('arabelle')"><button class="edit-add" onclick="addTodo('arabelle')">+</button></div></div>`;
+  alerts.forEach(a=>{
+    h+=`<div style="display:flex;gap:10px;align-items:center;padding:6px 0;border-bottom:1px solid var(--border)">
+      <span style="font-size:14px">${a.icon}</span>
+      <div style="flex:1"><div style="font-size:12px;font-weight:600;color:${a.color}">${a.text}</div><div class="m" style="font-size:9px;color:var(--muted)">${a.sub}</div></div></div>`;
+  });
+  araTodos.forEach((t,i)=>{
+    h+=`<div style="display:flex;gap:10px;align-items:center;padding:6px 0;${i<araTodos.length-1?'border-bottom:1px solid var(--border)':''}">
+      <div style="flex:1;font-size:12px">${t.text}${t.due?'<span class="m" style="font-size:9px;color:var(--muted);margin-left:6px">'+daysUntil(t.due)+'</span>':''}</div>
+      <button onclick="removeTodo('${t.text.replace(/'/g,"\\'")}','arabelle')" style="background:none;border:none;cursor:pointer;color:var(--muted);font-size:14px;padding:0 2px">&times;</button></div>`;
+  });
+  if(!alerts.length&&!araTodos.length)h+='<div class="empty-state">All clear</div>';
+  h+='</div>';
+
+  // 6. SCHEDULE
   const todayStr=manilaDateStr();
   const nextEvents=S.calendar.filter(e=>new Date(e.date+'T23:59:59+08:00')>=new Date()).sort((a,b)=>a.date.localeCompare(b.date)||(a.time||'').localeCompare(b.time||'')).slice(0,4);
   const todayEvents=nextEvents.filter(e=>e.date===todayStr);
@@ -796,153 +855,13 @@ function renderArabelleHome(){
     h+='</div>';
   }
 
-  // 2. FINANCE SNAPSHOT
-  const pendingBills=S.bills.items.filter(b=>b.status!=='paid');
-  const pendingTotal=pendingBills.reduce((s,b)=>s+b.amount,0);
-  const total=(S.accounts.payroll.balance||0)+(S.accounts.savings.balance||0)+(S.accounts.pocket_cash.balance||0);
-  const tripEst=S.trips.find(t=>t.status==='upcoming'||t.status==='active');
-  const tripTotal=tripEst?tripEst.budget.total:0;
-  h+=`<div class="c">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-      <div class="ct m" style="margin:0;padding:0;border:none">Finances</div>
-      <button onclick="toggleBal()" style="background:none;border:none;cursor:pointer;font-size:14px;color:var(--muted);padding:2px 4px">${hid?'🙈':'👁'}</button>
-    </div>
-    <div style="display:flex;gap:6px;margin-bottom:8px">
-      ${(S.accounts.payroll.balance||0)>100?`<div style="flex:1;background:var(--surface);border-radius:${CSS_R_SM};padding:8px"><div class="m" style="font-size:8px;color:var(--muted);letter-spacing:0.5px">PAYROLL</div><div class="m" style="font-size:14px;font-weight:700;color:var(--blue);margin-top:2px">${hid?'****':fmt(S.accounts.payroll.balance)}</div></div>`:''}
-      ${(S.accounts.savings.balance||0)>100?`<div style="flex:1;background:var(--surface);border-radius:${CSS_R_SM};padding:8px"><div class="m" style="font-size:8px;color:var(--muted);letter-spacing:0.5px">SAVINGS</div><div class="m" style="font-size:14px;font-weight:700;color:var(--green);margin-top:2px">${hid?'****':fmt(S.accounts.savings.balance)}</div></div>`:''}
-      ${(S.accounts.pocket_cash.balance||0)>100?`<div style="flex:1;background:var(--surface);border-radius:${CSS_R_SM};padding:8px"><div class="m" style="font-size:8px;color:var(--muted);letter-spacing:0.5px">POCKET</div><div class="m" style="font-size:14px;font-weight:700;color:var(--orange);margin-top:2px">${fmt(S.accounts.pocket_cash.balance)}</div></div>`:''}
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
-      <div style="background:var(--surface);border-radius:${CSS_R_SM};padding:8px"><div class="m" style="font-size:8px;color:var(--muted);letter-spacing:0.5px">TOTAL</div><div class="m" style="font-size:15px;font-weight:700;color:var(--green);margin-top:2px">${hid?'****':fmt(total)}</div></div>
-      <div style="background:var(--surface);border-radius:${CSS_R_SM};padding:8px"><div class="m" style="font-size:8px;color:var(--muted);letter-spacing:0.5px">BILLS DUE</div><div class="m" style="font-size:15px;font-weight:700;color:var(--orange);margin-top:2px">${hid?'****':fmt(pendingTotal)}</div></div>
-    </div>
-    ${(()=>{
-      const pocket=S.accounts.pocket_cash.balance||0;
-      const remaining=total-pendingTotal-tripTotal;
-      const soonBills=pendingBills.filter(b=>{const dl=billDaysLeft(b);return dl===null||dl<=3});
-      let insight='',color='var(--green)';
-      if(remaining<0){insight='Bills + trip exceed cash by '+fmt(Math.abs(remaining))+'. You will go negative.';color='var(--red)'}
-      else if(isOnTrip()&&remaining<2000){insight='Tight. Only '+fmt(remaining)+' left after bills + trip.';color='var(--orange)'}
-      else if(isOnTrip()){insight='Trip covered. '+fmt(remaining)+' left after bills + trip budget.';color='var(--green)'}
-      else if(soonBills.length){insight=soonBills.map(b=>b.name).join(', ')+' due soon.';color='var(--orange)'}
-      else if(pendingBills.length){insight=fmt(pendingTotal)+' in pending bills. '+fmt(total-pendingTotal)+' free after.';color='var(--text-secondary)'}
-      else{insight='All bills paid. '+fmt(total)+' available.';color='var(--green)'}
-      const pays=nextPaydays().filter(p=>p.daysUntil<=7);
-      if(pays.length){const p=pays[0];insight+=(insight?' ':'')+(p.daysUntil===0?p.label+' today.':p.daysUntil===1?p.label+' tomorrow.':p.label+' in '+p.daysUntil+' days.')}
-      return '<div style="margin-top:8px;padding:8px 10px;background:var(--surface);border-radius:'+CSS_R_SM+';font-size:11px;color:'+color+';line-height:1.4">'+insight+'</div>';
-    })()}
-  </div>`;
-
-  // 3. BABY JAH 4-ROW CARD
-  if(jah){
-    const lastFed=jah.feeding.length?jah.feeding[jah.feeding.length-1]:null;
-    const lastSleep=jah.sleep.length?jah.sleep[jah.sleep.length-1]:null;
-    const lastAct=jah.activities.length?jah.activities[jah.activities.length-1]:null;
-    const lastDiaper=jah.diapers.length?jah.diapers[jah.diapers.length-1]:null;
-    const js=jahStatus();
-    h+=`<div class="c" onclick="setProfile('jah')" style="cursor:pointer;border:1px solid rgba(224,126,168,0.1);background:linear-gradient(145deg,rgba(224,126,168,0.05) 0%,rgba(91,155,213,0.03) 100%)">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-        <div class="ct m" style="margin:0;padding:0;border:none"><span class="jah-accent">Baby Jah</span></div>
-        <span style="font-size:12px;font-weight:600">${js.icon} ${js.text}</span>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-        <div style="display:flex;gap:8px;align-items:center">
-          <span style="font-size:14px">🍼</span>
-          <div><div style="font-size:12px;font-weight:600">${lastFed?lastFed.food:'--'}</div><div class="m" style="font-size:9px;color:var(--muted)">${lastFed?timeAgo(lastFed.date,lastFed.time):'--'}</div></div>
-        </div>
-        <div style="display:flex;gap:8px;align-items:center">
-          <span style="font-size:14px">😴</span>
-          <div><div style="font-size:12px;font-weight:600">${lastSleep?(lastSleep.woke&&!lastSleep.slept?'Woke up':lastSleep.type==='nap'?'Napping':'Sleeping'):'--'}</div><div class="m" style="font-size:9px;color:var(--muted)">${lastSleep?timeAgo(lastSleep.date,lastSleep.woke||lastSleep.slept):'--'}</div></div>
-        </div>
-        <div style="display:flex;gap:8px;align-items:center">
-          <span style="font-size:14px">🏃</span>
-          <div><div style="font-size:12px;font-weight:600">${lastAct?lastAct.activity:'--'}</div><div class="m" style="font-size:9px;color:var(--muted)">${lastAct?timeAgo(lastAct.date,lastAct.time):'--'}</div></div>
-        </div>
-        <div style="display:flex;gap:8px;align-items:center">
-          <span style="font-size:14px">🧷</span>
-          <div><div style="font-size:12px;font-weight:600">${lastDiaper?(lastDiaper.type==='poop'?'Poop':'Wet'):'--'}</div><div class="m" style="font-size:9px;color:var(--muted)">${lastDiaper?timeAgo(lastDiaper.date,lastDiaper.time):'--'}</div></div>
-        </div>
-      </div>
-    </div>`;
-  }
-
-  // 4. RA STATUS CARD
-  const raSleep=(D.ra.schedule.sleep||[]);
-  const lastRASleep=raSleep.length?raSleep[raSleep.length-1]:null;
-  h+=`<div class="c">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-      <div class="ct m" style="margin:0;padding:0;border:none">RA</div>
-      <span style="font-size:12px;font-weight:600;color:var(--blue)">${ra.icon} ${ra.text}</span>
-    </div>
-    ${lastRASleep?`<div style="display:flex;gap:8px;align-items:center">
-      <span style="font-size:14px">😴</span>
-      <div><div style="font-size:12px;font-weight:600">${lastRASleep.slept&&lastRASleep.woke?fmt12(lastRASleep.slept)+' - '+fmt12(lastRASleep.woke):lastRASleep.slept?'Napping since '+fmt12(lastRASleep.slept):lastRASleep.woke?'Woke at '+fmt12(lastRASleep.woke):'--'}</div><div class="m" style="font-size:9px;color:var(--muted)">${lastRASleep.notes||fmtDate(lastRASleep.date)}</div></div>
-    </div>`:''}
-    <div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border);font-size:11px;color:var(--muted)">
-      ${(()=>{const day=manilaDayNum();const isWork=day>=1&&day<=5;if(!isWork)return'Rest day (off tonight)';return'Shift tonight 8 PM - 5 AM'})()}
-    </div>
-  </div>`;
-
-  // 5. ALERTS & TO DO
-  const alerts=[];
-  pendingBills.forEach(b=>{
-    const dl=billDaysLeft(b);
-    if(dl===null||dl<=5)alerts.push({icon:'💰',text:b.name+' '+fmt(b.amount),sub:dl===null?'due soon':dl<0?Math.abs(dl)+'d overdue':daysUntil(b.due_date),color:dl!==null&&dl<0?'var(--red)':'var(--orange)'});
-  });
-  const araTodos=D.arabelle.todos.filter(t=>!t.done).sort((a,b)=>{if(!a.due)return 1;if(!b.due)return-1;return a.due.localeCompare(b.due)}).slice(0,6);
-  if(alerts.length||araTodos.length){
-    h+='<div class="c"><div class="ct m">Alerts & To Do</div>';
-    alerts.forEach(a=>{
-      h+=`<div style="display:flex;gap:10px;align-items:center;padding:6px 0;border-bottom:1px solid var(--border)">
-        <span style="font-size:14px">${a.icon}</span>
-        <div style="flex:1"><div style="font-size:12px;font-weight:600;color:${a.color}">${a.text}</div><div class="m" style="font-size:9px;color:var(--muted)">${a.sub}</div></div></div>`;
-    });
-    araTodos.forEach((t,i)=>{
-      h+=`<div style="display:flex;gap:10px;align-items:center;padding:6px 0;${i<araTodos.length-1?'border-bottom:1px solid var(--border)':''};cursor:pointer" onclick="tickAraTodo(${i})">
-        <div style="width:16px;height:16px;border-radius:4px;border:2px solid var(--muted);flex-shrink:0;display:flex;align-items:center;justify-content:center" id="ara-todo-check-${i}"></div>
-        <span style="font-size:12px" id="ara-todo-text-${i}">${t.text}${t.due?'<span class="m" style="font-size:9px;color:var(--muted);margin-left:6px">'+daysUntil(t.due)+'</span>':''}</span></div>`;
-    });
-    h+='</div>';
-  }
-
-  // 6. COMMUTE FORECAST
-  if(W&&W.hourly){
-    const isToday=h_now<5;
-    const targetHour=5;
-    const dayOff=isToday?0:1;
-    const cw=getCommuteWeather(W,targetHour,dayOff);
-    if(cw){
-      const rec=getCommuteRec(cw.rain,cw.code);
-      const wIcon=wcIcon[cw.code]||'🌤';
-      const wDesc=wcDesc[cw.code]||'Unknown';
-      const label=isToday?'This morning 5 AM':'Tomorrow 5 AM';
-      h+=`<div class="c"><div class="ct m">Commute Forecast</div>
-        <div style="display:flex;justify-content:space-between;align-items:center;margin:4px 0 8px">
-          <div><div style="font-size:15px;font-weight:600">${wIcon} ${wDesc}</div><div class="m" style="font-size:10px;color:var(--muted);margin-top:2px">${label} // ${cw.rain}% rain</div></div>
-          <div style="font-size:28px">${rec.icon}</div>
-        </div>
-        <div class="${rec.cls}" style="padding:8px;font-size:12px;font-weight:600;text-align:center">${rec.text}</div>
-      </div>`;
-    }
-  }
-
-  // 7. MY MEALS
-  const araMeals=(D.arabelle.transactions||[]).filter(t=>t.category==='food').slice(-3).reverse();
-  if(araMeals.length){
-    h+='<div class="c"><div class="ct m">My Meals</div>';
-    araMeals.forEach(t=>{
-      h+=`<div style="display:flex;gap:8px;align-items:center;padding:5px 0">
-        <span style="font-size:12px">🍽</span>
-        <div style="flex:1;font-size:12px">${t.description}</div>
-        <span class="m" style="font-size:9px;color:var(--muted)">${timeAgo(t.date,t.time)||''}</span></div>`;
-    });h+='</div>';
-  }
-
-  // 8. BILLS DUE
+  // 7. BILLS DUE
   if(pendingBills.length){
     h+='<div class="c"><div class="ct m">Bills Due</div>';
     pendingBills.forEach(b=>{
-      h+=`<div class="r"><div class="rl"><div class="d" style="background:var(--orange)"></div><span style="font-size:13px">${b.name}</span></div>
+      const dl=billDaysLeft(b);
+      const dueStr=b.due_date?(dl<0?Math.abs(dl)+'d overdue':daysUntil(b.due_date)):'pending';
+      h+=`<div class="r"><div class="rl"><div class="d" style="background:${dl!==null&&dl<0?'var(--red)':'var(--orange)'}"></div><div><span style="font-size:13px">${b.name}</span><div class="m" style="font-size:9px;color:${dl!==null&&dl<0?'var(--red)':'var(--muted)'}">${dueStr}</div></div></div>
         <span class="m" style="font-weight:600;font-size:13px">${fmt(b.amount)}</span></div>`;
     });h+='</div>';
   }
@@ -964,16 +883,27 @@ function renderOverview(){
     const fedAgo=lastFed?timeAgo(lastFed.date,lastFed.time):null;
     const fedMins=lastFed?(Date.now()-new Date(lastFed.date+'T'+(lastFed.time||'12:00')+':00+08:00').getTime())/60000:Infinity;
     const stale=fedMins>360;
-    h+=`<div class="c" onclick="setProfile('jah')" style="cursor:pointer;border:1px solid rgba(224,126,168,0.1);background:linear-gradient(145deg,rgba(224,126,168,0.05) 0%,rgba(91,155,213,0.03) 100%)">
+    h+=`<div class="c" style="border:1px solid rgba(224,126,168,0.1);background:linear-gradient(145deg,rgba(224,126,168,0.05) 0%,rgba(91,155,213,0.03) 100%)">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-        <div class="m" style="font-size:16px;font-weight:700;letter-spacing:-0.5px"><span class="jah-accent">Baby Jah</span></div>
-        <div style="display:flex;align-items:center;gap:8px">
-          <div style="text-align:right">
+        <div class="m" style="font-size:16px;font-weight:700;letter-spacing:-0.5px" onclick="setProfile('jah')" style="cursor:pointer"><span class="jah-accent">Baby Jah</span></div>
+        <div style="display:flex;align-items:center;gap:6px">
+          <div style="text-align:right;cursor:pointer" onclick="setProfile('jah')">
             <div style="font-size:14px;font-weight:700;color:var(--text)" class="m">${js.text}</div>
             <div style="font-size:10px;color:var(--muted);margin-top:1px">${js.sub}</div>
           </div>
-          <span style="font-size:24px">${js.icon}</span>
+          <span style="font-size:24px;cursor:pointer" onclick="setProfile('jah')">${js.icon}</span>
+          ${pencilBtn('jah-home')}
         </div>
+      </div>
+      <div id="edit-jah-home" style="display:none">
+        <div class="jah-quick">
+          <button onclick="jahQuickSelect('fed','jah-home')">🍼 Fed</button>
+          <button onclick="jahQuickSelect('diaper','jah-home')">🧷 Diaper</button>
+          <button onclick="jahQuickSelect('sleep','jah-home')">😴 Sleep</button>
+          <button onclick="jahQuickSelect('woke','jah-home')">🥱 Woke</button>
+          <button onclick="jahQuickSelect('activity','jah-home')">🏃 Activity</button>
+        </div>
+        <div id="jah-form-jah-home"></div>
       </div>
       ${stale?'<div style="background:var(--red-dim);border-radius:var(--r-sm);padding:6px 10px;margin-bottom:8px;font-size:11px;color:var(--red);font-weight:600">No feeding logged in '+fedAgo+'. Data may be stale.</div>':''}
       <div style="display:flex;gap:8px">
@@ -1024,13 +954,15 @@ function renderOverview(){
   </div>`;
 
   // 3. UPCOMING BILLS
-  if(pendingBills.length){
+  const localPaid=JSON.parse(localStorage.getItem('paid_bills')||'[]');
+  const visibleBills=pendingBills.filter(b=>!localPaid.includes(b.name));
+  if(visibleBills.length){
     h+='<div class="c"><div class="ct m">Bills Due</div>';
-    pendingBills.forEach(b=>{
+    visibleBills.forEach(b=>{
       const dl=billDaysLeft(b);
       const dueStr=b.due_date?(dl<0?Math.abs(dl)+'d overdue':daysUntil(b.due_date)):'pending';
       h+=`<div class="r"><div class="rl"><div class="d" style="background:${dl!==null&&dl<0?'var(--red)':'var(--orange)'}"></div><div><span style="font-size:13px">${b.name}</span><div class="m" style="font-size:9px;color:${dl!==null&&dl<0?'var(--red)':'var(--muted)'}">${dueStr}</div></div></div>
-        <span class="m" style="font-weight:600;font-size:13px">${fmt(b.amount)}</span></div>`;
+        <div style="display:flex;align-items:center;gap:8px"><span class="m" style="font-weight:600;font-size:13px">${fmt(b.amount)}</span><button onclick="markBillPaid('${b.name.replace(/'/g,"\\'")}')" style="background:none;border:1px solid var(--border);border-radius:4px;padding:2px 8px;color:var(--green);font-size:10px;font-weight:600;cursor:pointer;font-family:var(--font-body)">Paid</button></div></div>`;
     });
     h+='</div>';
   }
@@ -1090,25 +1022,31 @@ function renderOverview(){
   if((S.accounts.pocket_cash.balance||0)<500)alerts.push({icon:'💵',text:'Pocket cash low: '+fmt(S.accounts.pocket_cash.balance),sub:'Withdraw soon',color:'var(--red)'});
   if(isStale(S.accounts.payroll.updated,7))alerts.push({icon:'🏦',text:'Account balances stale',sub:'Send a bank screenshot',color:'var(--orange)'});
 
-  const raTodos=(D.ra.todos||[]).filter(t=>!t.done).slice(0,3);
-  const araTodos=(D.arabelle.todos||[]).filter(t=>!t.done).slice(0,3);
-  const allTodos=[...raTodos.map(t=>({...t,who:'RA'})),...araTodos.map(t=>({...t,who:'Arabelle'}))].sort((a,b)=>{if(!a.due)return 1;if(!b.due)return-1;return a.due.localeCompare(b.due)}).slice(0,6);
+  const removedTodos=JSON.parse(localStorage.getItem('removed_todos')||'[]');
+  const raTodos=(D.ra.todos||[]).filter(t=>!t.done&&!removedTodos.includes(t.text)).slice(0,3);
+  const araTodos=(D.arabelle.todos||[]).filter(t=>!t.done&&!removedTodos.includes(t.text)).slice(0,3);
+  const addedRA=JSON.parse(localStorage.getItem('added_todos_ra')||'[]');
+  const addedAra=JSON.parse(localStorage.getItem('added_todos_arabelle')||'[]');
+  const allTodos=[...raTodos.map(t=>({...t,who:'RA'})),...araTodos.map(t=>({...t,who:'Arabelle'})),...addedRA.map(t=>({...t,who:'RA'})),...addedAra.map(t=>({...t,who:'Arabelle'}))].sort((a,b)=>{if(!a.due)return 1;if(!b.due)return-1;return a.due.localeCompare(b.due)}).slice(0,6);
 
-  if(alerts.length||allTodos.length){
-    h+='<div class="c"><div class="ct m">Alerts & To Do</div>';
-    alerts.forEach(a=>{
-      h+=`<div style="display:flex;gap:10px;align-items:center;padding:6px 0;border-bottom:1px solid var(--border)">
-        <span style="font-size:14px">${a.icon}</span>
-        <div style="flex:1"><div style="font-size:12px;font-weight:600;color:${a.color}">${a.text}</div><div class="m" style="font-size:9px;color:var(--muted)">${a.sub}</div></div></div>`;
-    });
-    allTodos.forEach((t,i)=>{
-      h+=`<div style="display:flex;gap:10px;align-items:center;padding:6px 0;${i<allTodos.length-1?'border-bottom:1px solid var(--border)':''}">
-        <div style="width:16px;height:16px;border-radius:4px;border:2px solid var(--muted);flex-shrink:0"></div>
-        <div style="flex:1;font-size:12px">${t.text}${t.due?'<span class="m" style="font-size:9px;color:var(--muted);margin-left:6px">'+daysUntil(t.due)+'</span>':''}</div>
-        <span class="m" style="font-size:9px;color:${t.who==='RA'?'var(--blue)':'var(--pink)'}">${t.who}</span></div>`;
-    });
-    h+='</div>';
-  }
+  h+=`<div class="c"><div style="display:flex;justify-content:space-between;align-items:center"><div class="ct m" style="margin-bottom:0;border:none;padding:0">Alerts & To Do</div>${pencilBtn('todos-home')}</div>
+    <div id="edit-todos-home" style="display:none;margin:8px 0">
+      <div class="edit-row"><input type="text" id="todo-input-ra" placeholder="Add todo for RA" onkeydown="if(event.key==='Enter')addTodo('ra')"><button class="edit-add" onclick="addTodo('ra')">+</button></div>
+      <div class="edit-row"><input type="text" id="todo-input-arabelle" placeholder="Add todo for Arabelle" onkeydown="if(event.key==='Enter')addTodo('arabelle')"><button class="edit-add" onclick="addTodo('arabelle')">+</button></div>
+    </div>`;
+  alerts.forEach(a=>{
+    h+=`<div style="display:flex;gap:10px;align-items:center;padding:6px 0;border-bottom:1px solid var(--border)">
+      <span style="font-size:14px">${a.icon}</span>
+      <div style="flex:1"><div style="font-size:12px;font-weight:600;color:${a.color}">${a.text}</div><div class="m" style="font-size:9px;color:var(--muted)">${a.sub}</div></div></div>`;
+  });
+  allTodos.forEach((t,i)=>{
+    h+=`<div style="display:flex;gap:10px;align-items:center;padding:6px 0;${i<allTodos.length-1?'border-bottom:1px solid var(--border)':''}">
+      <span class="m" style="font-size:9px;color:${t.who==='RA'?'var(--blue)':'var(--pink)'};font-weight:700;min-width:20px">${t.who}</span>
+      <div style="flex:1;font-size:12px">${t.text}${t.due?'<span class="m" style="font-size:9px;color:var(--muted);margin-left:6px">'+daysUntil(t.due)+'</span>':''}</div>
+      <button onclick="removeTodo('${t.text.replace(/'/g,"\\'")}','${t.who.toLowerCase()}')" style="background:none;border:none;cursor:pointer;color:var(--muted);font-size:14px;padding:0 2px">&times;</button></div>`;
+  });
+  if(!alerts.length&&!allTodos.length)h+='<div class="empty-state">All clear</div>';
+  h+='</div>';
 
   el.innerHTML=h;
 }
@@ -1269,6 +1207,9 @@ function jahStatus(){
   const lastFed=events.find(e=>e.type==='fed');const sinceFed=lastFed?(nowMin-lastFed.min):Infinity;
   const lastSlept=events.find(e=>e.type==='slept');
   const lastWoke=events.find(e=>e.type==='woke');
+  // PRIORITY CHECK: if there's an active sleep (slept with no woke), baby is sleeping -- period
+  const activeSleep=(jah.sleep||[]).findLast(s=>s.slept&&!s.woke);
+  if(activeSleep){const sm=toMin(activeSleep.date,activeSleep.slept);return{icon:'😴',text:activeSleep.type==='nap'?'Napping':'Sleeping',sub:ago(sm)+' ('+fmt12(activeSleep.slept)+')'};}
   // Determine status
   if(latest.type==='slept'){return{icon:'😴',text:'Sleeping',sub:ago(latest.min)+' ('+fmt12(latest.time)+')'};}
   if(latest.type==='woke'){
@@ -1276,8 +1217,9 @@ function jahStatus(){
     if(sinceMin<30)return{icon:'🥱',text:'Just woke up',sub:ago(latest.min)};
   }
   if(latest.type==='fed'){
-    if(sinceMin<30)return{icon:'🍼',text:'Just ate '+latest.label,sub:fmt12(latest.time)};
-    if(sinceMin<90)return{icon:'😊',text:'Fed -- '+latest.label,sub:ago(latest.min)};
+    const isMilk=latest.label&&latest.label.toLowerCase().includes('milk');
+    if(sinceMin<30)return{icon:'🍼',text:isMilk?'Just had milk':'Just ate '+latest.label,sub:fmt12(latest.time)};
+    if(sinceMin<90)return{icon:'😊',text:isMilk?'Had milk':'Fed -- '+latest.label,sub:ago(latest.min)};
   }
   if(latest.type==='activity'){
     if(latest.label.toLowerCase().includes('bath'))return{icon:'🛁',text:'Fresh from bath',sub:fmt12(latest.time)};
@@ -1571,6 +1513,127 @@ function tickAraTodo(i){
   localStorage.setItem('done_ara_todos',JSON.stringify(done));
 }
 
+// === CARD EDIT MODE ===
+const editState={};
+function toggleEdit(cardId){
+  editState[cardId]=!editState[cardId];
+  const btn=document.querySelector(`[data-edit="${cardId}"]`);
+  if(btn)btn.classList.toggle('active',editState[cardId]);
+  const panel=document.getElementById('edit-'+cardId);
+  if(panel)panel.style.display=editState[cardId]?'block':'none';
+}
+
+function postToSheet(payload){
+  const fd=new FormData();fd.append('payload',JSON.stringify(payload));
+  fetch(QUICKLOG_ENDPOINT,{method:'POST',body:fd,mode:'no-cors'}).catch(()=>{});
+}
+
+// Add todo (works for RA and Arabelle)
+function addTodo(who){
+  const input=document.getElementById('todo-input-'+who);
+  if(!input||!input.value.trim())return;
+  const text=input.value.trim();
+  const key='added_todos_'+who;
+  const added=JSON.parse(localStorage.getItem(key)||'[]');
+  added.push({text,date:manilaDateStr()});
+  localStorage.setItem(key,JSON.stringify(added));
+  postToSheet({category:'todo',logged_by:who==='ra'?'RA':'Arabelle',detail_1:text,detail_2:'new'});
+  input.value='';
+  renderedTabs['ov']=false;render();renderedTabs['ov']=true;
+}
+
+// Remove todo
+function removeTodo(text,who){
+  // Add to removed list in localStorage
+  const key='removed_todos';
+  const removed=JSON.parse(localStorage.getItem(key)||'[]');
+  if(!removed.includes(text))removed.push(text);
+  localStorage.setItem(key,JSON.stringify(removed));
+  // Also remove from added_todos if it was locally added
+  const addedKey='added_todos_'+who;
+  const added=JSON.parse(localStorage.getItem(addedKey)||'[]');
+  const filtered=added.filter(t=>t.text!==text);
+  localStorage.setItem(addedKey,JSON.stringify(filtered));
+  postToSheet({category:'todo',logged_by:who==='ra'?'RA':'Arabelle',detail_1:text,detail_2:'done'});
+  renderedTabs['ov']=false;render();renderedTabs['ov']=true;
+}
+
+// Mark bill as paid
+function markBillPaid(billName){
+  const paid=JSON.parse(localStorage.getItem('paid_bills')||'[]');
+  if(!paid.includes(billName))paid.push(billName);
+  localStorage.setItem('paid_bills',JSON.stringify(paid));
+  postToSheet({category:'bill_paid',logged_by:'RA',detail_1:billName,detail_2:manilaDateStr()});
+  renderedTabs['ov']=false;render();renderedTabs['ov']=true;
+}
+
+// Baby Jah quick entry -- tap button, fill mini form, submit
+let jahQuickType=null;
+function jahQuickSelect(type,editId){
+  jahQuickType=type;
+  const panel=document.getElementById('jah-form-'+editId);
+  if(!panel)return;
+  if(type==='sleep'||type==='woke'){
+    // One-tap: log immediately + update in-memory data
+    const now=new Date().toLocaleString('en-CA',{timeZone:'Asia/Manila',hour:'2-digit',minute:'2-digit',hour12:false}).slice(-5);
+    const today=manilaDateStr();
+    const payload={logged_by:PROFILE==='arabelle'?'Arabelle':'RA',who:'Baby Jah',category:'sleep',detail_1:type==='sleep'?'slept':'woke',detail_2:now,notes:''};
+    postToSheet(payload);
+    // Update local data immediately
+    if(type==='sleep'){
+      D.shared.baby_jah.sleep.push({date:today,slept:now,woke:null,type:parseInt(now)<6||parseInt(now)>=18?'night':'nap',notes:''});
+    }else{
+      // Close the active sleep entry
+      const active=D.shared.baby_jah.sleep.findLast(s=>s.slept&&!s.woke);
+      if(active)active.woke=now;
+      else D.shared.baby_jah.sleep.push({date:today,slept:null,woke:now,type:'nap',notes:''});
+    }
+    panel.innerHTML='<div style="text-align:center;padding:8px;font-size:12px;color:var(--green);font-weight:600">'+(type==='sleep'?'Logged: sleeping now':'Logged: woke up')+'</div>';
+    setTimeout(()=>{renderedTabs['ov']=false;render();renderedTabs['ov']=true},1000);
+    return;
+  }
+  const labels={fed:'What did Jah eat?',diaper:'',activity:'What is Jah doing?'};
+  if(type==='diaper'){
+    panel.innerHTML='<div class="edit-row" style="margin-top:6px"><button class="edit-add" style="flex:1" onclick="jahQuickSubmit(\'wet\',\''+editId+'\')">Wet</button><button class="edit-add" style="flex:1;background:var(--orange)" onclick="jahQuickSubmit(\'poop\',\''+editId+'\')">Poop</button></div>';
+  }else{
+    panel.innerHTML='<div class="edit-row" style="margin-top:6px"><input type="text" id="jah-q-input" placeholder="'+(labels[type]||'')+'" autofocus><button class="edit-add" onclick="jahQuickSubmit(null,\''+editId+'\')">Log</button></div>';
+    setTimeout(()=>{const i=document.getElementById('jah-q-input');if(i)i.focus()},100);
+  }
+}
+function jahQuickSubmit(val,editId){
+  const input=document.getElementById('jah-q-input');
+  const v=val||(input?input.value.trim():'')||'';
+  if(!v&&jahQuickType!=='diaper')return;
+  const now=new Date().toLocaleString('en-CA',{timeZone:'Asia/Manila',hour:'2-digit',minute:'2-digit',hour12:false}).slice(-5);
+  const payload={logged_by:PROFILE==='arabelle'?'Arabelle':'RA',who:'Baby Jah'};
+  const today=manilaDateStr();
+  if(jahQuickType==='fed'){payload.category='feeding';payload.detail_1=v||'Milk';D.shared.baby_jah.feeding.push({date:today,time:now,food:v||'Milk'})}
+  else if(jahQuickType==='diaper'){payload.category='diaper';payload.detail_1=v||'wet';D.shared.baby_jah.diapers.push({date:today,time:now,type:v||'wet'})}
+  else if(jahQuickType==='activity'){payload.category='activity';payload.detail_1=v||'Playing';D.shared.baby_jah.activities.push({date:today,time:now,activity:v||'Playing'})}
+  postToSheet(payload);
+  const panel=document.getElementById('jah-form-'+editId);
+  if(panel)panel.innerHTML='<div style="text-align:center;padding:8px;font-size:12px;color:var(--green);font-weight:600">Logged!</div>';
+  setTimeout(()=>{renderedTabs['ov']=false;render();renderedTabs['ov']=true},1000);
+}
+
+// Add meal
+function addMeal(who){
+  const input=document.getElementById('meal-input-'+who);
+  if(!input||!input.value.trim())return;
+  const text=input.value.trim();
+  postToSheet({category:'feeding',logged_by:who==='ra'?'RA':'Arabelle',who:who==='ra'?'RA':'Arabelle',detail_1:text});
+  const key='added_meals_'+who;
+  const added=JSON.parse(localStorage.getItem(key)||'[]');
+  const now=new Date().toLocaleString('en-CA',{timeZone:'Asia/Manila',hour:'2-digit',minute:'2-digit',hour12:false}).slice(-5);
+  added.push({description:text,time:now,date:manilaDateStr()});
+  localStorage.setItem(key,JSON.stringify(added));
+  input.value='';
+  renderedTabs['ov']=false;render();renderedTabs['ov']=true;
+}
+
+// Helper: render pencil icon
+function pencilBtn(cardId){return `<button class="card-edit" data-edit="${cardId}" onclick="toggleEdit('${cardId}')">&#9998;</button>`}
+
 function openQL(){
   document.getElementById('ql-overlay').classList.add('open');
   document.getElementById('ql-submit').style.display='';
@@ -1714,6 +1777,8 @@ function mergeSheetData(D,rows){
           D.shared.baby_jah.activities.push({date,time,activity:r.detail_1||''});
         }break;
       case 'sleep':{
+        // Skip sleep entries older than 24h to prevent stale sheet data from creating phantom records
+        if(date<new Date(Date.now()-86400000).toLocaleDateString('en-CA',{timeZone:'Asia/Manila'}))break;
         const action=(r.detail_1||'slept').toString().toLowerCase();
         let sleepTime=r.detail_2||time;
         sleepTime=String(sleepTime);if(sleepTime.includes('T')){const sm=sleepTime.match(/T(\d{2}):(\d{2})/);sleepTime=sm?(sm[1]+':'+sm[2]):time;}

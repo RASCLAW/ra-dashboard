@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-03-30T15:45:06+08:00",
+  "last_updated": "2026-03-30T16:05:14+08:00",
   "location": {
     "name": "Daet, Camarines Norte",
     "lat": 14.1122,
@@ -755,6 +755,12 @@
           "time": "07:30",
           "type": "poop",
           "notes": "Morning poop in Daet"
+        },
+        {
+          "date": "2026-03-30",
+          "time": "13:05",
+          "type": "poop",
+          "notes": "After waking from nap"
         }
       ],
       "milestones": [
@@ -892,6 +898,11 @@
           "date": "2026-03-30",
           "time": "13:05",
           "activity": "Dreaming"
+        },
+        {
+          "date": "2026-03-30",
+          "time": "14:51",
+          "activity": "Out with RA -- pasalubong shopping + coffee"
         }
       ],
       "next_checkup": null,
@@ -1354,13 +1365,6 @@
       {
         "date": "2026-03-27",
         "time": null,
-        "description": "InstaPay Transfer",
-        "amount": 300,
-        "category": "transfer"
-      },
-      {
-        "date": "2026-03-27",
-        "time": null,
         "description": "InstaPay Transfer Fees (3x)",
         "amount": 30,
         "category": "fees"
@@ -1492,13 +1496,6 @@
         "date": "2026-03-30",
         "time": "14:51",
         "description": "PASALUBONG",
-        "amount": null,
-        "category": "misc"
-      },
-      {
-        "date": "2026-03-30",
-        "time": "14:52",
-        "description": "But first Coffee",
         "amount": null,
         "category": "misc"
       }
