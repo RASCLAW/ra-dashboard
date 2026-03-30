@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-03-30T13:15:05+08:00",
+  "last_updated": "2026-03-30T13:45:05+08:00",
   "location": {
     "name": "Daet, Camarines Norte",
     "lat": 14.1122,
@@ -642,18 +642,6 @@
           "woke": "13:05",
           "type": "nap",
           "notes": "Woke up, logged via dashboard pencil"
-        },
-        {
-          "date": "2026-03-30",
-          "slept": null,
-          "woke": "13:05",
-          "type": "night"
-        },
-        {
-          "date": "2026-03-30",
-          "slept": null,
-          "woke": "13:07",
-          "type": "night"
         }
       ],
       "diapers": [
@@ -2401,6 +2389,26 @@
       "tags": [
         "sleep",
         "baby_jah"
+      ],
+      "source": "quick_log"
+    },
+    {
+      "date": "2026-03-30",
+      "time": "13:41",
+      "type": "todo",
+      "summary": "Fix Laundry",
+      "tags": [
+        "todo"
+      ],
+      "source": "quick_log"
+    },
+    {
+      "date": "2026-03-30",
+      "time": "13:42",
+      "type": "todo",
+      "summary": "Fix Laundry",
+      "tags": [
+        "todo"
       ],
       "source": "quick_log"
     }
