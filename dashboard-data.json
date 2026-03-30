@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-03-30T14:00:07+08:00",
+  "last_updated": "2026-03-30T15:45:06+08:00",
   "location": {
     "name": "Daet, Camarines Norte",
     "lat": 14.1122,
@@ -38,9 +38,9 @@
         "notes": "Funds consolidated to payroll for trip. RA will transfer back if money remains."
       },
       "pocket_cash": {
-        "balance": 7926,
+        "balance": 6811,
         "updated": "2026-03-30",
-        "notes": "P8,000 cash on hand - P74 sisilog = P7,926"
+        "notes": "P7,926 - P975 pasalubong - P140 coffee = P6,811"
       }
     },
     "bills": {
@@ -1471,6 +1471,36 @@
         "description": "Longsilog (breakfast, Daet)",
         "amount": null,
         "category": "food"
+      },
+      {
+        "date": "2026-03-30",
+        "time": "14:51",
+        "description": "Pasalubong",
+        "amount": 975,
+        "category": "food",
+        "notes": "Daet"
+      },
+      {
+        "date": "2026-03-30",
+        "time": "14:52",
+        "description": "But first Coffee",
+        "amount": 140,
+        "category": "food",
+        "notes": "Daet"
+      },
+      {
+        "date": "2026-03-30",
+        "time": "14:51",
+        "description": "PASALUBONG",
+        "amount": null,
+        "category": "misc"
+      },
+      {
+        "date": "2026-03-30",
+        "time": "14:52",
+        "description": "But first Coffee",
+        "amount": null,
+        "category": "misc"
       }
     ],
     "todos": [
@@ -1504,6 +1534,11 @@
       },
       {
         "text": "Delete Google Photos library (takeout done, 28GB)",
+        "done": false,
+        "due": null
+      },
+      {
+        "text": "Carwash",
         "done": false,
         "due": null
       }
@@ -1654,7 +1689,13 @@
       "commute_method": "mototaxi (default) / car if heavy rain"
     },
     "transactions": [],
-    "todos": [],
+    "todos": [
+      {
+        "text": "Feed Bujah",
+        "done": false,
+        "due": null
+      }
+    ],
     "contacts": []
   },
   "logs": [
@@ -2418,6 +2459,28 @@
       "summary": "Carwash",
       "tags": [
         "todo"
+      ],
+      "source": "quick_log"
+    },
+    {
+      "date": "2026-03-30",
+      "time": "14:51",
+      "type": "transaction",
+      "summary": "RA: PASALUBONG",
+      "tags": [
+        "transaction",
+        "ra"
+      ],
+      "source": "quick_log"
+    },
+    {
+      "date": "2026-03-30",
+      "time": "14:52",
+      "type": "transaction",
+      "summary": "RA: But first Coffee",
+      "tags": [
+        "transaction",
+        "ra"
       ],
       "source": "quick_log"
     }
