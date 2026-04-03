@@ -83,3 +83,12 @@ Append-only. Never prune.
 - **17:00** [Sync] Baby Jah watching Ms. Rachel -- comfort show, relaxed.
 - **19:00** [Sync] Family dinner: sinigang na fish and shrimp. RA, Arabelle, Zach, family. Baby Jah had bread and lugaw.
 - **21:00** [Sync] No beach today (everyone tired), but morning walk happened. Drive home tomorrow night (Mon Mar 30). Rain forecast ~35mm.
+
+## 2026-04-03
+
+### 6:30 PM
+- **Health:** Arabelle complaining of pain when urinating -- possible UTI. RA gave her buko juice. May be aggravated by coffee intake. Monitoring for 1-2 days. If fever, back pain, or blood in urine, will use Maxicare HMO for doctor visit.
+- **Action:** Hydration push (water + buko), avoid coffee/soda. Doctor visit contingency set for Apr 5 if no improvement.
+
+### 6:45 PM
+- **Food:** RA eating fish soup and fried pampano fish. Baby Jah had the fish soup earlier at 3 PM (same meal).

@@ -50,3 +50,23 @@ Append-only. The moderator logs patterns, recommendations, alerts, and actions h
 - 7 new timeline entries added
 - Trip note: drive home tomorrow night (Mon Mar 30), rain forecast ~35mm
 **Action:** Dashboard DB updated, dashboard-data.json rebuilt, deployed to Vercel
+
+## 2026-04-03 21:00 (PHT)
+**Type:** action
+**Domain:** finance, bills, baby_jah, location, travel, family
+**Observation:** Moderator revived after 4-day gap (Daet trip + PC rebuild). Full data sync from RA conversation.
+**Data:**
+- Location: Daet -> San Joaquin, Pasig
+- Payroll: P14,711.81 -> P3,000 (RA confirmed)
+- Pocket cash: P6,811 -> P2,000 (RA confirmed)
+- Meralco Apr P5,503.15: marked paid (Apr 3)
+- Parking P3,000: marked paid (Mar 28)
+- Added: Rent Apr P4,000 due Apr 14, PLDT Fibr Apr P1,699 due Apr 15
+- Arabelle next payday: Apr 11
+- Car gas: 100% -> 90%, Motorcycle: 30% -> 40%
+- Daet trip: active -> completed
+- Baby Jah: fish soup + rice (dietary progression milestone), milk, diaper change
+- Added Zach to DB (visiting for school break, graduation cap emoji)
+- Vercel re-authenticated (token expired from PC rebuild)
+- Dashboard moderator skill rebuilt at .claude/skills/dashboard-moderator/SKILL.md
+**Action:** Dashboard DB updated, dashboard-data.json rebuilt, deployed to Vercel

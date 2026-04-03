@@ -1,9 +1,9 @@
 {
-  "last_updated": "2026-03-30T16:05:14+08:00",
+  "last_updated": "2026-04-03T18:22:00+08:00",
   "location": {
-    "name": "Daet, Camarines Norte",
-    "lat": 14.1122,
-    "lon": 122.9553
+    "name": "San Joaquin, Pasig",
+    "lat": 14.5764,
+    "lon": 121.0567
   },
   "shared": {
     "pay_schedule": {
@@ -20,16 +20,17 @@
         "type": "bi-weekly",
         "day": "friday",
         "anchor": "2026-03-27",
+        "next_payday": "2026-04-11",
         "interval_days": 14,
         "source": "Arabelle employer"
       }
     },
     "accounts": {
       "payroll": {
-        "balance": 14711.81,
+        "balance": 3000,
         "account_masked": "***9713",
-        "updated": "2026-03-30",
-        "notes": "RA confirmed 1:27 AM"
+        "updated": "2026-04-03",
+        "notes": "RA confirmed Apr 3"
       },
       "savings": {
         "balance": 0,
@@ -38,9 +39,9 @@
         "notes": "Funds consolidated to payroll for trip. RA will transfer back if money remains."
       },
       "pocket_cash": {
-        "balance": 6811,
-        "updated": "2026-03-30",
-        "notes": "P7,926 - P975 pasalubong - P140 coffee = P6,811"
+        "balance": 2000,
+        "updated": "2026-04-03",
+        "notes": "RA confirmed Apr 3"
       }
     },
     "bills": {
@@ -78,13 +79,27 @@
           "name": "Parking",
           "amount": 3000,
           "due_date": "2026-03-28",
-          "status": "pending",
-          "paid_date": null
+          "status": "paid",
+          "paid_date": "2026-03-28"
         },
         {
           "name": "Meralco (Apr)",
           "amount": 5503.15,
           "due_date": "2026-04-03",
+          "status": "paid",
+          "paid_date": "2026-04-03"
+        },
+        {
+          "name": "Rent (Apr)",
+          "amount": 4000,
+          "due_date": "2026-04-14",
+          "status": "pending",
+          "paid_date": null
+        },
+        {
+          "name": "PLDT Fibr (Apr)",
+          "amount": 1699,
+          "due_date": "2026-04-15",
           "status": "pending",
           "paid_date": null
         }
@@ -194,6 +209,13 @@
         "time": null
       },
       {
+        "date": "2026-04-05",
+        "title": "Arabelle doctor visit (UTI) -- if not improving",
+        "category": "health",
+        "time": null,
+        "notes": "Maxicare HMO. Only if symptoms persist or worsen."
+      },
+      {
         "date": "2026-03-28",
         "title": "Beach morning with Baby Jah (low tide 7:17 AM)",
         "category": "family",
@@ -261,7 +283,7 @@
           "Kusina ni Angel (Bagasbas)"
         ],
         "pasalubong": "laing, pinangat, Bicol Express, kinunot, pili nut treats",
-        "status": "active",
+        "status": "completed",
         "actual_spending": {
           "food": 7437,
           "medicine": 33,
@@ -367,7 +389,7 @@
       "scooter": {
         "model": "Yamaha Mio Sporty 2013",
         "last_gas": "2026-03-23",
-        "gas_level": "30%",
+        "gas_level": "40%",
         "usual_cost": 200,
         "frequency": "weekly",
         "avg_price": 98.0
@@ -376,8 +398,12 @@
         "model": "Toyota Vios 2015",
         "last_maintenance": "2026-03-23",
         "notes": "Brake shoes replaced",
-        "gas_level": "100%",
-        "last_gas": "2026-03-26"
+        "gas_level": "90%",
+        "last_gas": "2026-03-26",
+        "rfid": {
+          "slex": -109,
+          "nlex": 200
+        }
       }
     },
     "baby_jah": {
@@ -542,9 +568,28 @@
           "time": "10:15",
           "food": "Milk",
           "notes": "Before nap attempt"
+        },
+        {
+          "date": "2026-04-03",
+          "time": "15:00",
+          "food": "Fish soup with rice",
+          "notes": "Eating rice + ulam regularly now. Dietary progression."
+        },
+        {
+          "date": "2026-04-03",
+          "time": "17:00",
+          "food": "Milk",
+          "notes": null
         }
       ],
       "sleep": [
+        {
+          "date": "2026-03-22",
+          "slept": null,
+          "woke": "02:30",
+          "type": "night",
+          "notes": "Woke up ~2:30 AM"
+        },
         {
           "date": "2026-03-23",
           "slept": "11:40",
@@ -761,6 +806,12 @@
           "time": "13:05",
           "type": "poop",
           "notes": "After waking from nap"
+        },
+        {
+          "date": "2026-04-03",
+          "time": "17:00",
+          "type": "wet",
+          "notes": "Changed after milk"
         }
       ],
       "milestones": [
@@ -799,6 +850,12 @@
           "age": "21 months",
           "milestone": "First real engagement with extended family -- playing with cousins, grandparents, aunts. Social milestone.",
           "location": "Daet"
+        },
+        {
+          "date": "2026-04-03",
+          "age": "21 months",
+          "milestone": "Eating rice with ulam regularly now -- fish soup, whatever the family eats. Major dietary progression from purees/lugaw.",
+          "location": "San Joaquin, Pasig"
         }
       ],
       "growth": [],
@@ -972,6 +1029,16 @@
         }
       ]
     },
+    "zach": {
+      "name": "Zach",
+      "relation": "Arabelle's first son",
+      "status": "visiting",
+      "status_label": "SCHOOL BREAK",
+      "status_emoji": "\ud83c\udf93",
+      "visit_start": "2026-04-01",
+      "visit_end": null,
+      "notes": "Staying with RA and Arabelle during school break after elementary graduation in Daet"
+    },
     "buki": {
       "name": "Buki",
       "fed_today": null,
@@ -1079,6 +1146,20 @@
       "workplace": "McKinley Hills, Taguig"
     },
     "transactions": [
+      {
+        "date": "2026-03-22",
+        "time": "00:56",
+        "description": "Presto PB Cookies",
+        "amount": null,
+        "category": "food"
+      },
+      {
+        "date": "2026-03-22",
+        "time": "02:40",
+        "description": "Chicken Nuggets + Rice",
+        "amount": null,
+        "category": "food"
+      },
       {
         "date": "2026-03-23",
         "time": "08:00",
@@ -1498,6 +1579,78 @@
         "description": "PASALUBONG",
         "amount": null,
         "category": "misc"
+      },
+      {
+        "date": "2026-03-31",
+        "description": "Car gas",
+        "amount": 1800,
+        "category": "transport"
+      },
+      {
+        "date": "2026-03-31",
+        "description": "Dunkin Donuts",
+        "amount": 342,
+        "category": "food"
+      },
+      {
+        "date": "2026-03-31",
+        "description": "Jollibee Breakfast",
+        "amount": 636,
+        "category": "food"
+      },
+      {
+        "date": "2026-04-01",
+        "description": "Groceries",
+        "amount": 3870,
+        "category": "food"
+      },
+      {
+        "date": "2026-04-01",
+        "description": "Gas motorcycle",
+        "amount": 200,
+        "category": "transport"
+      },
+      {
+        "date": "2026-04-01",
+        "description": "Laptop HDD replacement",
+        "amount": 3500,
+        "category": "tech"
+      },
+      {
+        "date": "2026-04-01",
+        "description": "Laptop repair labor",
+        "amount": 500,
+        "category": "tech"
+      },
+      {
+        "date": "2026-04-01",
+        "description": "Laptop battery",
+        "amount": 2500,
+        "category": "tech"
+      },
+      {
+        "date": "2026-04-02",
+        "description": "Parking",
+        "amount": 60,
+        "category": "transport"
+      },
+      {
+        "date": "2026-04-02",
+        "description": "Bigas",
+        "amount": 65,
+        "category": "food"
+      },
+      {
+        "date": "2026-04-02",
+        "description": "Eggs",
+        "amount": 30,
+        "category": "food"
+      },
+      {
+        "date": "2026-04-02",
+        "description": "Office food",
+        "amount": 50,
+        "category": "food"
       }
     ],
     "todos": [
@@ -1686,9 +1839,24 @@
       "commute_method": "mototaxi (default) / car if heavy rain"
     },
     "transactions": [],
+    "health": [
+      {
+        "date": "2026-04-03",
+        "issue": "Possible UTI",
+        "symptoms": "Pain when urinating",
+        "action": "Buko juice, hydration, no coffee. Monitor 1-2 days.",
+        "status": "monitoring",
+        "notes": "If fever, back pain, or blood in urine -- see doctor. Arabelle's HMO: Maxicare."
+      }
+    ],
     "todos": [
       {
         "text": "Feed Bujah",
+        "done": false,
+        "due": null
+      },
+      {
+        "text": "Drink lots of water, no coffee (UTI)",
         "done": false,
         "due": null
       }
@@ -2480,6 +2648,14 @@
         "ra"
       ],
       "source": "quick_log"
+    },
+    {
+      "date": "2026-04-03",
+      "time": "21:00",
+      "type": "moderator",
+      "summary": "Dashboard moderator revived. Location back to Pasig. Bills updated. Finances reconciled. Daet trip completed. Zach visiting for school break.",
+      "tags": ["sync", "moderator"],
+      "source": "moderator"
     }
   ],
   "briefing": {

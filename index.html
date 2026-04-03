@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#1a1a2e">
-<title>Life OS</title>
+<title>Project Dash</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#1a1a2e;--surface:#232340;--card:#2a2a4a;--card-hover:#333358;--border:rgba(255,255,255,0.09);--text:#f0ede8;--text-secondary:#b0a9a0;--muted:#7a7470;--input-bg:#232340;
@@ -88,6 +88,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);min-hei
 .fam-chip.active-belle{border-color:var(--pink);background:var(--pink-dim)}
 .fam-chip.jah-chip{border-color:rgba(224,126,168,0.15);background:rgba(224,126,168,0.05)}
 .fam-chip.active-jah{border-color:var(--pink);background:var(--pink-dim)}
+.fam-chip.active-zach{border-color:var(--blue);background:var(--blue-dim)}
 .fam-avatar{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
 .fam-text{min-width:0;overflow:hidden}
 .fam-name{font-size:9px;font-weight:700;font-family:var(--font-display);letter-spacing:0.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -150,7 +151,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);min-hei
 <body>
 
 <div class="loader-screen" id="loader">
-  <div style="font-size:13px;color:var(--muted);margin-bottom:12px;font-family:var(--font-display);letter-spacing:1px">LIFE OS</div>
+  <div style="font-size:13px;color:var(--muted);margin-bottom:12px;font-family:var(--font-display);letter-spacing:1px">PROJECT DASH</div>
   <div><span class="loader-dot"></span><span class="loader-dot"></span><span class="loader-dot"></span></div>
 </div>
 
@@ -287,29 +288,43 @@ function updateFamilyBar(){
   const raActive=PROFILE==='ra'?'active-ra':'';
   const belleActive=PROFILE==='arabelle'?'active-belle':'';
   const jahActive=PROFILE==='jah'?'active-jah':'';
+  const zachActive=PROFILE==='zach'?'active-zach':'';
   document.getElementById('family-bar').innerHTML=`
-    <div class="fam-chip home-chip ${homeActive}" onclick="goHome()">
-      <div class="fam-avatar" style="background:var(--green-dim)">&#127968;</div>
-    </div>
-    <div class="fam-chip ${raActive}" onclick="setProfile('ra')">
-      <div class="fam-avatar" style="background:var(--blue-dim)">&#128104;</div>
-      <div class="fam-text">
-        <div class="fam-name">RA</div>
-        <div class="fam-status">${ra.text}</div>
+    <div style="display:flex;flex-direction:column;gap:6px;width:100%">
+      <div style="display:flex;gap:6px">
+        <div class="fam-chip home-chip ${homeActive}" onclick="goHome()">
+          <div class="fam-avatar" style="background:var(--green-dim)">&#127968;</div>
+        </div>
+        <div class="fam-chip ${raActive}" onclick="setProfile('ra')">
+          <div class="fam-avatar" style="background:var(--blue-dim)">&#128104;</div>
+          <div class="fam-text">
+            <div class="fam-name">RA</div>
+            <div class="fam-status">${ra.text}</div>
+          </div>
+        </div>
+        <div class="fam-chip ${belleActive}" onclick="setProfile('arabelle')">
+          <div class="fam-avatar" style="background:var(--pink-dim)">&#128105;</div>
+          <div class="fam-text">
+            <div class="fam-name">Arabelle</div>
+            <div class="fam-status">${ara.text}</div>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="fam-chip jah-chip ${jahActive}" onclick="setProfile('jah')">
-      <div class="fam-avatar" style="background:var(--pink-dim)">&#128118;</div>
-      <div class="fam-text">
-        <div class="fam-name">Bujah</div>
-        <div class="fam-status">${jah.icon} ${jah.text}</div>
-      </div>
-    </div>
-    <div class="fam-chip ${belleActive}" onclick="setProfile('arabelle')">
-      <div class="fam-avatar" style="background:var(--pink-dim)">&#128105;</div>
-      <div class="fam-text">
-        <div class="fam-name">Arabelle</div>
-        <div class="fam-status">${ara.text}</div>
+      <div style="display:flex;gap:6px">
+        <div class="fam-chip jah-chip ${jahActive}" onclick="setProfile('jah')">
+          <div class="fam-avatar" style="background:var(--pink-dim)">&#128118;</div>
+          <div class="fam-text">
+            <div class="fam-name">Bujah</div>
+            <div class="fam-status">${jah.icon} ${jah.text}</div>
+          </div>
+        </div>
+        ${D.shared.zach?`<div class="fam-chip ${zachActive}" onclick="setProfile('zach')" style="border-color:rgba(34,211,238,0.15);background:rgba(34,211,238,0.05)">
+          <div class="fam-avatar" style="background:var(--blue-dim)">&#128102;</div>
+          <div class="fam-text">
+            <div class="fam-name">${D.shared.zach.name}</div>
+            <div class="fam-status">${D.shared.zach.status_emoji||'🎓'} ${D.shared.zach.status_label}</div>
+          </div>
+        </div>`:''}
       </div>
     </div>`;
 }
@@ -386,7 +401,7 @@ function nextPaydays(){
       let d=new Date(c);
       if(d.getDay()===0)d=new Date(d.getTime()-2*oneDay);
       if(d.getDay()===6)d=new Date(d.getTime()-oneDay);
-      if(d.getTime()>=todayMs){results.push({date:d,label:'RA payday',daysUntil:Math.round((d.getTime()-todayMs)/oneDay)});break}
+      if(d.getTime()>=todayMs){results.push({date:d,label:'RA payday',dateStr:fmtDate(d.toLocaleDateString('en-CA',{timeZone:'Asia/Manila'})),daysUntil:Math.round((d.getTime()-todayMs)/oneDay)});break}
     }
   }
 
@@ -397,7 +412,7 @@ function nextPaydays(){
     let next=anchor;
     while(next<todayMs)next+=interval;
     const d=new Date(next);
-    results.push({date:d,label:'Arabelle payday',daysUntil:Math.round((d.getTime()-todayMs)/oneDay)});
+    results.push({date:d,label:'Arabelle payday',dateStr:fmtDate(d.toLocaleDateString('en-CA',{timeZone:'Asia/Manila'})),daysUntil:Math.round((d.getTime()-todayMs)/oneDay)});
   }
 
   results.sort((a,b)=>a.daysUntil-b.daysUntil);
@@ -434,7 +449,7 @@ function getRAStatus(){
   if(isOnTrip())return{text:'Awake',icon:'🏠'};
   // 3. Time-based work schedule
   const h=manilaHour();const m=manilaMinute();const day=manilaDayNum();
-  const isWorkDay=day>=1&&day<=5&&!isHoliday(manilaDateStr());
+  const isWorkDay=day>=1&&day<=5;
   if(!isWorkDay)return{text:'Rest day',icon:'🏠'};
   if(h>=20||h<4)return{text:'At work',icon:'💼'};
   if(h>=4&&h<5)return{text:'Wrapping up',icon:'💼'};
@@ -581,7 +596,7 @@ function buildTabs(){
 const TAB_IDS=['ov','tr','tl','ex','sm','lg'];
 let currentTabIdx=0;
 const renderedTabs={};
-const TAB_RENDERERS={ov:()=>{if(PROFILE==='ra')renderRAHome();else if(PROFILE==='arabelle')renderArabelleHome();else if(PROFILE==='jah')renderJahHome();else renderOverview()},jh:renderJah,tr:renderTrip,tl:renderTimeline,ex:renderExpenses,sm:renderBrief,lg:renderLog};
+const TAB_RENDERERS={ov:()=>{if(PROFILE==='ra')renderRAHome();else if(PROFILE==='arabelle')renderArabelleHome();else if(PROFILE==='jah')renderJahHome();else if(PROFILE==='zach')renderZachHome();else renderOverview()},jh:renderJah,tr:renderTrip,tl:renderTimeline,ex:renderExpenses,sm:renderBrief,lg:renderLog};
 function ensureTabRendered(id){if(!renderedTabs[id]&&TAB_RENDERERS[id]){TAB_RENDERERS[id]();renderedTabs[id]=true}}
 function sw(id,b){document.querySelectorAll('.s').forEach(s=>s.classList.remove('a'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('a'));document.getElementById(id).classList.add('a');b.classList.add('a');currentTabIdx=TAB_IDS.indexOf(id);ensureTabRendered(id)}
 
@@ -599,7 +614,7 @@ if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5){
 function render(){
   if(!D)return;
   Object.keys(renderedTabs).forEach(k=>delete renderedTabs[k]);
-  if(PROFILE==='ra')renderRAHome();else if(PROFILE==='arabelle')renderArabelleHome();else if(PROFILE==='jah')renderJahHome();else renderOverview();
+  if(PROFILE==='ra')renderRAHome();else if(PROFILE==='arabelle')renderArabelleHome();else if(PROFILE==='jah')renderJahHome();else if(PROFILE==='zach')renderZachHome();else renderOverview();
   renderedTabs['ov']=true;
   updateFamilyBar();
 }
@@ -706,6 +721,24 @@ function renderArabelleHome(){
   const h_now=manilaHour();
   let h='';
   const pendingBills=S.bills.items.filter(b=>b.status!=='paid');
+
+  // 0. HEALTH ALERTS
+  const araHealth=(D.arabelle.health||[]).filter(x=>x.status==='monitoring');
+  if(araHealth.length){
+    araHealth.forEach(x=>{
+      h+=`<div class="c" style="border:1px solid var(--red);background:rgba(239,68,68,0.05)">
+        <div style="display:flex;gap:10px;align-items:center">
+          <span style="font-size:20px">🩺</span>
+          <div style="flex:1">
+            <div style="font-size:14px;font-weight:700;color:var(--red)">${x.issue}</div>
+            <div class="m" style="font-size:11px;color:var(--text-secondary);margin-top:2px">${x.symptoms}</div>
+            <div class="m" style="font-size:11px;color:var(--text-secondary);margin-top:4px">${x.action}</div>
+            <div class="m" style="font-size:10px;color:var(--muted);margin-top:4px">${x.notes}</div>
+          </div>
+        </div>
+      </div>`;
+    });
+  }
 
   // 1. COMMUTE FORECAST
   if(W&&W.hourly){
@@ -857,7 +890,7 @@ function renderArabelleHome(){
 
   // 7. BILLS DUE
   if(pendingBills.length){
-    h+='<div class="c"><div class="ct m">Bills Due</div>';
+    h+='<div class="c"><div class="ct m">Upcoming Bills</div>';
     pendingBills.forEach(b=>{
       const dl=billDaysLeft(b);
       const dueStr=b.due_date?(dl<0?Math.abs(dl)+'d overdue':daysUntil(b.due_date)):'pending';
@@ -937,18 +970,21 @@ function renderOverview(){
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
       <div style="background:var(--surface);border-radius:${CSS_R_SM};padding:8px"><div class="m" style="font-size:8px;color:var(--muted);letter-spacing:0.5px">TOTAL</div><div class="m" style="font-size:15px;font-weight:700;color:var(--green);margin-top:2px">${hid?'****':fmt(total)}</div></div>
-      <div style="background:var(--surface);border-radius:${CSS_R_SM};padding:8px"><div class="m" style="font-size:8px;color:var(--muted);letter-spacing:0.5px">BILLS DUE</div><div class="m" style="font-size:15px;font-weight:700;color:var(--orange);margin-top:2px">${hid?'****':fmt(pendingTotal)}</div></div>
+      <div style="background:var(--surface);border-radius:${CSS_R_SM};padding:8px"><div class="m" style="font-size:8px;color:var(--muted);letter-spacing:0.5px">UPCOMING BILLS</div><div class="m" style="font-size:15px;font-weight:700;color:var(--orange);margin-top:2px">${hid?'****':fmt(pendingTotal)}</div></div>
     </div>
     ${(()=>{
       const remaining=total-pendingTotal-tripTotal;
+      const pays=nextPaydays().filter(p=>p.daysUntil<=14);
+      const nextPay=pays.length?pays[0]:null;
+      const billsCoveredByPayday=nextPay&&pendingBills.every(b=>{const dl=billDaysLeft(b);return dl===null||dl>=nextPay.daysUntil-1});
       let insight='',color='var(--green)';
-      if(remaining<0){insight='Bills + trip exceed cash by '+fmt(Math.abs(remaining));color='var(--red)'}
+      if(billsCoveredByPayday&&pendingBills.length){insight=fmt(pendingTotal)+' in upcoming bills. '+nextPay.label+' on '+nextPay.dateStr+' covers it.';color='var(--green)'}
+      else if(remaining<0){insight='Bills + trip exceed cash by '+fmt(Math.abs(remaining));color='var(--red)'}
       else if(isOnTrip()&&remaining<2000){insight='Tight. '+fmt(remaining)+' left after bills + trip.';color='var(--orange)'}
       else if(isOnTrip()){insight='Trip covered. '+fmt(remaining)+' free after bills + trip.';color='var(--green)'}
-      else if(pendingBills.length){insight=fmt(pendingTotal)+' in bills. '+fmt(total-pendingTotal)+' free after.';color='var(--text-secondary)'}
+      else if(pendingBills.length){insight=fmt(pendingTotal)+' in upcoming bills. '+fmt(total)+' available now.';color='var(--text-secondary)'}
       else{insight='All bills paid. '+fmt(total)+' available.';color='var(--green)'}
-      const pays=nextPaydays().filter(p=>p.daysUntil<=7);
-      if(pays.length){const p=pays[0];insight+=(insight?' ':'')+(p.daysUntil===0?p.label+' today.':p.daysUntil===1?p.label+' tomorrow.':p.label+' in '+p.daysUntil+' days.')}
+      if(nextPay&&!billsCoveredByPayday){insight+=(insight?' ':'')+(nextPay.daysUntil===0?nextPay.label+' today.':nextPay.daysUntil===1?nextPay.label+' tomorrow.':nextPay.label+' in '+nextPay.daysUntil+' days.')}
       return '<div style="margin-top:8px;padding:8px 10px;background:var(--surface);border-radius:'+CSS_R_SM+';font-size:11px;color:'+color+';line-height:1.4">'+insight+'</div>';
     })()}
   </div>`;
@@ -957,7 +993,7 @@ function renderOverview(){
   const localPaid=JSON.parse(localStorage.getItem('paid_bills')||'[]');
   const visibleBills=pendingBills.filter(b=>!localPaid.includes(b.name));
   if(visibleBills.length){
-    h+='<div class="c"><div class="ct m">Bills Due</div>';
+    h+='<div class="c"><div class="ct m">Upcoming Bills</div>';
     visibleBills.forEach(b=>{
       const dl=billDaysLeft(b);
       const dueStr=b.due_date?(dl<0?Math.abs(dl)+'d overdue':daysUntil(b.due_date)):'pending';
@@ -1017,7 +1053,32 @@ function renderOverview(){
     }
   }
 
-  // 6. COMBINED ALERTS + TODOS
+  // 6. VEHICLES
+  if(S.vehicle){
+    const car=S.vehicle.car;const moto=S.vehicle.scooter;
+    h+='<div class="c"><div class="ct m">Vehicles</div><div style="display:flex;gap:8px">';
+    if(car){
+      const gl=parseInt(car.gas_level)||0;const gc=gl>60?'var(--green)':gl>30?'var(--orange)':'var(--red)';
+      h+=`<div style="flex:1;background:var(--surface);border-radius:${CSS_R_SM};padding:10px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><span style="font-size:14px">🚗</span><span class="m" style="font-size:9px;color:var(--muted)">${car.model}</span></div>
+        <div style="display:flex;align-items:baseline;gap:4px;margin-bottom:6px"><span class="m" style="font-size:20px;font-weight:700;color:${gc}">${car.gas_level}</span><span class="m" style="font-size:9px;color:var(--muted)">gas</span></div>
+        <div style="background:var(--bg);border-radius:3px;height:4px;overflow:hidden;margin-bottom:6px"><div style="background:${gc};height:100%;width:${gl}%;border-radius:3px"></div></div>
+        ${car.rfid?`<div class="m" style="font-size:9px;color:var(--muted);line-height:1.4">SLEX RFID: <span style="color:${car.rfid.slex<0?'var(--red)':'var(--green)'};font-weight:600">${fmt(car.rfid.slex)}</span><br>NLEX RFID: <span style="color:var(--green);font-weight:600">~${fmt(car.rfid.nlex)}</span></div>`:''}
+      </div>`;
+    }
+    if(moto){
+      const gl=parseInt(moto.gas_level)||0;const gc=gl>60?'var(--green)':gl>30?'var(--orange)':'var(--red)';
+      h+=`<div style="flex:1;background:var(--surface);border-radius:${CSS_R_SM};padding:10px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><span style="font-size:14px">🏍️</span><span class="m" style="font-size:9px;color:var(--muted)">${moto.model}</span></div>
+        <div style="display:flex;align-items:baseline;gap:4px;margin-bottom:6px"><span class="m" style="font-size:20px;font-weight:700;color:${gc}">${moto.gas_level}</span><span class="m" style="font-size:9px;color:var(--muted)">gas</span></div>
+        <div style="background:var(--bg);border-radius:3px;height:4px;overflow:hidden;margin-bottom:6px"><div style="background:${gc};height:100%;width:${gl}%;border-radius:3px"></div></div>
+        <div class="m" style="font-size:9px;color:var(--muted)">~${fmt(moto.usual_cost)}/fill @ ${fmt(moto.avg_price)}/L</div>
+      </div>`;
+    }
+    h+='</div></div>';
+  }
+
+  // 7. COMBINED ALERTS + TODOS
   const alerts=[];
   if((S.accounts.pocket_cash.balance||0)<500)alerts.push({icon:'💵',text:'Pocket cash low: '+fmt(S.accounts.pocket_cash.balance),sub:'Withdraw soon',color:'var(--red)'});
   if(isStale(S.accounts.payroll.updated,7))alerts.push({icon:'🏦',text:'Account balances stale',sub:'Send a bank screenshot',color:'var(--orange)'});
@@ -1048,6 +1109,27 @@ function renderOverview(){
   if(!alerts.length&&!allTodos.length)h+='<div class="empty-state">All clear</div>';
   h+='</div>';
 
+  el.innerHTML=h;
+}
+
+function renderZachHome(){
+  const el=document.getElementById('ov');
+  const z=D.shared.zach;
+  if(!z){el.innerHTML='<div class="c"><div class="empty-state">No data for Zach</div></div>';return}
+  const visitStart=z.visit_start?fmtDate(z.visit_start):'';
+  const daysHere=z.visit_start?Math.max(1,Math.round((Date.now()-new Date(z.visit_start+'T00:00:00+08:00').getTime())/86400000)):'';
+  let h='';
+  h+=`<div class="c" style="text-align:center;padding:24px 16px">
+    <div style="font-size:48px;margin-bottom:8px">&#128102;</div>
+    <div class="m" style="font-size:22px;font-weight:700;letter-spacing:-0.5px">${z.name}</div>
+    <div class="m" style="font-size:12px;color:var(--muted);margin-top:4px">${z.relation}</div>
+    <div style="margin-top:16px;display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:var(--r-pill);background:var(--green-dim);border:1px solid var(--green)">
+      <span style="font-size:18px">${z.status_emoji||'🎓'}</span>
+      <span class="m" style="font-size:14px;font-weight:700;color:var(--green)">${z.status_label}</span>
+    </div>
+    ${visitStart?`<div class="m" style="font-size:11px;color:var(--muted);margin-top:12px">Visiting since ${visitStart} (${daysHere} day${daysHere!==1?'s':''})</div>`:''}
+    ${z.notes?`<div class="m" style="font-size:12px;color:var(--text-secondary);margin-top:8px;line-height:1.4">${z.notes}</div>`:''}
+  </div>`;
   el.innerHTML=h;
 }
 
@@ -1453,8 +1535,8 @@ function renderExpenses(){
   h+=`<div class="c"><div class="ct m">Quick Stats</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
       <div style="background:var(--bg);border-radius:8px;padding:12px"><div class="m" style="font-size:9px;color:var(--muted);letter-spacing:0.5px">CASH ON HAND</div><div class="m" style="font-size:18px;font-weight:700;color:var(--blue);margin-top:2px">${fmt(total)}</div></div>
-      <div style="background:var(--bg);border-radius:8px;padding:12px"><div class="m" style="font-size:9px;color:var(--muted);letter-spacing:0.5px">BILLS DUE</div><div class="m" style="font-size:18px;font-weight:700;color:var(--orange);margin-top:2px">${fmt(pendingTotal)}</div></div>
-      <div style="background:var(--bg);border-radius:8px;padding:12px"><div class="m" style="font-size:9px;color:var(--muted);letter-spacing:0.5px">AFTER BILLS</div><div class="m" style="font-size:18px;font-weight:700;color:var(--green);margin-top:2px">${fmt(total-pendingTotal)}</div></div>
+      <div style="background:var(--bg);border-radius:8px;padding:12px"><div class="m" style="font-size:9px;color:var(--muted);letter-spacing:0.5px">UPCOMING BILLS</div><div class="m" style="font-size:18px;font-weight:700;color:var(--orange);margin-top:2px">${fmt(pendingTotal)}</div></div>
+      <div style="background:var(--bg);border-radius:8px;padding:12px"><div class="m" style="font-size:9px;color:var(--muted);letter-spacing:0.5px">AVAILABLE NOW</div><div class="m" style="font-size:18px;font-weight:700;color:var(--green);margin-top:2px">${fmt(total)}</div></div>
       ${tripTotal?`<div style="background:var(--bg);border-radius:8px;padding:12px"><div class="m" style="font-size:9px;color:var(--muted);letter-spacing:0.5px">TRIP EST</div><div class="m" style="font-size:18px;font-weight:700;color:var(--purple);margin-top:2px">~${fmt(tripTotal)}</div></div>`:''}
     </div>`;
   if(remaining<5000)h+=`<div class="stale-warning">After bills + trip: <span class="m" style="font-weight:700">${fmt(remaining)}</span> remaining.</div>`;
@@ -1833,7 +1915,7 @@ async function init(){
 
     const updated=new Date(D.last_updated);
     document.getElementById('dash-label').textContent='Updated '+updated.toLocaleString('en-PH',{timeZone:'Asia/Manila',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'});
-    document.getElementById('footer').textContent='RA Dashboard';
+    document.getElementById('footer').textContent='';
 
     if(isStale(D.last_updated,3)){
       document.getElementById('status-dot').style.background='var(--orange)';
