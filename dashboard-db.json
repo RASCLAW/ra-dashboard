@@ -1651,6 +1651,18 @@
         "description": "Office food",
         "amount": 50,
         "category": "food"
+      },
+      {
+        "date": "2026-04-04",
+        "description": "McDo burger (free, from Arabelle)",
+        "amount": 0,
+        "category": "food"
+      },
+      {
+        "date": "2026-04-04",
+        "description": "Fish fillet (free, work)",
+        "amount": 0,
+        "category": "food"
       }
     ],
     "todos": [
