@@ -952,6 +952,27 @@ function renderOverview(){
     </div>`;
   }
 
+  // 1b. HEALTH ALERTS
+  const healthAlerts=S.health_alerts||[];
+  if(healthAlerts.length){
+    h+='<div class="c" style="border:1px solid rgba(232,112,112,0.2);background:linear-gradient(145deg,rgba(232,112,112,0.06) 0%,rgba(232,176,96,0.04) 100%)">';
+    h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><span style="font-size:16px">\u{1F6A8}</span><div class="ct m" style="margin:0;padding:0;border:none;color:var(--red)">Health Alerts</div></div>';
+    healthAlerts.forEach((a,i)=>{
+      const sev=a.severity==='urgent'?'var(--red)':'var(--orange)';
+      const bg=a.severity==='urgent'?'var(--red-dim)':'var(--orange-dim)';
+      h+=`<div style="padding:10px;background:${bg};border-radius:var(--r-sm);${i<healthAlerts.length-1?'margin-bottom:8px':''}">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+          <span style="font-size:13px;font-weight:700;color:${sev}">${a.who}</span>
+          <span class="m" style="font-size:9px;font-weight:700;color:${sev};letter-spacing:0.5px">${a.severity.toUpperCase()}</span>
+        </div>
+        <div style="font-size:12px;font-weight:600;margin-bottom:3px">${a.issue}</div>
+        <div style="font-size:11px;color:var(--text-secondary);margin-bottom:2px">${a.action}</div>
+        ${a.notes?'<div style="font-size:10px;color:var(--muted);line-height:1.4;margin-top:4px">'+a.notes+'</div>':''}
+      </div>`;
+    });
+    h+='</div>';
+  }
+
   // 2. FINANCE WITH INSIGHT
   const total=(S.accounts.payroll.balance||0)+(S.accounts.savings.balance||0)+(S.accounts.pocket_cash.balance||0);
   const pendingBills=S.bills.items.filter(b=>b.status!=='paid');

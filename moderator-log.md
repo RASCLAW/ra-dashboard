@@ -70,3 +70,24 @@ Append-only. The moderator logs patterns, recommendations, alerts, and actions h
 - Vercel re-authenticated (token expired from PC rebuild)
 - Dashboard moderator skill rebuilt at .claude/skills/dashboard-moderator/SKILL.md
 **Action:** Dashboard DB updated, dashboard-data.json rebuilt, deployed to Vercel
+
+## 2026-04-05 22:30 (PHT)
+**Type:** action
+**Domain:** health, finance, baby_jah, family, dashboard
+**Observation:** 2-day sync. Health alerts are the big story -- Arabelle UTI day 3 not improving, Baby Jah eczema scratching. Built Health Alerts card for dashboard home page.
+**Data:**
+- NEW: Health Alerts card added to dashboard Overview (renders from shared.health_alerts)
+- Arabelle UTI: status monitoring -> not_improving. Doctor visit via Maxicare flagged as urgent.
+- Baby Jah: eczema flare-up logged, scratching until bruised. Pedia derma recommended.
+- Baby Jah milestone: teething passed, eating solids comfortably, good digestion
+- Baby Jah: milk + diaper change ~8 PM
+- Payroll: P3,000 -> P2,552
+- Pocket cash: P2,000 -> P100
+- 12 transactions logged (parking x2, gas, butingsilog, car wash, Dunkin, Mountain Dew, bigas, eggs, buko juice, mineral water, diapers)
+- Car gas: 90% -> 80%
+- Carwash todo: done
+- Calendar: cleaned 9 old March events, added Beyblade (Apr 4), Parklinks (Apr 5), Pyro Musical (Apr 11), Iver gift + Tapo cancel reminders (Apr 10)
+- Zach: Beyblade tournament at Cardpro BGC with RA, Parklinks badminton with family
+- Tapo subscription: flagged for cancellation before Apr 11
+- Added 3 todos: buy Iver gift, unsubscribe Tapo, book Arabelle doctor visit
+**Action:** Dashboard DB updated, Health Alerts card added to HTML, dashboard-data.json rebuilt, deployed to Vercel

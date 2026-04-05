@@ -92,3 +92,23 @@ Append-only. Never prune.
 
 ### 6:45 PM
 - **Food:** RA eating fish soup and fried pampano fish. Baby Jah had the fish soup earlier at 3 PM (same meal).
+
+## 2026-04-04
+
+### 9:00 PM
+- **Activity:** RA and Zach went to a Beyblade tournament at Cardpro, BGC. Bonding time during Zach's school break visit.
+
+## 2026-04-05
+
+### 6:00 AM
+- **Activity:** Morning run and badminton with the whole family at Parklinks, Pasig. Their usual spot.
+- **Context:** Family fitness outing -- RA, Arabelle, Zach, Baby Jah all together.
+
+### 8:00 PM
+- **Baby Jah:** Last milk and diaper change of the day around 8 PM.
+
+### 10:00 PM
+- **Health:** Arabelle UTI not improving (Day 3). Still drinking buko juice and water, keeping UT clean. Currently sleeping. Doctor visit via Maxicare recommended -- do not delay further.
+- **Health:** Baby Jah eczema flaring up -- very dry skin, scratching until bruised. Teething stage passed though, eating solids comfortably now, good poops.
+- **Finance:** BPI P2,552, pocket cash P100. Spent on parking, gas, food, car wash, groceries, diapers.
+- **Milestone:** Baby Jah dietary progression continues -- comfortably eating whatever the family eats. Teething discomfort gone.

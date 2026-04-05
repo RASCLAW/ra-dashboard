@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-04T02:02:13+08:00",
+  "last_updated": "2026-04-06T01:30:00+08:00",
   "location": {
     "name": "San Joaquin, Pasig",
     "lat": 14.5764,
@@ -27,10 +27,10 @@
     },
     "accounts": {
       "payroll": {
-        "balance": 3000,
+        "balance": 1403,
         "account_masked": "***9713",
-        "updated": "2026-04-03",
-        "notes": "RA confirmed Apr 3"
+        "updated": "2026-04-06",
+        "notes": "P2552 - P840 vape - P309 Jollibee = P1403"
       },
       "savings": {
         "balance": 0,
@@ -39,9 +39,9 @@
         "notes": "Funds consolidated to payroll for trip. RA will transfer back if money remains."
       },
       "pocket_cash": {
-        "balance": 2000,
-        "updated": "2026-04-03",
-        "notes": "RA confirmed Apr 3"
+        "balance": 100,
+        "updated": "2026-04-06",
+        "notes": "RA confirmed Apr 5"
       }
     },
     "bills": {
@@ -113,7 +113,8 @@
         {
           "name": "TP-Link Tapo",
           "amount": 140,
-          "next_due": "2026-04-11"
+          "next_due": "2026-04-11",
+          "notes": "CANCEL BEFORE APR 11"
         },
         {
           "name": "Arabelle Google Cloud",
@@ -124,59 +125,10 @@
     },
     "calendar": [
       {
-        "date": "2026-03-25",
-        "title": "Call ACE Hospital Pateros",
-        "category": "health",
-        "time": null
-      },
-      {
-        "date": "2026-03-26",
-        "title": "Hospital visit -- Med Cert",
-        "category": "health",
-        "time": null
-      },
-      {
-        "date": "2026-03-26",
-        "title": "Send sickline form to Informdata",
-        "category": "work",
-        "time": null
-      },
-      {
-        "date": "2026-03-27",
-        "title": "Send sickline form to Informdata",
-        "category": "work",
-        "time": null
-      },
-      {
-        "date": "2026-03-27",
-        "title": "Withdraw cash, check weather",
-        "category": "finance",
-        "time": null
-      },
-      {
         "date": "2026-03-30",
         "title": "Send sickline form to Informdata",
         "category": "work",
         "time": null
-      },
-      {
-        "date": "2026-03-28",
-        "title": "Pay parking P3,000",
-        "category": "finance",
-        "time": null
-      },
-      {
-        "date": "2026-03-26",
-        "title": "Depart for Daet 8-9 PM",
-        "category": "travel",
-        "time": "20:00"
-      },
-      {
-        "date": "2026-03-28",
-        "title": "Zach's Elementary Graduation",
-        "category": "family",
-        "time": "13:00",
-        "notes": "1 PM in Daet"
       },
       {
         "date": "2026-03-31",
@@ -185,10 +137,48 @@
         "time": "06:00"
       },
       {
+        "date": "2026-04-04",
+        "title": "Beyblade Tournament -- Cardpro BGC (with Zach)",
+        "category": "family",
+        "time": null
+      },
+      {
+        "date": "2026-04-05",
+        "title": "Arabelle doctor visit (UTI) -- BOOK NOW",
+        "category": "health",
+        "time": null,
+        "notes": "UTI not improving after 3 days. Use Maxicare HMO."
+      },
+      {
+        "date": "2026-04-05",
+        "title": "Morning run + Badminton -- Parklinks, Pasig",
+        "category": "family",
+        "time": "06:00"
+      },
+      {
+        "date": "2026-04-10",
+        "title": "Buy gift for Iver Sage (1st birthday)",
+        "category": "family",
+        "time": null
+      },
+      {
+        "date": "2026-04-10",
+        "title": "Unsubscribe TP-Link Tapo (P140/mo)",
+        "category": "finance",
+        "time": null
+      },
+      {
         "date": "2026-04-11",
         "title": "Iver Sage 1st Birthday -- Jollibee Green Meadows",
         "category": "family",
         "time": "16:00"
+      },
+      {
+        "date": "2026-04-11",
+        "title": "Pyro Musical -- MOA, Pasay",
+        "category": "family",
+        "time": "19:00",
+        "notes": "After Iver bday. Leave Jollibee 5PM, park at SM Seaside or Macapagal Blvd. Show ~7PM. No tickets needed."
       },
       {
         "date": "2026-06-06",
@@ -207,20 +197,6 @@
         "title": "RA's Birthday",
         "category": "family",
         "time": null
-      },
-      {
-        "date": "2026-04-05",
-        "title": "Arabelle doctor visit (UTI) -- if not improving",
-        "category": "health",
-        "time": null,
-        "notes": "Maxicare HMO. Only if symptoms persist or worsen."
-      },
-      {
-        "date": "2026-03-28",
-        "title": "Beach morning with Baby Jah (low tide 7:17 AM)",
-        "category": "family",
-        "time": "06:30",
-        "notes": "Talisay/Daet. Low tide at 7:17 AM -- ideal for Jah. Before graduation at 1 PM."
       }
     ],
     "trips": [
@@ -383,6 +359,84 @@
             }
           ]
         }
+      },
+      {
+        "name": "Iver Sage Birthday + Pyro Musical",
+        "destination": "Green Meadows (Pasig) -> MOA (Pasay)",
+        "dates": "Apr 11, 2026",
+        "status": "upcoming",
+        "schedule": [
+          {
+            "date": "2026-04-11",
+            "label": "Saturday",
+            "items": [
+              {
+                "time": "16:00",
+                "event": "Iver Sage 1st Birthday",
+                "notes": "Jollibee Green Meadows. Bring gift!",
+                "icon": "event",
+                "location": "Jollibee Green Meadows, Pasig"
+              },
+              {
+                "time": "17:00",
+                "event": "Leave for MOA area",
+                "notes": "Route: C5 -> Skyway -> Coastal Road -> MOA (1-1.5 hrs). Or McKinley -> Macapagal Blvd. Use Waze real-time.",
+                "icon": "travel",
+                "location": "En route"
+              },
+              {
+                "time": "18:30",
+                "event": "Arrive + park + food",
+                "notes": "Park at SM Seaside or Macapagal Blvd restaurant. MOA main will be packed. Solaire/Okada have free parking.",
+                "icon": "food",
+                "location": "MOA area, Pasay"
+              },
+              {
+                "time": "19:00",
+                "event": "Pyro Musical fireworks show",
+                "notes": "Watch from outside -- SM Seaside area, Macapagal Blvd, or Aseana. No tickets needed.",
+                "icon": "event",
+                "location": "SM MOA Open Grounds area, Pasay"
+              },
+              {
+                "time": "20:45",
+                "event": "Head home",
+                "notes": "Wait 30-45 min after show to avoid gridlock. Home by ~10 PM via Skyway/C5.",
+                "icon": "travel",
+                "location": "San Joaquin, Pasig"
+              }
+            ]
+          }
+        ],
+        "budget": {
+          "toll_skyway": 250,
+          "parking": 100,
+          "food": 500,
+          "gift": 500,
+          "total": 1350
+        },
+        "alerts": [
+          {
+            "type": "warning",
+            "text": "Confirm Pyromusical 2026 schedule -- check FB page 'Philippine International Pyromusical Competition' or SM MOA socials"
+          },
+          {
+            "type": "warning",
+            "text": "Leave Jollibee by 5-5:30 PM to arrive before 7 PM show. EDSA will be brutal -- use Skyway or Macapagal."
+          },
+          {
+            "type": "ok",
+            "text": "Park at SM Seaside or a Macapagal Blvd restaurant -- solves parking + dinner"
+          },
+          {
+            "type": "money",
+            "text": "Skyway toll ~P110-250. Total trip budget ~P1,350 (toll + parking + food + gift)"
+          },
+          {
+            "type": "ok",
+            "text": "Bring: blanket/mat, mosquito repellent, water, snacks, power bank, portable fan"
+          }
+        ]
       }
     ],
     "vehicle": {
@@ -398,7 +452,7 @@
         "model": "Toyota Vios 2015",
         "last_maintenance": "2026-03-23",
         "notes": "Brake shoes replaced",
-        "gas_level": "90%",
+        "gas_level": "80%",
         "last_gas": "2026-03-26",
         "rfid": {
           "slex": -109,
@@ -580,6 +634,12 @@
           "time": "17:00",
           "food": "Milk",
           "notes": null
+        },
+        {
+          "date": "2026-04-05",
+          "time": "20:00",
+          "food": "Milk",
+          "notes": "Evening milk before bed"
         }
       ],
       "sleep": [
@@ -812,6 +872,12 @@
           "time": "17:00",
           "type": "wet",
           "notes": "Changed after milk"
+        },
+        {
+          "date": "2026-04-05",
+          "time": "20:00",
+          "type": "fresh",
+          "notes": "Last diaper change of the day"
         }
       ],
       "milestones": [
@@ -855,6 +921,12 @@
           "date": "2026-04-03",
           "age": "21 months",
           "milestone": "Eating rice with ulam regularly now -- fish soup, whatever the family eats. Major dietary progression from purees/lugaw.",
+          "location": "San Joaquin, Pasig"
+        },
+        {
+          "date": "2026-04-05",
+          "age": "22 months",
+          "milestone": "Teething stage passed -- eating solid foods comfortably. Good digestion, healthy poops.",
           "location": "San Joaquin, Pasig"
         }
       ],
@@ -960,10 +1032,15 @@
           "date": "2026-03-30",
           "time": "14:51",
           "activity": "Out with RA -- pasalubong shopping + coffee"
+        },
+        {
+          "date": "2026-04-05",
+          "time": "06:00",
+          "activity": "Morning run + badminton with whole family at Parklinks, Pasig"
         }
       ],
       "next_checkup": null,
-      "mood_today": "Playing with cousins (2026-03-30 9:45 AM)",
+      "mood_today": "Morning run with family at Parklinks (2026-04-05)",
       "feedings": [
         {
           "date": "2026-03-27",
@@ -1026,6 +1103,13 @@
             "Ask doctor about cow's milk elimination trial",
             "Track which lotions were tried and failed"
           ]
+        },
+        {
+          "date": "2026-04-05",
+          "issue": "Eczema flare-up",
+          "symptoms": "Very dry skin, itchy, scratching until bruised/scratched",
+          "action": "Consult pediatric derma",
+          "status": "monitoring"
         }
       ]
     },
@@ -1034,10 +1118,10 @@
       "relation": "Arabelle's first son",
       "status": "visiting",
       "status_label": "SCHOOL BREAK",
-      "status_emoji": "\ud83c\udf93",
+      "status_emoji": "🎓",
       "visit_start": "2026-04-01",
       "visit_end": null,
-      "notes": "Staying with RA and Arabelle during school break after elementary graduation in Daet"
+      "notes": "School break. Beyblade tournament at Cardpro BGC with RA (Apr 4). Parklinks badminton (Apr 5)."
     },
     "buki": {
       "name": "Buki",
@@ -1075,6 +1159,24 @@
         "last_maintenance": "2026-03-23",
         "maintenance_notes": "Brake shoes replaced",
         "updated": "2026-03-29"
+      }
+    ],
+    "health_alerts": [
+      {
+        "who": "Arabelle",
+        "issue": "UTI -- not improving (Day 3)",
+        "severity": "urgent",
+        "action": "Book Maxicare doctor visit ASAP",
+        "since": "2026-04-03",
+        "notes": "Drinking buko juice + water, keeping UT clean. Not improving after 3 days."
+      },
+      {
+        "who": "Baby Jah",
+        "issue": "Eczema flare-up -- dry skin, scratching until bruised",
+        "severity": "monitor",
+        "action": "Consult pediatric derma for topical treatment",
+        "since": "2026-04-05",
+        "notes": "Skin very dry, eczema itchy. Scratches until bruised. Consider bundling with Arabelle visit."
       }
     ]
   },
@@ -1663,6 +1765,104 @@
         "description": "Fish fillet (free, work)",
         "amount": 0,
         "category": "food"
+      },
+      {
+        "date": "2026-04-04",
+        "description": "Motor Parking (work shift)",
+        "amount": 85,
+        "category": "transport",
+        "method": "cash"
+      },
+      {
+        "date": "2026-04-04",
+        "description": "Motor Parking (Zach Beyblade trip)",
+        "amount": 60,
+        "category": "transport",
+        "method": "cash"
+      },
+      {
+        "date": "2026-04-05",
+        "description": "Motor Gas",
+        "amount": 200,
+        "category": "transport",
+        "method": "cash"
+      },
+      {
+        "date": "2026-04-05",
+        "description": "Butingsilog",
+        "amount": 140,
+        "category": "food",
+        "method": "cash"
+      },
+      {
+        "date": "2026-04-05",
+        "description": "Car Wash",
+        "amount": 170,
+        "category": "transport",
+        "method": "cash"
+      },
+      {
+        "date": "2026-04-05",
+        "description": "Dunkin Donut",
+        "amount": 60,
+        "category": "food",
+        "method": "cash"
+      },
+      {
+        "date": "2026-04-05",
+        "description": "Mountain Dew",
+        "amount": 25,
+        "category": "food",
+        "method": "cash"
+      },
+      {
+        "date": "2026-04-05",
+        "description": "Bigas (rice)",
+        "amount": 120,
+        "category": "groceries",
+        "method": "cash"
+      },
+      {
+        "date": "2026-04-05",
+        "description": "Eggs",
+        "amount": 65,
+        "category": "groceries",
+        "method": "cash"
+      },
+      {
+        "date": "2026-04-05",
+        "description": "Buko Juice (Arabelle UTI)",
+        "amount": 50,
+        "category": "groceries",
+        "method": "cash"
+      },
+      {
+        "date": "2026-04-05",
+        "description": "Mineral Water",
+        "amount": 70,
+        "category": "groceries",
+        "method": "cash"
+      },
+      {
+        "date": "2026-04-05",
+        "description": "Diapers",
+        "amount": 120,
+        "category": "baby",
+        "method": "cash"
+      },
+      {
+        "date": "2026-04-06",
+        "description": "Vape pods x2 (RA + Arabelle)",
+        "amount": 840,
+        "category": "personal",
+        "method": "BPI"
+      },
+      {
+        "date": "2026-04-06",
+        "description": "Jollibee midnight snack (RA + Zach)",
+        "amount": 309,
+        "category": "food",
+        "method": "BPI"
       }
     ],
     "todos": [
@@ -1701,8 +1901,24 @@
       },
       {
         "text": "Carwash",
+        "done": true,
+        "due": null,
+        "notes": "Done Apr 5"
+      },
+      {
+        "text": "Buy gift for Iver Sage 1st birthday",
         "done": false,
-        "due": null
+        "due": "2026-04-10"
+      },
+      {
+        "text": "Unsubscribe TP-Link Tapo",
+        "done": false,
+        "due": "2026-04-10"
+      },
+      {
+        "text": "Book Arabelle Maxicare doctor visit (UTI)",
+        "done": false,
+        "due": "2026-04-06"
       }
     ],
     "contacts": [
@@ -1856,9 +2072,9 @@
         "date": "2026-04-03",
         "issue": "Possible UTI",
         "symptoms": "Pain when urinating",
-        "action": "Buko juice, hydration, no coffee. Monitor 1-2 days.",
-        "status": "monitoring",
-        "notes": "If fever, back pain, or blood in urine -- see doctor. Arabelle's HMO: Maxicare."
+        "action": "Book Maxicare doctor visit. Not improving after 3 days.",
+        "status": "not_improving",
+        "notes": "Day 3: still painful. Buko juice, water, hygiene not enough. Doctor visit ASAP. HMO: Maxicare."
       }
     ],
     "todos": [
@@ -2666,8 +2882,39 @@
       "time": "21:00",
       "type": "moderator",
       "summary": "Dashboard moderator revived. Location back to Pasig. Bills updated. Finances reconciled. Daet trip completed. Zach visiting for school break.",
-      "tags": ["sync", "moderator"],
+      "tags": [
+        "sync",
+        "moderator"
+      ],
       "source": "moderator"
+    },
+    {
+      "date": "2026-04-04",
+      "time": "21:00",
+      "title": "Beyblade Tournament with Zach",
+      "body": "RA and Zach at Cardpro BGC.",
+      "tags": [
+        "family",
+        "zach"
+      ]
+    },
+    {
+      "date": "2026-04-05",
+      "time": "06:00",
+      "title": "Family morning run + badminton at Parklinks",
+      "body": "Whole family outing.",
+      "tags": [
+        "family"
+      ]
+    },
+    {
+      "date": "2026-04-05",
+      "time": "22:30",
+      "title": "Health: Arabelle UTI + Baby Jah eczema",
+      "body": "UTI day 3 not improving. Eczema scratching.",
+      "tags": [
+        "health"
+      ]
     }
   ],
   "briefing": {
