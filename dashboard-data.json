@@ -1867,29 +1867,6 @@
     ],
     "todos": [
       {
-        "text": "File leave at Informdata for Daet trip",
-        "done": true,
-        "due": "2026-03-27",
-        "notes": "Sickline forms submitted Mar 26 + 27 via Microsoft Forms. Mar 30 still pending."
-      },
-      {
-        "text": "Pay parking P3,000",
-        "done": false,
-        "due": "2026-03-28"
-      },
-      {
-        "text": "Withdraw cash before Daet trip",
-        "done": true,
-        "due": "2026-03-27",
-        "notes": "P5,000 ATM Mar 26 (BPI Wells FA) + P6,000 ATM Mar 27 (MDC PASI in Daet)"
-      },
-      {
-        "text": "Call ACE Hospital Pateros -- confirm PhilCare HMO",
-        "done": true,
-        "due": "2026-03-25",
-        "notes": "Confirmed via PhilDigiMed app -- WITH ACCESS"
-      },
-      {
         "text": "Empty recycle bin (3.1GB)",
         "done": false,
         "due": null
@@ -1898,12 +1875,6 @@
         "text": "Delete Google Photos library (takeout done, 28GB)",
         "done": false,
         "due": null
-      },
-      {
-        "text": "Carwash",
-        "done": true,
-        "due": null,
-        "notes": "Done Apr 5"
       },
       {
         "text": "Buy gift for Iver Sage 1st birthday",
