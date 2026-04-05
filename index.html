@@ -790,7 +790,7 @@ function renderArabelleHome(){
         </div>
         <div style="display:flex;gap:8px;align-items:center">
           <span style="font-size:14px">😴</span>
-          <div><div style="font-size:12px;font-weight:600">${lastSleep?(lastSleep.woke&&!lastSleep.slept?'Woke up':lastSleep.type==='nap'?'Napping':'Sleeping'):'--'}</div><div class="m" style="font-size:9px;color:var(--muted)">${lastSleep?timeAgo(lastSleep.date,lastSleep.woke||lastSleep.slept):'--'}</div></div>
+          <div><div style="font-size:12px;font-weight:600">${lastSleep?(lastSleep.slept&&!lastSleep.woke?(lastSleep.type==='nap'?'Napping':'Sleeping'):'Last: '+(lastSleep.type==='nap'?'Nap':'Sleep')):'--'}</div><div class="m" style="font-size:9px;color:var(--muted)">${lastSleep?timeAgo(lastSleep.date,lastSleep.woke||lastSleep.slept):'--'}</div></div>
         </div>
         <div style="display:flex;gap:8px;align-items:center">
           <span style="font-size:14px">🏃</span>
@@ -946,7 +946,7 @@ function renderOverview(){
         </div>
         <div style="flex:1;display:flex;gap:8px;align-items:center">
           <span style="font-size:14px">😴</span>
-          <div><div style="font-size:12px;font-weight:600">${lastSleep?(lastSleep.woke&&!lastSleep.slept?'Woke up':lastSleep.type==='nap'?'Napping':'Sleeping'):'--'}</div><div class="m" style="font-size:9px;color:var(--muted)">${lastSleep?timeAgo(lastSleep.date,lastSleep.woke||lastSleep.slept):'--'}</div></div>
+          <div><div style="font-size:12px;font-weight:600">${lastSleep?(lastSleep.slept&&!lastSleep.woke?(lastSleep.type==='nap'?'Napping':'Sleeping'):'Last: '+(lastSleep.type==='nap'?'Nap':'Sleep')):'--'}</div><div class="m" style="font-size:9px;color:var(--muted)">${lastSleep?timeAgo(lastSleep.date,lastSleep.woke||lastSleep.slept):'--'}</div></div>
         </div>
       </div>
     </div>`;
@@ -1008,6 +1008,17 @@ function renderOverview(){
       if(nextPay&&!billsCoveredByPayday){insight+=(insight?' ':'')+(nextPay.daysUntil===0?nextPay.label+' today.':nextPay.daysUntil===1?nextPay.label+' tomorrow.':nextPay.label+' in '+nextPay.daysUntil+' days.')}
       return '<div style="margin-top:8px;padding:8px 10px;background:var(--surface);border-radius:'+CSS_R_SM+';font-size:11px;color:'+color+';line-height:1.4">'+insight+'</div>';
     })()}
+  </div>`;
+
+  // 2b. QUICK STATS
+  const remaining2=total-pendingTotal;
+  h+=`<div class="c"><div class="ct m">Quick Stats</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+      <div style="background:var(--surface);border-radius:8px;padding:10px"><div class="m" style="font-size:9px;color:var(--muted);letter-spacing:0.5px">CASH ON HAND</div><div class="m" style="font-size:18px;font-weight:700;color:var(--blue);margin-top:2px">${hid?'****':fmt(total)}</div></div>
+      <div style="background:var(--surface);border-radius:8px;padding:10px"><div class="m" style="font-size:9px;color:var(--muted);letter-spacing:0.5px">UPCOMING BILLS</div><div class="m" style="font-size:18px;font-weight:700;color:var(--orange);margin-top:2px">${hid?'****':fmt(pendingTotal)}</div></div>
+      <div style="background:var(--surface);border-radius:8px;padding:10px"><div class="m" style="font-size:9px;color:var(--muted);letter-spacing:0.5px">AFTER BILLS</div><div class="m" style="font-size:18px;font-weight:700;color:${remaining2<1000?'var(--red)':'var(--green)'};margin-top:2px">${hid?'****':fmt(remaining2)}</div></div>
+      <div style="background:var(--surface);border-radius:8px;padding:10px"><div class="m" style="font-size:9px;color:var(--muted);letter-spacing:0.5px">POCKET CASH</div><div class="m" style="font-size:18px;font-weight:700;color:var(--orange);margin-top:2px">${fmt(S.accounts.pocket_cash.balance)}</div></div>
+    </div>
   </div>`;
 
   // 3. UPCOMING BILLS

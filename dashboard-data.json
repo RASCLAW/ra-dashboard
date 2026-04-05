@@ -1121,7 +1121,7 @@
       "status_emoji": "🎓",
       "visit_start": "2026-04-01",
       "visit_end": null,
-      "notes": "School break. Beyblade tournament at Cardpro BGC with RA (Apr 4). Parklinks badminton (Apr 5)."
+      "notes": "School break. Beyblade tournament at Cardpro BGC with RA (Apr 4). Parklinks badminton (Apr 5). Jollibee midnight snack with RA ~2am, slept 3am (Apr 6)."
     },
     "buki": {
       "name": "Buki",
@@ -2914,6 +2914,16 @@
       "body": "UTI day 3 not improving. Eczema scratching.",
       "tags": [
         "health"
+      ]
+    },
+    {
+      "date": "2026-04-06",
+      "time": "02:00",
+      "title": "Jollibee midnight snack -- RA + Zach",
+      "body": "Late night snack run. Zach slept around 3am.",
+      "tags": [
+        "food",
+        "zach"
       ]
     }
   ],
