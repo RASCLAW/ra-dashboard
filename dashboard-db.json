@@ -442,8 +442,8 @@
     "vehicle": {
       "scooter": {
         "model": "Yamaha Mio Sporty 2013",
-        "last_gas": "2026-03-23",
-        "gas_level": "40%",
+        "last_gas": "2026-04-06",
+        "gas_level": "100%",
         "usual_cost": 200,
         "frequency": "weekly",
         "avg_price": 98.0
