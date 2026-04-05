@@ -319,7 +319,7 @@ function updateFamilyBar(){
           </div>
         </div>
         ${D.shared.zach?`<div class="fam-chip ${zachActive}" onclick="setProfile('zach')" style="border-color:rgba(34,211,238,0.15);background:rgba(34,211,238,0.05)">
-          <div class="fam-avatar" style="background:var(--blue-dim)">&#128102;</div>
+          <div class="fam-avatar" style="background:var(--blue-dim)">👦🏽</div>
           <div class="fam-text">
             <div class="fam-name">${D.shared.zach.name}</div>
             <div class="fam-status">${D.shared.zach.status_emoji||'🎓'} ${D.shared.zach.status_label}</div>
@@ -1141,7 +1141,7 @@ function renderZachHome(){
   const daysHere=z.visit_start?Math.max(1,Math.round((Date.now()-new Date(z.visit_start+'T00:00:00+08:00').getTime())/86400000)):'';
   let h='';
   h+=`<div class="c" style="text-align:center;padding:24px 16px">
-    <div style="font-size:48px;margin-bottom:8px">&#128102;</div>
+    <div style="font-size:48px;margin-bottom:8px">👦🏽</div>
     <div class="m" style="font-size:22px;font-weight:700;letter-spacing:-0.5px">${z.name}</div>
     <div class="m" style="font-size:12px;color:var(--muted);margin-top:4px">${z.relation}</div>
     <div style="margin-top:16px;display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:var(--r-pill);background:var(--green-dim);border:1px solid var(--green)">
@@ -1151,6 +1151,22 @@ function renderZachHome(){
     ${visitStart?`<div class="m" style="font-size:11px;color:var(--muted);margin-top:12px">Visiting since ${visitStart} (${daysHere} day${daysHere!==1?'s':''})</div>`:''}
     ${z.notes?`<div class="m" style="font-size:12px;color:var(--text-secondary);margin-top:8px;line-height:1.4">${z.notes}</div>`:''}
   </div>`;
+
+  // Zach timeline -- entries tagged with 'zach'
+  const zachTimeline=(D.timeline||[]).filter(e=>e.tags&&e.tags.includes('zach')).sort((a,b)=>(b.date+b.time).localeCompare(a.date+a.time)).slice(0,8);
+  if(zachTimeline.length){
+    h+='<div class="c"><div class="ct m">Timeline</div>';
+    let lastDate='';
+    zachTimeline.forEach(e=>{
+      if(e.date!==lastDate){lastDate=e.date;h+=`<div class="m" style="font-size:9px;color:var(--muted);letter-spacing:1.5px;margin:8px 0 6px">${fmtDate(e.date).toUpperCase()}</div>`}
+      h+=`<div style="display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)">
+        <div class="m" style="font-size:10px;color:var(--muted);min-width:50px">${e.time?fmt12(e.time):''}</div>
+        <div style="flex:1"><div style="font-size:12px;font-weight:600">${e.title}</div>${e.body?'<div style="font-size:11px;color:var(--text-secondary);margin-top:2px;line-height:1.4">'+e.body+'</div>':''}</div>
+      </div>`;
+    });
+    h+='</div>';
+  }
+
   el.innerHTML=h;
 }
 
