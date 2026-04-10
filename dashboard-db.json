@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-06T01:30:00+08:00",
+  "last_updated": "2026-04-10T12:00:00+08:00",
   "location": {
     "name": "San Joaquin, Pasig",
     "lat": 14.5764,
@@ -175,10 +175,31 @@
       },
       {
         "date": "2026-04-11",
-        "title": "Pyro Musical -- MOA, Pasay",
+        "title": "Pyro Musical FINALE -- MOA (Spain vs PH, 2-hour show)",
         "category": "family",
-        "time": "19:00",
-        "notes": "After Iver bday. Leave Jollibee 5PM, park at SM Seaside or Macapagal Blvd. Show ~7PM. No tickets needed."
+        "time": "19:30",
+        "notes": "FINAL NIGHT of 12th Philippine International Pyromusical Competition. Hermanos Caballer (Spain) competes, Platinum Fireworks (PH) closes. Extended 7:30-9:30 PM. Free viewing at SM By The Bay seawall. Leave Jollibee Green Meadows 5PM. Arrive MOA 5:45, claim spot by 6PM. Meetup point if separated: MOA Main Entrance. Map saved at DuberyMNL/.tmp/pyro_map.png."
+      },
+      {
+        "date": "2026-04-11",
+        "title": "Pyro Musical MOA -- scout free viewing spot early",
+        "category": "family",
+        "time": "17:00",
+        "notes": "No tickets. Scout Seaside Boulevard seawall or Macapagal Blvd. Arrive by 6PM before crowd. Ref map: .tmp/pyro_map.png (4 spots + launch zone + meetup). Best spot = SM By The Bay seawall, arrive by 5:30PM."
+      },
+      {
+        "date": "2026-04-18",
+        "title": "Arabelle + Zach depart for Daet (bus) -- Mabini Colleges HS application",
+        "category": "travel",
+        "time": null,
+        "notes": "Zach applying for HS at Mabini Colleges, Governor Panotes Ave, Daet. Founded 1924, leading private HS in Camarines Norte. Docs needed: report card, PSA birth cert, Good Moral, 2x2 photos."
+      },
+      {
+        "date": "2026-04-20",
+        "title": "Arabelle + Zach return from Daet (Mon night or Tue AM)",
+        "category": "travel",
+        "time": null,
+        "notes": "Return window: Mon Apr 20 night or Tue Apr 21 morning"
       },
       {
         "date": "2026-06-06",
@@ -437,6 +458,43 @@
             "text": "Bring: blanket/mat, mosquito repellent, water, snacks, power bank, portable fan"
           }
         ]
+      },
+      {
+        "name": "Ara + Zach Bicol Bus Trip (Mabini Colleges Application)",
+        "destination": "Daet, Camarines Norte",
+        "dates": "Apr 18 - Apr 20/21 (bus, round trip)",
+        "mode": "bus",
+        "travelers": ["arabelle", "zach"],
+        "purpose": "Zach HS application at Mabini Colleges",
+        "accommodation": "Arabelle's family",
+        "status": "upcoming",
+        "checklist": [
+          "Zach elementary report card (Form 138)",
+          "PSA birth certificate",
+          "Good Moral certificate",
+          "2x2 ID photos (at least 4)",
+          "Parent valid ID (Arabelle)",
+          "Cash for application fee + bus tickets + food",
+          "Clothes for 3-4 days",
+          "Toiletries + meds",
+          "Phone chargers + powerbank",
+          "Small bag for IDs/cash (keep on person, not overhead)",
+          "Water + snacks for bus",
+          "Face mask + tissue"
+        ],
+        "reminders": [
+          {"when": "2026-04-15", "text": "Call Mabini Colleges HSD to confirm application requirements and office hours: (054) 721-1281"},
+          {"when": "2026-04-16", "text": "Secure Zach's documents -- report card, PSA, good moral, 2x2 photos"},
+          {"when": "2026-04-17", "text": "Book bus tickets (DLTB / Philtranco / Superlines to Daet, ~8-10 hrs)"},
+          {"when": "2026-04-17", "text": "Pack bags, charge devices, withdraw cash"},
+          {"when": "2026-04-18", "text": "Depart for bus terminal -- daytime bus safer than overnight"},
+          {"when": "2026-04-20", "text": "Ara + Zach expected back Mon night or Tue AM"}
+        ],
+        "alerts": [
+          {"type": "warning", "text": "Daytime bus safer than overnight (driver fatigue risk)"},
+          {"type": "info", "text": "Safest seats: middle rows, aisle side. Avoid front 3 rows and very last row"},
+          {"type": "info", "text": "Keep IDs/cash/phone on person, not in overhead bag"}
+        ]
       }
     ],
     "vehicle": {
@@ -640,6 +698,12 @@
           "time": "20:00",
           "food": "Milk",
           "notes": "Evening milk before bed"
+        },
+        {
+          "date": "2026-04-10",
+          "time": "08:00",
+          "food": "Lugaw + Milk",
+          "notes": "Usual morning routine"
         }
       ],
       "sleep": [
@@ -928,6 +992,12 @@
           "age": "22 months",
           "milestone": "Teething stage passed -- eating solid foods comfortably. Good digestion, healthy poops.",
           "location": "San Joaquin, Pasig"
+        },
+        {
+          "date": "2026-04-10",
+          "age": "22 months",
+          "milestone": "Walking faster and stabler -- noticeable improvement on outdoor walks with RA. Nap delayed due to poop (still awake at 10AM after fresh diaper + milk).",
+          "location": "San Joaquin, Pasig"
         }
       ],
       "growth": [],
@@ -1040,7 +1110,7 @@
         }
       ],
       "next_checkup": null,
-      "mood_today": "Morning run with family at Parklinks (2026-04-05)",
+      "mood_today": "Apr 10: Walked outside with RA, walking faster and stabler now. Fresh diaper + milk at 10AM, still awake (pooped again -- maybe why he can't sleep). Nap pending.",
       "feedings": [
         {
           "date": "2026-03-27",
@@ -1121,7 +1191,7 @@
       "status_emoji": "🎓",
       "visit_start": "2026-04-01",
       "visit_end": null,
-      "notes": "School break. Beyblade tournament at Cardpro BGC with RA (Apr 4). Parklinks badminton (Apr 5). Jollibee midnight snack with RA ~2am, slept 3am (Apr 6)."
+      "notes": "School break. Beyblade tournament at Cardpro BGC with RA (Apr 4). Parklinks badminton (Apr 5). Bus trip to Daet with Arabelle Apr 18 for Mabini Colleges HS application (SY 2026-2027) -- leading private HS in Camarines Norte, founded 1924. Back Mon night or Tue AM."
     },
     "buki": {
       "name": "Buki",
@@ -2906,6 +2976,38 @@
         "family",
         "zach"
       ]
+    },
+    {
+      "date": "2026-04-10",
+      "time": "08:00",
+      "type": "meal",
+      "summary": "RA + Zach: hotdog omelette breakfast",
+      "tags": ["ra", "zach", "meal"],
+      "source": "moderator"
+    },
+    {
+      "date": "2026-04-10",
+      "time": "08:00",
+      "type": "meal",
+      "summary": "Baby Jah: lugaw + milk (usual morning)",
+      "tags": ["baby_jah", "meal"],
+      "source": "moderator"
+    },
+    {
+      "date": "2026-04-10",
+      "time": "09:30",
+      "type": "milestone",
+      "summary": "Baby Jah: walked outside with RA, walking faster and stabler",
+      "tags": ["baby_jah", "milestone"],
+      "source": "moderator"
+    },
+    {
+      "date": "2026-04-10",
+      "time": "10:00",
+      "type": "care",
+      "summary": "Baby Jah: fresh diaper + milk change, still awake (pooped again)",
+      "tags": ["baby_jah", "care"],
+      "source": "moderator"
     }
   ],
   "briefing": {

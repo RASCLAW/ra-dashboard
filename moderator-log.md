@@ -91,3 +91,28 @@ Append-only. The moderator logs patterns, recommendations, alerts, and actions h
 - Tapo subscription: flagged for cancellation before Apr 11
 - Added 3 todos: buy Iver gift, unsubscribe Tapo, book Arabelle doctor visit
 **Action:** Dashboard DB updated, Health Alerts card added to HTML, dashboard-data.json rebuilt, deployed to Vercel
+
+## 2026-04-10 10:30 (PHT)
+**Type:** action
+**Domain:** calendar, trips, baby_jah, family, timeline
+**Observation:** Data sync for Apr 10 morning. Zach Daet bus trip planned, Pyro Musical scout note, Baby Jah walking milestone, morning routines logged.
+**Data:**
+- Calendar: +3 entries -- Pyro Musical scout reminder (Apr 11, 5PM), Arabelle+Zach depart Daet for Mabini Colleges HS application (Apr 18), return window (Apr 20 Mon night / Apr 21 Tue AM)
+- Trips: new "Ara + Zach Bicol Bus Trip" object added -- destination Daet, bus round trip, checklist (12 items), reminders (6 dated), alerts (3: daytime bus, safe seats, keep IDs on person)
+- Zach notes: updated to include Daet bus trip + Mabini Colleges HS application context
+- Baby Jah feeding: +1 entry (Apr 10 08:00, lugaw + milk, usual morning)
+- Baby Jah milestone: +1 entry (Apr 10, walking faster/stabler, nap pending after poop)
+- Baby Jah mood_today: updated to Apr 10 narrative (walked outside, diaper+milk at 10AM, still awake)
+- Timeline: +4 entries (08:00 RA+Zach hotdog omelette breakfast, 08:00 Jah lugaw+milk, 09:30 Jah walking milestone, 10:00 Jah diaper+milk care)
+- last_updated: bumped to 2026-04-10T10:30:00+08:00 (stamped to 11:07:51 by deploy.sh)
+**Action:** dashboard-db.json updated, copied to dashboard-data.json, deployed to Vercel (ra-dashboard-lake.vercel.app)
+
+## 2026-04-10 12:00 (PHT)
+**Type:** action
+**Domain:** calendar
+**Observation:** Small Pyro Musical FINALE update -- upgraded both Apr 11 calendar entries with confirmed final-night details.
+**Data:**
+- Calendar entry "Pyro Musical -- MOA, Pasay" updated: title -> "Pyro Musical FINALE -- MOA (Spain vs PH, 2-hour show)", time 19:00 -> 19:30, notes updated with full FINALE details (Hermanos Caballer Spain vs Platinum Fireworks PH, 7:30-9:30 PM, SM By The Bay seawall free viewing, meetup point MOA Main Entrance, ref map at DuberyMNL/.tmp/pyro_map.png)
+- Calendar entry "scout free viewing spot early" (Apr 11, 17:00): notes appended with ref map path + best spot confirmation (SM By The Bay seawall, arrive by 5:30 PM)
+- last_updated: bumped to 2026-04-10T12:00:00+08:00
+**Action:** dashboard-db.json updated, copied to dashboard-data.json, deployed to Vercel (ra-dashboard-lake.vercel.app)
