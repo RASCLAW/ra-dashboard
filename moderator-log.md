@@ -116,3 +116,15 @@ Append-only. The moderator logs patterns, recommendations, alerts, and actions h
 - Calendar entry "scout free viewing spot early" (Apr 11, 17:00): notes appended with ref map path + best spot confirmation (SM By The Bay seawall, arrive by 5:30 PM)
 - last_updated: bumped to 2026-04-10T12:00:00+08:00
 **Action:** dashboard-db.json updated, copied to dashboard-data.json, deployed to Vercel (ra-dashboard-lake.vercel.app)
+
+## 2026-04-12 11:30 (PHT)
+**Type:** action
+**Domain:** baby_jah, family, timeline
+**Observation:** Family event recap from Apr 11 + Baby Jah care log + Festival Mall outing planned for today.
+**Data:**
+- Baby Jah feeding: +1 entry (Apr 12 11:30, milk, mid-morning feed)
+- Baby Jah diapers: +1 entry (Apr 12 11:30, wet, diaper change with milk feed)
+- Baby Jah mood_today: updated to Apr 12 narrative (diaper + milk 11:30 AM, Festival Mall outing today)
+- Timeline: +4 entries -- Iver Sage birthday (Apr 11 16:00, "was a blast"), Pyro Musical MOA (Apr 11 19:30, "fun, didn't get a spot close but still enjoyed it"), Jah diaper+milk (Apr 12 11:30), Festival Mall Alabang outing (Apr 12 13:00, X-Site rides + possible Beyblade at Toy Town for Zach)
+- last_updated: bumped to 2026-04-12T11:30:00+08:00
+**Action:** dashboard-db.json updated, copied to dashboard-data.json, deployed to Vercel (ra-dashboard-lake.vercel.app)

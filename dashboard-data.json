@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-10T11:52:35+08:00",
+  "last_updated": "2026-04-12T12:57:42+08:00",
   "location": {
     "name": "San Joaquin, Pasig",
     "lat": 14.5764,
@@ -704,6 +704,12 @@
           "time": "08:00",
           "food": "Lugaw + Milk",
           "notes": "Usual morning routine"
+        },
+        {
+          "date": "2026-04-12",
+          "time": "11:30",
+          "food": "Milk",
+          "notes": "Mid-morning feed"
         }
       ],
       "sleep": [
@@ -942,6 +948,12 @@
           "time": "20:00",
           "type": "fresh",
           "notes": "Last diaper change of the day"
+        },
+        {
+          "date": "2026-04-12",
+          "time": "11:30",
+          "type": "wet",
+          "notes": "Diaper change with milk feed"
         }
       ],
       "milestones": [
@@ -1110,7 +1122,7 @@
         }
       ],
       "next_checkup": null,
-      "mood_today": "Apr 10: Walked outside with RA, walking faster and stabler now. Fresh diaper + milk at 10AM, still awake (pooped again -- maybe why he can't sleep). Nap pending.",
+      "mood_today": "Apr 12: Diaper change + milk feed at 11:30 AM. Family outing planned today -- Festival Mall Alabang, X-Site rides + possible Beyblade tournament at Toy Town for Zach.",
       "feedings": [
         {
           "date": "2026-03-27",
@@ -3007,6 +3019,38 @@
       "type": "care",
       "summary": "Baby Jah: fresh diaper + milk change, still awake (pooped again)",
       "tags": ["baby_jah", "care"],
+      "source": "moderator"
+    },
+    {
+      "date": "2026-04-11",
+      "time": "16:00",
+      "type": "event",
+      "summary": "Iver Sage 1st birthday celebration -- was a blast",
+      "tags": ["family", "event"],
+      "source": "moderator"
+    },
+    {
+      "date": "2026-04-11",
+      "time": "19:30",
+      "type": "event",
+      "summary": "Pyro Musical at MOA -- fun, didn't get a spot close to the venue but still enjoyed it",
+      "tags": ["family", "event", "arabelle", "zach"],
+      "source": "moderator"
+    },
+    {
+      "date": "2026-04-12",
+      "time": "11:30",
+      "type": "care",
+      "summary": "Baby Jah: diaper change + milk feed at 11:30 AM",
+      "tags": ["baby_jah", "care"],
+      "source": "moderator"
+    },
+    {
+      "date": "2026-04-12",
+      "time": "13:00",
+      "type": "event",
+      "summary": "Festival Mall Alabang family outing -- X-Site rides + possible Beyblade tournament at Toy Town for Zach",
+      "tags": ["family", "event", "zach"],
       "source": "moderator"
     }
   ],
