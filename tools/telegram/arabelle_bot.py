@@ -237,7 +237,7 @@ def call_claude(prompt):
     """Call claude --print with the prompt."""
     try:
         result = subprocess.run(
-            ["claude", "--print", "--model", "opus", prompt],
+            ["claude", "--print", "--model", "sonnet", prompt],
             capture_output=True,
             text=True,
             timeout=60,
